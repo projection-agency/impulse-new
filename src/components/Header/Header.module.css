@@ -1,0 +1,152 @@
+.header {
+  position: absolute;
+  z-index: 9;
+  left: 50%;
+  transform: translateX(-50%);
+
+  .headerContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  padding: 1.2vw 0;
+
+  .headerNavList {
+    display: flex;
+    align-items: center;
+
+    a {
+      color: var(--white);
+      padding: 0.8vw 1.3vw;
+      font-family: Manrope;
+      font-weight: 700;
+      font-size: 0.8vw;
+      line-height: 100%;
+      border: 0.1vw solid var(--white);
+      border-radius: 8.6vw;
+      transition: color 0.3s, background-color 0.3s;
+    }
+
+    a:hover {
+      background-color: var(--white);
+      color: var(--black);
+    }
+  }
+
+  .headerLogoContainer {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.8vw;
+
+    svg {
+      width: 2.9vw;
+      height: 2.9vw;
+    }
+
+    .logoTitle {
+      h4 {
+        font-family: Benzin;
+        font-weight: 400;
+        font-size: 1.2vw;
+        line-height: 100%;
+        letter-spacing: -0.01vw;
+        color: var(--white);
+        margin-bottom: 0.3vw;
+      }
+
+      p {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: Helvetica;
+        font-weight: 500;
+        font-size: 0.4vw;
+        line-height: 100%;
+        letter-spacing: -0.01vw;
+        text-transform: uppercase;
+        color: var(--white);
+
+        span {
+          display: block;
+          height: 0.01vw;
+          width: 0.94vw;
+          background-color: var(--white);
+        }
+      }
+    }
+  }
+
+  .headerRightContainer {
+    display: flex;
+    align-items: center;
+    gap: 12.6vw;
+
+    .langController {
+      display: flex;
+      gap: 1vw;
+      color: var(--white);
+      font-family: Druk Cyr;
+      font-weight: 500;
+      font-size: 1.1vw;
+      line-height: 100%;
+      letter-spacing: 0.01vw;
+    }
+
+    .contactContainer {
+      display: flex;
+      gap: 0.4vw;
+
+      .contactWithUs {
+        display: flex;
+        align-items: center;
+        gap: 0.4vw;
+        color: var(--black);
+        background-color: var(--white);
+        padding: 1vw 1.6vw;
+        border-radius: 8.6vw;
+        font-family: Manrope;
+        font-weight: 700;
+        font-size: 0.8vw;
+        line-height: 100%;
+        letter-spacing: 0.01vw;
+
+        svg {
+          width: 0.9vw;
+          height: 0.9vw;
+          fill: var(--black);
+          transition: fill 0.3s;
+        }
+      }
+
+      .menuBtn {
+        backdrop-filter: blur(22px);
+        background: linear-gradient(
+          147.73deg,
+          rgba(0, 0, 0, 0.33) -5.4%,
+          rgba(0, 0, 0, 0.1) 131.29%
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.25vw;
+        padding: 0 1.2vw;
+        border-radius: 2.6vw;
+
+        span {
+          display: block;
+          width: 1.3vw;
+          height: 0.06vw;
+          border-radius: 50%;
+          background-color: var(--white);
+        }
+      }
+    }
+  }
+}

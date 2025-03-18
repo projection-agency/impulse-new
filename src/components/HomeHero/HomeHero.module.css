@@ -1,0 +1,244 @@
+.section {
+  position: relative;
+  width: 100%;
+  /* height: 100vh; */
+  padding-top: 8vw;
+  padding-bottom: 3vw;
+}
+
+.section video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.heroTitleContainer {
+  position: relative;
+  text-align: center;
+  color: var(--white);
+
+  span {
+    font-family: Manrope;
+    font-weight: 700;
+    font-size: 0.9vw;
+    line-height: 100%;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.8vw;
+  }
+
+  h1 {
+    font-family: Druk Cyr;
+    font-weight: 700;
+    font-size: 8.1vw;
+    line-height: 99%;
+    text-transform: uppercase;
+    margin-bottom: 1.6vw;
+  }
+
+  p {
+    font-family: Manrope;
+    font-weight: 500;
+    font-size: 0.9vw;
+    line-height: 140%;
+    width: 26vw;
+    margin: 0 auto;
+    margin-bottom: 2.5vw;
+  }
+
+  a {
+    padding: 1.6vw 0;
+    width: 17vw;
+    font-family: Mona Sans, sans-serif;
+    font-weight: 700;
+    font-size: 0.9vw;
+    line-height: 100%;
+    letter-spacing: -0.01vw;
+    text-transform: uppercase;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 0.8vw;
+    border-radius: 1.2vw;
+    background: var(--gradient);
+    transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin-bottom: 3.8vw;
+
+    svg {
+      width: 0.6vw;
+      height: 0.6vw;
+      fill: var(--white);
+      transition: 0.3s ease-in-out;
+    }
+  }
+
+  a:hover {
+    box-shadow: 0px 20px 33px 4px rgba(209, 47, 1, 0.33);
+    background: var(--hoverGradient);
+
+    svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  .showReelContainer {
+    position: relative;
+
+    img {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      pointer-events: none;
+    }
+  }
+
+  .showReel {
+    /* position: relative; */
+    border: 0.01vw solid rgba(255, 255, 255, 0.5);
+    width: 11vw;
+    height: 11vw;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    gap: 0.8vw;
+    transition: background 0.3s ease-in-out;
+    cursor: pointer;
+    margin-bottom: 2vw;
+
+    img {
+      width: auto;
+      height: auto;
+    }
+
+    svg {
+      width: 1.1vw;
+      height: 1.1vw;
+      fill: var(--white);
+      transition: fill 0.3s ease-in-out;
+    }
+
+    span {
+      font-family: Manrope;
+      text-transform: capitalize;
+      transition: color 0.3s ease-in-out;
+    }
+  }
+
+  .showReel:hover {
+    background-color: var(--white);
+
+    svg {
+      fill: var(--black);
+    }
+
+    span {
+      color: var(--black);
+    }
+  }
+}
+
+.swiperController {
+  position: relative;
+  display: flex;
+
+  .tab {
+    display: flex;
+    align-items: center;
+    gap: 0.8vw;
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(24px);
+    width: fit-content;
+    padding: 1.2vw 1.6vw;
+    border-radius: 1.2vw;
+
+    .tabImageBorder {
+      border: 0.2vw solid var(--white);
+      border-radius: 50%;
+      padding: 0.4vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    img {
+      width: 4.1vw;
+      height: 4.1vw;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    h4 {
+      font-family: Manrope;
+      font-weight: 600;
+      font-size: 1vw;
+      line-height: 100%;
+      letter-spacing: -0.01vw;
+      color: var(--white);
+      margin-bottom: 0.8vw;
+    }
+
+    p {
+      font-family: Manrope;
+      font-weight: 400;
+      font-size: 0.8vw;
+      line-height: 150%;
+      letter-spacing: -0.01vw;
+      display: flex;
+      align-items: center;
+      gap: 0.4vw;
+      color: rgba(255, 255, 255, 0.5);
+
+      svg {
+        width: 0.8vw;
+        height: 0.8vw;
+        fill: white;
+      }
+    }
+  }
+}
+
+.heroBottomContainer {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .scrollDown {
+    display: flex;
+    align-items: center;
+    gap: 0.8vw;
+
+    svg {
+      width: 1.6vw;
+      height: 1.6vw;
+    }
+
+    p {
+      font-family: Helvetica;
+      font-weight: 400;
+      font-size: 0.8vw;
+      line-height: 100%;
+      letter-spacing: -0.01vw;
+      color: var(--white);
+      margin-bottom: 0.2vw;
+    }
+
+    span {
+      font-family: Helvetica;
+      font-weight: 400;
+      font-size: 0.8vw;
+      line-height: 100%;
+      letter-spacing: -0.01vw;
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
