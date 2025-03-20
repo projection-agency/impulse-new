@@ -1,0 +1,55 @@
+.btn {
+  position: relative;
+  display: flex;
+  gap: 0.8vw;
+  align-items: center;
+  outline: 2px solid black;
+  width: fit-content;
+  border-radius: 1.2vw;
+  padding: 1.6vw 3.3vw;
+  transition: 0.3s;
+  font-family: Manrope;
+  font-weight: 800;
+  font-size: 0.9vw;
+  line-height: 100%;
+  letter-spacing: -0.01vw;
+  text-align: center;
+  text-transform: uppercase;
+  overflow: hidden;
+  cursor: pointer;
+
+  svg {
+    width: 0.6vw !important;
+    height: 0.6vw !important;
+    margin: 0 !important;
+    fill: var(--black);
+    transition: 0.3s;
+  }
+}
+
+.btn:before {
+  position: absolute;
+  content: "";
+  width: 110%;
+  height: 110%;
+  background-image: url(/images/gradient-bg.avif);
+  background-size: cover;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: -1;
+}
+
+.btn:hover {
+  color: var(--white);
+  outline: 2px solid transparent;
+
+  svg {
+    fill: var(--white);
+    transform: rotate(90deg);
+  }
+}
+
+.btn:hover::before {
+  opacity: 1;
+}

@@ -1,0 +1,118 @@
+.section {
+  padding-top: 8.3vw;
+  overflow: hidden;
+  padding-bottom: 8.3vw;
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2vw;
+
+  h2 {
+    font-family: Druk Cyr;
+    font-weight: 700;
+    font-size: 5vw;
+    line-height: 99%;
+    letter-spacing: 0.01vw;
+    text-transform: uppercase;
+  }
+}
+
+.slider {
+  display: flex;
+}
+
+.slide {
+  /* width: 20vw !important; */
+  img {
+    width: 77vw;
+    height: 44.7vw;
+  }
+}
+
+.swiperContainer {
+  width: 77vw;
+  overflow: visible;
+}
+
+.sliderWrapper {
+  position: relative;
+
+  .swiperController {
+    position: absolute;
+    top: 44%;
+    display: flex;
+    justify-content: center;
+    gap: 82vw;
+    width: 100%;
+    z-index: 99999999999999999999;
+    height: 1px;
+  }
+
+  .btn {
+    position: relative;
+    background-color: rgba(29, 29, 29, 1);
+    width: 5vw;
+    height: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .btn::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-image: url(/images/gradient-bg.avif);
+    background-size: cover;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .btn:hover::before {
+    opacity: 1;
+  }
+
+  svg {
+    width: 1.6vw;
+    height: 1.6vw;
+    z-index: 1;
+  }
+}
+
+.tabController {
+  display: flex;
+  margin-bottom: 2.5vw;
+
+  div {
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 0.9vw;
+    line-height: 100%;
+    padding: 0.8vw 1.3vw;
+    border: 1px solid rgba(29, 29, 29, 0.1);
+    border-radius: 8.6vw;
+  }
+}
+
+.progressBarContainer {
+  width: 100%;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.2);
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  margin-bottom: 0.8vw;
+}
+
+.progressBar {
+  height: 100%;
+  background: var(--black);
+  transition: width 0.3s ease-in-out;
+}

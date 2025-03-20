@@ -3,8 +3,9 @@ import s from "./Layout.module.css";
 
 interface LayoutPropTypes {
   children: ReactNode;
+  className?: string;
 }
 
-export const Layout: FC<LayoutPropTypes> = ({ children }) => {
-  return <div className={s.layout}>{children}</div>;
+export const Layout: FC<LayoutPropTypes> = ({ children, className }) => {
+  return <div className={`${s.layout} ${className}`}>{children}</div>;
 };
