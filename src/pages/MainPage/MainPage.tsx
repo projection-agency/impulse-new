@@ -1,8 +1,9 @@
-import { ActualToursSection } from "../../components/ActualToursSection/ActualToursSection";
+import { DescSection } from "../../components/DescSection/DescSection";
 import { ChroniclesSection } from "../../components/ChroniclesSection/ChroniclesSection";
 import { Header } from "../../components/Header/Header";
 import { HomeHero } from "../../components/HomeHero/HomeHero";
 import { MissionSection } from "../../components/MissionSection/MissionSection";
+import { ActualToursSection } from "../../components/ActualToursSection/ActualToursSection";
 
 export const MainPage = () => {
   return (
@@ -11,11 +12,13 @@ export const MainPage = () => {
 
       <HomeHero />
 
-      <ActualToursSection />
+      <DescSection />
 
       <MissionSection />
 
       <ChroniclesSection />
+
+      <ActualToursSection />
     </main>
   );
 };

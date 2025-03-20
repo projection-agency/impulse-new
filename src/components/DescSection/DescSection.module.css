@@ -1,0 +1,49 @@
+.section {
+  padding-top: 8.3vw;
+  padding-bottom: 13vw;
+
+  .infoBlock {
+    margin: 0 auto;
+    transform: translateY(-3.5vw);
+    margin-bottom: 0.8vw;
+
+    svg {
+      margin: 0 auto;
+      width: 6.4vw;
+      height: 6.4vw;
+      margin-bottom: 2vw;
+    }
+
+    h2 {
+      font-family: Druk Cyr;
+      font-weight: 700;
+      font-size: 5vw;
+      line-height: 110.00000000000001%;
+      letter-spacing: 0.01vw;
+      text-align: center;
+      text-transform: uppercase;
+      width: 60vw;
+      margin: 0 auto;
+      margin-bottom: 2vw;
+
+      span {
+        text-decoration: underline;
+      }
+    }
+
+    p {
+      margin: 0 auto;
+      margin-bottom: 2.9vw;
+      font-family: Manrope;
+      font-weight: 500;
+      font-size: 1vw;
+      line-height: 130%;
+    }
+
+    .aside {
+      margin: 0 auto;
+      width: 22vw;
+      transform: translateX(50%);
+    }
+  }
+}

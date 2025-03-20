@@ -1,49 +1,198 @@
 .section {
-  padding-top: 8.3vw;
-  padding-bottom: 13vw;
+  padding: 8.3vw 0;
+  background-color: black;
 
-  .infoBlock {
-    margin: 0 auto;
-    transform: translateY(-3.5vw);
-    margin-bottom: 0.8vw;
+  h2 {
+    font-family: Druk Cyr;
+    font-weight: 700;
+    font-size: 5vw;
+    line-height: 99%;
+    letter-spacing: 2%;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 2.9vw;
+  }
 
-    svg {
-      margin: 0 auto;
-      width: 6.4vw;
-      height: 6.4vw;
-      margin-bottom: 2vw;
+  .list {
+    color: var(--white);
+    gap: 1.8vw;
+    display: flex;
+
+    .item:nth-child(1) {
+      width: 30.7vw;
+    }
+    .item:nth-child(2) {
+      flex-grow: 1;
+      transform: translateY(3vw);
     }
 
-    h2 {
-      font-family: Druk Cyr;
-      font-weight: 700;
-      font-size: 5vw;
-      line-height: 110.00000000000001%;
-      letter-spacing: 0.01vw;
-      text-align: center;
-      text-transform: uppercase;
-      width: 60vw;
-      margin: 0 auto;
-      margin-bottom: 2vw;
+    .imageContainer {
+      position: relative;
+      padding: 2vw;
+      height: 43.7vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      h3 {
+        font-family: Druk Cyr;
+        font-weight: 900;
+        font-size: 3.7vw;
+        line-height: 99%;
+        letter-spacing: 0.01vw;
+        text-transform: uppercase;
+      }
 
       span {
-        text-decoration: underline;
+        font-family: Druk Cyr;
+        font-weight: 900;
+        font-size: 5vw;
+        line-height: 99%;
+        letter-spacing: 0.01vw;
+        text-transform: uppercase;
+      }
+
+      .verticalText {
+        position: absolute;
+        right: 2vw;
+        bottom: 2vw;
+        writing-mode: vertical-rl;
+        font-family: Mona Sans;
+        font-weight: 900;
+        font-size: 1.2vw;
+        line-height: 99%;
+        letter-spacing: 0.01vw;
+        text-transform: uppercase;
       }
     }
+  }
+}
 
-    p {
-      margin: 0 auto;
-      margin-bottom: 2.9vw;
+.bottomHeading {
+  padding: 1.25vw 0 2vw 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  h4 {
+    font-family: Mona Sans;
+    font-weight: 700;
+    font-size: 1.4vw;
+    line-height: 100%;
+    letter-spacing: -0.01vw;
+    margin-bottom: 0.8vw;
+  }
+
+  .location {
+    display: flex;
+
+    span:nth-child(1) {
+      margin-right: 1.2vw;
+    }
+
+    span {
       font-family: Manrope;
       font-weight: 500;
-      font-size: 1vw;
-      line-height: 130%;
+      font-size: 0.9vw;
+      line-height: 120%;
+      letter-spacing: -0.01vw;
+      display: flex;
+      text-transform: capitalize;
+      color: rgba(255, 255, 255, 0.7);
     }
 
-    .aside {
-      margin: 0 auto;
-      width: 22vw;
-      transform: translateX(50%);
+    svg {
+      width: 1vw;
+      height: 1vw;
+      margin-right: 0.4vw;
     }
+  }
+}
+
+.priceBlock {
+  display: flex;
+  align-items: end;
+  font-family: Mona Sans;
+  font-weight: 700;
+  font-size: 1.4vw;
+  line-height: 100%;
+  letter-spacing: -2.2%;
+  text-transform: uppercase;
+
+  span {
+    font-family: Manrope;
+    font-weight: 700;
+    font-size: 0.9vw;
+    line-height: 100%;
+    text-transform: uppercase;
+    margin-right: 0.5vw;
+    margin-left: 0.5vw;
+  }
+
+  svg {
+    width: 2.1vw;
+    height: 1vw;
+    margin-right: 0.5vw;
+  }
+}
+
+.btnContainer {
+  display: flex;
+  gap: 0.6vw;
+  width: 30.7vw;
+
+  div {
+    font-family: Manrope;
+    font-weight: 700;
+    font-size: 0.8vw;
+    line-height: 100%;
+    letter-spacing: -0.01vw;
+    text-transform: uppercase;
+    padding: 0.9vw;
+    border-radius: 8.6vw;
+    text-align: center;
+    flex: 1;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  div:nth-child(1) {
+    position: relative;
+    background-color: var(--white);
+    color: var(--black);
+    overflow: hidden;
+    z-index: 4;
+  }
+
+  div:nth-child(1):hover {
+    color: var(--white);
+    background-color: transparent;
+  }
+
+  div:nth-child(1)::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-image: url(/images/gradient-bg.avif);
+    background-size: cover;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  div:nth-child(1):hover::before {
+    opacity: 1;
+  }
+
+  div:nth-child(2) {
+    border: 2px solid var(--white);
+  }
+
+  div:nth-child(2):hover {
+    background-color: var(--white);
+    color: var(--black);
   }
 }
