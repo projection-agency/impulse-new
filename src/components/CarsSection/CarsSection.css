@@ -1,0 +1,21 @@
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.9s, opacity 0.9s;
+  opacity: 0.4;
+}
+
+.swiper {
+  padding-top: 1vw;
+  padding-bottom: 12vw;
+}
+
+.swiper-slide-active {
+  transform: scale(2) translateY(5vw); /* Центрована машина більша */
+  opacity: 1;
+}
+
+.swiper-button-disabled {
+  opacity: 0;
+}

@@ -4,6 +4,8 @@ import { Header } from "../../components/Header/Header";
 import { HomeHero } from "../../components/HomeHero/HomeHero";
 import { MissionSection } from "../../components/MissionSection/MissionSection";
 import { ActualToursSection } from "../../components/ActualToursSection/ActualToursSection";
+import { ServicesSection } from "../../components/ServicesSection/ServicesSection";
+import { CarsSection } from "../../components/CarsSection/CarsSection";
 
 export const MainPage = () => {
   return (
@@ -19,6 +21,10 @@ export const MainPage = () => {
       <ChroniclesSection />
 
       <ActualToursSection />
+
+      <ServicesSection />
+
+      <CarsSection />
     </main>
   );
 };
