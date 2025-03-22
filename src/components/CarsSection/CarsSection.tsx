@@ -152,6 +152,7 @@ export const CarsSection = () => {
           </defs>
         </svg>
         <Swiper
+          className={s.swiper}
           spaceBetween={50} // Простір між слайдами
           slidesPerView={3} // Скільки слайдів показує одночасно
           centeredSlides={true} // Центруємо слайди

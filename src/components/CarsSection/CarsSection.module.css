@@ -39,6 +39,19 @@
   .sliderWrapper {
     position: relative;
 
+    .swiper {
+      padding-top: 1vw;
+      padding-bottom: 12vw;
+
+      .carItem {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.9s, opacity 0.9s;
+        opacity: 0.4;
+      }
+    }
+
     .circle {
       position: absolute;
       left: 50%;
@@ -123,9 +136,4 @@
 
 .carInfo {
   transform: translateY(-7vw);
-}
-
-.carItem {
-  display: flex;
-  flex-direction: column;
 }
