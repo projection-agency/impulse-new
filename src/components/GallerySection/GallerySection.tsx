@@ -56,6 +56,7 @@ export const GallerySection = () => {
 
     img.style.transition = "none"; // Вимикаємо плавні переходи під час руху
     img.style.animation = "none"; // Вимикаємо анімацію
+    img.style.zIndex = "9";
 
     const handleMouseMove = (event: MouseEvent) => {
       const dx = event.clientX - startX;
@@ -69,6 +70,7 @@ export const GallerySection = () => {
       if (img) {
         img.style.transition = "transform 0.5s ease"; // Повертаємо плавний ефект
         img.style.transform = "translate(0, 0)";
+        img.style.zIndex = "";
         setTimeout(() => {
           img.style.animation = ""; // Повертаємо анімацію після завершення
         }, 500);
