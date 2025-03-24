@@ -8,6 +8,8 @@ import { ServicesSection } from "../../components/ServicesSection/ServicesSectio
 import { CarsSection } from "../../components/CarsSection/CarsSection";
 import { EssenceSection } from "../../components/EssenceSection/EssenceSection";
 import { GallerySection } from "../../components/GallerySection/GallerySection";
+import { ReviewSection } from "../../components/ReviewSection/ReviewSection";
+import { FaqSection } from "../../components/FaqSection/FaqSection";
 
 export const MainPage = () => {
   return (
@@ -31,6 +33,10 @@ export const MainPage = () => {
       <EssenceSection />
 
       <GallerySection />
+
+      <ReviewSection />
+
+      <FaqSection />
     </main>
   );
 };

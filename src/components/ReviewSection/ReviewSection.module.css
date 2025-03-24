@@ -1,0 +1,175 @@
+.section {
+  padding: 8.3vw 0;
+
+  .container {
+    /* display: flex; */
+  }
+
+  .reviewContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: var(--white);
+  }
+
+  .reviewerInfoContainer {
+    padding: 3vw 5.2vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .tourDesc {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Manrope;
+      font-weight: 500;
+      font-size: 0.9vw;
+      line-height: 140%;
+      color: rgba(29, 29, 29, 0.7);
+      gap: 0.9vw;
+      margin-bottom: 4vw;
+
+      div {
+        width: 0.2vw;
+        height: 0.2vw;
+        border-radius: 50%;
+        background-color: rgba(29, 29, 29, 0.7);
+      }
+    }
+
+    h3 {
+      font-family: Druk Cyr;
+      font-weight: 700;
+      font-size: 3.7vw;
+      line-height: 99%;
+      letter-spacing: 0.01vw;
+      text-align: center;
+      text-transform: uppercase;
+      max-width: 40vw;
+      margin: 0 auto;
+      margin-bottom: 6.8vw;
+    }
+
+    p {
+      font-family: Manrope;
+      font-weight: 500;
+      font-size: 0.9vw;
+      line-height: 140%;
+      text-align: center;
+      border-top: 1px solid rgba(29, 29, 29, 0.1);
+      padding: 0 6vw;
+      padding-top: 2.3vw;
+    }
+  }
+
+  .controller {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8vw;
+
+    svg {
+      position: relative;
+      width: 2.1vw;
+      height: 1vw;
+      fill: var(--black);
+      z-index: 2;
+      transition: fill 0.3s;
+    }
+
+    button {
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      padding: 1.1vw 3.3vw;
+      border-radius: 8.6vw;
+      border: 1px solid rgba(29, 29, 29, 1);
+      transition: border 0.3s;
+    }
+
+    button::before {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url(/images/gradient-bg.avif);
+      background-size: cover;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    button:hover {
+      border-color: transparent;
+
+      svg {
+        fill: var(--white);
+      }
+    }
+
+    button:hover::before {
+      opacity: 1;
+    }
+
+    .slideCount {
+      font-family: Manrope;
+      font-weight: 500;
+      font-size: 1.2vw;
+      line-height: 130%;
+      letter-spacing: 0.4vw;
+      min-width: 4vw;
+      text-align: center;
+    }
+
+    .pagination {
+      display: flex;
+      gap: 0.4vw;
+
+      .bullet {
+        display: block;
+        background-color: black;
+        width: 0.8vw;
+        height: 0.8vw;
+        border-radius: 50%;
+      }
+
+      .activeBullet {
+        display: block;
+        background-color: rgba(29, 29, 29, 0.1);
+        width: 0.8vw;
+        height: 0.8vw;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .videoContainer {
+    position: relative;
+
+    .impulse {
+      display: flex;
+      align-items: end;
+      gap: 0.4vw;
+      padding: 1vw 1.6vw;
+      position: absolute;
+      top: 1.6vw;
+      right: 1.6vw;
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(24px);
+      border-radius: 1.2vw;
+      font-family: Manrope;
+      font-weight: 700;
+      font-size: 1.6vw;
+      line-height: 80%;
+      letter-spacing: -0.01vw;
+      text-transform: uppercase;
+
+      svg {
+        width: 0.8vw;
+        height: 0.8vw;
+      }
+    }
+  }
+}

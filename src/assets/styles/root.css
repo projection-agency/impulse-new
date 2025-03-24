@@ -1,7 +1,7 @@
 :root {
   --white: rgba(255, 255, 255, 1);
   --black: rgba(0, 0, 0, 1);
-
+  --text: rgba(29, 29, 29, 1);
   --gradient: linear-gradient(93.24deg, #ab0600 0%, #ff5e00 100%);
   --hoverGradient: linear-gradient(93.24deg, #cd2822 0%, #ff8239 100%);
 }
