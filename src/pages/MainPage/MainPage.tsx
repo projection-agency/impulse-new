@@ -6,6 +6,8 @@ import { MissionSection } from "../../components/MissionSection/MissionSection";
 import { ActualToursSection } from "../../components/ActualToursSection/ActualToursSection";
 import { ServicesSection } from "../../components/ServicesSection/ServicesSection";
 import { CarsSection } from "../../components/CarsSection/CarsSection";
+import { EssenceSection } from "../../components/EssenceSection/EssenceSection";
+import { GallerySection } from "../../components/GallerySection/GallerySection";
 
 export const MainPage = () => {
   return (
@@ -25,6 +27,10 @@ export const MainPage = () => {
       <ServicesSection />
 
       <CarsSection />
+
+      <EssenceSection />
+
+      <GallerySection />
     </main>
   );
 };

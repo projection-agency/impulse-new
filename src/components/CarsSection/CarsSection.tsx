@@ -153,17 +153,17 @@ export const CarsSection = () => {
         </svg>
         <Swiper
           className={s.swiper}
-          spaceBetween={50} // Простір між слайдами
-          slidesPerView={3} // Скільки слайдів показує одночасно
-          centeredSlides={true} // Центруємо слайди
+          spaceBetween={50}
+          slidesPerView={3}
+          centeredSlides={true}
           initialSlide={0}
-          grabCursor={true} // Додаємо курсор при наведенні
-          effect="coverflow" // Ефект coverflow для слайдів
+          grabCursor={true}
+          effect="coverflow"
           coverflowEffect={{
-            rotate: 50, // Кут обертання
-            stretch: 0, // Розтягування
-            depth: 1000, // Глибина ефекту
-            modifier: 1, // Модифікація ефекту
+            rotate: 50,
+            stretch: 0,
+            depth: 1000,
+            modifier: 1,
           }}
           navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
           modules={[Navigation]}
