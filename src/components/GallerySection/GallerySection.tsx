@@ -39,7 +39,7 @@ export const GallerySection = () => {
       if (img) {
         img.style.transform = `translate(${Math.random() * 100 - 50}px, ${
           Math.random() * 100 - 50
-        }px) rotate(${Math.random() * 20 - 10}deg)`;
+        }px) `;
       }
     });
   }, []);
