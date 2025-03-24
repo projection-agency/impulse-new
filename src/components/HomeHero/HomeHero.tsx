@@ -5,7 +5,13 @@ import { Layout } from "../Layout/Layout";
 export const HomeHero = () => {
   return (
     <section className={s.section}>
-      <video autoPlay loop muted playsInline>
+      <video
+        poster="/images/stub-hero-image.avif"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
         <source src="/temp/video.mp4" type="video/mp4" />
       </video>
 

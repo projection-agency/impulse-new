@@ -2,11 +2,7 @@ import { useState } from "react";
 import { Layout } from "../Layout/Layout";
 import s from "./MissionSection.module.css";
 
-const videos = [
-  "/temp/mission-temp-video.mp4",
-  "/temp/mission-temp-video.mp4",
-  "/temp/mission-temp-video.mp4",
-];
+const videos = ["/temp/video.mp4", "/temp/video.mp4", "/temp/video.mp4"];
 
 export const MissionSection = () => {
   const [currentVideo, setCurrentVideo] = useState(0);
