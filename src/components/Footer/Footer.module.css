@@ -1,0 +1,214 @@
+.footer {
+  background-color: rgba(18, 18, 18, 1);
+  padding-bottom: 2vw;
+
+  .footerTopContainer {
+    position: relative;
+    overflow: hidden;
+    min-height: 32.3vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+    .logoBlock {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2vw 0;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+
+      .footerBgLogo {
+        position: absolute;
+        width: 34vw;
+        height: 30.3vw;
+        left: 5.8vw;
+        top: 2vw;
+      }
+
+      svg {
+        width: 5.2vw;
+        height: 5.2vw;
+      }
+
+      .desc {
+        display: flex;
+        gap: 4vw;
+
+        p {
+          font-family: Manrope;
+          font-weight: 500;
+          font-size: 0.9vw;
+          line-height: 120%;
+          letter-spacing: -0.01vw;
+          color: rgba(255, 255, 255, 0.6);
+        }
+      }
+    }
+
+    .contactBlock {
+      padding: 2vw 0 2vw 2vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .address {
+        color: var(--white);
+
+        p {
+          font-family: Manrope;
+          font-weight: 700;
+          font-size: 0.9vw;
+          line-height: 100%;
+          letter-spacing: -0.01vw;
+          text-transform: uppercase;
+          margin-bottom: 1.2vw;
+        }
+
+        address {
+          font-family: Druk Cyr;
+          font-weight: 500;
+          font-size: 5vw;
+          line-height: 120%;
+          text-transform: uppercase;
+          font-style: normal;
+
+          a {
+            position: relative;
+            background: var(--white);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            width: fit-content;
+          }
+
+          a::before {
+            position: absolute;
+            left: 0;
+            bottom: -0.5vw;
+            content: "";
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(93.24deg, #ab0600 0%, #ff5e00 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+          }
+
+          a:hover {
+            background: linear-gradient(93.24deg, #ab0600 0%, #ff5e00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+
+          a:hover::before {
+            opacity: 1;
+          }
+        }
+      }
+
+      .socialBlock {
+        display: flex;
+        justify-content: space-between;
+
+        ul {
+          display: flex;
+          gap: 1.2vw;
+
+          a {
+            position: relative;
+            overflow: hidden;
+            padding: 1.8vw;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: border 0.3s;
+
+            svg {
+              position: relative;
+              width: 1.2vw;
+              height: 1.2vw;
+              fill: var(--white);
+              z-index: 1;
+            }
+          }
+
+          a::before {
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(/images/gradient-bg.avif);
+            background-size: cover;
+            opacity: 0;
+            transition: opacity 0.3s;
+          }
+
+          a:hover::before {
+            opacity: 1;
+          }
+
+          a:hover {
+            border-color: transparent;
+          }
+        }
+
+        .anchor {
+          position: relative;
+          overflow: hidden;
+          padding: 1.6vw;
+          border-radius: 50%;
+          border-radius: 50%;
+          transition: border 0.3s;
+          background-color: rgba(29, 29, 29, 1);
+
+          svg {
+            position: relative;
+            width: 1.6vw;
+            height: 1.6vw;
+            fill: var(--white);
+            z-index: 1;
+          }
+        }
+
+        .anchor::before {
+          position: absolute;
+          content: "";
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url(/images/gradient-bg.avif);
+          background-size: cover;
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+
+        .anchor:hover::before {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .bigText {
+    display: block;
+    padding-top: 2vw;
+    padding-bottom: 2vw;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 2vw;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .footerBottomLinks {
+    font-family: Manrope;
+    font-weight: 500;
+    font-size: 0.8vw;
+    line-height: 120%;
+    letter-spacing: -0.01vw;
+    color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+  }
+}

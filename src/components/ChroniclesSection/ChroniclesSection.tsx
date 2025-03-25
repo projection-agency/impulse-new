@@ -7,10 +7,22 @@ import "swiper/css";
 import "swiper/css/navigation";
 import s from "./ChroniclesSection.module.css";
 
+const gallery = [
+  {
+    image: "/temp/1.jpg",
+  },
+  {
+    image: "/temp/2.jpg",
+  },
+  {
+    image: "/temp/3.jpg",
+  },
+];
+
 export const ChroniclesSection = () => {
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState((1 / gallery.length) * 100); // Початкове значення 33.3%
 
   return (
     <section className={s.section}>
@@ -94,15 +106,11 @@ export const ChroniclesSection = () => {
           }}
           className={s.swiperContainer}
         >
-          <SwiperSlide className={s.slide}>
-            <img src="/temp/1.jpg" alt="Porsche 911" />
-          </SwiperSlide>
-          <SwiperSlide className={s.slide}>
-            <img src="/temp/2.jpg" alt="Lamborghini" />
-          </SwiperSlide>
-          <SwiperSlide className={s.slide}>
-            <img src="/temp/3.jpg" alt="BMW" />
-          </SwiperSlide>
+          {gallery.map((image) => (
+            <SwiperSlide className={s.slide}>
+              <img src={image.image} alt="" />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </section>

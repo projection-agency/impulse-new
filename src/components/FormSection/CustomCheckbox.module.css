@@ -1,0 +1,43 @@
+.checkBoxContainer {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkBox {
+  width: 1vw;
+  height: 1vw;
+  border: 1px solid rgba(0, 0, 0, 0.212);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.checked {
+  background: linear-gradient(93deg, #ab0600 0%, #ff5e00 100%);
+  border-color: transparent;
+}
+
+.checkmark {
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  transition: opacity 0.3s;
+
+  svg {
+    width: 0.9vw;
+    height: 0.9vw;
+  }
+}
+
+.label {
+  margin-left: 0.6vw;
+  color: #1d1d1d;
+  font-family: Manrope;
+  font-size: 0.9vw;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%; /* 25.2px */
+}

@@ -73,7 +73,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./CarsSection.css";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Navigation } from "swiper/modules";
 
 export const CarsSection = () => {
@@ -83,11 +83,6 @@ export const CarsSection = () => {
   const nextRef = useRef<HTMLDivElement>(null);
 
   const currentSlideIndex = (activeSlide + cars.length) % cars.length;
-
-  useEffect(() => {
-    console.log(activeSlide);
-    console.log(currentSlideIndex);
-  }, [activeSlide, currentSlideIndex]);
 
   return (
     <section className={s.section}>
