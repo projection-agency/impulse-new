@@ -151,7 +151,8 @@ export const CarsSection = () => {
           spaceBetween={50}
           slidesPerView={3}
           centeredSlides={true}
-          initialSlide={0}
+          // loop={true}
+          initialSlide={1}
           grabCursor={true}
           effect="coverflow"
           coverflowEffect={{

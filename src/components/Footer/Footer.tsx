@@ -110,10 +110,10 @@ export const Footer = () => {
 
         <div className={s.footerBottomLinks}>
           <p>©2025 Impulse. All rights Reserved</p>
-
           <Link to="">Политика конфиденциальности</Link>
-
-          <a href="">Разработка сайта Before/After</a>
+          <p>
+            Разработка сайта <a href=""> Before/After</a>
+          </p>
         </div>
       </Layout>
     </footer>

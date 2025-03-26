@@ -82,6 +82,7 @@
     line-height: 100%;
     letter-spacing: -0.01vw;
     margin-bottom: 0.8vw;
+    text-transform: uppercase;
   }
 
   .location {
@@ -141,20 +142,23 @@
   display: flex;
   gap: 0.6vw;
   width: 30.7vw;
+  height: 2.8vw;
 
   div {
     font-family: Manrope;
     font-weight: 700;
     font-size: 0.8vw;
-    line-height: 100%;
+    line-height: 90%;
     letter-spacing: -0.01vw;
     text-transform: uppercase;
-    padding: 0.9vw;
     border-radius: 8.6vw;
     text-align: center;
     flex: 1;
     transition: 0.3s;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   div:nth-child(1) {

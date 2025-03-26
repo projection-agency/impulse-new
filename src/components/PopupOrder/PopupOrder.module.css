@@ -1,3 +1,12 @@
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999999999999999999;
+}
+
 .section {
   height: 100vh;
   display: grid;
@@ -8,6 +17,7 @@
     max-height: 100vh;
 
     img {
+      object-fit: cover;
       height: 100%;
       width: 100%;
     }
@@ -20,6 +30,7 @@
       transform: translate(-50%, -50%);
       color: var(--white);
       text-transform: uppercase;
+      width: 40vw;
 
       span {
         display: block;
@@ -40,9 +51,32 @@
   }
 
   .formBlock {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: var(--white);
+    z-index: 1;
+
+    .closeBtn {
+      position: absolute;
+      top: 2vw;
+      right: 2.2vw;
+      cursor: pointer;
+
+      svg {
+        width: 2.7vw;
+        height: 2.7vw;
+        stroke: var(--black);
+        transition: transform 0.3s;
+      }
+    }
+
+    .closeBtn:hover {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
 
     .formContainer {
       width: 29.7vw;
@@ -158,6 +192,7 @@
 
     .submitBtn:hover::before {
       opacity: 1;
+      z-index: -1;
     }
   }
 }

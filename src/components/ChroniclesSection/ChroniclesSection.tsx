@@ -10,12 +10,18 @@ import s from "./ChroniclesSection.module.css";
 const gallery = [
   {
     image: "/temp/1.jpg",
+    location: "Италия Dolomites",
+    date: "2025. 01.06 - 05.06",
   },
   {
     image: "/temp/2.jpg",
+    location: "Италия Dolomites",
+    date: "2025. 01.06 - 05.06",
   },
   {
     image: "/temp/3.jpg",
+    location: "Италия Dolomites",
+    date: "2025. 01.06 - 05.06",
   },
 ];
 
@@ -86,6 +92,7 @@ export const ChroniclesSection = () => {
         <Swiper
           spaceBetween={20}
           slidesPerView={1}
+          // loop={true}
           navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
           modules={[Navigation]}
           onInit={(swiper) => {
@@ -109,6 +116,11 @@ export const ChroniclesSection = () => {
           {gallery.map((image) => (
             <SwiperSlide className={s.slide}>
               <img src={image.image} alt="" />
+
+              <div className={s.slideBottomInfo}>
+                <p>{image.location}</p>
+                <p>{image.date}</p>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>

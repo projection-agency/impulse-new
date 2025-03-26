@@ -29,6 +29,18 @@
   img {
     width: 77vw;
     height: 44.7vw;
+    margin-bottom: 1.3vw;
+  }
+
+  .slideBottomInfo {
+    font-family: Manrope;
+    font-weight: 700;
+    font-size: 0.9vw;
+    line-height: 120%;
+    letter-spacing: -2.2%;
+    display: flex;
+    gap: 29vw;
+    align-items: center;
   }
 }
 
@@ -62,6 +74,7 @@
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
+    transition: 0.3s;
   }
 
   .btn::before {
@@ -69,7 +82,7 @@
     content: "";
     width: 100%;
     height: 100%;
-    background-image: url(/images/gradient-bg.avif);
+    background-image: url(/images/circle-gradient-bg.svg);
     background-size: cover;
     opacity: 0;
     transition: opacity 0.3s;

@@ -1,5 +1,7 @@
 import { FC, useState } from "react";
+import { motion } from "framer-motion"; // Імпортуємо motion
 import s from "./PopupTour.module.css";
+import AccordionGroup from "../Accordion/Accordion";
 
 interface Day {
   date: string;
@@ -37,8 +39,20 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
   };
 
   return (
-    <div className={s.popupOverlay}>
-      <div className={s.popupContent}>
+    <motion.div
+      className={s.popupOverlay}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <motion.div
+        className={s.popupContent}
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 50, opacity: 0 }}
+        transition={{ duration: 0.3 }}
+      >
         <div className={s.mainInfo}>
           <div className={s.tourInfo}>
             <span>{info.date}</span>
@@ -53,6 +67,62 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
               развлечения и вертолётный тур над Альпами. Финальный аккорд —
               прощальный ужин в атмосфере стиля и элегантности.
             </p>
+          </div>
+
+          <div className={s.accordionContainer}>
+            <AccordionGroup
+              items={[
+                {
+                  title: "Включено в стоимость",
+                  content: (
+                    <ul>
+                      <li>Полная организация автопробега командой IMPULSE</li>
+                      <li>
+                        Проживание в отелях с превосходными номерами, спа зонами
+                        и безупречным сервисом
+                      </li>
+                      <li> Профессиональный Photography & Video Production</li>
+                      <li>Завтраки и ужины</li>
+                      <li>Входные билеты во все музеи</li>
+                      <li>Полёт на вертолёте</li>
+                      <li> Road Book автопробега в печатном и pdf формате</li>
+                      <li>
+                        Check-list со всей важной информацией для подготовки к
+                        туру
+                      </li>
+                      <li>Рации для связи между участниками во время заезда</li>
+                      <li>Grand Final мероприятие</li>
+                      <li>Трансфер из аэропорта Мюнхена в отель</li>
+                      <li>Трансфер в аэропорт Милана из отеля</li>
+                      <li>Личный менеджер для помощи на каждом этапе</li>
+                      <li>Именное приглашение в тур</li>
+                      <li>Подарки от компании IMPULSE и спонсоров</li>
+                    </ul>
+                  ),
+                },
+                {
+                  title: "Не включено в стоимость",
+                  content: (
+                    <ul>
+                      <li>Авиаперелёты в Мюнхен / из Милана</li>
+                      <li>Обеды</li>
+                      <li>Бензин (~ 250 €)</li>
+                    </ul>
+                  ),
+                },
+                {
+                  title: "маршрут",
+                  content: (
+                    <div className={s.route}>
+                      <img src="/temp/route-image.jpg" alt="route" />
+                      <button>
+                        <span>открыть карту</span>{" "}
+                      </button>
+                    </div>
+                  ),
+                },
+              ]}
+            />
           </div>
         </div>
 
@@ -144,7 +214,7 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
