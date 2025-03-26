@@ -12,7 +12,7 @@ export const HomeHero = () => {
         muted
         playsInline
       >
-        <source src="/temp/video.mp4" type="video/mp4" />
+        <source src="/temp/hero-video.mp4" type="video/mp4" />
       </video>
 
       <div className={s.heroTitleContainer}>
