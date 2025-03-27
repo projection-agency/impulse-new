@@ -29,12 +29,12 @@ export const PopupOrder = ({ onClose }: { onClose: () => void }) => {
       >
         <section className={s.section}>
           <div className={s.imageBlock}>
-            <img src="/images/consult-popup-bg.avif" alt="three cars" />
+            <img src="/images/form-mountains-road.avif" alt="three cars" />
 
             <div className={s.title}>
-              <span>остались вопросы?</span>
+              <span>Ну что</span>
 
-              <h2>мы Поможем подобрать идеальный маршрут</h2>
+              <h2>Готовы начать путешествие?</h2>
             </div>
           </div>
 

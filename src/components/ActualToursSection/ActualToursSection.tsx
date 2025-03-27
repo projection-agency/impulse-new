@@ -3,6 +3,14 @@ import { Layout } from "../Layout/Layout";
 import s from "./ActualToursSection.module.css";
 import { PopupTour } from "../PopupTour/PopupTour";
 
+import Lenis from "lenis";
+const lenis = new Lenis();
+function raf(time: number) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
 const tourItems = [
   {
     id: 1,
@@ -115,18 +123,18 @@ export const ActualToursSection = () => {
 
   useEffect(() => {
     if (activeTourId) {
+      // Блокуємо скрол
       document.body.style.overflow = "hidden";
     } else {
+      // Дозволяємо скрол
       document.body.style.overflow = "";
     }
 
+    // Очищення при демонтажі компонента
     return () => {
       document.body.style.overflow = "";
     };
-  }, [activeTourId]);
-
-  // if (!activeTourId) return null;
-
+  }, [activeTourId]); // Слухаємо тільки зміни activeTourId
   const handleTourPopup = (tourId: number) => {
     setActiveTourId(activeTourId === tourId ? null : tourId);
   };
