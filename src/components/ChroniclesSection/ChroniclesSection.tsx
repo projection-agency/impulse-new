@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Layout } from "../Layout/Layout";
 import { SiteButton } from "../SiteButton/SiteButton";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,9 +10,9 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { API_URL } from "../../App";
 
-// interface ImageItem {
-//   cars: string[];
-// }
+interface ImageItem {
+  cars: string[];
+}
 
 const fetchGallery = async () => {
   const { data } = await axios.get(`${API_URL}wp-json/wp/v2/travel_journal`);
@@ -25,36 +25,22 @@ export const ChroniclesSection = () => {
     queryFn: fetchGallery,
   });
 
-  // const [selectedCar, setSelectedCar] = useState<string | null>(null);
+  const [selectedCar, setSelectedCar] = useState<string | null>(null);
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState((1 / data.length) * 100);
 
-  console.log(typeof data);
+  const uniqueCars: string[] = Array.from(
+    new Set(data.flatMap((item: ImageItem) => item.cars))
+  );
 
-  console.log(data);
+  const filteredData = selectedCar
+    ? data.filter((item: ImageItem) => item.cars.includes(selectedCar))
+    : data;
 
-  // const uniqueCars: string[] = Array.from(
-  //   new Set(
-  //     data.reduce((acc: string[], item: ImageItem) => {
-  //       // Перевірка, чи є поле cars і чи це масив
-  //       if (Array.isArray(item.cars)) {
-  //         return acc.concat(item.cars); // Об'єднуємо масиви
-  //       }
-  //       return acc;
-  //     }, [])
-  //   )
-  // );
-
-  // console.log(uniqueCars);
-
-  // const filteredData = selectedCar
-  //   ? data.filter((item: ImageItem) => item.cars.includes(selectedCar))
-  //   : data;
-
-  // useEffect(() => {
-  //   setProgress((1 / filteredData.length) * 100);
-  // }, [selectedCar, filteredData]);
+  useEffect(() => {
+    setProgress((1 / filteredData.length) * 100);
+  }, [selectedCar, filteredData]);
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -74,7 +60,7 @@ export const ChroniclesSection = () => {
           ></div>
         </div>
 
-        {/* <div className={s.tabController}>
+        <div className={s.tabController}>
           {uniqueCars.map((car, index) => (
             <div
               key={index}
@@ -92,7 +78,7 @@ export const ChroniclesSection = () => {
               </span>
             </div>
           ))}
-        </div> */}
+        </div>
       </Layout>
 
       <div className={s.sliderWrapper}>
@@ -149,7 +135,7 @@ export const ChroniclesSection = () => {
           }}
           className={s.swiperContainer}
         >
-          {data.map(
+          {filteredData.map(
             (image: {
               id: number;
               load_image_text_photo: string;
