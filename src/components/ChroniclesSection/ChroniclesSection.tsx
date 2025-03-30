@@ -25,6 +25,7 @@ export const ChroniclesSection = () => {
     queryFn: fetchGallery,
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedCar, setSelectedCar] = useState<string | null>(null);
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
