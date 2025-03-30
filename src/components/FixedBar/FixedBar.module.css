@@ -10,7 +10,8 @@
   z-index: 9;
   bottom: 2vw;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(10vw);
+  transition: transform 0.5s ease-out;
 
   button {
     font-family: Manrope;
@@ -63,4 +64,8 @@
     background-color: rgba(29, 29, 29, 1);
     color: var(--white);
   }
+}
+
+.visible {
+  transform: translateX(-50%) translateY(0%);
 }

@@ -29,7 +29,7 @@ const cars = [
     models: ["650S", "720S", "750S", "765LT", "ARTURA"],
   },
   {
-    mark: "Porshe",
+    mark: "Porsche",
     image: "/images/cars-images/porshe.webp",
     models: ["911 CARRERA", "911 CARRERA S", "911 TURBO", "911 GT3"],
   },

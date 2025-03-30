@@ -219,6 +219,8 @@
           border-radius: 1.2vw;
           background: rgba(255, 255, 255, 0.16);
           backdrop-filter: blur(12px);
+          flex-wrap: nowrap;
+          white-space: nowrap;
 
           svg {
             width: 0.4vw;

@@ -86,8 +86,6 @@ export const ActualToursSection = () => {
     return `${formattedStartDay} – ${formattedEndDate}`;
   };
 
-  console.log(data);
-
   useEffect(() => {
     if (activeTourId) {
       document.body.style.overflow = "hidden";
@@ -203,7 +201,6 @@ export const ActualToursSection = () => {
                 <div onClick={() => handleTourPopup(item.id)}>Детальнее</div>
               </div>
 
-              {/* Uncomment if you want to show the PopupTour */}
               {activeTourId === item.id && (
                 <PopupTour info={item} onClose={() => setActiveTourId(null)} />
               )}

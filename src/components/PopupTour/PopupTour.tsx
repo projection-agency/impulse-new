@@ -18,12 +18,8 @@ interface PopupTourProps {
 export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
   const [currentDay, setCurrentDay] = useState(0);
 
-  console.log(info);
-
   const totalDays = info.save_data_text.length;
   const currentSlide = info.save_data_text[currentDay];
-
-  console.log(currentSlide);
 
   const handlePrev = () => {
     if (currentDay > 0) {
@@ -159,9 +155,7 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
               </div>
 
               <p className={s.date}>
-                <span>ДЕНЬ</span>
-                <span>{currentDay + 1}</span>
-                <span>({currentSlide.hl_input_title})</span>
+                <span>{currentSlide.hl_input_title}</span>
               </p>
 
               <div className={s.image}>
