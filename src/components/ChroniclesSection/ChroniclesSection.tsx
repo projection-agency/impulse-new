@@ -34,19 +34,19 @@ export const ChroniclesSection = () => {
 
   console.log(data);
 
-  const uniqueCars: string[] = Array.from(
-    new Set(
-      data.reduce((acc: string[], item: ImageItem) => {
-        // Перевірка, чи є поле cars і чи це масив
-        if (Array.isArray(item.cars)) {
-          return acc.concat(item.cars); // Об'єднуємо масиви
-        }
-        return acc;
-      }, [])
-    )
-  );
+  // const uniqueCars: string[] = Array.from(
+  //   new Set(
+  //     data.reduce((acc: string[], item: ImageItem) => {
+  //       // Перевірка, чи є поле cars і чи це масив
+  //       if (Array.isArray(item.cars)) {
+  //         return acc.concat(item.cars); // Об'єднуємо масиви
+  //       }
+  //       return acc;
+  //     }, [])
+  //   )
+  // );
 
-  console.log(uniqueCars);
+  // console.log(uniqueCars);
 
   const filteredData = selectedCar
     ? data.filter((item: ImageItem) => item.cars.includes(selectedCar))
@@ -74,7 +74,7 @@ export const ChroniclesSection = () => {
           ></div>
         </div>
 
-        <div className={s.tabController}>
+        {/* <div className={s.tabController}>
           {uniqueCars.map((car, index) => (
             <div
               key={index}
@@ -92,7 +92,7 @@ export const ChroniclesSection = () => {
               </span>
             </div>
           ))}
-        </div>
+        </div> */}
       </Layout>
 
       <div className={s.sliderWrapper}>
