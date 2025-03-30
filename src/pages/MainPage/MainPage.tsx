@@ -2,7 +2,7 @@ import { DescSection } from "../../components/DescSection/DescSection";
 import { ChroniclesSection } from "../../components/ChroniclesSection/ChroniclesSection";
 import { HomeHero } from "../../components/HomeHero/HomeHero";
 import { MissionSection } from "../../components/MissionSection/MissionSection";
-// import { ActualToursSection } from "../../components/ActualToursSection/ActualToursSection";
+import { ActualToursSection } from "../../components/ActualToursSection/ActualToursSection";
 import { ServicesSection } from "../../components/ServicesSection/ServicesSection";
 import { CarsSection } from "../../components/CarsSection/CarsSection";
 import { EssenceSection } from "../../components/EssenceSection/EssenceSection";
@@ -22,7 +22,7 @@ export const MainPage = () => {
 
       <ChroniclesSection />
 
-      {/* <ActualToursSection /> */}
+      <ActualToursSection />
 
       <ServicesSection />
 
