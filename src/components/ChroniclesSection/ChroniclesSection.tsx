@@ -30,13 +30,23 @@ export const ChroniclesSection = () => {
   const nextRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState((1 / data.length) * 100);
 
+  console.log(typeof data);
+
+  console.log(data);
+
   const uniqueCars: string[] = Array.from(
     new Set(
       data.reduce((acc: string[], item: ImageItem) => {
-        return acc.concat(item.cars); // Об'єднуємо масиви
+        // Перевірка, чи є поле cars і чи це масив
+        if (Array.isArray(item.cars)) {
+          return acc.concat(item.cars); // Об'єднуємо масиви
+        }
+        return acc;
       }, [])
     )
   );
+
+  console.log(uniqueCars);
 
   const filteredData = selectedCar
     ? data.filter((item: ImageItem) => item.cars.includes(selectedCar))
