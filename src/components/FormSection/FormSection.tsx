@@ -66,7 +66,7 @@ export const FormSection = () => {
             />
 
             <button className={s.submitBtn} type="submit">
-              оставить заявку
+              <span>оставить заявку</span>
               <svg
                 viewBox="0 0 13 12"
                 fill="none"

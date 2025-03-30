@@ -43,6 +43,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: var(--white);
 
     .formContainer {
       width: 29.7vw;
@@ -125,6 +126,11 @@
       text-transform: uppercase;
       transition: 0.3s;
 
+      span {
+        position: relative;
+        z-index: 1;
+      }
+
       svg {
         width: 0.6vw;
         height: 0.6vw;
@@ -141,7 +147,7 @@
       top: 0;
       left: 0;
       background-image: url(/images/corner-gradient-bg.jpg);
-      z-index: -1;
+      z-index: 0;
       opacity: 0;
       transition: opacity 0.3s;
     }
