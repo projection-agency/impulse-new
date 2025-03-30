@@ -111,6 +111,20 @@
     padding: 0.8vw 1.3vw;
     border: 1px solid rgba(29, 29, 29, 0.1);
     border-radius: 8.6vw;
+    display: flex;
+    gap: 0.3vw;
+    transition: 0.3s;
+
+    cursor: pointer;
+  }
+
+  div:hover {
+    border-color: black;
+  }
+
+  .active {
+    background-color: black;
+    color: var(--white);
   }
 }
 
@@ -128,4 +142,17 @@
   height: 100%;
   background: var(--black);
   transition: width 0.3s ease-in-out;
+}
+
+.route {
+  display: flex;
+  gap: 0.8vw;
+  align-items: center;
+
+  span {
+    width: 0.3vw;
+    height: 0.3vw;
+    border-radius: 50%;
+    background-color: var(--black);
+  }
 }

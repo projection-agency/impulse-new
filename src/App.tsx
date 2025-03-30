@@ -6,6 +6,11 @@ import { FixedBar } from "./components/FixedBar/FixedBar";
 import { useState } from "react";
 import { PopupConsultation } from "./components/PopupConsultation/PopupConsultation";
 import { PopupOrder } from "./components/PopupOrder/PopupOrder";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+export const API_URL = import.meta.env.VITE_API_URL;
+
+const queryClient = new QueryClient();
 
 function App() {
   const [consultPopup, setConsultPopup] = useState(false);
@@ -19,7 +24,7 @@ function App() {
   };
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Header />
 
       <FixedBar
@@ -35,7 +40,7 @@ function App() {
 
       {consultPopup && <PopupConsultation onClose={handleToggleConsult} />}
       {orderPopup && <PopupOrder onClose={handleToggleOrder} />}
-    </>
+    </QueryClientProvider>
   );
 }
 

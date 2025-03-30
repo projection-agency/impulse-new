@@ -45,12 +45,14 @@
       }
 
       span {
+        display: block;
         font-family: Druk Cyr;
         font-weight: 900;
         font-size: 5vw;
         line-height: 99%;
         letter-spacing: 0.01vw;
         text-transform: uppercase;
+        max-width: 7vw;
       }
 
       .verticalText {

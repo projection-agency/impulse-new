@@ -2,20 +2,15 @@ import { FC, useState } from "react";
 import { motion } from "framer-motion"; // Імпортуємо motion
 import s from "./PopupTour.module.css";
 import AccordionGroup from "../Accordion/Accordion";
-
-interface Day {
-  date: string;
-  image: string;
-  location: string;
-  time: string;
-  description: string;
-}
+import { Day, yearEditor } from "../ActualToursSection/ActualToursSection";
 
 interface PopupTourProps {
   info: {
-    title: string;
-    date: string;
-    days: Day[];
+    title: { rendered: string };
+
+    input_date_start: string;
+    input_date_end: string;
+    save_data_text: Day[];
   };
   onClose: () => void;
 }
@@ -23,8 +18,12 @@ interface PopupTourProps {
 export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
   const [currentDay, setCurrentDay] = useState(0);
 
-  const totalDays = info.days.length;
-  const currentSlide = info.days[currentDay];
+  console.log(info);
+
+  const totalDays = info.save_data_text.length;
+  const currentSlide = info.save_data_text[currentDay];
+
+  console.log(currentSlide);
 
   const handlePrev = () => {
     if (currentDay > 0) {
@@ -55,8 +54,10 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
       >
         <div className={s.mainInfo}>
           <div className={s.tourInfo}>
-            <span>{info.date}</span>
-            <h3>{info.title}</h3>
+            <span>
+              {yearEditor(info.input_date_start, info.input_date_end)}
+            </span>
+            <h3>{info.title.rendered}</h3>
 
             <p>
               Погружение в мир скорости, роскоши и незабываемых эмоций.
@@ -130,7 +131,7 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
           className={s.sliderContainer}
           style={{
             backgroundImage: currentSlide
-              ? `url(${currentSlide.image})`
+              ? `url(${currentSlide.hl_image_image})`
               : "none",
           }}
         >
@@ -154,17 +155,17 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
               <div className={s.counter}>
                 <span className={s.current}>0{currentDay + 1}</span>
                 <div></div>
-                <span>0{info.days.length}</span>
+                <span>0{info.save_data_text.length}</span>
               </div>
 
               <p className={s.date}>
                 <span>ДЕНЬ</span>
                 <span>{currentDay + 1}</span>
-                <span>({currentSlide.date})</span>
+                <span>({currentSlide.hl_input_title})</span>
               </p>
 
               <div className={s.image}>
-                <img src={currentSlide.image} alt="image" />
+                <img src={currentSlide.hl_image_image} alt="image" />
                 <div className={s.location}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -174,11 +175,13 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
                     <rect x="4" y="4.5" width="1" height="12" fill="white" />
                     <circle cx="4.5" cy="5" r="4" fill="white" />
                   </svg>
-                  {currentSlide.location}
+                  {currentSlide.hl_input_way}
                 </div>
               </div>
 
-              <p className={s.dayDescription}>{currentSlide.description}</p>
+              <p className={s.dayDescription}>
+                {currentSlide.hl_input_description}
+              </p>
             </div>
 
             <div className={s.controller}>

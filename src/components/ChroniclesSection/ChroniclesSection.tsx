@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Layout } from "../Layout/Layout";
 import { SiteButton } from "../SiteButton/SiteButton";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -6,29 +6,43 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import s from "./ChroniclesSection.module.css";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import { API_URL } from "../../App";
 
-const gallery = [
-  {
-    image: "/temp/1.jpg",
-    location: "Италия Dolomites",
-    date: "2025. 01.06 - 05.06",
-  },
-  {
-    image: "/temp/2.jpg",
-    location: "Италия Dolomites",
-    date: "2025. 01.06 - 05.06",
-  },
-  {
-    image: "/temp/3.jpg",
-    location: "Италия Dolomites",
-    date: "2025. 01.06 - 05.06",
-  },
-];
+interface ImageItem {
+  cars: string[];
+}
+
+const fetchGallery = async () => {
+  const { data } = await axios.get(`${API_URL}wp-json/wp/v2/travel_journal`);
+  return data;
+};
 
 export const ChroniclesSection = () => {
+  const { data = [], isLoading } = useQuery({
+    queryKey: ["gallery"],
+    queryFn: fetchGallery,
+  });
+
+  const [selectedCar, setSelectedCar] = useState<string | null>(null);
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState((1 / gallery.length) * 100); // Початкове значення 33.3%
+  const [progress, setProgress] = useState((1 / data.length) * 100);
+
+  const uniqueCars: string[] = Array.from(
+    new Set(data.flatMap((item: ImageItem) => item.cars))
+  );
+
+  const filteredData = selectedCar
+    ? data.filter((item: ImageItem) => item.cars.includes(selectedCar))
+    : data;
+
+  useEffect(() => {
+    setProgress((1 / filteredData.length) * 100);
+  }, [selectedCar, filteredData]);
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <section className={s.section}>
@@ -47,15 +61,23 @@ export const ChroniclesSection = () => {
         </div>
 
         <div className={s.tabController}>
-          <div>
-            Porsche 911 <span>(12)</span>
-          </div>
-          <div>
-            Lamborghini <span>(12)</span>
-          </div>
-          <div>
-            BMW <span>(12)</span>
-          </div>
+          {uniqueCars.map((car, index) => (
+            <div
+              key={index}
+              onClick={() => setSelectedCar(car === selectedCar ? null : car)}
+              className={selectedCar === car ? s.active : ""}
+            >
+              {car}
+              <span>
+                (
+                {
+                  data.filter((item: ImageItem) => item.cars.includes(car))
+                    .length
+                }
+                )
+              </span>
+            </div>
+          ))}
         </div>
       </Layout>
 
@@ -92,7 +114,7 @@ export const ChroniclesSection = () => {
         <Swiper
           spaceBetween={20}
           slidesPerView={1}
-          // loop={true}
+          initialSlide={0}
           navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
           modules={[Navigation]}
           onInit={(swiper) => {
@@ -113,16 +135,29 @@ export const ChroniclesSection = () => {
           }}
           className={s.swiperContainer}
         >
-          {gallery.map((image) => (
-            <SwiperSlide className={s.slide}>
-              <img src={image.image} alt="" />
+          {filteredData.map(
+            (image: {
+              id: number;
+              load_image_text_photo: string;
+              input_way_start: string;
+              input_way_end: string;
+              input_date: string;
+            }) =>
+              image.load_image_text_photo ? (
+                <SwiperSlide key={image.id} className={s.slide}>
+                  <img src={image.load_image_text_photo} alt="" />
+                  <div className={s.slideBottomInfo}>
+                    <p className={s.route}>
+                      {image.input_way_start}
+                      <span></span>
+                      {image.input_way_end}
+                    </p>
 
-              <div className={s.slideBottomInfo}>
-                <p>{image.location}</p>
-                <p>{image.date}</p>
-              </div>
-            </SwiperSlide>
-          ))}
+                    <p>{image.input_date}</p>
+                  </div>
+                </SwiperSlide>
+              ) : null
+          )}
         </Swiper>
       </div>
     </section>
