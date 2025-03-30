@@ -31,7 +31,7 @@ export const ChroniclesSection = () => {
   const [progress, setProgress] = useState((1 / data.length) * 100);
 
   const uniqueCars: string[] = Array.from(
-    new Set(data.flatMap((item: ImageItem) => item.cars))
+    new Set([].concat(...data.map((item: ImageItem) => item.cars)))
   );
 
   const filteredData = selectedCar
