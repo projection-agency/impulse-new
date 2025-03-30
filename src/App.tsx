@@ -8,7 +8,7 @@ import { PopupConsultation } from "./components/PopupConsultation/PopupConsultat
 import { PopupOrder } from "./components/PopupOrder/PopupOrder";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-export const API_URL = import.meta.env.VITE_API_URL;
+export const API_URL = "https://www.impulse.projection-learn.website/";
 
 const queryClient = new QueryClient();
 
