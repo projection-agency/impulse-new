@@ -10,11 +10,17 @@ import { GallerySection } from "../../components/GallerySection/GallerySection";
 import { ReviewSection } from "../../components/ReviewSection/ReviewSection";
 import { FaqSection } from "../../components/FaqSection/FaqSection";
 import { FormSection } from "../../components/FormSection/FormSection";
+import { FC } from "react";
 
-export const MainPage = () => {
+interface MainPageProps {
+  openOrder: () => void;
+  openConsult: () => void;
+}
+
+export const MainPage: FC<MainPageProps> = ({ openOrder, openConsult }) => {
   return (
     <main>
-      <HomeHero />
+      <HomeHero openOrder={openOrder} openConsult={openConsult} />
 
       <DescSection />
 

@@ -9,9 +9,10 @@ import s from "./ChroniclesSection.module.css";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { API_URL } from "../../App";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 interface ImageItem {
-  cars: string[];
+  cars: string;
 }
 
 const fetchGallery = async () => {
@@ -25,6 +26,9 @@ export const ChroniclesSection = () => {
     queryFn: fetchGallery,
   });
 
+  const { width } = useWindowSize();
+  const isMobile = width < 1024;
+
   const [selectedCar, setSelectedCar] = useState<string | null>(null);
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
@@ -35,7 +39,7 @@ export const ChroniclesSection = () => {
   );
 
   const filteredData = selectedCar
-    ? data.filter((item: ImageItem) => item.cars.includes(selectedCar))
+    ? data.filter((item: ImageItem) => item.cars === selectedCar)
     : data;
 
   useEffect(() => {
@@ -49,16 +53,17 @@ export const ChroniclesSection = () => {
       <Layout>
         <div className={s.titleContainer}>
           <h2>Хроники путешествий</h2>
-          <SiteButton />
+          {!isMobile && <SiteButton />}
         </div>
 
-        {/* Прогрес-бар */}
-        <div className={s.progressBarContainer}>
-          <div
-            className={s.progressBar}
-            style={{ width: `${progress}%` }}
-          ></div>
-        </div>
+        {!isMobile && (
+          <div className={s.progressBarContainer}>
+            <div
+              className={s.progressBar}
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+        )}
 
         <div className={s.tabController}>
           {uniqueCars.map((car, index) => (
@@ -69,20 +74,23 @@ export const ChroniclesSection = () => {
             >
               {car}
               <span>
-                (
-                {
-                  data.filter((item: ImageItem) => item.cars.includes(car))
-                    .length
-                }
-                )
+                ({data.filter((item: ImageItem) => item.cars === car).length})
               </span>
             </div>
           ))}
         </div>
+
+        {isMobile && (
+          <div className={s.progressBarContainer}>
+            <div
+              className={s.progressBar}
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+        )}
       </Layout>
 
       <div className={s.sliderWrapper}>
-        {/* Кнопки навігації */}
         <div className={s.swiperController}>
           <div ref={prevRef} className={s.btn}>
             <svg
@@ -113,7 +121,7 @@ export const ChroniclesSection = () => {
 
         <Swiper
           spaceBetween={20}
-          slidesPerView={1}
+          slidesPerView={0.95}
           initialSlide={0}
           navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
           modules={[Navigation]}

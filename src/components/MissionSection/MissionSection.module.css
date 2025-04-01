@@ -195,3 +195,107 @@
     opacity: 1;
   }
 }
+
+@media (max-width: 1024px) {
+  .section {
+    .titleContainer {
+      display: block;
+      border: none;
+      margin-bottom: 6.4vw;
+
+      h2 {
+        font-size: 12.5vw;
+        padding: 0;
+        border: none;
+        margin-bottom: 3vw;
+      }
+
+      p {
+        font-size: 3.7vw;
+        width: 53vw;
+        padding: 0;
+      }
+    }
+
+    .jcsb {
+      padding: 0;
+      flex-direction: row;
+      align-items: flex-start;
+      max-height: none;
+      padding-top: 4.2vw;
+      border-top: 1px solid rgba(29, 29, 29, 0.1);
+
+      .impulse {
+        font-size: 5.3vw;
+        padding-top: 1vw;
+
+        svg {
+          width: 2.7vw;
+          height: 2.7vw;
+        }
+      }
+    }
+
+    .pagination {
+      gap: 3.2vw;
+
+      .bullets {
+        gap: 2vw;
+      }
+
+      .bullet {
+        width: 2.6vw;
+        height: 2.6vw;
+      }
+
+      .activeBullet {
+        width: 2.6vw;
+        height: 2.6vw;
+      }
+
+      .qty {
+        font-size: 4.8vw;
+        letter-spacing: 2vw;
+      }
+    }
+
+    .controller {
+      gap: 2vw;
+
+      div {
+        padding: 3.7vw 7vw;
+        svg {
+          width: 7.7vw;
+          height: 3.7vw;
+        }
+      }
+    }
+  }
+
+  .videoWrapper {
+    height: 178vw;
+    padding-top: 8.5vw;
+
+    .list {
+      width: auto;
+      gap: 1.8vw;
+      justify-content: start;
+
+      div {
+        flex-basis: calc((100% - 1.8vw) / 2);
+        padding: 4.2vw;
+        border-radius: 4.8vw;
+
+        p {
+          font-size: 3.7vw;
+          max-width: 27vw;
+        }
+
+        svg {
+          width: 18.6vw;
+          height: 18.6vw;
+        }
+      }
+    }
+  }
+}

@@ -17,20 +17,31 @@ const gallery = [
 
 export const GallerySection = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isImagesVisible, setIsImagesVisible] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
+  const galleryRef = useRef<HTMLUListElement | null>(null);
   const imagesRef = useRef<(HTMLLIElement | null)[]>([]);
 
   const handleScroll = () => {
     if (sectionRef.current) {
       const rect = sectionRef.current.getBoundingClientRect();
-      setIsScrolled(rect.top <= -100);
+      setIsScrolled(rect.top <= 100);
+    }
+  };
+
+  const handleImages = () => {
+    if (galleryRef.current) {
+      const rect = galleryRef.current.getBoundingClientRect();
+      setIsImagesVisible(rect.top <= 190);
     }
   };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleImages);
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleImages);
     };
   }, []);
 
@@ -100,7 +111,10 @@ export const GallerySection = () => {
           className={`${s.galleryImage} ${isScrolled ? s.scrolled : ""}`}
         />
 
-        <ul className={s.galleryList}>
+        <ul
+          className={`${s.galleryList} ${isImagesVisible && s.visible}`}
+          ref={galleryRef}
+        >
           {gallery.map((image, index) => (
             <li
               key={index}

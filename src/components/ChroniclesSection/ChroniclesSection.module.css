@@ -156,3 +156,72 @@
     background-color: var(--black);
   }
 }
+
+@media (max-width: 1024px) {
+  .section {
+    padding: 21.3vw 0;
+  }
+
+  .titleContainer {
+    margin-bottom: 6.4vw;
+
+    h2 {
+      font-size: 10.6vw;
+    }
+  }
+
+  .progressBarContainer {
+    height: 1px;
+    margin-bottom: 3.7vw;
+  }
+
+  .tabController {
+    position: relative;
+    width: 95vw;
+    overflow-x: auto;
+    gap: 1vw;
+    margin-bottom: 4.2vw;
+
+    div {
+      font-size: 3.7vw;
+      padding: 4.2vw;
+    }
+  }
+
+  .sliderWrapper {
+    .swiperController {
+      gap: 60vw;
+    }
+
+    .btn {
+      width: 13.8vw;
+      height: 13.8vw;
+      flex-shrink: 0;
+    }
+
+    svg {
+      width: 4.6vw;
+      height: 4.6vw;
+    }
+  }
+
+  .slide {
+    .slideBottomInfo {
+      justify-content: space-between;
+      gap: 0;
+      font-size: 3.4vw;
+    }
+
+    img {
+      height: 133vw;
+      margin-bottom: 4.2vw;
+    }
+  }
+
+  .route {
+    span {
+      width: 0.8vw;
+      height: 0.8vw;
+    }
+  }
+}

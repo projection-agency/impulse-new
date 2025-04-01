@@ -85,7 +85,7 @@ export const CarsSection = () => {
   const currentSlideIndex = (activeSlide + cars.length) % cars.length;
 
   return (
-    <section className={s.section}>
+    <section className={`${s.section} carSection`}>
       <div className={s.titleContainer}>
         <h2>50+ Автомобилей в автопарке Impulse</h2>
         <p>

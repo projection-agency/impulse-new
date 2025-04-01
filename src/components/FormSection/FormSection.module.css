@@ -167,3 +167,71 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .section {
+    display: block;
+    height: auto;
+
+    .imageBlock {
+      max-height: none;
+      height: 220vw;
+
+      .title {
+        width: 90vw;
+
+        span {
+          font-size: 4.2vw;
+        }
+
+        h2 {
+          font-size: 19.2vw;
+        }
+      }
+    }
+
+    .formBlock {
+      padding: 25.8vw 0;
+
+      .formContainer {
+        width: 91.4vw;
+
+        h3 {
+          font-size: 4.2vw;
+          width: 70vw;
+          margin: 0 auto;
+        }
+
+        form {
+          .inputsBlock {
+            margin-bottom: 8.5vw;
+            gap: 4.2vw;
+          }
+
+          label {
+            font-size: 3.7vw;
+          }
+
+          input {
+            font-size: 4.2vw;
+            height: 13.8vw;
+            margin-top: 2.1vw;
+          }
+        }
+      }
+
+      .submitBtn {
+        font-size: 4.2vw;
+        padding: 5.8vw;
+        border-width: 1px;
+        margin-top: 8.5vw;
+        border-radius: 4.2vw;
+
+        svg {
+          width: 3.2vw;
+          height: 3.2vw;
+        }
+      }
+    }
+  }
+}

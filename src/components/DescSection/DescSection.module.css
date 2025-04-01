@@ -2,6 +2,11 @@
   padding-top: 8.3vw;
   padding-bottom: 13vw;
 
+  .topImages {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .infoBlock {
     margin: 0 auto;
     transform: translateY(-3.5vw);
@@ -44,6 +49,43 @@
       margin: 0 auto;
       width: 22vw;
       transform: translateX(50%);
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding: 21.3vw 0;
+
+    .infoBlock {
+      transform: translateY(-13vw);
+      margin-bottom: 5vw;
+
+      svg {
+        width: 21.8vw;
+        height: 21.8vw;
+        margin-bottom: 8.5vw;
+      }
+
+      h2 {
+        font-size: 12.5vw;
+        width: auto;
+        margin-bottom: 6.4vw;
+      }
+
+      .aside {
+        transform: none;
+        width: 82vw;
+      }
+
+      p {
+        font-size: 3.7vw;
+        text-align: center;
+        margin-bottom: 8.5vw;
+      }
+
+      .btn {
+      }
     }
   }
 }

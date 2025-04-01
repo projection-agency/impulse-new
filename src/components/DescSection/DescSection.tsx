@@ -1,25 +1,32 @@
+import { useWindowSize } from "../../hooks/useWindowSize";
 import { Layout } from "../Layout/Layout";
 import { SiteButton } from "../SiteButton/SiteButton";
 import { SiteLogo } from "../SiteLogo/SiteLogo";
 import s from "./DescSection.module.css";
 
 export const DescSection = () => {
+  const { width } = useWindowSize();
+
+  const isMobile = width < 1024;
+
   return (
     <section className={s.section}>
       <Layout>
-        <div className="flex justify-between">
-          <div className="w-[30.4vw]">
+        <div className="flex flex-row justify-between gap-[5.6vw]">
+          <div className="lg:w-[30.4vw]">
             <img src="/images/actual-tours/lambos.avif" alt="Lamborghini" />
           </div>
 
           <div className="flex gap-[1.2vw]">
-            <div className="w-[20.3vw]">
+            <div className="lg:w-[20.3vw]">
               <img src="/images/actual-tours/drone.avif" alt="Drone" />
             </div>
 
-            <div className="w-[14.1vw]">
-              <img src="/images/actual-tours/plate.avif" alt="Plate" />
-            </div>
+            {!isMobile && (
+              <div className="lg:w-[14.1vw]">
+                <img src="/images/actual-tours/plate.avif" alt="Plate" />
+              </div>
+            )}
           </div>
         </div>
 
@@ -43,9 +50,9 @@ export const DescSection = () => {
           </div>
         </div>
 
-        <div className="flex gap-[18vw] ml-[14.5vw]">
-          <div className="flex gap-[1.2vw]">
-            <div>
+        <div className="flex gap-[18vw] lg:ml-[14.5vw] ">
+          <div className="flex flex-row-reverse lg:flex-row lg:gap-[1.2vw] gap-[5.8vw] lg:justify-start justify-between">
+            <div className="lg:block flex justify-end">
               <img src="/images/actual-tours/home.avif" alt="Home" />
             </div>
             <div>
@@ -53,9 +60,11 @@ export const DescSection = () => {
             </div>
           </div>
 
-          <div>
-            <img src="/images/actual-tours/mountain.avif" alt="Bed" />
-          </div>
+          {!isMobile && (
+            <div>
+              <img src="/images/actual-tours/mountain.avif" alt="Bed" />
+            </div>
+          )}
         </div>
       </Layout>
     </section>

@@ -2,6 +2,7 @@
   position: relative;
   min-height: 120vh;
   background-size: cover;
+  background-position: center;
   padding-top: 3.2vw;
 
   .tabsController {
@@ -165,4 +166,97 @@
   );
   transform: rotate(180deg);
   pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+  .section {
+    min-height: 100vh;
+    overflow: hidden;
+    padding-top: 6.4vw;
+
+    .tabContent {
+      height: 80vh;
+    }
+
+    .tabsController {
+      display: block;
+      margin-bottom: 8.5vw;
+
+      .tabs {
+        justify-content: space-between;
+
+        li:nth-child(1) {
+          span:nth-child(2) {
+            width: 35vw;
+          }
+        }
+        li {
+          width: 8vw;
+          height: 16vw;
+          transition: width 0.3s;
+
+          p {
+            flex-direction: column;
+
+            span:nth-child(1) {
+              font-size: 3.7vw;
+              line-height: 100%;
+              transform: translateY(8vw);
+              transition: transform 0.3s;
+              margin-bottom: 1vw;
+            }
+
+            span:nth-child(2) {
+              width: 37vw;
+              opacity: 0;
+              font-size: 3.7vw;
+              line-height: 100%;
+              transition: opacity 0.3s;
+            }
+          }
+
+          .active {
+            span:nth-child(1) {
+              transform: translateY(0vw);
+            }
+
+            span:nth-child(2) {
+              opacity: 1;
+            }
+          }
+        }
+
+        .activeTab {
+          width: 40vw;
+        }
+      }
+    }
+
+    .titleContainer {
+      P {
+        font-size: 3.7vw;
+        max-width: 55vw;
+        line-height: 120%;
+        margin-bottom: 3.2vw;
+      }
+
+      h2 {
+        font-size: 12.8vw;
+      }
+    }
+
+    .tabDesc {
+      max-width: none;
+
+      p {
+        font-size: 3.7vw;
+        padding: 4.2vw;
+        border-radius: 4.2vw;
+      }
+    }
+  }
+
+  .section::before {
+    height: 140vw;
+  }
 }

@@ -2,3 +2,9 @@
   width: 95.8vw;
   margin: 0 auto;
 }
+
+@media (max-width: 1024px) {
+  .layout {
+    width: 91.4vw;
+  }
+}

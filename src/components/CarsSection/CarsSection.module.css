@@ -129,11 +129,92 @@
     line-height: 120%;
     letter-spacing: -0.01vw;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.5);
     transition: 3s;
   }
 }
 
 .carInfo {
   transform: translateY(-7vw);
+}
+
+.carInfo {
+  opacity: 1;
+  transition: opacity 10s ease-in-out;
+}
+
+.carInfo.fadeOut {
+  opacity: 0;
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding-bottom: 25vw;
+    padding-top: 20vw;
+
+    .titleContainer {
+      margin-bottom: 0;
+
+      h2 {
+        font-size: 12.8vw;
+        margin-bottom: 6.4vw;
+      }
+
+      p {
+        font-size: 3.7vw;
+        width: 60vw;
+        transform: none;
+        text-align: center;
+      }
+    }
+
+    .sliderWrapper {
+      .swiper {
+        padding-top: 0;
+        height: 120vw;
+      }
+
+      .circle {
+        bottom: none;
+        top: 0;
+        width: 90%;
+        height: 100%;
+      }
+
+      .btn {
+        width: 13.8vw;
+        height: 13.8vw;
+
+        svg {
+          width: 4.6vw;
+          height: 4.6vw;
+        }
+      }
+
+      .swiperController {
+        top: 60%;
+      }
+    }
+
+    h3 {
+      font-size: 4.2vw;
+      margin-bottom: 8.8vw;
+    }
+
+    .carInfo {
+      transform: translateY(-50vw);
+      transition: 3s;
+
+      .modelsList {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: column;
+        align-items: center;
+        gap: 2.1vw;
+
+        font-size: 3.7vw;
+      }
+    }
+  }
 }

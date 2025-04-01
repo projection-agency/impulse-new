@@ -53,3 +53,19 @@
 .btn:hover::before {
   opacity: 1;
 }
+
+@media (max-width: 1024px) {
+  .btn {
+    margin: 0 auto;
+    font-size: 4.2vw;
+    outline: 1px solid var(--black);
+    padding: 5.8vw 8.5vw;
+    border-radius: 4.2vw;
+    gap: 4.2vw;
+
+    svg {
+      width: 3.2vw !important;
+      height: 3.2vw !important;
+    }
+  }
+}

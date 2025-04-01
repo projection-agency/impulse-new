@@ -1,3 +1,4 @@
+import { useWindowSize } from "../../hooks/useWindowSize";
 import { Layout } from "../Layout/Layout";
 import s from "./ReviewSection.module.css";
 
@@ -28,6 +29,9 @@ import { useState } from "react";
 
 export const ReviewSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { width } = useWindowSize();
+
+  const isMobile = width < 1024;
 
   const totalSlides = reviews.length;
 
@@ -60,15 +64,17 @@ export const ReviewSection = () => {
             </div>
 
             <div className={s.controller}>
-              <button onClick={prevSlide}>
-                <svg
-                  viewBox="0 0 42 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M0.584015 8.57143L9.05573 0L10.4677 1.42857L2.99422 8.99L42 8.99L42 11.01H2.99422L10.4677 18.5714L9.05573 20L0.584015 11.4286C-0.194679 10.6407 -0.194679 9.35929 0.584015 8.57143Z" />
-                </svg>
-              </button>
+              {!isMobile && (
+                <button onClick={prevSlide}>
+                  <svg
+                    viewBox="0 0 42 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M0.584015 8.57143L9.05573 0L10.4677 1.42857L2.99422 8.99L42 8.99L42 11.01H2.99422L10.4677 18.5714L9.05573 20L0.584015 11.4286C-0.194679 10.6407 -0.194679 9.35929 0.584015 8.57143Z" />
+                  </svg>
+                </button>
+              )}
 
               <div className={s.pagination}>
                 {reviews.map((_, index) => (
@@ -84,6 +90,18 @@ export const ReviewSection = () => {
               <div className={s.slideCount}>
                 {currentIndex + 1}/{totalSlides}
               </div>
+
+              {isMobile && (
+                <button onClick={nextSlide}>
+                  <svg
+                    viewBox="0 0 42 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M0.584015 8.57143L9.05573 0L10.4677 1.42857L2.99422 8.99L42 8.99L42 11.01H2.99422L10.4677 18.5714L9.05573 20L0.584015 11.4286C-0.194679 10.6407 -0.194679 9.35929 0.584015 8.57143Z" />
+                  </svg>
+                </button>
+              )}
 
               <button onClick={nextSlide}>
                 <svg

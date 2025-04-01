@@ -1,16 +1,28 @@
-.swiper-slide {
-}
+.carSection {
+  .swiper-slide-active {
+    transform: scale(2) translateY(5vw);
+    opacity: 1 !important;
+  }
 
-/* .swiper {
-  padding-top: 1vw;
-  padding-bottom: 12vw;
-} */
+  .swiper-button-disabled {
+    opacity: 0;
+  }
 
-.swiper-slide-active {
-  transform: scale(2) translateY(5vw); /* Центрована машина більша */
-  opacity: 1 !important;
-}
+  @media (max-width: 1024px) {
+    .swiper-slide {
+      transform: scale(1.5) translateY(40vw);
 
-.swiper-button-disabled {
-  opacity: 0;
+      img {
+        width: 200vw;
+      }
+    }
+
+    .swiper-slide-active {
+      transform: scale(4) translateY(0);
+
+      img {
+        width: 20vw;
+      }
+    }
+  }
 }

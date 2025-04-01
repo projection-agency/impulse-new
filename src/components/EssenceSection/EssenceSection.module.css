@@ -24,6 +24,8 @@
       gap: 0.8vw;
 
       .icon {
+        position: relative;
+        overflow: hidden;
         width: 3.7vw;
         height: 3.7vw;
         display: flex;
@@ -36,6 +38,7 @@
           width: 1.2vw;
           height: 1.2vw;
           fill: var(--white);
+          z-index: 2;
         }
       }
 
@@ -68,6 +71,30 @@
             fill: rgba(255, 255, 255, 0.7);
           }
         }
+      }
+
+      .icon::before {
+        position: absolute;
+        content: "";
+        background-image: url(images/circle-gradient-bg.svg);
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+    }
+
+    .inst:hover {
+      .icon {
+        border-color: transparent;
+      }
+
+      .icon::before {
+        opacity: 1;
       }
     }
   }
@@ -124,6 +151,90 @@
       letter-spacing: -0.01vw;
       color: rgba(255, 255, 255, 0.5);
       max-width: 20vw;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding: 0 0 21vw 0;
+    .container {
+      flex-direction: column-reverse;
+      gap: 8.5vw;
+    }
+
+    .descBlock {
+      width: auto;
+
+      .essence {
+        font-size: 3.7vw;
+        line-height: 110%;
+        padding-bottom: 4.2vw;
+        margin-bottom: 4.2vw;
+      }
+
+      h3 {
+        font-size: 12.5vw;
+      }
+
+      span {
+        font-size: 7.4vw;
+        margin-bottom: 4.2vw;
+      }
+
+      .bottomDesc {
+        font-size: 3.7vw;
+        max-width: 60vw;
+      }
+    }
+
+    .imageBlock {
+      width: auto;
+      height: 106vw;
+
+      img {
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .filter {
+        content: "";
+        position: absolute;
+        bottom: -53%;
+        right: -63%;
+        width: 130vw;
+        height: 130vw;
+      }
+
+      .inst {
+        gap: 3.2vw;
+
+        .icon {
+          width: 17vw;
+          height: 17vw;
+
+          svg {
+            width: 6.4vw;
+            height: 6.4vw;
+          }
+        }
+
+        .desc {
+          p {
+            font-size: 4.2vw;
+            margin-bottom: 2vw;
+          }
+
+          span {
+            font-size: 3.7vw;
+
+            svg {
+              width: 4.2vw;
+              height: 4.2vw;
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -11,7 +11,7 @@ export const PhoneNumberInput = () => {
     <PhoneInput
       country={"ua"} // Код країни за замовчуванням
       onlyCountries={["ua", "us", "pl", "de"]} // Обмежити вибір країн
-      placeholder="Введіть свій номер телефону"
+      placeholder="Введите свой номер телефона"
       onChange={handlePhoneChange}
       inputStyle={{
         width: "100%",

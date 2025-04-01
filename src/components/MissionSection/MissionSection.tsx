@@ -2,17 +2,22 @@ import { useState } from "react";
 import { Layout } from "../Layout/Layout";
 import s from "./MissionSection.module.css";
 
-const videos = ["/temp/video.mp4", "/temp/video.mp4", "/temp/video.mp4"];
+const videos = ["/temp/video.mp4", "/temp/hero-video.mp4", "/temp/video.mp4"];
 
 export const MissionSection = () => {
   const [currentVideo, setCurrentVideo] = useState(0);
+  const [isFading, setIsFading] = useState(false);
 
-  const nextVideo = () => {
-    setCurrentVideo((prev) => (prev + 1) % videos.length);
-  };
-
-  const prevVideo = () => {
-    setCurrentVideo((prev) => (prev - 1 + videos.length) % videos.length);
+  const switchVideo = (direction: "next" | "prev") => {
+    setIsFading(true);
+    setTimeout(() => {
+      setCurrentVideo((prev) =>
+        direction === "next"
+          ? (prev + 1) % videos.length
+          : (prev - 1 + videos.length) % videos.length
+      );
+      setIsFading(false);
+    }, 1); // тривалість fade-out
   };
 
   return (
@@ -54,7 +59,7 @@ export const MissionSection = () => {
       </Layout>
 
       <Layout>
-        <div className="flex justify-between mb-[1.6vw]">
+        <div className="flex justify-between lg:mb-[1.6vw] mb-[4.2vw]">
           <div className={s.pagination}>
             <div className={s.bullets}>
               {videos.map((_, index) => (
@@ -70,7 +75,7 @@ export const MissionSection = () => {
           </div>
 
           <div className={s.controller}>
-            <div className={s.prev} onClick={prevVideo}>
+            <div className={s.prev} onClick={() => switchVideo("prev")}>
               <svg
                 viewBox="0 0 42 20"
                 fill="none"
@@ -79,7 +84,7 @@ export const MissionSection = () => {
                 <path d="M0.584015 8.57143L9.05573 0L10.4677 1.42857L2.99422 8.99L42 8.99L42 11.01H2.99422L10.4677 18.5714L9.05573 20L0.584015 11.4286C-0.194679 10.6407 -0.194679 9.35929 0.584015 8.57143Z" />
               </svg>
             </div>
-            <div className={s.next} onClick={nextVideo}>
+            <div className={s.next} onClick={() => switchVideo("next")}>
               <svg
                 viewBox="0 0 42 20"
                 fill="none"
@@ -93,7 +98,14 @@ export const MissionSection = () => {
       </Layout>
 
       <div className={s.videoWrapper}>
-        <video key={videos[currentVideo]} autoPlay loop muted playsInline>
+        <video
+          className={`${s.video} ${isFading ? s.fade : ""}`}
+          key={videos[currentVideo]}
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
           <source src={videos[currentVideo]} type="video/mp4" />
         </video>
         <Layout>

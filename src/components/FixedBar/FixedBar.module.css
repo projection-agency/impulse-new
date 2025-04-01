@@ -69,3 +69,31 @@
 .visible {
   transform: translateX(-50%) translateY(0%);
 }
+
+@media (max-width: 1024px) {
+  .bar {
+    position: static;
+    transform: none;
+    width: 100%;
+    background-color: rgba(29, 29, 29, 1);
+    border-radius: 0;
+    justify-content: center;
+    padding: 2.1vw 0;
+    gap: 1.6vw;
+
+    button {
+      font-size: 3.2vw;
+      padding: 3.7vw 8vw;
+    }
+
+    button:nth-child(1) {
+      background-image: url(/images/gradient-bg.avif);
+      background-size: cover;
+    }
+
+    button:nth-child(2) {
+      color: var(--white);
+      border: 1px solid var(--white);
+    }
+  }
+}

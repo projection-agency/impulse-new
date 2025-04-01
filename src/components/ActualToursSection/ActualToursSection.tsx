@@ -40,6 +40,7 @@ const fetchGallery = async () => {
   return data;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const yearEditor = (start: string, end: string) => {
   const startDate = new Date(start);
   const endDate = new Date(end);

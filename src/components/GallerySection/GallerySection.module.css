@@ -1,4 +1,5 @@
 .section {
+  position: relative;
   overflow: hidden;
   padding-top: 20.6vw;
 
@@ -29,14 +30,14 @@
   }
 
   .galleryBlock {
-    position: relative;
-    min-height: 140vw;
+    /* position: relative; */
+    min-height: 90vw;
 
     .galleryImage {
       position: absolute;
-      top: 0;
+      top: 25vw;
       left: 50%;
-      transform: translateX(-50%) translateY(-30vw);
+      transform: translateX(-50%);
 
       width: 5.8vw;
       height: 5.8vw;
@@ -45,15 +46,18 @@
     }
 
     .scrolled {
-      width: 100%;
-      height: 100%;
-      transform: translateX(-50%) translateY(0);
+      width: 100% !important;
+      height: 100% !important;
+      transform: translateX(-50%) translateY(-30vw);
       border-radius: 0;
     }
 
     .galleryList {
       position: absolute;
-      top: 10.4vw;
+      top: 20vw;
+      transform: translateY(5vw);
+      opacity: 0;
+      transition: 1s;
 
       li {
         position: absolute;
@@ -127,6 +131,11 @@
         top: 90vw;
       }
     }
+
+    .visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
@@ -139,7 +148,6 @@
   }
 }
 
-/* Стилі для елемента */
 @keyframes shake {
   0% {
     transform: translateY(0);
@@ -155,5 +163,96 @@
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 1024px) {
+  .section {
+    h2 {
+      font-size: 16.5vw;
+    }
+
+    .galleryBlock {
+      min-height: 450vw;
+
+      .galleryImage {
+        width: 13.8vw;
+        height: 13.8vw;
+        top: 22vw;
+      }
+
+      .galleryList {
+        li {
+          position: absolute;
+          display: inline-block;
+        }
+
+        li:nth-child(1) {
+          top: 4.8vw;
+
+          width: 36vw;
+          left: 4.2vw;
+        }
+
+        li:nth-child(2) {
+          width: 80vw;
+          left: 15vw;
+          top: 20vw;
+        }
+
+        li:nth-child(3) {
+          width: 36vw;
+          left: 30vw;
+          top: 80vw;
+          animation: shake 8s infinite;
+          z-index: 1;
+        }
+        li:nth-child(4) {
+          width: 91vw;
+          left: 4.2vw;
+          animation: shake 14s infinite;
+          top: 120vw;
+        }
+        li:nth-child(5) {
+          width: 63vw;
+
+          left: 4.2vw;
+          top: 190vw;
+          animation: shake 10s infinite;
+        }
+        li:nth-child(6) {
+          width: 45.8vw;
+          left: 50vw;
+          animation: shake 12s infinite;
+          top: 220vw;
+          z-index: 1;
+        }
+        li:nth-child(7) {
+          width: 36vw;
+          left: 60vw;
+          top: 330vw;
+          animation: shake 8s infinite;
+          z-index: 1;
+        }
+        li:nth-child(8) {
+          width: 80vw;
+          left: 4.2vw;
+          animation: shake 14s infinite;
+          top: 290vw;
+        }
+        li:nth-child(9) {
+          width: 45.8vw;
+          left: 53vw;
+          animation: shake 10s infinite;
+          top: 390vw;
+        }
+        li:nth-child(10) {
+          width: 45.8vw;
+          left: 4.2vw;
+          animation: shake 12s infinite;
+          top: 390vw;
+        }
+      }
+    }
   }
 }

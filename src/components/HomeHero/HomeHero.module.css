@@ -91,63 +91,63 @@
       transform: rotate(90deg);
     }
   }
+}
 
-  .showReelContainer {
-    position: relative;
+.showReelContainer {
+  position: relative;
 
-    img {
-      position: absolute;
-      width: 100%;
-      left: 0;
-      pointer-events: none;
-    }
+  img {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    pointer-events: none;
+  }
+}
+
+.showReel {
+  /* position: relative; */
+  border: 0.01vw solid rgba(255, 255, 255, 0.5);
+  width: 11vw;
+  height: 11vw;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  gap: 0.8vw;
+  transition: background 0.3s ease-in-out;
+  cursor: pointer;
+  margin-bottom: 2vw;
+
+  img {
+    width: auto;
+    height: auto;
   }
 
-  .showReel {
-    /* position: relative; */
-    border: 0.01vw solid rgba(255, 255, 255, 0.5);
-    width: 11vw;
-    height: 11vw;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    gap: 0.8vw;
-    transition: background 0.3s ease-in-out;
-    cursor: pointer;
-    margin-bottom: 2vw;
-
-    img {
-      width: auto;
-      height: auto;
-    }
-
-    svg {
-      width: 1.1vw;
-      height: 1.1vw;
-      fill: var(--white);
-      transition: fill 0.3s ease-in-out;
-    }
-
-    span {
-      font-family: Manrope;
-      text-transform: capitalize;
-      transition: color 0.3s ease-in-out;
-    }
+  svg {
+    width: 1.1vw;
+    height: 1.1vw;
+    fill: var(--white);
+    transition: fill 0.3s ease-in-out;
   }
 
-  .showReel:hover {
-    background-color: var(--white);
+  span {
+    font-family: Manrope;
+    text-transform: capitalize;
+    transition: color 0.3s ease-in-out;
+  }
+}
 
-    svg {
-      fill: var(--black);
-    }
+.showReel:hover {
+  background-color: var(--white);
 
-    span {
-      color: var(--black);
-    }
+  svg {
+    fill: var(--black);
+  }
+
+  span {
+    color: var(--black);
   }
 }
 
@@ -164,11 +164,13 @@
     width: fit-content;
     padding: 1.2vw 1.6vw;
     border-radius: 1.2vw;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+    cursor: pointer;
 
     .tabImageBorder {
-      border: 0.2vw solid var(--white);
+      position: relative;
       border-radius: 50%;
-      padding: 0.4vw;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -179,6 +181,7 @@
       height: 4.1vw;
       border-radius: 50%;
       overflow: hidden;
+      z-index: 9;
     }
 
     h4 {
@@ -209,6 +212,10 @@
       }
     }
   }
+}
+
+.tab.active {
+  opacity: 1;
 }
 
 .heroBottomContainer {
@@ -244,6 +251,168 @@
       line-height: 100%;
       letter-spacing: -0.01vw;
       color: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
+.videoContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  .video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.8s ease-in-out;
+    opacity: 0;
+  }
+
+  .video.active {
+    opacity: 1;
+    z-index: 2000000000;
+  }
+
+  .video.hidden {
+    opacity: 0;
+    z-index: 1;
+  }
+}
+
+.ringBg {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2;
+}
+.ring {
+  fill: none;
+  stroke: white;
+  stroke-width: 1;
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding-top: 25vw;
+    padding-bottom: 6.4vw;
+  }
+
+  .heroTitleContainer {
+    margin-bottom: 27.7vw;
+
+    span {
+      font-size: 4.2vw;
+      margin-bottom: 2vw;
+    }
+
+    h1 {
+      font-size: 21.3vw;
+      margin-bottom: 8.5vw;
+    }
+
+    p {
+      font-size: 3.7vw;
+      width: 80%;
+      margin-bottom: 8.5vw;
+    }
+
+    a {
+      font-size: 4.2vw;
+      width: 66.6vw;
+      border-radius: 6.4vw;
+      gap: 4.2vw;
+      padding: 5.8vw 0;
+
+      svg {
+        width: 3.2vw;
+        height: 3.2vw;
+      }
+    }
+  }
+
+  .heroBottomContainer {
+    display: block;
+    .swiperController {
+      flex-wrap: wrap;
+      gap: 2.1vw;
+
+      .tab {
+        display: block;
+        flex-basis: calc((100% - 2.1vw) / 2);
+        padding: 7.2vw 5.3vw;
+        border-radius: 6.4vw;
+
+        .tabImageBorder {
+          display: block;
+          margin-bottom: 2.6vw;
+
+          img {
+            width: 13.7vw;
+            height: 13.7vw;
+          }
+        }
+
+        h4 {
+          font-size: 4.2vw;
+          margin-bottom: 2.5vw;
+        }
+
+        p {
+          font-size: 3.2vw;
+          gap: 1vw;
+          line-height: 106%;
+          margin-bottom: 1.6vw;
+
+          svg {
+            min-width: 3.2vw;
+            min-height: 3.2vw;
+            max-width: 3.2vw;
+            max-height: 3.2vw;
+          }
+        }
+      }
+    }
+  }
+
+  .shoeReelMobileWrapper {
+    background-image: url(/images/show-reel-mob-bg.jpg);
+    background-size: cover;
+    height: 200vw;
+    margin-top: 21.3vw;
+  }
+
+  .showReelContainer {
+    top: 50%;
+    transform: translateY(-50%);
+    .showReel {
+      width: 40vw;
+      height: 40vw;
+      background-color: var(--white);
+
+      svg {
+        width: 5.8vw;
+        height: 5.8vw;
+        fill: var(--black);
+      }
+
+      span {
+        font-size: 3.7vw;
+        color: var(--black);
+      }
+    }
+
+    .showReel::after {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 1px;
+      background-color: var(--white);
+    }
+
+    img {
+      height: 100%;
     }
   }
 }

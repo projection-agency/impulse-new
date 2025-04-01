@@ -101,3 +101,25 @@
 .options-list li:hover::before {
   opacity: 1;
 }
+
+@media (max-width: 1024px) {
+  .select-box {
+    height: 13.8vw;
+    font-size: 4.2vw;
+  }
+
+  .arrow {
+    svg {
+      width: 6.4vw;
+      height: 6.4vw;
+    }
+  }
+
+  .options-list {
+    li {
+      padding: 5.3vw;
+
+      font-size: 5.3vw;
+    }
+  }
+}
