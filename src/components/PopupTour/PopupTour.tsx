@@ -3,19 +3,31 @@ import { motion } from "framer-motion"; // Імпортуємо motion
 import s from "./PopupTour.module.css";
 import AccordionGroup from "../Accordion/Accordion";
 import { Day, yearEditor } from "../ActualToursSection/ActualToursSection";
+import { useWindowSize } from "../../hooks/useWindowSize";
+import { Layout } from "../Layout/Layout";
 
 interface PopupTourProps {
   info: {
     title: { rendered: string };
-
+    input_desc: string;
     input_date_start: string;
     input_date_end: string;
     save_data_text: Day[];
+    coast_booking: string;
+    coast_content_11: string;
+    coast_content_12: string;
+    coast_content_21: string;
+    coast_content_22: string;
+    coast_title_1: string;
+    coast_title_2: string;
   };
   onClose: () => void;
 }
 
 export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
+  const { width } = useWindowSize();
+  const isMobile = width < 1024;
+
   const [currentDay, setCurrentDay] = useState(0);
 
   const totalDays = info.save_data_text.length;
@@ -33,6 +45,34 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
     }
   };
 
+  const arrow = (
+    <svg
+      className={s.arrow}
+      width="22"
+      height="22"
+      viewBox="0 0 22 22"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g opacity="0.6" clipPath="url(#clip0_1367_719)">
+        <path
+          d="M7.39999 17V14.6H12.8L5 6.79999L6.79999 5L14.6 12.8V7.40002H17V17H7.39999Z"
+          fill="white"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_1367_719">
+          <rect
+            width="12"
+            height="12"
+            fill="white"
+            transform="matrix(1 0 0 -1 5 17)"
+          />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+
   return (
     <motion.div
       className={s.popupOverlay}
@@ -48,79 +88,159 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
         exit={{ y: 50, opacity: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <div className={s.mainInfo}>
+        <div className={s.mainInfo} data-lenis-prevent>
           <div className={s.tourInfo}>
             <span>
               {yearEditor(info.input_date_start, info.input_date_end)}
             </span>
             <h3>{info.title.rendered}</h3>
 
-            <p>
-              Погружение в мир скорости, роскоши и незабываемых эмоций.
-              Уникальное автопутешествие через живописные Доломиты на
-              Lamborghini с участием предпринимателей и экспертов со всего мира.
-              Тур включает в себя вождение на немецких автобанах без ограничений
-              скорости, ночёвки в премиальных отелях 4-5*, эксклюзивные
-              развлечения и вертолётный тур над Альпами. Финальный аккорд —
-              прощальный ужин в атмосфере стиля и элегантности.
-            </p>
+            <p>{info.input_desc}</p>
           </div>
 
-          <div className={s.accordionContainer}>
-            <AccordionGroup
-              items={[
-                {
-                  title: "Включено в стоимость",
-                  content: (
-                    <ul>
-                      <li>Полная организация автопробега командой IMPULSE</li>
-                      <li>
-                        Проживание в отелях с превосходными номерами, спа зонами
-                        и безупречным сервисом
-                      </li>
-                      <li> Профессиональный Photography & Video Production</li>
-                      <li>Завтраки и ужины</li>
-                      <li>Входные билеты во все музеи</li>
-                      <li>Полёт на вертолёте</li>
-                      <li> Road Book автопробега в печатном и pdf формате</li>
-                      <li>
-                        Check-list со всей важной информацией для подготовки к
-                        туру
-                      </li>
-                      <li>Рации для связи между участниками во время заезда</li>
-                      <li>Grand Final мероприятие</li>
-                      <li>Трансфер из аэропорта Мюнхена в отель</li>
-                      <li>Трансфер в аэропорт Милана из отеля</li>
-                      <li>Личный менеджер для помощи на каждом этапе</li>
-                      <li>Именное приглашение в тур</li>
-                      <li>Подарки от компании IMPULSE и спонсоров</li>
-                    </ul>
-                  ),
-                },
-                {
-                  title: "Не включено в стоимость",
-                  content: (
-                    <ul>
-                      <li>Авиаперелёты в Мюнхен / из Милана</li>
-                      <li>Обеды</li>
-                      <li>Бензин (~ 250 €)</li>
-                    </ul>
-                  ),
-                },
-                {
-                  title: "маршрут",
-                  content: (
-                    <div className={s.route}>
-                      <img src="/temp/route-image.jpg" alt="route" />
-                      <button>
-                        <span>открыть карту</span>{" "}
-                      </button>
-                    </div>
-                  ),
-                },
-              ]}
-            />
-          </div>
+          {isMobile && (
+            <button onClick={onClose} className={s.closeBtn}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 52 52"
+                fill="none"
+              >
+                <path
+                  d="M39 39L13 13M39 13L13 39"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          )}
+
+          {!isMobile && (
+            <div className={s.accordionContainer}>
+              <AccordionGroup
+                items={[
+                  {
+                    title: "Включено в стоимость",
+                    content: (
+                      <ul>
+                        <li>Полная организация автопробега командой IMPULSE</li>
+                        <li>
+                          Проживание в отелях с превосходными номерами, спа
+                          зонами и безупречным сервисом
+                        </li>
+                        <li>Профессиональный Photography & Video Production</li>
+                        <li>Завтраки и ужины</li>
+                        <li>Входные билеты во все музеи</li>
+                        <li>Полёт на вертолёте</li>
+                        <li> Road Book автопробега в печатном и pdf формате</li>
+                        <li>
+                          Check-list со всей важной информацией для подготовки к
+                          туру
+                        </li>
+                        <li>
+                          Рации для связи между участниками во время заезда
+                        </li>
+                        <li>Grand Final мероприятие</li>
+                        <li>Трансфер из аэропорта Мюнхена в отель</li>
+                        <li>Трансфер в аэропорт Милана из отеля</li>
+                        <li>Личный менеджер для помощи на каждом этапе</li>
+                        <li>Именное приглашение в тур</li>
+                        <li>Подарки от компании IMPULSE и спонсоров</li>
+                      </ul>
+                    ),
+                  },
+
+                  {
+                    title: "Не включено в стоимость",
+                    content: (
+                      <ul>
+                        <li>Авиаперелёты в Мюнхен / из Милана</li>
+                        <li>Обеды</li>
+                        <li>Бензин (~ 250 €)</li>
+                      </ul>
+                    ),
+                  },
+                  {
+                    title: "маршрут",
+                    content: (
+                      <div className={s.route}>
+                        <img src="/temp/route-image.jpg" alt="route" />
+                        <button>
+                          <span>открыть карту</span>
+                        </button>
+                      </div>
+                    ),
+                  },
+                  {
+                    title: "стоимость тура",
+                    content: (
+                      <div className={s.accordion}>
+                        <div className={s.priceAcardon}>
+                          <div>
+                            <h4>1. {info.coast_title_1}</h4>
+                            <ul>
+                              <p>- Шеринг спорткара между двумя участниками</p>
+                              <p>- Проживание в отеле в двухместном номере</p>
+                            </ul>
+
+                            {info.coast_content_11 && (
+                              <div className={s.priceBlock}>
+                                {arrow}
+                                <p>{info.coast_content_11}</p>
+                              </div>
+                            )}
+
+                            <p className="lg:mb-[0.8vw]">
+                              Специальная цена при бронировании двух мест сразу
+                              (для друзей или пар):
+                            </p>
+
+                            {info.coast_content_12 && (
+                              <div className={s.priceBlock}>
+                                {arrow}
+                                <p>{info.coast_content_12}</p>
+                              </div>
+                            )}
+                          </div>
+
+                          <div>
+                            <h4>2. {info.coast_title_2}</h4>
+                            <ul>
+                              <p>- Шеринг спорткара между двумя участниками</p>
+                              <p>- Проживание в отеле в двухместном номере</p>
+                            </ul>
+
+                            {info.coast_content_21 && (
+                              <div className={s.priceBlock}>
+                                {arrow}
+                                <p>{info.coast_content_21}</p>
+                              </div>
+                            )}
+
+                            {info.coast_content_22 && (
+                              <>
+                                <p className="lg:mb-[0.8vw]">
+                                  Специальная цена при бронировании двух мест
+                                  сразу (для друзей или пар):
+                                </p>
+
+                                <div className={s.priceBlock}>
+                                  {arrow}
+                                  <p>{info.coast_content_22}</p>
+                                </div>
+                              </>
+                            )}
+                          </div>
+                        </div>
+
+                        <p className={s.coastBooking}>* {info.coast_booking}</p>
+                      </div>
+                    ),
+                  },
+                ]}
+              />
+            </div>
+          )}
         </div>
 
         <div
@@ -131,20 +251,22 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
               : "none",
           }}
         >
-          <button onClick={onClose} className={s.closeBtn}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 52 52"
-              fill="none"
-            >
-              <path
-                d="M39 39L13 13M39 13L13 39"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
+          {!isMobile && (
+            <button onClick={onClose} className={s.closeBtn}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 52 52"
+                fill="none"
+              >
+                <path
+                  d="M39 39L13 13M39 13L13 39"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          )}
 
           <div className={s.daysSlider}>
             <div>
@@ -211,6 +333,135 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
             </div>
           </div>
         </div>
+
+        {isMobile && (
+          <Layout>
+            <div className={s.accordionContainer}>
+              <AccordionGroup
+                items={[
+                  {
+                    title: "Включено в стоимость",
+                    content: (
+                      <ul>
+                        <li>Полная организация автопробега командой IMPULSE</li>
+                        <li>
+                          Проживание в отелях с превосходными номерами, спа
+                          зонами и безупречным сервисом
+                        </li>
+                        <li>Профессиональный Photography & Video Production</li>
+                        <li>Завтраки и ужины</li>
+                        <li>Входные билеты во все музеи</li>
+                        <li>Полёт на вертолёте</li>
+                        <li> Road Book автопробега в печатном и pdf формате</li>
+                        <li>
+                          Check-list со всей важной информацией для подготовки к
+                          туру
+                        </li>
+                        <li>
+                          Рации для связи между участниками во время заезда
+                        </li>
+                        <li>Grand Final мероприятие</li>
+                        <li>Трансфер из аэропорта Мюнхена в отель</li>
+                        <li>Трансфер в аэропорт Милана из отеля</li>
+                        <li>Личный менеджер для помощи на каждом этапе</li>
+                        <li>Именное приглашение в тур</li>
+                        <li>Подарки от компании IMPULSE и спонсоров</li>
+                      </ul>
+                    ),
+                  },
+
+                  {
+                    title: "Не включено в стоимость",
+                    content: (
+                      <ul>
+                        <li>Авиаперелёты в Мюнхен / из Милана</li>
+                        <li>Обеды</li>
+                        <li>Бензин (~ 250 €)</li>
+                      </ul>
+                    ),
+                  },
+                  {
+                    title: "маршрут",
+                    content: (
+                      <div className={s.route}>
+                        <img src="/temp/route-image.jpg" alt="route" />
+                        <button>
+                          <span>открыть карту</span>
+                        </button>
+                      </div>
+                    ),
+                  },
+                  {
+                    title: "стоимость тура",
+                    content: (
+                      <div className={s.accordion}>
+                        <div className={s.priceAcardon}>
+                          <div>
+                            <h4>1. {info.coast_title_1}</h4>
+                            <ul>
+                              <p>- Шеринг спорткара между двумя участниками</p>
+                              <p>- Проживание в отеле в двухместном номере</p>
+                            </ul>
+
+                            {info.coast_content_11 && (
+                              <div className={s.priceBlock}>
+                                {arrow}
+                                <p>{info.coast_content_11}</p>
+                              </div>
+                            )}
+
+                            <p className="lg:mb-[0.8vw]  mb-[2.1vw]">
+                              Специальная цена при бронировании двух мест сразу
+                              (для друзей или пар):
+                            </p>
+
+                            {info.coast_content_12 && (
+                              <div className={s.priceBlock}>
+                                {arrow}
+                                <p>{info.coast_content_12}</p>
+                              </div>
+                            )}
+                          </div>
+
+                          <div>
+                            <h4>2. {info.coast_title_2}</h4>
+                            <ul>
+                              <p>- Шеринг спорткара между двумя участниками</p>
+                              <p>- Проживание в отеле в двухместном номере</p>
+                            </ul>
+
+                            {info.coast_content_21 && (
+                              <div className={s.priceBlock}>
+                                {arrow}
+                                <p>{info.coast_content_21}</p>
+                              </div>
+                            )}
+
+                            {info.coast_content_22 && (
+                              <>
+                                <p className="lg:mb-[0.8vw] mb-[2.1vw]">
+                                  Специальная цена при бронировании двух мест
+                                  сразу (для друзей или пар):
+                                </p>
+
+                                <div className={s.priceBlock}>
+                                  {arrow}
+                                  <p>{info.coast_content_22}</p>
+                                </div>
+                              </>
+                            )}
+                          </div>
+                        </div>
+
+                        <p className={s.coastBooking}>* {info.coast_booking}</p>
+                      </div>
+                    ),
+                  },
+                ]}
+              />
+            </div>
+          </Layout>
+        )}
       </motion.div>
     </motion.div>
   );

@@ -28,9 +28,9 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({ label, onChange }) => {
               <path
                 d="M15 4.5L6.75 12.75L3 9"
                 stroke="white"
-                stroke-width="1.3"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </span>

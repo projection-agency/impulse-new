@@ -76,3 +76,37 @@
   /* transition: 0.3s; */
   margin-bottom: 1.7vw;
 }
+
+@media (max-width: 1024px) {
+  .header {
+    font-size: 4.2vw;
+    padding: 6.4vw 0;
+
+    svg {
+      width: 6.4vw;
+      height: 6.4vw;
+    }
+  }
+
+  .content {
+    ul {
+      li {
+        font-size: 3.7vw;
+        gap: 2vw;
+      }
+
+      li:not(:last-child) {
+        margin-bottom: 2vw;
+      }
+
+      li::before {
+        min-width: 1vw;
+        min-height: 1vw;
+      }
+    }
+  }
+
+  .active {
+    margin-bottom: 5vw;
+  }
+}

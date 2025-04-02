@@ -1,40 +1,30 @@
+import axios from "axios";
+import { useWindowSize } from "../../hooks/useWindowSize";
 import { Layout } from "../Layout/Layout";
 import s from "./FaqSection.module.css";
+import { API_URL } from "../../App";
+import { useQuery } from "@tanstack/react-query";
 
-const questions = [
-  {
-    question: "Какой опыт или навыки нужны для участия в туре?",
-    answer:
-      "Туры доступны для участников старше 21 года с водительским стажем от 2-х лет",
-  },
-  {
-    question: "Нужен ли депозит за автомобиль и каковы условия его возврата?",
-    answer:
-      "Да, мы запрашиваем депозит за автомобиль от 2000 €, который будет возвращён после окончания тура при отсутствии повреждений автомобиля",
-  },
-  {
-    question: "Возможна ли оплата тура частями?",
-    answer:
-      "Да, мы предоставляем возможность оплаты в два этапа: 70% суммы оплачивается при бронировании, а оставшиеся 30% — за 40 дней до начала тура",
-  },
-  {
-    question: "Какие гарантии предоставляет компания?",
-    answer:
-      "Мы гарантируем прозрачность условий через подписанный договор и нашу безупречную репутацию",
-  },
-  {
-    question: "Есть ли скидки на участие для двух и более человек?",
-    answer:
-      "Да, при участии двух человек стоимость составит 8800 евро. Мы также всегда готовы обсудить индивидуальные условия для групп",
-  },
-  {
-    question: "Доступно ли проживание в номере для одного человека?",
-    answer:
-      "Да, такая опция доступна за дополнительную плату. Обратите внимание, что стандартная стоимость тура рассчитана на размещение в двухместных номерах",
-  },
-];
+interface faqItem {
+  faq_question: string;
+  faq_answer: string;
+}
+
+const fetchFaqs = async () => {
+  const { data } = await axios.get(`${API_URL}wp-json/wp/v2/faq`);
+
+  return data;
+};
 
 export const FaqSection = () => {
+  const { width } = useWindowSize();
+  const isMobile = width < 1024;
+
+  const { data = [] } = useQuery({
+    queryKey: ["faqs"],
+    queryFn: fetchFaqs,
+  });
+
   return (
     <section className={s.section}>
       <Layout>
@@ -44,15 +34,31 @@ export const FaqSection = () => {
           <div></div>
         </div>
 
-        <ul>
-          {questions.map((question, index) => (
-            <li className={s.itemContainer} key={index}>
-              <div className={s.questionNumber}>0{++index}</div>
-              <div className={s.question}>{question.question}</div>
-              <div className={s.answer}>{question.answer}</div>
-            </li>
-          ))}
-        </ul>
+        {!isMobile && (
+          <ul>
+            {data.map((question: faqItem, index: number) => (
+              <li className={s.itemContainer} key={index}>
+                <div className={s.questionNumber}>0{++index}</div>
+                <div className={s.question}>{question.faq_question}</div>
+                <div className={s.answer}>{question.faq_answer}</div>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {isMobile && (
+          <ul>
+            {data.map((question: faqItem, index: number) => (
+              <li className={s.itemContainer} key={index}>
+                <div className={s.questionNumber}>0{++index}</div>
+                <div>
+                  <div className={s.question}>{question.faq_question}</div>
+                  <div className={s.answer}>{question.faq_answer}</div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
       </Layout>
     </section>
   );

@@ -89,7 +89,7 @@ export const HomeHero = ({
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g clip-path="url(#clip0_1398_14919)">
+              <g clipPath="url(#clip0_1398_14919)">
                 <path
                   d="M2.39999 0V2.39999H7.79999L0 10.2L1.79999 12L9.60001 4.19997V9.59998H12V0H2.39999Z"
                   fill="white"
@@ -153,7 +153,7 @@ export const HomeHero = ({
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <g opacity="0.6" clip-path="url(#clip0_1398_14952)">
+                          <g opacity="0.6" clipPath="url(#clip0_1398_14952)">
                             <path
                               d="M4 6H3C2.4485 6 2 6.4485 2 7V8C2 8.5515 2.4485 9 3 9H4C4.5515 9 5 8.5515 5 8V7C5 6.4485 4.5515 6 4 6ZM3 8V7H4V8H3ZM9.5 1H9V0.5C9 0.224 8.7765 0 8.5 0C8.2235 0 8 0.224 8 0.5V1H4V0.5C4 0.224 3.7765 0 3.5 0C3.2235 0 3 0.224 3 0.5V1H2.5C1.1215 1 0 2.1215 0 3.5V9.5C0 10.8785 1.1215 12 2.5 12H9.5C10.8785 12 12 10.8785 12 9.5V3.5C12 2.1215 10.8785 1 9.5 1ZM2.5 2H9.5C10.327 2 11 2.673 11 3.5V4H1V3.5C1 2.673 1.673 2 2.5 2ZM9.5 11H2.5C1.673 11 1 10.327 1 9.5V5H11V9.5C11 10.327 10.327 11 9.5 11Z"
                               fill="white"

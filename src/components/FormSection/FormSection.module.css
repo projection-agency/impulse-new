@@ -200,6 +200,7 @@
           font-size: 4.2vw;
           width: 70vw;
           margin: 0 auto;
+          margin-bottom: 8.5vw;
         }
 
         form {
@@ -216,6 +217,7 @@
             font-size: 4.2vw;
             height: 13.8vw;
             margin-top: 2.1vw;
+            padding: 4.2vw;
           }
         }
       }

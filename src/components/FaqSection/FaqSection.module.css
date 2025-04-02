@@ -2,8 +2,6 @@
   padding: 8.2vw 0;
 
   .itemContainer:has(h2) {
-    margin-bottom: 2vw;
-
     h2 {
       font-family: Druk Cyr;
       font-weight: 700;
@@ -36,7 +34,7 @@
         font-weight: 700;
         font-size: 3.3vw;
         line-height: 99%;
-        letter-spacing: 2%;
+        letter-spacing: 0.01vw;
         text-transform: uppercase;
         color: var(--text);
         max-width: 33vw;
@@ -56,5 +54,48 @@
 
   .itemContainer:not(:last-child) {
     margin-bottom: 2vw;
+  }
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding: 21.3vw 0;
+
+    .itemContainer {
+      grid-template-columns: 1fr 8fr;
+    }
+
+    .itemContainer:has(h2) {
+      margin-bottom: 8.5vw !important;
+
+      h2 {
+        font-size: 12.8vw;
+      }
+    }
+
+    .itemContainer:not(:last-child) {
+      margin-bottom: 6.4vw;
+    }
+
+    ul {
+      .itemContainer {
+        padding-top: 6.4vw;
+
+        .questionNumber {
+          font-size: 3.7vw;
+        }
+
+        .question {
+          font-size: 8.5vw;
+          max-width: none;
+          margin-bottom: 4.2vw;
+        }
+
+        .answer {
+          font-size: 3.7vw;
+          max-width: none;
+        }
+      }
+    }
   }
 }

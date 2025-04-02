@@ -2,27 +2,59 @@ import { Link } from "react-router-dom";
 import { Layout } from "../Layout/Layout";
 import { SiteLogo } from "../SiteLogo/SiteLogo";
 import s from "./Footer.module.css";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 export const Footer = () => {
+  const { width } = useWindowSize();
+
+  const isMobile = width < 1024;
+
   return (
     <footer className={s.footer}>
       <Layout>
         <div className={s.footerTopContainer}>
           <div className={s.logoBlock}>
-            <a href="">
-              <SiteLogo fill={"white"} />
-            </a>
-            <div className={s.desc}>
-              <p>
-                Импульс. Это слово идеально отражает суть наших путешествий —
-                энергию, драйв и вдохновение.
-              </p>
-              <p>
-                Мы не просто организовываем автопробеги, а создаём моменты,
-                которые становятся импульсом к переменам, новым эмоциям и
-                открытиям.
-              </p>
+            <div className="flex justify-between items-center mb-[8.5vw] lg:mb-[0]">
+              <a href="">
+                <SiteLogo fill={"white"} />
+              </a>
+              {isMobile && (
+                <a className={s.anchor} href="">
+                  <svg
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M31.8498 23.0222L30.9071 23.9648L16.4711 9.52884C16.3444 9.40218 16.1778 9.33418 15.9991 9.33418C15.8204 9.33418 15.6538 9.40351 15.5271 9.52884L1.0911 23.9648L0.148437 23.0222L14.5844 8.58618C14.9618 8.20884 15.4644 8.00084 15.9991 8.00084C16.5338 8.00084 17.0351 8.20884 17.4138 8.58618L31.8498 23.0222Z" />
+                  </svg>
+                </a>
+              )}
             </div>
+
+            {!isMobile && (
+              <div className={s.desc}>
+                <p>
+                  Импульс. Это слово идеально отражает суть наших путешествий —
+                  энергию, драйв и вдохновение.
+                </p>
+                <p>
+                  Мы не просто организовываем автопробеги, а создаём моменты,
+                  которые становятся импульсом к переменам, новым эмоциям и
+                  открытиям.
+                </p>
+              </div>
+            )}
+
+            {isMobile && (
+              <div className={s.desc}>
+                <p>
+                  Импульс. Это слово идеально отражает суть наших путешествий —
+                  энергию, драйв и вдохновение. Мы не просто организовываем
+                  автопробеги, а создаём моменты, которые становятся импульсом к
+                  переменам, новым эмоциям и открытиям.
+                </p>
+              </div>
+            )}
 
             <img
               className={s.footerBgLogo}
@@ -91,21 +123,27 @@ export const Footer = () => {
                 </li>
               </ul>
 
-              <a className={s.anchor} href="">
-                <svg
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M31.8498 23.0222L30.9071 23.9648L16.4711 9.52884C16.3444 9.40218 16.1778 9.33418 15.9991 9.33418C15.8204 9.33418 15.6538 9.40351 15.5271 9.52884L1.0911 23.9648L0.148437 23.0222L14.5844 8.58618C14.9618 8.20884 15.4644 8.00084 15.9991 8.00084C16.5338 8.00084 17.0351 8.20884 17.4138 8.58618L31.8498 23.0222Z" />
-                </svg>
-              </a>
+              {!isMobile && (
+                <a className={s.anchor} href="">
+                  <svg
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M31.8498 23.0222L30.9071 23.9648L16.4711 9.52884C16.3444 9.40218 16.1778 9.33418 15.9991 9.33418C15.8204 9.33418 15.6538 9.40351 15.5271 9.52884L1.0911 23.9648L0.148437 23.0222L14.5844 8.58618C14.9618 8.20884 15.4644 8.00084 15.9991 8.00084C16.5338 8.00084 17.0351 8.20884 17.4138 8.58618L31.8498 23.0222Z" />
+                  </svg>
+                </a>
+              )}
             </div>
           </div>
         </div>
 
         <span className={s.bigText}>
-          <img src="/images/footer-big-text.svg" alt="impulse sc tours" />
+          {isMobile ? (
+            <img src="/images/footer-mob-big-text.svg" alt="impulse" />
+          ) : (
+            <img src="/images/footer-big-text.svg" alt="impulse sc tours" />
+          )}
         </span>
 
         <div className={s.footerBottomLinks}>

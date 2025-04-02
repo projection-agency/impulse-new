@@ -1,39 +1,32 @@
+import { useQuery } from "@tanstack/react-query";
+import { API_URL } from "../../App";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { Layout } from "../Layout/Layout";
 import s from "./ReviewSection.module.css";
-
-const reviews = [
-  {
-    reviewer: "Макс",
-    location: "Италия",
-    car: "Lamborghini Aventador",
-    year: "2024",
-    title: "“Они воплотили мои детские мечты в реальность”",
-    review:
-      "В детстве я играл с маленькими Lamborghini, а теперь смог погоняю на них по потрясающих маршрутам, и не просто на одной, а на трёх разных! Это просто жир. Я до сих пор пересматриваю видео из тура и ловлю те же эмоции, что и в момент поездки.",
-    video: "/temp/review-temp-image.jpg",
-  },
-  {
-    reviewer: "Макс",
-    location: "Италия",
-    car: "Lamborghini Aventador",
-    year: "2024",
-    title: "“Они воплотили мои детские мечты в реальность”",
-    review:
-      "В детстве я играл с маленькими Lamborghini, а теперь смог погоняю на них по потрясающих маршрутам, и не просто на одной, а на трёх разных! Это просто жир. Я до сих пор пересматриваю видео из тура и ловлю те же эмоции, что и в момент поездки.",
-    video: "/temp/review-temp-image.jpg",
-  },
-];
-
 import { useState } from "react";
+import axios from "axios";
+
+const fetchReviews = async () => {
+  const { data } = await axios.get(`${API_URL}wp-json/wp/v2/review`);
+  return data;
+};
 
 export const ReviewSection = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const { width } = useWindowSize();
-
   const isMobile = width < 1024;
 
-  const totalSlides = reviews.length;
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const { data = [], isLoading } = useQuery({
+    queryKey: ["reviews"],
+    queryFn: fetchReviews,
+  });
+
+  if (isLoading) {
+    return <p>Loading</p>;
+  }
+
+  const totalSlides = data.length;
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % totalSlides);
@@ -51,16 +44,16 @@ export const ReviewSection = () => {
           <div className={s.reviewerInfoContainer}>
             <div>
               <div className={s.tourDesc}>
-                <span>{reviews[currentIndex].reviewer}</span>
+                <span>{data[currentIndex].input_name}</span>
                 <div></div>
-                <span>{reviews[currentIndex].location}</span>
+                <span>{data[currentIndex].review_tour.input_location}</span>
                 <div></div>
-                <span>{reviews[currentIndex].car}</span>
+                <span>{data[currentIndex].review_tour.input_title}</span>
                 <div></div>
-                <span>{reviews[currentIndex].year}</span>
+                <span>{data[currentIndex].review_tour.input_date_end}</span>
               </div>
-              <h3>{reviews[currentIndex].title}</h3>
-              <p>{reviews[currentIndex].review}</p>
+              <h3>{data[currentIndex].input_quote}</h3>
+              <p>{data[currentIndex].input_review}</p>
             </div>
 
             <div className={s.controller}>
@@ -77,11 +70,13 @@ export const ReviewSection = () => {
               )}
 
               <div className={s.pagination}>
-                {reviews.map((_, index) => (
+                {data.map((_: unknown, index: number) => (
                   <span
                     key={index}
                     className={
-                      index === currentIndex ? s.activeBullet : s.bullet
+                      totalSlides === 1 || index === currentIndex
+                        ? s.activeBullet
+                        : s.bullet
                     }
                   ></span>
                 ))}
@@ -117,8 +112,8 @@ export const ReviewSection = () => {
 
           <div className={s.videoContainer}>
             <img
-              src={reviews[currentIndex].video}
-              alt={reviews[currentIndex].reviewer}
+              src={data[currentIndex].load_image_text_image}
+              alt={data[currentIndex].input_name}
             />
 
             <div className={s.impulse}>

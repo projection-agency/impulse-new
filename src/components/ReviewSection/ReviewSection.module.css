@@ -129,7 +129,8 @@
 
       .bullet {
         display: block;
-        background-color: black;
+        background-color: rgba(29, 29, 29, 0.1);
+
         width: 0.8vw;
         height: 0.8vw;
         border-radius: 50%;
@@ -137,7 +138,8 @@
 
       .activeBullet {
         display: block;
-        background-color: rgba(29, 29, 29, 0.1);
+        background-color: black;
+
         width: 0.8vw;
         height: 0.8vw;
         border-radius: 50%;

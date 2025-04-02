@@ -1,17 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Layout } from "../Layout/Layout";
 import s from "./ActualToursSection.module.css";
 import { PopupTour } from "../PopupTour/PopupTour";
-
-import Lenis from "lenis";
 import { useQuery } from "@tanstack/react-query";
 import { API_URL } from "../../App";
 import axios from "axios";
-const lenis = new Lenis();
+import Lenis from "lenis";
+
+const lenis = new Lenis({
+  lerp: 0.05,
+});
+
 function raf(time: number) {
   lenis.raf(time);
   requestAnimationFrame(raf);
 }
+
 requestAnimationFrame(raf);
 
 export interface Day {
@@ -31,6 +35,14 @@ interface TourType {
   input_date_start: string;
   input_date_end: string;
   input_main_price: string;
+  coast_booking: string;
+  coast_content_11: string;
+  coast_content_12: string;
+  coast_content_21: string;
+  coast_content_22: string;
+  coast_title_1: string;
+  coast_title_2: string;
+  input_desc: string;
   input_route: string;
   save_data_text: Day[];
 }
@@ -60,7 +72,7 @@ export const yearEditor = (start: string, end: string) => {
 
 const getYear = (date: string) => {
   const dateObj = new Date(date);
-  return dateObj.getFullYear(); // Отримаємо рік
+  return dateObj.getFullYear();
 };
 
 export const ActualToursSection = () => {
@@ -86,18 +98,6 @@ export const ActualToursSection = () => {
 
     return `${formattedStartDay} – ${formattedEndDate}`;
   };
-
-  useEffect(() => {
-    if (activeTourId) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [activeTourId]);
 
   const handleTourPopup = (tourId: number) => {
     setActiveTourId(activeTourId === tourId ? null : tourId);

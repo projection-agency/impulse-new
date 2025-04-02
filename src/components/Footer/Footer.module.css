@@ -157,43 +157,43 @@
             border-color: transparent;
           }
         }
-
-        .anchor {
-          position: relative;
-          overflow: hidden;
-          padding: 1.6vw;
-          border-radius: 50%;
-          border-radius: 50%;
-          transition: border 0.3s;
-          background-color: rgba(29, 29, 29, 1);
-
-          svg {
-            position: relative;
-            width: 1.6vw;
-            height: 1.6vw;
-            fill: var(--white);
-            z-index: 1;
-          }
-        }
-
-        .anchor::before {
-          position: absolute;
-          content: "";
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-image: url(/images/circle-gradient-bg.svg);
-          background-size: cover;
-          opacity: 0;
-          transition: opacity 0.3s;
-        }
-
-        .anchor:hover::before {
-          opacity: 1;
-        }
       }
     }
+  }
+
+  .anchor {
+    position: relative;
+    overflow: hidden;
+    padding: 1.6vw;
+    border-radius: 50%;
+    border-radius: 50%;
+    transition: border 0.3s;
+    background-color: rgba(29, 29, 29, 1);
+
+    svg {
+      position: relative;
+      width: 1.6vw;
+      height: 1.6vw;
+      fill: var(--white);
+      z-index: 1;
+    }
+  }
+
+  .anchor::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(/images/circle-gradient-bg.svg);
+    background-size: cover;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .anchor:hover::before {
+    opacity: 1;
   }
 
   .bigText {
@@ -225,6 +225,136 @@
     p {
       display: flex;
       gap: 0.2vw;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .footer {
+    padding: 16vw 0 10.6vw 0;
+
+    .footerTopContainer {
+      position: relative;
+      padding-bottom: 10.6vw;
+      display: block;
+      overflow: visible;
+      border-bottom: none;
+
+      .logoBlock {
+        position: relative;
+        border-right: none;
+        display: block;
+        padding: 0;
+        margin-bottom: 10.6vw;
+        padding-bottom: 10.6vw;
+
+        .footerBgLogo {
+          display: none;
+        }
+
+        a {
+        }
+
+        svg {
+          width: 17vw;
+          height: 17vw;
+        }
+
+        .anchor {
+          padding: 4.6vw;
+
+          svg {
+            width: 4.6vw;
+            height: 4.6vw;
+          }
+        }
+
+        .desc {
+          p {
+            font-size: 3.6vw;
+            max-width: none !important;
+          }
+        }
+      }
+
+      .logoBlock::before {
+        position: absolute;
+        content: "";
+        width: 100vw;
+        height: 1px;
+        bottom: 0;
+        left: -4.2vw;
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .contactBlock {
+        padding: 0;
+
+        .address {
+          p {
+            font-size: 3.7vw;
+            margin-bottom: 4.2vw;
+          }
+
+          address {
+            line-height: 270%;
+            margin-bottom: 6.4vw;
+
+            a {
+              font-size: 11.2vw;
+            }
+          }
+        }
+
+        .socialBlock {
+          ul {
+            gap: 4.2vw;
+            a {
+              padding: 5.3vw;
+
+              svg {
+                width: 6.4vw;
+                height: 6.4vw;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .footerTopContainer::before {
+      position: absolute;
+      content: "";
+      width: 100vw;
+      height: 1px;
+      bottom: 0;
+      left: -4.2vw;
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .bigText {
+      position: relative;
+      padding-top: 10.6vw;
+      padding-bottom: 10.6vw;
+      margin-bottom: 10.6vw;
+      border-bottom: none;
+    }
+
+    .bigText::before {
+      position: absolute;
+      content: "";
+      width: 100vw;
+      height: 1px;
+      bottom: 0;
+      left: -4.2vw;
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .footerBottomLinks {
+      flex-direction: column;
+      align-items: center;
+      font-size: 3.7vw;
+      gap: 4.2vw;
     }
   }
 }

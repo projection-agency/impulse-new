@@ -115,6 +115,10 @@
     }
   }
 
+  .custom-select {
+    margin-top: 2vw;
+  }
+
   .options-list {
     li {
       padding: 5.3vw;
