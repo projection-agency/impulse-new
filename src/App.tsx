@@ -22,6 +22,12 @@ export const App = () => {
     return () => clearTimeout(timeout);
   }, []);
 
+  useEffect(() => {
+    document.fonts.ready.then(() => {
+      setTimeout(() => setLoading(false), 200); // затримка щоб не моргало
+    });
+  }, []);
+
   const handleToggleConsult = () => {
     setConsultPopup(!consultPopup);
   };
