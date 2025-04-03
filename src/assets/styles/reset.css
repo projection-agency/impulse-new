@@ -25,3 +25,7 @@ a {
 input {
   display: block;
 }
+
+html {
+  font-display: swap;
+}
