@@ -18,13 +18,8 @@ export const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setLoading(false), 3500); // 1 секунда затримки
-    return () => clearTimeout(timeout);
-  }, []);
-
-  useEffect(() => {
     document.fonts.ready.then(() => {
-      setTimeout(() => setLoading(false), 200); // затримка щоб не моргало
+      setTimeout(() => setLoading(false), 3500); // затримка щоб не моргало
     });
   }, []);
 
