@@ -40,9 +40,9 @@ export const App = () => {
 
     document.fonts.ready.then(() => {
       setTimeout(() => {
-        setFadeOutLoader(true); // запускаємо анімацію
-        setTimeout(() => setLoading(false), 1000); // чекаємо, поки loader "зникне"
-      }, 2500); // трохи часу на шрифт/ініціалізацію
+        setFadeOutLoader(true);
+        setTimeout(() => setLoading(false), 1000);
+      }, 2500);
     });
   }, []);
 
@@ -80,6 +80,7 @@ export const App = () => {
             path="/"
             element={
               <MainPage
+                loading={loading}
                 lenis={lenis}
                 openOrder={handleToggleOrder}
                 openConsult={handleToggleConsult}

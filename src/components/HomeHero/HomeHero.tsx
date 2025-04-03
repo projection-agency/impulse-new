@@ -36,13 +36,14 @@ const tabs = [
 export const HomeHero = ({
   openOrder,
   openConsult,
+  loading,
 }: {
   openOrder: () => void;
   openConsult: () => void;
+  loading: boolean;
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const { width } = useWindowSize();
-
   const isMobile = width < 1024;
 
   useEffect(() => {
@@ -79,8 +80,9 @@ export const HomeHero = ({
         <div className={s.heroTitleContainer}>
           <span data-aos="fade-up">Формат:</span>
           <h1>
-            <AnimatedHeading text="Приватные туры" />
+            <AnimatedHeading text="Приватные туры" startAnimation={!loading} />
           </h1>
+
           <p data-aos="fade-up">
             Индивидуальные путешествия на спортивных автомобилях с маршрутом,
             созданным специально для вас.

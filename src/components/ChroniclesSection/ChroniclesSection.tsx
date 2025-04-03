@@ -161,7 +161,6 @@ export const ChroniclesSection = () => {
               swiper.navigation.update();
             }
 
-            // встановлюємо початковий прогрес
             const realCount = filteredData.length;
             setProgress(realCount > 0 ? (1 / realCount) * 100 : 0);
           }}

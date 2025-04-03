@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { Layout } from "../Layout/Layout";
 import s from "./MissionSection.module.css";
 import { motion, useInView } from "framer-motion";
+import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 
 const videos = ["/temp/video.mp4", "/temp/hero-video.mp4", "/temp/video.mp4"];
 
@@ -81,7 +82,7 @@ export const MissionSection = () => {
                 fontWeight: 500,
               }}
             >
-              ожиданиям и потребностям
+              <AnimatedHeading text="ожиданиям и потребностям" />
             </motion.span>
           </motion.h2>
 
