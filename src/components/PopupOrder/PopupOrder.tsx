@@ -10,7 +10,7 @@ export const PopupOrder = ({
   initialTour,
 }: {
   onClose: () => void;
-  initialTour: TourType | null;
+  initialTour?: TourType | null;
 }) => {
   const handleSelectChange = (value: string) => {
     console.log("Вибрано:", value);
@@ -95,7 +95,8 @@ export const PopupOrder = ({
                         { value: "us", label: "Multibrand Tour" },
                       ]}
                       placeholder={
-                        initialTour?.title.rendered || "Выберите актуальный тур"
+                        initialTour?.title?.rendered ||
+                        "Выберите актуальный тур"
                       }
                       onChange={handleSelectChange}
                     />

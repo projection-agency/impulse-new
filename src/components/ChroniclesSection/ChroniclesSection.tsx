@@ -34,7 +34,6 @@ export const ChroniclesSection = () => {
   const [selectedCar, setSelectedCar] = useState<string | null>(null);
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState((1 / data.length) * 100);
 
   const uniqueCars: string[] = Array.from(
     new Set(data.flatMap((item: ImageItem) => item.cars))
@@ -43,17 +42,17 @@ export const ChroniclesSection = () => {
   const filteredData = selectedCar
     ? data.filter((item: ImageItem) => item.cars === selectedCar)
     : data;
+  const [progress, setProgress] = useState((1 / filteredData.length) * 100);
 
   useEffect(() => {
-    setProgress((1 / filteredData.length) * 100);
-  }, [selectedCar, filteredData]);
+    const count = filteredData.length;
+    setProgress(count > 0 ? (1 / count) * 100 : 0);
+  }, [selectedCar, filteredData.length]);
 
   const fadeUp = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
+    hidden: { opacity: 1 },
+    visible: { opacity: 1 },
   };
-
-  console.log(uniqueCars);
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -147,8 +146,8 @@ export const ChroniclesSection = () => {
         <Swiper
           spaceBetween={20}
           slidesPerView={0.95}
-          initialSlide={0}
-          loop={true}
+          initialSlide={1}
+          loop={filteredData.length > 2}
           navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
           modules={[Navigation]}
           onInit={(swiper) => {
@@ -161,10 +160,15 @@ export const ChroniclesSection = () => {
               swiper.navigation.init();
               swiper.navigation.update();
             }
+
+            // встановлюємо початковий прогрес
+            const realCount = filteredData.length;
+            setProgress(realCount > 0 ? (1 / realCount) * 100 : 0);
           }}
           onSlideChange={(swiper) => {
+            const realCount = filteredData.length;
             const progress =
-              ((swiper.activeIndex + 1) / swiper.slides.length) * 100;
+              realCount > 0 ? ((swiper.realIndex + 1) / realCount) * 100 : 0;
             setProgress(progress);
           }}
           className={s.swiperContainer}
@@ -179,14 +183,9 @@ export const ChroniclesSection = () => {
             }) =>
               image.load_image_text_photo ? (
                 <SwiperSlide className={s.slide} key={image.id}>
-                  <motion.div
-                    variants={fadeUp}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: false, amount: 0.3 }}
-                    transition={{ duration: 0.6 }}
-                  >
+                  <div>
                     <img src={image.load_image_text_photo} alt="" />
+
                     <div className={s.slideBottomInfo}>
                       <p className={s.route}>
                         {image.input_way_start}
@@ -195,7 +194,7 @@ export const ChroniclesSection = () => {
                       </p>
                       <p>{image.input_date}</p>
                     </div>
-                  </motion.div>
+                  </div>
                 </SwiperSlide>
               ) : null
           )}

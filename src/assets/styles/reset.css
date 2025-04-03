@@ -10,7 +10,6 @@
 
 body {
   background-color: rgba(249, 247, 240, 1);
-  scroll-behavior: smooth;
 }
 
 img {
@@ -29,4 +28,5 @@ input {
 
 html {
   font-display: swap;
+  scroll-behavior: smooth;
 }
