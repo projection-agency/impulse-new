@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Layout } from "../Layout/Layout";
 import s from "./MissionSection.module.css";
+import { motion, useInView } from "framer-motion";
 
 const videos = ["/temp/video.mp4", "/temp/hero-video.mp4", "/temp/video.mp4"];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0 },
+};
 
 export const MissionSection = () => {
   const [currentVideo, setCurrentVideo] = useState(0);
@@ -17,17 +23,68 @@ export const MissionSection = () => {
           : (prev - 1 + videos.length) % videos.length
       );
       setIsFading(false);
-    }, 1); // тривалість fade-out
+    }, 1);
   };
+
+  // refs for scroll-triggered animation
+  const titleRef = useRef(null);
+  const videoControlsRef = useRef(null);
+  const videoWrapperRef = useRef(null);
+  const listRef = useRef(null);
+
+  const titleInView = useInView(titleRef, { once: false, amount: 0.3 });
+  const controlsInView = useInView(videoControlsRef, {
+    once: false,
+    amount: 0.3,
+  });
+  const wrapperInView = useInView(videoWrapperRef, {
+    once: false,
+    amount: 0.3,
+  });
+  const listInView = useInView(listRef, { once: false, amount: 0.3 });
 
   return (
     <section className={s.section}>
       <Layout>
-        <div className={s.titleContainer}>
-          <h2>
-            Чтобы каждая деталь соответствовала вашим
-            <span> ожиданиям и потребностям</span>
-          </h2>
+        <motion.div
+          ref={titleRef}
+          variants={fadeUp}
+          initial="hidden"
+          animate={titleInView ? "visible" : "hidden"}
+          transition={{ duration: 0.6 }}
+          className={s.titleContainer}
+        >
+          <motion.h2
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            Чтобы каждая деталь
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              style={{
+                display: "inline-block",
+                fontWeight: 500,
+              }}
+            >
+              соответствовала вашим
+            </motion.div>
+            <br />
+            <motion.span
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              style={{
+                display: "inline-block",
+                fontWeight: 500,
+              }}
+            >
+              ожиданиям и потребностям
+            </motion.span>
+          </motion.h2>
+
           <div className={s.jcsb}>
             <p>
               Комфорт и забота о каждом клиенте —
@@ -55,11 +112,18 @@ export const MissionSection = () => {
               </svg>
             </span>
           </div>
-        </div>
+        </motion.div>
       </Layout>
 
       <Layout>
-        <div className="flex justify-between lg:mb-[1.6vw] mb-[4.2vw]">
+        <motion.div
+          ref={videoControlsRef}
+          variants={fadeUp}
+          initial="hidden"
+          animate={controlsInView ? "visible" : "hidden"}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="flex justify-between lg:mb-[1.6vw] mb-[4.2vw]"
+        >
           <div className={s.pagination}>
             <div className={s.bullets}>
               {videos.map((_, index) => (
@@ -94,10 +158,17 @@ export const MissionSection = () => {
               </svg>
             </div>
           </div>
-        </div>
+        </motion.div>
       </Layout>
 
-      <div className={s.videoWrapper}>
+      <motion.div
+        ref={videoWrapperRef}
+        variants={fadeUp}
+        initial="hidden"
+        animate={wrapperInView ? "visible" : "hidden"}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className={s.videoWrapper}
+      >
         <video
           className={`${s.video} ${isFading ? s.fade : ""}`}
           key={videos[currentVideo]}
@@ -108,8 +179,16 @@ export const MissionSection = () => {
         >
           <source src={videos[currentVideo]} type="video/mp4" />
         </video>
+
         <Layout>
-          <div className={s.list}>
+          <motion.div
+            ref={listRef}
+            variants={fadeUp}
+            initial="hidden"
+            animate={listInView ? "visible" : "hidden"}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className={s.list}
+          >
             <div>
               <p>Подходящий маршрут</p>
               <svg
@@ -184,10 +263,9 @@ export const MissionSection = () => {
                 </defs>
               </svg>
             </div>
-          </div>
+          </motion.div>
         </Layout>
-        ;
-      </div>
+      </motion.div>
     </section>
   );
 };

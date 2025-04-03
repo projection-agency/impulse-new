@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import s from "./ServicesSection.module.css";
 import { Layout } from "../Layout/Layout";
 import { useWindowSize } from "../../hooks/useWindowSize";
@@ -54,21 +54,55 @@ const tabs = [
 
 export const ServicesSection = () => {
   const [activeTab, setActiveTab] = useState(1);
+  const [hasStarted, setHasStarted] = useState(false);
+  const sectionRef = useRef(null);
+  const intervalRef = useRef<number | null>(null);
 
   const { width } = useWindowSize();
-
   const isMobile = width < 1024;
 
   useEffect(() => {
-    const newInterval = setInterval(() => {
-      setActiveTab((prevTab) => (prevTab % tabs.length) + 1);
-    }, 10000);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasStarted) {
+          setHasStarted(true);
+        }
+      },
+      { threshold: 0.5 }
+    );
 
-    return () => clearInterval(newInterval);
-  }, []);
+    const section = sectionRef.current;
+    if (section) observer.observe(section);
+
+    return () => {
+      if (section) observer.unobserve(section);
+    };
+  }, [hasStarted]);
+
+  useEffect(() => {
+    if (hasStarted && !intervalRef.current) {
+      setActiveTab((prevTab) => (prevTab % tabs.length) + 1);
+
+      intervalRef.current = setInterval(() => {
+        setActiveTab((prevTab) => (prevTab % tabs.length) + 1);
+      }, 10000);
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+  }, [hasStarted]);
+
+  const handleTabClick = (id: number) => {
+    setActiveTab(id);
+  };
 
   return (
     <section
+      ref={sectionRef}
       className={s.section}
       style={{
         backgroundImage: `url(${
@@ -82,11 +116,11 @@ export const ServicesSection = () => {
           <ul className={s.tabs}>
             {tabs.map((tab) => (
               <li
-                className={`${tab.id === activeTab && s.activeTab}`}
+                className={`${tab.id === activeTab ? s.activeTab : ""}`}
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => handleTabClick(tab.id)}
               >
-                <p className={`${tab.id === activeTab && s.active}`}>
+                <p className={`${tab.id === activeTab ? s.active : ""}`}>
                   <span>0{tab.id}</span>
                   <span>{tab.tab}</span>
                 </p>
@@ -111,12 +145,8 @@ export const ServicesSection = () => {
             <button
               onClick={() => setActiveTab((prev) => (prev % tabs.length) + 1)}
             >
-              <svg
-                viewBox="0 0 42 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M41.416 8.57143L32.9443 0L31.5323 1.42857L39.0058 8.99L1.00991e-06 8.99L0 11.01H39.0058L31.5323 18.5714L32.9443 20L41.416 11.4286C42.1947 10.6407 42.1947 9.35929 41.416 8.57143Z" />
+              <svg viewBox="0 0 42 20" fill="none">
+                <path d="..." />
               </svg>
             </button>
           )}
@@ -128,9 +158,10 @@ export const ServicesSection = () => {
 
             <h2
               dangerouslySetInnerHTML={{
-                __html: tabs[activeTab - 1]?.title?.includes("<br")
-                  ? tabs[activeTab - 1]?.title.replace(/<br\s*\/?>/g, "<br /> ")
-                  : tabs[activeTab - 1]?.title || "",
+                __html: tabs[activeTab - 1]?.title.replace(
+                  /<br\s*\/?>/g,
+                  "<br /> "
+                ),
               }}
             ></h2>
           </div>

@@ -10,6 +10,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { API_URL } from "../../App";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { motion, useInView } from "framer-motion";
 
 interface ImageItem {
   cars: string;
@@ -46,26 +47,55 @@ export const ChroniclesSection = () => {
     setProgress((1 / filteredData.length) * 100);
   }, [selectedCar, filteredData]);
 
+  const tabRef = useRef(null);
+  const tabInView = useInView(tabRef, { once: false, amount: 0.3 });
+
+  const fadeUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   if (isLoading) return <p>Loading...</p>;
 
   return (
     <section className={s.section}>
       <Layout>
-        <div className={s.titleContainer}>
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className={s.titleContainer}
+        >
           <h2>Хроники путешествий</h2>
           {!isMobile && <SiteButton />}
-        </div>
+        </motion.div>
 
         {!isMobile && (
-          <div className={s.progressBarContainer}>
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className={s.progressBarContainer}
+          >
             <div
               className={s.progressBar}
               style={{ width: `${progress}%` }}
             ></div>
-          </div>
+          </motion.div>
         )}
 
-        <div className={s.tabController}>
+        <motion.div
+          ref={tabRef}
+          variants={fadeUp}
+          initial="hidden"
+          animate={tabInView ? "visible" : "hidden"}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className={s.tabController}
+        >
           {uniqueCars.map((car, index) => (
             <div
               key={index}
@@ -78,7 +108,7 @@ export const ChroniclesSection = () => {
               </span>
             </div>
           ))}
-        </div>
+        </motion.div>
 
         {isMobile && (
           <div className={s.progressBarContainer}>
@@ -152,18 +182,26 @@ export const ChroniclesSection = () => {
               input_date: string;
             }) =>
               image.load_image_text_photo ? (
-                <SwiperSlide key={image.id} className={s.slide}>
-                  <img src={image.load_image_text_photo} alt="" />
-                  <div className={s.slideBottomInfo}>
-                    <p className={s.route}>
-                      {image.input_way_start}
-                      <span></span>
-                      {image.input_way_end}
-                    </p>
-
-                    <p>{image.input_date}</p>
-                  </div>
-                </SwiperSlide>
+                <motion.div
+                  key={image.id}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, amount: 0.3 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <SwiperSlide className={s.slide}>
+                    <img src={image.load_image_text_photo} alt="" />
+                    <div className={s.slideBottomInfo}>
+                      <p className={s.route}>
+                        {image.input_way_start}
+                        <span></span>
+                        {image.input_way_end}
+                      </p>
+                      <p>{image.input_date}</p>
+                    </div>
+                  </SwiperSlide>
+                </motion.div>
               ) : null
           )}
         </Swiper>

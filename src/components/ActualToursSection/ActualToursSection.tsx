@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { API_URL } from "../../App";
 import axios from "axios";
 import Lenis from "lenis";
+import { motion } from "framer-motion";
 
 const lenis = new Lenis({
   lerp: 0.05,
@@ -103,19 +104,38 @@ export const ActualToursSection = () => {
     setActiveTourId(activeTourId === tourId ? null : tourId);
   };
 
+  const fadeUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   if (isLoading) return <p>Loading...</p>;
 
   return (
     <section className={s.section}>
       <Layout>
-        <h2>
+        <motion.h2
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+        >
           Актуальные
           <br /> event-туры
-        </h2>
+        </motion.h2>
 
         <div className={s.list}>
-          {data.map((item: TourType) => (
-            <div className={s.item} key={item.id}>
+          {data.map((item: TourType, index: number) => (
+            <motion.div
+              key={item.id}
+              className={s.item}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
               <div
                 style={{
                   backgroundImage: `url(${item.load_image_text_main_image})`,
@@ -205,7 +225,7 @@ export const ActualToursSection = () => {
               {activeTourId === item.id && (
                 <PopupTour info={item} onClose={() => setActiveTourId(null)} />
               )}
-            </div>
+            </motion.div>
           ))}
         </div>
       </Layout>
