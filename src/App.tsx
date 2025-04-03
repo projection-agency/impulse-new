@@ -32,65 +32,67 @@ export const App = () => {
   const [consultPopup, setConsultPopup] = useState(false);
   const [orderPopup, setOrderPopup] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [fadeOutLoader, setFadeOutLoader] = useState(false); // для анімації
   const [selectedTour, setSelectedTour] = useState<TourType | null>(null);
 
   useEffect(() => {
     Aos.init();
 
     document.fonts.ready.then(() => {
-      setTimeout(() => setLoading(false), 3500); // затримка щоб не моргало
+      setTimeout(() => {
+        setFadeOutLoader(true); // запускаємо анімацію
+        setTimeout(() => setLoading(false), 1000); // чекаємо, поки loader "зникне"
+      }, 2500); // трохи часу на шрифт/ініціалізацію
     });
   }, []);
 
   const handleToggleConsult = () => {
     setConsultPopup(!consultPopup);
-
-    if (!consultPopup) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = !consultPopup ? "hidden" : "";
   };
 
   const handleToggleOrder = (tour?: TourType) => {
     setOrderPopup(!orderPopup);
-
     setSelectedTour(tour ?? null);
-
-    if (!orderPopup) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = !orderPopup ? "hidden" : "";
   };
-
-  if (loading) {
-    return <Loader />;
-  }
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Header />
-
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <MainPage
-              lenis={lenis}
-              openOrder={handleToggleOrder}
-              openConsult={handleToggleConsult}
-            />
-          }
-        />
-      </Routes>
-
-      <Footer />
-
-      {consultPopup && <PopupConsultation onClose={handleToggleConsult} />}
-      {orderPopup && (
-        <PopupOrder initialTour={selectedTour} onClose={handleToggleOrder} />
+      {loading && (
+        <div
+          className={`fixed inset-0 z-50 transition-opacity duration-1000 bg-white ${
+            fadeOutLoader ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
+        >
+          <Loader />
+        </div>
       )}
+
+      <div
+        className={`transition-opacity duration-1000 ${
+          fadeOutLoader ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <Header />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <MainPage
+                lenis={lenis}
+                openOrder={handleToggleOrder}
+                openConsult={handleToggleConsult}
+              />
+            }
+          />
+        </Routes>
+        <Footer />
+        {consultPopup && <PopupConsultation onClose={handleToggleConsult} />}
+        {orderPopup && (
+          <PopupOrder initialTour={selectedTour} onClose={handleToggleOrder} />
+        )}
+      </div>
     </QueryClientProvider>
   );
 };
