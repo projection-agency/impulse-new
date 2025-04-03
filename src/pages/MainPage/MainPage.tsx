@@ -18,22 +18,16 @@ interface MainPageProps {
   lenis: InstanceType<typeof Lenis>;
   openOrder: () => void;
   openConsult: () => void;
-  loading: boolean;
 }
 
 export const MainPage: FC<MainPageProps> = ({
   openOrder,
   openConsult,
   lenis,
-  loading,
 }) => {
   return (
     <main>
-      <HomeHero
-        loading={loading}
-        openOrder={openOrder}
-        openConsult={openConsult}
-      />
+      <HomeHero openOrder={openOrder} openConsult={openConsult} />
 
       <DescSection />
 

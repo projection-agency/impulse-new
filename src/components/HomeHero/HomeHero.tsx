@@ -36,11 +36,9 @@ const tabs = [
 export const HomeHero = ({
   openOrder,
   openConsult,
-  loading,
 }: {
   openOrder: () => void;
   openConsult: () => void;
-  loading: boolean;
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const { width } = useWindowSize();
@@ -80,7 +78,7 @@ export const HomeHero = ({
         <div className={s.heroTitleContainer}>
           <span data-aos="fade-up">Формат:</span>
           <h1>
-            <AnimatedHeading text="Приватные туры" startAnimation={!loading} />
+            <AnimatedHeading text="Приватные туры" />
           </h1>
 
           <p data-aos="fade-up">

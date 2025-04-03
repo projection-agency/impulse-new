@@ -80,7 +80,6 @@ export const App = () => {
             path="/"
             element={
               <MainPage
-                loading={loading}
                 lenis={lenis}
                 openOrder={handleToggleOrder}
                 openConsult={handleToggleConsult}
