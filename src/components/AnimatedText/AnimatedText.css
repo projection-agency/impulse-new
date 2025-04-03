@@ -1,19 +1,27 @@
-.animated-text {
+.animated-heading {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  font-size: inherit;
+  font-weight: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  padding-bottom: 0.3vw;
 }
 
-.animated-text span {
-  opacity: 0;
+.letter {
   display: inline-block;
-  animation: fadeIn 1s ease forwards;
+  transform-origin: bottom;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  will-change: transform, opacity;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(2vw);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+@media (max-width: 1024px) {
+  .animated-heading {
+    padding-bottom: 1vw;
   }
 }

@@ -68,11 +68,16 @@ export const Footer = () => {
               <p>Связаться с нами</p>
 
               <address>
-                <a href="mailto:impulsetravel7@gmail.com">
+                <a
+                  data-text="impulsetravel7@gmail.com"
+                  href="mailto:impulsetravel7@gmail.com"
+                >
                   impulsetravel7@gmail.com
                 </a>
 
-                <a href="tel:380953440973">+380 (95) 344 09 73</a>
+                <a data-text="+380 (95) 344 09 73" href="tel:380953440973">
+                  +380 (95) 344 09 73
+                </a>
               </address>
             </div>
 

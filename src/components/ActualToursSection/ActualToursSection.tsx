@@ -1,23 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Layout } from "../Layout/Layout";
 import s from "./ActualToursSection.module.css";
 import { PopupTour } from "../PopupTour/PopupTour";
 import { useQuery } from "@tanstack/react-query";
 import { API_URL } from "../../App";
 import axios from "axios";
-import Lenis from "lenis";
 import { motion } from "framer-motion";
-
-const lenis = new Lenis({
-  lerp: 0.05,
-});
-
-function raf(time: number) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
-
-requestAnimationFrame(raf);
+import Lenis from "lenis";
+import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 
 export interface Day {
   hl_input_title: string;
@@ -27,7 +17,7 @@ export interface Day {
   hl_input_description: string;
 }
 
-interface TourType {
+export interface TourType {
   id: number;
   title: { rendered: string };
   load_image_text_main_image: string;
@@ -76,7 +66,13 @@ const getYear = (date: string) => {
   return dateObj.getFullYear();
 };
 
-export const ActualToursSection = () => {
+export const ActualToursSection = ({
+  lenis,
+  openOrder,
+}: {
+  lenis: InstanceType<typeof Lenis>;
+  openOrder: (tour: TourType) => void;
+}) => {
   const [activeTourId, setActiveTourId] = useState<number | null>(null);
 
   const { data = [], isLoading } = useQuery({
@@ -109,6 +105,17 @@ export const ActualToursSection = () => {
     visible: { opacity: 1, y: 0 },
   };
 
+  useEffect(() => {
+    if (activeTourId !== null) {
+      lenis.stop();
+      document.body.style.overflow = "hidden";
+    } else {
+      lenis.start();
+      document.body.style.overflow = "";
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTourId]);
+
   if (isLoading) return <p>Loading...</p>;
 
   return (
@@ -121,8 +128,7 @@ export const ActualToursSection = () => {
           viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
-          Актуальные
-          <br /> event-туры
+          <AnimatedHeading text="Актуальные event-туры" />
         </motion.h2>
 
         <div className={s.list}>
@@ -218,7 +224,7 @@ export const ActualToursSection = () => {
               </div>
 
               <div className={s.btnContainer}>
-                <div>Забронировать</div>
+                <div onClick={() => openOrder(item)}>Забронировать</div>
                 <div onClick={() => handleTourPopup(item.id)}>Детальнее</div>
               </div>
 

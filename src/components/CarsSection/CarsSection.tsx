@@ -75,6 +75,7 @@ import "swiper/css/navigation";
 import "./CarsSection.css";
 import { useRef, useState } from "react";
 import { Navigation } from "swiper/modules";
+import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 
 export const CarsSection = () => {
   const [activeSlide, setActiveSlide] = useState(0); // Змінено на 0 замість 1
@@ -87,7 +88,10 @@ export const CarsSection = () => {
   return (
     <section className={`${s.section} carSection`}>
       <div className={s.titleContainer}>
-        <h2>50+ Автомобилей в автопарке Impulse</h2>
+        <h2>
+          <AnimatedHeading text="50+ Автомобилей в автопарке Impulse" />
+        </h2>
+
         <p>
           Мы позаботились о том, чтобы у нас были машины на любой вкус: от
           стремительных суперкаров до элегантных премиум-седанов

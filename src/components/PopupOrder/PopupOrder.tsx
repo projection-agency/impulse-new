@@ -3,8 +3,15 @@ import s from "./PopupOrder.module.css";
 import { PhoneNumberInput } from "../FormSection/PhoneNumberInput";
 import CustomSelect from "../CustomSelect/CustomSelect";
 import CustomCheckbox from "../FormSection/CustomCheckbox";
+import { TourType } from "../ActualToursSection/ActualToursSection";
 
-export const PopupOrder = ({ onClose }: { onClose: () => void }) => {
+export const PopupOrder = ({
+  onClose,
+  initialTour,
+}: {
+  onClose: () => void;
+  initialTour: TourType | null;
+}) => {
   const handleSelectChange = (value: string) => {
     console.log("Вибрано:", value);
   };
@@ -87,7 +94,9 @@ export const PopupOrder = ({ onClose }: { onClose: () => void }) => {
                         { value: "ua", label: "Lamborghini 2.0" },
                         { value: "us", label: "Multibrand Tour" },
                       ]}
-                      placeholder="Выберите актуальный тур"
+                      placeholder={
+                        initialTour?.title.rendered || "Выберите актуальный тур"
+                      }
                       onChange={handleSelectChange}
                     />
                   </label>

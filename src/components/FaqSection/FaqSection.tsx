@@ -4,6 +4,7 @@ import { Layout } from "../Layout/Layout";
 import s from "./FaqSection.module.css";
 import { API_URL } from "../../App";
 import { useQuery } from "@tanstack/react-query";
+import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 
 interface faqItem {
   faq_question: string;
@@ -30,14 +31,16 @@ export const FaqSection = () => {
       <Layout>
         <div className={s.itemContainer}>
           <div></div>
-          <h2>FAQ</h2>
+          <h2>
+            <AnimatedHeading text="FAQ" />
+          </h2>
           <div></div>
         </div>
 
         {!isMobile && (
           <ul>
             {data.map((question: faqItem, index: number) => (
-              <li className={s.itemContainer} key={index}>
+              <li data-aos="fade-up" className={s.itemContainer} key={index}>
                 <div className={s.questionNumber}>0{++index}</div>
                 <div className={s.question}>{question.faq_question}</div>
                 <div className={s.answer}>{question.faq_answer}</div>
@@ -49,7 +52,7 @@ export const FaqSection = () => {
         {isMobile && (
           <ul>
             {data.map((question: faqItem, index: number) => (
-              <li className={s.itemContainer} key={index}>
+              <li data-aos="fade-up" className={s.itemContainer} key={index}>
                 <div className={s.questionNumber}>0{++index}</div>
                 <div>
                   <div className={s.question}>{question.faq_question}</div>

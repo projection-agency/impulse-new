@@ -7,17 +7,36 @@ import { PopupConsultation } from "./components/PopupConsultation/PopupConsultat
 import { PopupOrder } from "./components/PopupOrder/PopupOrder";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Loader from "./components/Loader/Loader";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 export const API_URL = "https://www.impulse.projection-learn.website/";
 
 const queryClient = new QueryClient();
 
+import Lenis from "lenis";
+import { TourType } from "./components/ActualToursSection/ActualToursSection";
+
+const lenis = new Lenis({
+  lerp: 0.05,
+});
+
+function raf(time: number) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
+
 export const App = () => {
   const [consultPopup, setConsultPopup] = useState(false);
   const [orderPopup, setOrderPopup] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [selectedTour, setSelectedTour] = useState<TourType | null>(null);
 
   useEffect(() => {
+    Aos.init();
+
     document.fonts.ready.then(() => {
       setTimeout(() => setLoading(false), 3500); // затримка щоб не моргало
     });
@@ -25,10 +44,24 @@ export const App = () => {
 
   const handleToggleConsult = () => {
     setConsultPopup(!consultPopup);
+
+    if (!consultPopup) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
   };
 
-  const handleToggleOrder = () => {
+  const handleToggleOrder = (tour?: TourType) => {
     setOrderPopup(!orderPopup);
+
+    setSelectedTour(tour ?? null);
+
+    if (!orderPopup) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
   };
 
   if (loading) {
@@ -44,6 +77,7 @@ export const App = () => {
           path="/"
           element={
             <MainPage
+              lenis={lenis}
               openOrder={handleToggleOrder}
               openConsult={handleToggleConsult}
             />
@@ -54,7 +88,9 @@ export const App = () => {
       <Footer />
 
       {consultPopup && <PopupConsultation onClose={handleToggleConsult} />}
-      {orderPopup && <PopupOrder onClose={handleToggleOrder} />}
+      {orderPopup && (
+        <PopupOrder initialTour={selectedTour} onClose={handleToggleOrder} />
+      )}
     </QueryClientProvider>
   );
 };

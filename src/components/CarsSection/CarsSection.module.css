@@ -17,6 +17,7 @@
       text-align: center;
       text-transform: uppercase;
       margin-bottom: 1.8vw;
+      justify-content: center;
     }
 
     p {
@@ -157,6 +158,8 @@
 
       h2 {
         font-size: 12.8vw;
+        max-width: 87vw;
+        margin: 0 auto;
         margin-bottom: 6.4vw;
       }
 

@@ -12,12 +12,19 @@ import { FaqSection } from "../../components/FaqSection/FaqSection";
 import { FormSection } from "../../components/FormSection/FormSection";
 import { FC } from "react";
 
+import Lenis from "lenis";
+
 interface MainPageProps {
+  lenis: InstanceType<typeof Lenis>;
   openOrder: () => void;
   openConsult: () => void;
 }
 
-export const MainPage: FC<MainPageProps> = ({ openOrder, openConsult }) => {
+export const MainPage: FC<MainPageProps> = ({
+  openOrder,
+  openConsult,
+  lenis,
+}) => {
   return (
     <main>
       <HomeHero openOrder={openOrder} openConsult={openConsult} />
@@ -28,7 +35,7 @@ export const MainPage: FC<MainPageProps> = ({ openOrder, openConsult }) => {
 
       <ChroniclesSection />
 
-      <ActualToursSection />
+      <ActualToursSection openOrder={openOrder} lenis={lenis} />
 
       <ServicesSection />
 

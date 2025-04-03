@@ -4,6 +4,7 @@ import s from "./HomeHero.module.css";
 import { Layout } from "../Layout/Layout";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { FixedBar } from "../FixedBar/FixedBar";
+import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 
 const videos = [
   { src: "/temp/hero-video.mp4", poster: "/images/stub-hero-image.avif" },
@@ -48,7 +49,7 @@ export const HomeHero = ({
     const interval = setInterval(() => {
       setTimeout(() => {
         setActiveIndex((prevIndex) => (prevIndex + 1) % videos.length);
-      }, 800); // Час згасання відео
+      }, 800);
     }, 5800);
 
     return () => clearInterval(interval);
@@ -76,13 +77,15 @@ export const HomeHero = ({
         </div>
 
         <div className={s.heroTitleContainer}>
-          <span>Формат:</span>
-          <h1>Приватные туры</h1>
-          <p>
+          <span data-aos="fade-up">Формат:</span>
+          <h1>
+            <AnimatedHeading text="Приватные туры" />
+          </h1>
+          <p data-aos="fade-up">
             Индивидуальные путешествия на спортивных автомобилях с маршрутом,
             созданным специально для вас.
           </p>
-          <Link to="/">
+          <Link data-aos="fade-up" to="/">
             Актуальные туры
             <svg
               viewBox="0 0 12 12"
@@ -104,7 +107,7 @@ export const HomeHero = ({
           </Link>
 
           {!isMobile && (
-            <div className={s.showReelContainer}>
+            <div data-aos="fade-up" className={s.showReelContainer}>
               <img src="/images/show-reel-circle.svg" alt="" />
 
               <div className={s.showReel}>
@@ -188,10 +191,10 @@ export const HomeHero = ({
                   />
                 </svg>
 
-                <div>
+                <a href="#descSection">
                   <p>Прокрутите вниз</p>
                   <span>чтобы узнать больше</span>
-                </div>
+                </a>
               </div>
             )}
           </div>

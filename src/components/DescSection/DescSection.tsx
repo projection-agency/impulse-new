@@ -24,7 +24,7 @@ export const DescSection = () => {
   const bottomInView = useInView(bottomBlockRef, { once: false, amount: 0.3 });
 
   return (
-    <section className={s.section}>
+    <section id="descSection" className={s.section}>
       <Layout>
         <motion.div
           ref={imageBlockRef}

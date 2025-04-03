@@ -145,8 +145,15 @@ export const ServicesSection = () => {
             <button
               onClick={() => setActiveTab((prev) => (prev % tabs.length) + 1)}
             >
-              <svg viewBox="0 0 42 20" fill="none">
-                <path d="..." />
+              <svg
+                viewBox="0 0 42 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M41.416 8.57143L32.9443 0L31.5323 1.42857L39.0058 8.99L1.00991e-06 8.99L0 11.01H39.0058L31.5323 18.5714L32.9443 20L41.416 11.4286C42.1947 10.6407 42.1947 9.35929 41.416 8.57143Z"
+                  fill="white"
+                />
               </svg>
             </button>
           )}

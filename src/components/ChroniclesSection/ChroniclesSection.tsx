@@ -10,7 +10,8 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { API_URL } from "../../App";
 import { useWindowSize } from "../../hooks/useWindowSize";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
+import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 
 interface ImageItem {
   cars: string;
@@ -47,13 +48,12 @@ export const ChroniclesSection = () => {
     setProgress((1 / filteredData.length) * 100);
   }, [selectedCar, filteredData]);
 
-  const tabRef = useRef(null);
-  const tabInView = useInView(tabRef, { once: false, amount: 0.3 });
-
   const fadeUp = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
   };
+
+  console.log(uniqueCars);
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -68,7 +68,9 @@ export const ChroniclesSection = () => {
           transition={{ duration: 0.6 }}
           className={s.titleContainer}
         >
-          <h2>Хроники путешествий</h2>
+          <h2>
+            <AnimatedHeading text="Хроники путешествий" />
+          </h2>
           {!isMobile && <SiteButton />}
         </motion.div>
 
@@ -88,14 +90,7 @@ export const ChroniclesSection = () => {
           </motion.div>
         )}
 
-        <motion.div
-          ref={tabRef}
-          variants={fadeUp}
-          initial="hidden"
-          animate={tabInView ? "visible" : "hidden"}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className={s.tabController}
-        >
+        <div className={s.tabController}>
           {uniqueCars.map((car, index) => (
             <div
               key={index}
@@ -108,7 +103,7 @@ export const ChroniclesSection = () => {
               </span>
             </div>
           ))}
-        </motion.div>
+        </div>
 
         {isMobile && (
           <div className={s.progressBarContainer}>
@@ -153,6 +148,7 @@ export const ChroniclesSection = () => {
           spaceBetween={20}
           slidesPerView={0.95}
           initialSlide={0}
+          loop={true}
           navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
           modules={[Navigation]}
           onInit={(swiper) => {
@@ -182,15 +178,14 @@ export const ChroniclesSection = () => {
               input_date: string;
             }) =>
               image.load_image_text_photo ? (
-                <motion.div
-                  key={image.id}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: false, amount: 0.3 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <SwiperSlide className={s.slide}>
+                <SwiperSlide className={s.slide} key={image.id}>
+                  <motion.div
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.3 }}
+                    transition={{ duration: 0.6 }}
+                  >
                     <img src={image.load_image_text_photo} alt="" />
                     <div className={s.slideBottomInfo}>
                       <p className={s.route}>
@@ -200,8 +195,8 @@ export const ChroniclesSection = () => {
                       </p>
                       <p>{image.input_date}</p>
                     </div>
-                  </SwiperSlide>
-                </motion.div>
+                  </motion.div>
+                </SwiperSlide>
               ) : null
           )}
         </Swiper>
