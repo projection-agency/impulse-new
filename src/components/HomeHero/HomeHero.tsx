@@ -8,8 +8,8 @@ import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 
 const videos = [
   { src: "/temp/hero-video.mp4", poster: "/images/stub-hero-image.avif" },
-  { src: "/temp/video.mp4", poster: "/images/stub-hero-image1.avif" },
-  { src: "/temp/hero-video.mp4", poster: "/images/stub-hero-image2.avif" },
+  { src: "/temp/video.mp4", poster: "/images/stub-hero-image.avif" },
+  { src: "/temp/hero-video.mp4", poster: "/images/stub-hero-image.avif" },
 ];
 
 const tabs = [
