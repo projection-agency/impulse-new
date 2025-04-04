@@ -18,13 +18,13 @@ const gallery = [
 export const GallerySection = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isImagesVisible, setIsImagesVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement | null>(null);
+  const gallerySectionRef = useRef<HTMLElement | null>(null);
   const galleryRef = useRef<HTMLUListElement | null>(null);
   const imagesRef = useRef<(HTMLLIElement | null)[]>([]);
 
   const handleScroll = () => {
-    if (sectionRef.current) {
-      const rect = sectionRef.current.getBoundingClientRect();
+    if (gallerySectionRef.current) {
+      const rect = gallerySectionRef.current.getBoundingClientRect();
       setIsScrolled(rect.top <= 100);
     }
   };
@@ -95,7 +95,7 @@ export const GallerySection = () => {
   };
 
   return (
-    <section ref={sectionRef} className={s.section}>
+    <section ref={gallerySectionRef} className={s.section}>
       <div className={s.marquee}>
         <div className={s.marqueeInner}>
           <h2>Сотни клиентов, которые доверились нам</h2>

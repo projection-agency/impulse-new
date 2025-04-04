@@ -25,7 +25,7 @@
 
   .marqueeInner {
     display: flex;
-    min-width: 300%;
+    min-width: 100%;
     animation: marquee 25s linear infinite;
   }
 
@@ -52,90 +52,90 @@
       border-radius: 0;
     }
 
-    .galleryList {
-      position: absolute;
-      top: 20vw;
-      transform: translateY(5vw);
-      opacity: 0;
-      transition: 1s;
-
-      li {
-        position: absolute;
-        display: inline-block;
-      }
-
-      li:nth-child(1) {
-        top: 4.8vw;
-
-        width: 17vw;
-        left: 38.5vw;
-        animation: shake 10s infinite;
-        z-index: 1;
-      }
-
-      li:nth-child(2) {
-        width: 48vw;
-        animation: shake 12s infinite;
-        left: 50vw;
-      }
-
-      li:nth-child(3) {
-        width: 14.3vw;
-        left: 21vw;
-        top: 24vw;
-        animation: shake 8s infinite;
-        z-index: 1;
-      }
-      li:nth-child(4) {
-        width: 28vw;
-        left: 2vw;
-        animation: shake 14s infinite;
-        top: 32.5vw;
-      }
-      li:nth-child(5) {
-        width: 21vw;
-        left: 60vw;
-        top: 34.5vw;
-        animation: shake 10s infinite;
-        z-index: 1;
-      }
-      li:nth-child(6) {
-        width: 18.2vw;
-        left: 79.6vw;
-        animation: shake 12s infinite;
-        top: 32.5vw;
-      }
-      li:nth-child(7) {
-        width: 14.3vw;
-        left: 21vw;
-        top: 68.8vw;
-        animation: shake 8s infinite;
-        z-index: 1;
-      }
-      li:nth-child(8) {
-        width: 48vw;
-        left: 26vw;
-        animation: shake 14s infinite;
-        top: 58.2vw;
-      }
-      li:nth-child(9) {
-        width: 14.3vw;
-        left: 2vw;
-        animation: shake 10s infinite;
-        top: 90vw;
-      }
-      li:nth-child(10) {
-        width: 21vw;
-        left: 60vw;
-        animation: shake 12s infinite;
-        top: 90vw;
-      }
-    }
-
     .visible {
       opacity: 1;
       transform: translateY(0);
     }
+  }
+}
+
+.galleryList {
+  position: absolute;
+  top: 20vw;
+  transform: translateY(5vw);
+  opacity: 0;
+  transition: 1s;
+
+  li {
+    position: absolute;
+    display: inline-block;
+  }
+
+  li:nth-child(1) {
+    top: 4.8vw;
+
+    width: 17vw;
+    left: 38.5vw;
+    animation: shake 10s infinite;
+    z-index: 1;
+  }
+
+  li:nth-child(2) {
+    width: 48vw;
+    animation: shake 12s infinite;
+    left: 50vw;
+  }
+
+  li:nth-child(3) {
+    width: 14.3vw;
+    left: 21vw;
+    top: 24vw;
+    animation: shake 8s infinite;
+    z-index: 1;
+  }
+  li:nth-child(4) {
+    width: 28vw;
+    left: 2vw;
+    animation: shake 14s infinite;
+    top: 32.5vw;
+  }
+  li:nth-child(5) {
+    width: 21vw;
+    left: 60vw;
+    top: 34.5vw;
+    animation: shake 10s infinite;
+    z-index: 1;
+  }
+  li:nth-child(6) {
+    width: 18.2vw;
+    left: 79.6vw;
+    animation: shake 12s infinite;
+    top: 32.5vw;
+  }
+  li:nth-child(7) {
+    width: 14.3vw;
+    left: 21vw;
+    top: 68.8vw;
+    animation: shake 8s infinite;
+    z-index: 1;
+  }
+  li:nth-child(8) {
+    width: 48vw;
+    left: 26vw;
+    animation: shake 14s infinite;
+    top: 58.2vw;
+  }
+  li:nth-child(9) {
+    width: 14.3vw;
+    left: 2vw;
+    animation: shake 10s infinite;
+    top: 90vw;
+  }
+  li:nth-child(10) {
+    width: 21vw;
+    left: 60vw;
+    animation: shake 12s infinite;
+    top: 90vw;
   }
 }
 
