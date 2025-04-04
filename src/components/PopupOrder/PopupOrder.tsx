@@ -4,6 +4,7 @@ import { PhoneNumberInput } from "../FormSection/PhoneNumberInput";
 import CustomSelect from "../CustomSelect/CustomSelect";
 import CustomCheckbox from "../FormSection/CustomCheckbox";
 import { TourType } from "../ActualToursSection/ActualToursSection";
+import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 
 export const PopupOrder = ({
   onClose,
@@ -21,6 +22,7 @@ export const PopupOrder = ({
 
   return (
     <motion.div
+      data-lenis-prevent
       className={s.popupOverlay}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -39,9 +41,11 @@ export const PopupOrder = ({
             <img src="/images/form-mountains-road.avif" alt="three cars" />
 
             <div className={s.title}>
-              <span>Ну что</span>
+              <span data-aos="fade-up">Ну что</span>
 
-              <h2>Готовы начать путешествие?</h2>
+              <h2>
+                <AnimatedHeading text="Готовы начать путешествие?" />
+              </h2>
             </div>
           </div>
 

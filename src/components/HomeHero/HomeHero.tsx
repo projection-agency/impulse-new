@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import s from "./HomeHero.module.css";
 import { Layout } from "../Layout/Layout";
 import { useWindowSize } from "../../hooks/useWindowSize";
@@ -60,7 +59,7 @@ export const HomeHero = ({
         <div className={s.videoContainer}>
           {videos.map((video, index) => (
             <video
-              key={video.poster}
+              key={index}
               className={`${s.video} ${
                 index === activeIndex ? s.active : s.hidden
               }`}
@@ -85,7 +84,7 @@ export const HomeHero = ({
             Индивидуальные путешествия на спортивных автомобилях с маршрутом,
             созданным специально для вас.
           </p>
-          <Link data-aos="fade-up" to="/">
+          <a data-aos="fade-up" href="#tours">
             Актуальные туры
             <svg
               viewBox="0 0 12 12"
@@ -104,7 +103,7 @@ export const HomeHero = ({
                 </clipPath>
               </defs>
             </svg>
-          </Link>
+          </a>
 
           {!isMobile && (
             <div data-aos="fade-up" className={s.showReelContainer}>

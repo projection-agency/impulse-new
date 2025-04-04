@@ -1,4 +1,5 @@
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 import { Layout } from "../Layout/Layout";
 import { SiteButton } from "../SiteButton/SiteButton";
 import { SiteLogo } from "../SiteLogo/SiteLogo";
@@ -16,11 +17,9 @@ export const DescSection = () => {
   const isMobile = width < 1024;
 
   const imageBlockRef = useRef(null);
-  const infoBlockRef = useRef(null);
   const bottomBlockRef = useRef(null);
 
   const imageInView = useInView(imageBlockRef, { once: false, amount: 0.3 });
-  const infoInView = useInView(infoBlockRef, { once: false, amount: 0.3 });
   const bottomInView = useInView(bottomBlockRef, { once: false, amount: 0.3 });
 
   return (
@@ -52,32 +51,32 @@ export const DescSection = () => {
           </div>
         </motion.div>
 
-        <motion.div
-          ref={infoBlockRef}
-          variants={fadeUp}
-          initial="hidden"
-          animate={infoInView ? "visible" : "hidden"}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-          className={s.infoBlock}
-        >
-          <SiteLogo fill="black" />
+        <div className={s.infoBlock}>
+          <div data-aos="fade-up">
+            <SiteLogo fill="black" />
+          </div>
 
-          <h2>
-            Погрузитесь в путешествие <br /> <span>с самыми близкими, </span>{" "}
-            где всё создано по вашему личному сценарию
+          <h2 data-aos="fade-up">
+            Погрузитесь в путешествие <br />
+            <span className={s.span}>
+              <AnimatedHeading text="с самыми близкими" />
+            </span>
+            , где всё создано по вашему личному сценарию
           </h2>
 
           <div className={s.aside}>
-            <p>
+            <p data-aos="fade-up">
               Наши приватные туры дают возможность сменить обстановку, оставить
               позади рутину и насладиться каждым километром лучших европейских
               дорог за рулём роскошного спорткара — с вашей второй половинкой
               или в компании друзей.
             </p>
 
-            <SiteButton />
+            <div data-aos="fade-up">
+              <SiteButton />
+            </div>
           </div>
-        </motion.div>
+        </div>
 
         <motion.div
           ref={bottomBlockRef}

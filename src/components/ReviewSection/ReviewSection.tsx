@@ -38,7 +38,7 @@ export const ReviewSection = () => {
   };
 
   return (
-    <section className={s.section}>
+    <section id="reviews" className={s.section}>
       <Layout className={s.container}>
         <div className={s.reviewContainer}>
           <div className={s.reviewerInfoContainer}>
@@ -52,8 +52,16 @@ export const ReviewSection = () => {
                 <div></div>
                 <span>{data[currentIndex].review_tour.input_date_end}</span>
               </div>
-              <h3>{data[currentIndex].input_quote}</h3>
-              <p>{data[currentIndex].input_review}</p>
+              <h3
+                dangerouslySetInnerHTML={{
+                  __html: data[currentIndex].input_quote,
+                }}
+              ></h3>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: data[currentIndex].input_review,
+                }}
+              ></p>
             </div>
 
             <div className={s.controller}>

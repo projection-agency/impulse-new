@@ -1,5 +1,5 @@
 .animated-heading {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   overflow: hidden;
   font-size: inherit;

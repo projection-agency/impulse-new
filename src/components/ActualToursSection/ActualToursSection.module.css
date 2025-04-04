@@ -132,6 +132,10 @@
   letter-spacing: -2.2%;
   text-transform: uppercase;
 
+  .slash {
+    font-weight: 300;
+  }
+
   span {
     font-family: Manrope;
     font-weight: 700;

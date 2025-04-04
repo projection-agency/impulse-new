@@ -57,7 +57,7 @@ export const ChroniclesSection = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <section className={s.section}>
+    <section id="gallery" className={s.section}>
       <Layout>
         <motion.div
           variants={fadeUp}

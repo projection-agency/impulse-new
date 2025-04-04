@@ -129,6 +129,8 @@
       font-size: 5vw;
       line-height: 99%;
       text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 0;
     }
 
     span {

@@ -36,6 +36,9 @@ export interface TourType {
   input_desc: string;
   input_route: string;
   save_data_text: Day[];
+  price_include: string[];
+  price_uninclude: string[];
+  load_image_text_image: string;
 }
 
 const fetchGallery = async () => {
@@ -70,10 +73,18 @@ export const ActualToursSection = ({
   lenis,
   openOrder,
 }: {
-  lenis: InstanceType<typeof Lenis>;
+  lenis?: InstanceType<typeof Lenis>;
   openOrder: (tour: TourType) => void;
 }) => {
   const [activeTourId, setActiveTourId] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (activeTourId !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [activeTourId, lenis]);
 
   const { data = [], isLoading } = useQuery({
     queryKey: ["tours"],
@@ -105,21 +116,10 @@ export const ActualToursSection = ({
     visible: { opacity: 1, y: 0 },
   };
 
-  useEffect(() => {
-    if (activeTourId !== null) {
-      lenis.stop();
-      document.body.style.overflow = "hidden";
-    } else {
-      lenis.start();
-      document.body.style.overflow = "";
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTourId]);
-
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <section className={s.section}>
+    <section id="tours" className={s.section}>
       <Layout>
         <motion.h2
           variants={fadeUp}
@@ -151,7 +151,18 @@ export const ActualToursSection = ({
                 }}
                 className={s.imageContainer}
               >
-                <h3>{item.title.rendered}</h3>
+                <h3>
+                  {item.title.rendered.split(" ").map((word, index) =>
+                    index === 0 ? (
+                      <>
+                        {word}
+                        <br />
+                      </>
+                    ) : (
+                      ` ${word}`
+                    )
+                  )}
+                </h3>
 
                 <div>
                   <span>
@@ -218,7 +229,8 @@ export const ActualToursSection = ({
                         fill="white"
                       />
                     </svg>
-                    / <span>от</span> {item.input_main_price || "Не указано"}
+                    <div className={s.slash}>/</div> <span>от</span>{" "}
+                    {item.input_main_price || "Не указано"}
                   </div>
                 </div>
               </div>

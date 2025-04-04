@@ -62,35 +62,54 @@
         opacity: 0.6;
       }
     }
+  }
 
-    .route {
-      position: relative;
-      max-height: 17.4vw;
+  .accordion {
+    .coastBooking {
+      margin-left: auto;
+      width: fit-content;
+      color: #fff;
+      font-family: Manrope;
+      font-size: 0.9vw;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 140%;
+      letter-spacing: -0.01vw;
+      opacity: 0.6;
+      padding-right: 1.7vw;
+      margin-top: 1.6vw;
+    }
+  }
+
+  .route {
+    position: relative;
+    max-height: 17.4vw;
+    overflow: hidden;
+
+    button {
+      position: absolute;
       overflow: hidden;
+      left: 0.8vw;
+      bottom: 0.8vw;
+      font-family: Manrope;
+      font-weight: 700;
+      font-size: 0.8vw;
+      line-height: 100%;
+      letter-spacing: -0.01vw;
+      text-transform: uppercase;
+      border-radius: 8.6vw;
+      background-color: var(--white);
+      padding: 0.9vw 4.4vw;
+      color: var(--black);
+      cursor: pointer;
+      transition: 0.3s;
+      pointer-events: none;
+      cursor: no-drop;
 
-      button {
-        position: absolute;
-        overflow: hidden;
-        left: 0.8vw;
-        bottom: 0.8vw;
-        font-family: Manrope;
-        font-weight: 700;
-        font-size: 0.8vw;
-        line-height: 100%;
-        letter-spacing: -0.01vw;
-        text-transform: uppercase;
-        border-radius: 8.6vw;
-        background-color: var(--white);
-        padding: 0.9vw 4.4vw;
-        color: var(--black);
-        cursor: pointer;
-        transition: 0.3s;
-
-        span {
-          position: relative;
-          z-index: 9;
-          transition: color 0.3s;
-        }
+      span {
+        position: relative;
+        z-index: 9;
+        transition: color 0.3s;
       }
 
       button::before {
@@ -117,23 +136,6 @@
 
     button:hover::before {
       opacity: 1;
-    }
-  }
-
-  .accordion {
-    .coastBooking {
-      margin-left: auto;
-      width: fit-content;
-      color: #fff;
-      font-family: Manrope;
-      font-size: 0.9vw;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 140%;
-      letter-spacing: -0.01vw;
-      opacity: 0.6;
-      padding-right: 1.7vw;
-      margin-top: 1.6vw;
     }
   }
 
@@ -248,7 +250,7 @@
         width: 100%;
         height: 16vw;
         overflow: hidden;
-        margin-bottom: 3vw;
+        margin-bottom: 2vw;
 
         img {
           object-fit: cover;
@@ -278,6 +280,19 @@
             height: 0.8vw;
           }
         }
+      }
+
+      .distance {
+        color: #000;
+        text-align: center;
+        font-family: Manrope;
+        font-size: 0.9vw;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 140%; /* 25.2px */
+        letter-spacing: -0.01vw;
+        text-align: center;
+        margin-bottom: 0.8vw;
       }
 
       .dayDescription {
@@ -327,7 +342,7 @@
           height: 100%;
           top: 0;
           left: 0;
-          background-image: url(/images/gradient-bg.avif);
+          background-image: url(/images/circle-gradient-bg.svg);
           background-size: cover;
           opacity: 0;
           transition: opacity 0.3s;
@@ -446,6 +461,7 @@
 
         .image {
           height: 50vw;
+          margin-bottom: 4.2vw;
 
           .location {
             bottom: 3.2vw;
@@ -458,6 +474,11 @@
               height: 3.7vw;
             }
           }
+        }
+
+        .distance {
+          font-size: 3.7vw;
+          margin-bottom: 2.1vw;
         }
 
         .dayDescription {
@@ -489,6 +510,14 @@
       .date {
         font-size: 10.6vw;
         margin-bottom: 6.4vw;
+      }
+    }
+
+    .route {
+      max-height: 89vw;
+
+      button {
+        display: none;
       }
     }
 

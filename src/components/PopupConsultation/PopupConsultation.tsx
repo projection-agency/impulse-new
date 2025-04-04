@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import s from "./PopupConsultation.module.css";
 import { PhoneNumberInput } from "../FormSection/PhoneNumberInput";
 import CustomCheckbox from "../FormSection/CustomCheckbox";
+import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 
 export const PopupConsultation = ({ onClose }: { onClose: () => void }) => {
   const handleCheckboxChange = (checked: boolean) => {
@@ -10,6 +11,7 @@ export const PopupConsultation = ({ onClose }: { onClose: () => void }) => {
 
   return (
     <motion.div
+      data-lenis-prevent
       className={s.popupOverlay}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -28,9 +30,11 @@ export const PopupConsultation = ({ onClose }: { onClose: () => void }) => {
             <img src="/images/consult-popup-bg.avif" alt="three cars" />
 
             <div className={s.title}>
-              <span>остались вопросы?</span>
+              <span data-aos="fade-up">остались вопросы?</span>
 
-              <h2>мы Поможем подобрать идеальный маршрут</h2>
+              <h2>
+                <AnimatedHeading text="мы Поможем подобрать идеальный маршрут" />
+              </h2>
             </div>
           </div>
 

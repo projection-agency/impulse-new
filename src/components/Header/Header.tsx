@@ -1,10 +1,14 @@
-import { Link } from "react-router-dom";
 import s from "./Header.module.css";
 import { SiteLogo } from "../SiteLogo/SiteLogo";
 import { Layout } from "../Layout/Layout";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { FC } from "react";
 
-export const Header = () => {
+interface HeaderProps {
+  openConsult: () => void;
+}
+
+export const Header: FC<HeaderProps> = ({ openConsult }) => {
   const { width } = useWindowSize();
 
   const isMobile = width < 1024;
@@ -16,16 +20,16 @@ export const Header = () => {
             <nav>
               <ul className={s.headerNavList}>
                 <li>
-                  <Link to="/">Галерея</Link>
+                  <a href="#gallery">Галерея</a>
                 </li>
                 <li>
-                  <Link to="/">Автопарк</Link>
+                  <a href="#cars">Автопарк</a>
                 </li>
                 <li>
-                  <Link to="/">Туры</Link>
+                  <a href="#tours">Туры</a>
                 </li>
                 <li>
-                  <Link to="/">Отзывы</Link>
+                  <a href="#reviews">Отзывы</a>
                 </li>
               </ul>
             </nav>
@@ -53,8 +57,8 @@ export const Header = () => {
 
             <div className={s.contactContainer}>
               {!isMobile && (
-                <div className={s.contactWithUs}>
-                  Связаться с нами
+                <div onClick={openConsult} className={s.contactWithUs}>
+                  <span>Связаться с нами</span>
                   <svg
                     viewBox="0 0 18 18"
                     fill="none"

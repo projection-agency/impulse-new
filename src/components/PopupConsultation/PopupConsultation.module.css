@@ -42,10 +42,15 @@
       }
 
       h2 {
-        font-family: Druk Cyr;
-        font-weight: 700;
-        font-size: 5vw;
-        line-height: 99%;
+        max-width: 38vw;
+        margin: 0 auto;
+        justify-content: center;
+        span {
+          font-family: Druk Cyr;
+          font-weight: 700;
+          font-size: 5vw;
+          line-height: 99%;
+        }
       }
     }
   }
@@ -196,6 +201,8 @@
       top: 0;
       left: 0;
       background-image: url(/images/corner-gradient-bg.jpg);
+      background-size: cover;
+
       z-index: -1;
       opacity: 0;
       transition: opacity 0.3s;

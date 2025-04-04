@@ -8,7 +8,7 @@
   .reviewContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background-color: var(--white);
+    background: #fffffa;
   }
 
   .reviewerInfoContainer {
@@ -48,6 +48,10 @@
       max-width: 40vw;
       margin: 0 auto;
       margin-bottom: 6.8vw;
+
+      span {
+        color: #5f5f5f;
+      }
     }
 
     p {

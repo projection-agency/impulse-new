@@ -2,7 +2,7 @@ import s from "./SiteButton.module.css";
 
 export const SiteButton = () => {
   return (
-    <div className={s.btn}>
+    <a href="#tours" className={s.btn}>
       Актуальные туры
       <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clipPath="url(#clip0_1575_181)">
@@ -14,6 +14,6 @@ export const SiteButton = () => {
           </clipPath>
         </defs>
       </svg>
-    </div>
+    </a>
   );
 };

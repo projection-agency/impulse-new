@@ -83,10 +83,10 @@ export const CarsSection = () => {
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
 
-  const currentSlideIndex = (activeSlide + cars.length) % cars.length;
+  // const currentSlideIndex = (activeSlide + cars.length) % cars.length;
 
   return (
-    <section className={`${s.section} carSection`}>
+    <section id="cars" className={`${s.section} carSection`}>
       <div className={s.titleContainer}>
         <h2>
           <AnimatedHeading text="50+ Автомобилей в автопарке Impulse" />
@@ -155,8 +155,7 @@ export const CarsSection = () => {
           spaceBetween={50}
           slidesPerView={3}
           centeredSlides={true}
-          // loop={true}
-          initialSlide={1}
+          loop={true} // ✅ додай це
           grabCursor={true}
           effect="coverflow"
           coverflowEffect={{
@@ -167,7 +166,7 @@ export const CarsSection = () => {
           }}
           navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
           modules={[Navigation]}
-          onSlideChange={(swiper) => setActiveSlide(swiper.activeIndex)} // Оновлюємо activeSlide
+          onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)} // ✅ заміна
           onInit={(swiper) => {
             if (
               swiper.params.navigation &&
@@ -188,10 +187,10 @@ export const CarsSection = () => {
         </Swiper>
 
         <div className={s.carInfo}>
-          <h3>{cars[currentSlideIndex].mark}</h3>
+          <h3>{cars[activeSlide].mark}</h3>
 
           <ul className={s.modelsList}>
-            {cars[currentSlideIndex].models.map((model, index) => (
+            {cars[activeSlide].models.map((model, index) => (
               <li key={index}>{model}</li>
             ))}
           </ul>

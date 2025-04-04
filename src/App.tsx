@@ -44,6 +44,20 @@ export const App = () => {
         setTimeout(() => setLoading(false), 1000);
       }, 2500);
     });
+
+    // Ініціалізуємо Lenis тільки на десктопі
+    if (window.innerWidth >= 768) {
+      const lenis = new Lenis({
+        lerp: 0.05,
+      });
+
+      function raf(time: number) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
+      requestAnimationFrame(raf);
+    }
   }, []);
 
   const handleToggleConsult = () => {
@@ -74,13 +88,12 @@ export const App = () => {
           fadeOutLoader ? "opacity-100" : "opacity-0"
         }`}
       >
-        <Header />
+        <Header openConsult={handleToggleConsult} />
         <Routes>
           <Route
             path="/"
             element={
               <MainPage
-                lenis={lenis}
                 openOrder={handleToggleOrder}
                 openConsult={handleToggleConsult}
               />

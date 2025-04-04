@@ -33,11 +33,13 @@
   }
 
   .slideBottomInfo {
+    color: #1d1d1d;
     font-family: Manrope;
-    font-weight: 700;
     font-size: 0.9vw;
+    font-style: normal;
+    font-weight: 700;
     line-height: 120%;
-    letter-spacing: -2.2%;
+    letter-spacing: -0.01vw;
     display: flex;
     gap: 29vw;
     align-items: center;

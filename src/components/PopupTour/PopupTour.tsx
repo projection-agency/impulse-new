@@ -20,6 +20,9 @@ interface PopupTourProps {
     coast_content_22: string;
     coast_title_1: string;
     coast_title_2: string;
+    price_include: string[];
+    price_uninclude: string[];
+    load_image_text_image: string;
   };
   onClose: () => void;
 }
@@ -73,8 +76,11 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
     </svg>
   );
 
+  console.log(info);
+
   return (
     <motion.div
+      data-lenis-prevent
       className={s.popupOverlay}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -88,7 +94,7 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
         exit={{ y: 50, opacity: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <div className={s.mainInfo} data-lenis-prevent>
+        <div className={s.mainInfo}>
           <div className={s.tourInfo}>
             <span>
               {yearEditor(info.input_date_start, info.input_date_end)}
@@ -123,29 +129,9 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
                     title: "Включено в стоимость",
                     content: (
                       <ul>
-                        <li>Полная организация автопробега командой IMPULSE</li>
-                        <li>
-                          Проживание в отелях с превосходными номерами, спа
-                          зонами и безупречным сервисом
-                        </li>
-                        <li>Профессиональный Photography & Video Production</li>
-                        <li>Завтраки и ужины</li>
-                        <li>Входные билеты во все музеи</li>
-                        <li>Полёт на вертолёте</li>
-                        <li> Road Book автопробега в печатном и pdf формате</li>
-                        <li>
-                          Check-list со всей важной информацией для подготовки к
-                          туру
-                        </li>
-                        <li>
-                          Рации для связи между участниками во время заезда
-                        </li>
-                        <li>Grand Final мероприятие</li>
-                        <li>Трансфер из аэропорта Мюнхена в отель</li>
-                        <li>Трансфер в аэропорт Милана из отеля</li>
-                        <li>Личный менеджер для помощи на каждом этапе</li>
-                        <li>Именное приглашение в тур</li>
-                        <li>Подарки от компании IMPULSE и спонсоров</li>
+                        {info.price_include.map((item: string) => (
+                          <li>{item}</li>
+                        ))}
                       </ul>
                     ),
                   },
@@ -154,9 +140,9 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
                     title: "Не включено в стоимость",
                     content: (
                       <ul>
-                        <li>Авиаперелёты в Мюнхен / из Милана</li>
-                        <li>Обеды</li>
-                        <li>Бензин (~ 250 €)</li>
+                        {info.price_uninclude.map((item: string) => (
+                          <li>{item}</li>
+                        ))}
                       </ul>
                     ),
                   },
@@ -164,7 +150,8 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
                     title: "маршрут",
                     content: (
                       <div className={s.route}>
-                        <img src="/temp/route-image.jpg" alt="route" />
+                        <img src={info.load_image_text_image} alt="route" />
+
                         <button>
                           <span>открыть карту</span>
                         </button>
@@ -190,7 +177,7 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
                               </div>
                             )}
 
-                            <p className="lg:mb-[0.8vw]">
+                            <p className="lg:mb-[0.8vw]  mb-[2.1vw]">
                               Специальная цена при бронировании двух мест сразу
                               (для друзей или пар):
                             </p>
@@ -219,7 +206,7 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
 
                             {info.coast_content_22 && (
                               <>
-                                <p className="lg:mb-[0.8vw]">
+                                <p className="lg:mb-[0.8vw] mb-[2.1vw]">
                                   Специальная цена при бронировании двух мест
                                   сразу (для друзей или пар):
                                 </p>
@@ -295,6 +282,8 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
                 </div>
               </div>
 
+              <p className={s.distance}>{currentSlide.hl_input_distance}</p>
+
               <p className={s.dayDescription}>
                 {currentSlide.hl_input_description}
               </p>
@@ -343,29 +332,9 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
                     title: "Включено в стоимость",
                     content: (
                       <ul>
-                        <li>Полная организация автопробега командой IMPULSE</li>
-                        <li>
-                          Проживание в отелях с превосходными номерами, спа
-                          зонами и безупречным сервисом
-                        </li>
-                        <li>Профессиональный Photography & Video Production</li>
-                        <li>Завтраки и ужины</li>
-                        <li>Входные билеты во все музеи</li>
-                        <li>Полёт на вертолёте</li>
-                        <li> Road Book автопробега в печатном и pdf формате</li>
-                        <li>
-                          Check-list со всей важной информацией для подготовки к
-                          туру
-                        </li>
-                        <li>
-                          Рации для связи между участниками во время заезда
-                        </li>
-                        <li>Grand Final мероприятие</li>
-                        <li>Трансфер из аэропорта Мюнхена в отель</li>
-                        <li>Трансфер в аэропорт Милана из отеля</li>
-                        <li>Личный менеджер для помощи на каждом этапе</li>
-                        <li>Именное приглашение в тур</li>
-                        <li>Подарки от компании IMPULSE и спонсоров</li>
+                        {info.price_include.map((item: string) => (
+                          <li>{item}</li>
+                        ))}
                       </ul>
                     ),
                   },
@@ -374,9 +343,9 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
                     title: "Не включено в стоимость",
                     content: (
                       <ul>
-                        <li>Авиаперелёты в Мюнхен / из Милана</li>
-                        <li>Обеды</li>
-                        <li>Бензин (~ 250 €)</li>
+                        {info.price_uninclude.map((item: string) => (
+                          <li>{item}</li>
+                        ))}
                       </ul>
                     ),
                   },
@@ -384,7 +353,8 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
                     title: "маршрут",
                     content: (
                       <div className={s.route}>
-                        <img src="/temp/route-image.jpg" alt="route" />
+                        <img src={info.load_image_text_image} alt="route" />
+
                         <button>
                           <span>открыть карту</span>
                         </button>

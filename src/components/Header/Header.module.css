@@ -3,6 +3,7 @@
   z-index: 9;
   left: 50%;
   transform: translateX(-50%);
+  padding: 1.2vw 0;
 
   .headerContainer {
     position: relative;
@@ -10,8 +11,6 @@
     align-items: center;
     justify-content: space-between;
   }
-
-  padding: 1.2vw 0;
 
   .headerNavList {
     display: flex;
@@ -108,6 +107,8 @@
       gap: 0.4vw;
 
       .contactWithUs {
+        position: relative;
+        overflow: hidden;
         display: flex;
         align-items: center;
         gap: 0.4vw;
@@ -120,12 +121,45 @@
         font-size: 0.8vw;
         line-height: 100%;
         letter-spacing: 0.01vw;
+        transition: color 0.3s;
+        cursor: pointer;
+
+        span {
+          position: relative;
+          z-index: 2;
+        }
 
         svg {
           width: 0.9vw;
           height: 0.9vw;
           fill: var(--black);
           transition: fill 0.3s;
+          z-index: 2;
+        }
+      }
+
+      .contactWithUs::before {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        left: 0;
+        background-image: url(/images/gradient-bg.avif);
+        background-size: cover;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .contactWithUs:hover::before {
+        opacity: 1;
+      }
+
+      .contactWithUs:hover {
+        color: var(--white);
+
+        svg {
+          fill: var(--white);
         }
       }
 

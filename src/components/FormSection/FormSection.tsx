@@ -1,3 +1,4 @@
+import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 import CustomSelect from "../CustomSelect/CustomSelect";
 import CustomCheckbox from "./CustomCheckbox";
 import s from "./FormSection.module.css";
@@ -17,9 +18,11 @@ export const FormSection = () => {
         <img src="/images/form-mountains-road.avif" alt="mountains road" />
 
         <div className={s.title}>
-          <span>Ну что</span>
+          <span data-aos="fade-up">Ну что</span>
 
-          <h2>Готовы начать путешествие?</h2>
+          <h2>
+            <AnimatedHeading text="Готовы начать путешествие?" />
+          </h2>
         </div>
       </div>
 
