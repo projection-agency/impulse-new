@@ -78,12 +78,20 @@ import { Navigation } from "swiper/modules";
 import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 
 export const CarsSection = () => {
-  const [activeSlide, setActiveSlide] = useState(0); // Змінено на 0 замість 1
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const handleSlideChange = (index: number) => {
+    setIsAnimating(true);
+
+    setTimeout(() => {
+      setActiveSlide(index);
+      setIsAnimating(false);
+    }, 700);
+  };
 
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
-
-  // const currentSlideIndex = (activeSlide + cars.length) % cars.length;
 
   return (
     <section id="cars" className={`${s.section} carSection`}>
@@ -166,7 +174,7 @@ export const CarsSection = () => {
           }}
           navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
           modules={[Navigation]}
-          onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)} // ✅ заміна
+          onSlideChange={(swiper) => handleSlideChange(swiper.realIndex)}
           onInit={(swiper) => {
             if (
               swiper.params.navigation &&
@@ -186,7 +194,7 @@ export const CarsSection = () => {
           ))}
         </Swiper>
 
-        <div className={s.carInfo}>
+        <div className={`${s.carInfo} ${isAnimating ? s.hidden : ""}`}>
           <h3>{cars[activeSlide].mark}</h3>
 
           <ul className={s.modelsList}>

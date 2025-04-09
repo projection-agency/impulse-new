@@ -163,8 +163,7 @@
     display: flex;
     align-items: center;
     gap: 0.8vw;
-    background: rgba(255, 255, 255, 0.16);
-    backdrop-filter: blur(24px);
+
     width: fit-content;
     padding: 1.2vw 1.6vw;
     border-radius: 1.2vw;
@@ -181,8 +180,8 @@
     }
 
     img {
-      width: 4.1vw;
-      height: 4.1vw;
+      width: 3.8vw;
+      height: 3.8vw;
       border-radius: 50%;
       overflow: hidden;
       z-index: 9;
@@ -213,6 +212,7 @@
         width: 0.8vw;
         height: 0.8vw;
         fill: white;
+        margin-bottom: 0.2vw;
       }
     }
   }
@@ -220,6 +220,8 @@
 
 .tab.active {
   opacity: 1;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(24px);
 }
 
 .heroBottomContainer {
@@ -306,6 +308,52 @@
   fill: none;
   stroke: white;
   stroke-width: 1;
+}
+
+.tabImageWrapper {
+  position: relative;
+  width: 5vw;
+  height: 5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progressCircle {
+  /* transform: rotate(-90deg); */
+}
+
+.progressCircle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.progressBackground {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 0.05vw;
+}
+
+.progressBar {
+  fill: none;
+  stroke: white;
+  stroke-width: 0.05vw;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  /* transform: rotate(-90deg); */
+}
+
+.animating {
+  animation: progressAnim 20s linear forwards;
+}
+
+@keyframes progressAnim {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -401,6 +449,31 @@
     background-size: cover;
     height: 200vw;
     margin-top: 21.3vw;
+  }
+
+  .tabImageWrapper {
+    width: 17vw;
+    height: 17vw;
+    margin-bottom: 2.6vw;
+
+    img {
+      width: 13vw !important;
+      height: 13vw !important;
+    }
+  }
+
+  .progressBackground {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.2);
+    stroke-width: 0.2vw;
+  }
+
+  .progressBar {
+    fill: none;
+    stroke: white;
+    stroke-width: 0.2vw;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
   }
 
   .showReelContainer {

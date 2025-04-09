@@ -4,7 +4,7 @@ import { Layout } from "../Layout/Layout";
 import { SiteButton } from "../SiteButton/SiteButton";
 import { SiteLogo } from "../SiteLogo/SiteLogo";
 import s from "./DescSection.module.css";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 const fadeUp = {
@@ -21,6 +21,16 @@ export const DescSection = () => {
 
   const imageInView = useInView(imageBlockRef, { once: false, amount: 0.3 });
   const bottomInView = useInView(bottomBlockRef, { once: false, amount: 0.3 });
+
+  const infoBlockRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: infoBlockRef,
+    offset: ["start end", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [0, isMobile ? -300 : -1000]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8, 1], [1, 1, 0]);
 
   return (
     <section id="descSection" className={s.section}>
@@ -51,7 +61,11 @@ export const DescSection = () => {
           </div>
         </motion.div>
 
-        <div className={s.infoBlock}>
+        <motion.div
+          ref={infoBlockRef}
+          style={{ y, opacity }}
+          className={s.infoBlock}
+        >
           <div data-aos="fade-up">
             <SiteLogo fill="black" />
           </div>
@@ -76,7 +90,7 @@ export const DescSection = () => {
               <SiteButton />
             </div>
           </div>
-        </div>
+        </motion.div>
 
         <motion.div
           ref={bottomBlockRef}

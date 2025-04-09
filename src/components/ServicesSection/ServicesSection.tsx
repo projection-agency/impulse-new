@@ -56,11 +56,12 @@ export const ServicesSection = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [hasStarted, setHasStarted] = useState(false);
   const sectionRef = useRef(null);
-  const intervalRef = useRef<number | null>(null);
+  const timeoutRef = useRef<number | null>(null);
 
   const { width } = useWindowSize();
   const isMobile = width < 1024;
 
+  // Стежимо, коли секція потрапляє у viewport
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -80,24 +81,45 @@ export const ServicesSection = () => {
   }, [hasStarted]);
 
   useEffect(() => {
-    if (hasStarted && !intervalRef.current) {
-      setActiveTab((prevTab) => (prevTab % tabs.length) + 1);
+    const activeBars = document.querySelectorAll(`.${s.animate}`);
+    activeBars.forEach((bar) => {
+      bar.classList.remove(s.animate);
+      void (bar as HTMLElement).offsetWidth; // force reflow
+      bar.classList.add(s.animate);
+    });
+  }, [activeTab]);
 
-      intervalRef.current = setInterval(() => {
-        setActiveTab((prevTab) => (prevTab % tabs.length) + 1);
-      }, 10000);
+  // Автоматичне перемикання табів
+  useEffect(() => {
+    if (!hasStarted) return;
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
     }
 
+    timeoutRef.current = setTimeout(() => {
+      setActiveTab((prevTab) => (prevTab % tabs.length) + 1);
+    }, 10000); // 10 секунд
+
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
       }
     };
-  }, [hasStarted]);
+  }, [activeTab, hasStarted]);
 
   const handleTabClick = (id: number) => {
     setActiveTab(id);
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+
+    timeoutRef.current = setTimeout(() => {
+      setActiveTab((prevTab) => (prevTab % tabs.length) + 1);
+    }, 10000);
   };
 
   return (
@@ -127,14 +149,14 @@ export const ServicesSection = () => {
 
                 <div className={s.progressLayout}>
                   <div
-                    className={s.progressBar}
-                    style={{
-                      width: activeTab === tab.id ? "100%" : "0%",
-                      height: "2px",
-                      backgroundColor: "white",
-                      transition:
-                        activeTab === tab.id ? "width 10s linear" : "none",
-                    }}
+                    key={
+                      activeTab === tab.id
+                        ? `active-${tab.id}`
+                        : `inactive-${tab.id}`
+                    }
+                    className={`${s.progressBar} ${
+                      activeTab === tab.id ? s.animate : ""
+                    }`}
                   ></div>
                 </div>
               </li>
@@ -143,7 +165,7 @@ export const ServicesSection = () => {
 
           {!isMobile && (
             <button
-              onClick={() => setActiveTab((prev) => (prev % tabs.length) + 1)}
+              onClick={() => handleTabClick((activeTab % tabs.length) + 1)}
             >
               <svg
                 viewBox="0 0 42 20"

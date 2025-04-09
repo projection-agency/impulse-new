@@ -31,8 +31,8 @@ export const FixedBar = ({
       <button onClick={openOrder}>
         <span>Заказать сейчас</span>
       </button>
-      <button>
-        <span onClick={openConsult}>задать вопрос</span>
+      <button onClick={openConsult}>
+        <span>задать вопрос</span>
       </button>
     </div>
   );

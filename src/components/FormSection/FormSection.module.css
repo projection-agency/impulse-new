@@ -76,7 +76,8 @@
     pointer-events: none;
 
     .formContainer {
-      width: 29.7vw;
+      min-width: 29.7vw;
+      max-width: 29.7vw;
 
       h3 {
         color: #1d1d1d;
@@ -231,6 +232,7 @@
 
       .formContainer {
         width: 91.4vw;
+        max-width: none;
 
         h3 {
           font-size: 4.2vw;

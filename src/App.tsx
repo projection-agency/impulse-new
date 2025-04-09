@@ -9,24 +9,13 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Loader from "./components/Loader/Loader";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import { TourType } from "./components/ActualToursSection/ActualToursSection";
+import Lenis from "lenis";
+import { AnimatePresence } from "framer-motion";
 
 export const API_URL = "https://www.impulse.projection-learn.website/";
 
 const queryClient = new QueryClient();
-
-import Lenis from "lenis";
-import { TourType } from "./components/ActualToursSection/ActualToursSection";
-
-const lenis = new Lenis({
-  lerp: 0.05,
-});
-
-function raf(time: number) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
-
-requestAnimationFrame(raf);
 
 export const App = () => {
   const [consultPopup, setConsultPopup] = useState(false);
@@ -45,17 +34,14 @@ export const App = () => {
       }, 2500);
     });
 
-    // Ініціалізуємо Lenis тільки на десктопі
-    if (window.innerWidth >= 768) {
+    if (window.innerWidth >= 1024) {
       const lenis = new Lenis({
         lerp: 0.05,
       });
-
       function raf(time: number) {
         lenis.raf(time);
         requestAnimationFrame(raf);
       }
-
       requestAnimationFrame(raf);
     }
   }, []);
@@ -101,10 +87,16 @@ export const App = () => {
           />
         </Routes>
         <Footer />
-        {consultPopup && <PopupConsultation onClose={handleToggleConsult} />}
-        {orderPopup && (
-          <PopupOrder initialTour={selectedTour} onClose={handleToggleOrder} />
-        )}
+
+        <AnimatePresence>
+          {consultPopup && <PopupConsultation onClose={handleToggleConsult} />}
+          {orderPopup && (
+            <PopupOrder
+              initialTour={selectedTour}
+              onClose={handleToggleOrder}
+            />
+          )}
+        </AnimatePresence>
       </div>
     </QueryClientProvider>
   );

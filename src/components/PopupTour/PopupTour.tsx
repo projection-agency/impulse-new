@@ -76,8 +76,6 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
     </svg>
   );
 
-  console.log(info);
-
   return (
     <motion.div
       data-lenis-prevent
@@ -91,7 +89,7 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
         className={s.popupContent}
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        exit={{ y: 50, opacity: 0 }}
+        exit={{ y: -50, opacity: 0 }}
         transition={{ duration: 0.3 }}
       >
         <div className={s.mainInfo}>
@@ -129,9 +127,11 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
                     title: "Включено в стоимость",
                     content: (
                       <ul>
-                        {info.price_include.map((item: string) => (
-                          <li>{item}</li>
-                        ))}
+                        {info.price_include.map(
+                          (item: string, index: number) => (
+                            <li key={index}>{item}</li>
+                          )
+                        )}
                       </ul>
                     ),
                   },
@@ -140,9 +140,11 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
                     title: "Не включено в стоимость",
                     content: (
                       <ul>
-                        {info.price_uninclude.map((item: string) => (
-                          <li>{item}</li>
-                        ))}
+                        {info.price_uninclude.map(
+                          (item: string, index: number) => (
+                            <li key={index}>{item}</li>
+                          )
+                        )}
                       </ul>
                     ),
                   },
@@ -332,9 +334,11 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
                     title: "Включено в стоимость",
                     content: (
                       <ul>
-                        {info.price_include.map((item: string) => (
-                          <li>{item}</li>
-                        ))}
+                        {info.price_include.map(
+                          (item: string, index: number) => (
+                            <li key={index}>{item}</li>
+                          )
+                        )}
                       </ul>
                     ),
                   },
@@ -343,9 +347,11 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
                     title: "Не включено в стоимость",
                     content: (
                       <ul>
-                        {info.price_uninclude.map((item: string) => (
-                          <li>{item}</li>
-                        ))}
+                        {info.price_uninclude.map(
+                          (item: string, index: number) => (
+                            <li key={index}>{item}</li>
+                          )
+                        )}
                       </ul>
                     ),
                   },

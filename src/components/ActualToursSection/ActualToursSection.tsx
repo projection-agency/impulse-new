@@ -5,7 +5,7 @@ import { PopupTour } from "../PopupTour/PopupTour";
 import { useQuery } from "@tanstack/react-query";
 import { API_URL } from "../../App";
 import axios from "axios";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Lenis from "lenis";
 import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 
@@ -154,12 +154,12 @@ export const ActualToursSection = ({
                 <h3>
                   {item.title.rendered.split(" ").map((word, index) =>
                     index === 0 ? (
-                      <>
+                      <span key={index}>
                         {word}
                         <br />
-                      </>
+                      </span>
                     ) : (
-                      ` ${word}`
+                      <span key={index}> {word}</span>
                     )
                   )}
                 </h3>
@@ -240,9 +240,14 @@ export const ActualToursSection = ({
                 <div onClick={() => handleTourPopup(item.id)}>Детальнее</div>
               </div>
 
-              {activeTourId === item.id && (
-                <PopupTour info={item} onClose={() => setActiveTourId(null)} />
-              )}
+              <AnimatePresence>
+                {activeTourId === item.id && (
+                  <PopupTour
+                    info={item}
+                    onClose={() => setActiveTourId(null)}
+                  />
+                )}
+              </AnimatePresence>
             </motion.div>
           ))}
         </div>

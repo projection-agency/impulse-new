@@ -33,7 +33,7 @@ export const PopupOrder = ({
         className={s.popupContent}
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        exit={{ y: 50, opacity: 0 }}
+        exit={{ y: -50, opacity: 0 }}
         transition={{ duration: 0.3 }}
       >
         <section className={s.section}>
