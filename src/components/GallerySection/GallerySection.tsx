@@ -3,6 +3,7 @@ import s from "./GallerySection.module.css";
 import "aos/dist/aos.css";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 const gallery = [
   { image: "/images/gallery/1.avif" },
@@ -22,36 +23,37 @@ export const GallerySection = () => {
   const gallerySectionRef = useRef<HTMLElement | null>(null);
   const galleryImageRef = useRef<HTMLImageElement | null>(null);
 
+  const { width } = useWindowSize();
+
+  const isMobile = width < 1024;
+
+  const offset = isMobile ? "400" : "600";
+
   useEffect(() => {
     if (!gallerySectionRef.current || !galleryImageRef.current) return;
 
     gsap.fromTo(
       galleryImageRef.current,
       {
-        width: "5.8vw",
-        height: "5.8vw",
-        borderRadius: "50%",
-        top: "25vw",
-        left: "50%",
-        transform: "translateX(-50%)",
+        WebkitMaskSize: isMobile ? "10vw 10vw" : "5.8vw 5.8vw",
+        maskSize: isMobile ? "10vw 10vw" : "5.8vw 5.8vw",
+        WebkitMaskPosition: "center 25vw ",
       },
       {
-        width: "100%",
-        height: "100%",
-        borderRadius: "0",
-        top: "0",
-        left: "0",
-        transform: "none",
+        WebkitMaskSize: "300% 300%",
+        maskSize: "300% 300%",
+        WebkitMaskPosition: "center -40vw ",
+
         ease: "power3.out",
         scrollTrigger: {
           trigger: gallerySectionRef.current,
-          start: "top top+=100",
-          end: "+=300",
+          start: isMobile ? "top 70%" : "top top+=10",
+          end: "+=10",
           scrub: 1,
         },
       }
     );
-  }, []);
+  }, [isMobile]);
 
   return (
     <section ref={gallerySectionRef} className={s.section}>
@@ -75,14 +77,13 @@ export const GallerySection = () => {
             <li
               data-aos="fade-up"
               data-aos-duration="1000"
-              data-aos-offset="500"
+              data-aos-offset={offset}
               key={index}
             >
               <img src={image.image} alt="image" />
             </li>
           ))}
         </ul>
-        ;
       </div>
     </section>
   );

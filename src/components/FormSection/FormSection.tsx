@@ -40,7 +40,7 @@ export const FormSection = () => {
         scrollTrigger: {
           trigger: sectionRef.current,
           pin: pinWrapperRef.current,
-          start: "top top",
+          start: "top 0",
           end: "+=800",
           scrub: true,
           anticipatePin: 1,

@@ -59,7 +59,7 @@ export const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {loading && (
+      {/* {loading && (
         <div
           className={`fixed inset-0 z-50 transition-opacity duration-1000 bg-white ${
             fadeOutLoader ? "opacity-0 pointer-events-none" : "opacity-100"
@@ -67,12 +67,12 @@ export const App = () => {
         >
           <Loader />
         </div>
-      )}
+      )} */}
 
       <div
-        className={`transition-opacity duration-1000 ${
-          fadeOutLoader ? "opacity-100" : "opacity-0"
-        }`}
+      // className={`transition-opacity duration-1000 ${
+      //   fadeOutLoader ? "opacity-100" : "opacity-0"
+      // }`}
       >
         <Header openConsult={handleToggleConsult} />
         <Routes>
