@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { Layout } from "../Layout/Layout";
 import s from "./MissionSection.module.css";
 import { motion, useInView } from "framer-motion";
-import { AnimatedHeading } from "../AnimatedText/AnimatedText";
+import { TextAnimation } from "../TextAnimation/TextAnimation";
 
 const videos = ["/temp/video.mp4", "/temp/hero-video.mp4", "/temp/video.mp4"];
 
@@ -59,7 +59,7 @@ export const MissionSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            Чтобы каждая деталь
+            <TextAnimation texts={["Чтобы каждая деталь"]}></TextAnimation>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -69,7 +69,7 @@ export const MissionSection = () => {
                 fontWeight: 500,
               }}
             >
-              соответствовала вашим
+              <TextAnimation texts={["соответствовала вашим"]} />
             </motion.div>
             <br />
             <motion.span
@@ -81,7 +81,10 @@ export const MissionSection = () => {
                 fontWeight: 500,
               }}
             >
-              <AnimatedHeading text="ожиданиям и потребностям" />
+              <TextAnimation
+                color="rgba(95, 95, 95, 1)"
+                texts={["ожиданиям и потребностям"]}
+              />
             </motion.span>
           </motion.h2>
 

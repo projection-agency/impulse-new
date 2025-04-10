@@ -53,15 +53,29 @@ const tabs = [
 ];
 
 export const ServicesSection = () => {
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState<number | null>(null);
+
   const [hasStarted, setHasStarted] = useState(false);
   const sectionRef = useRef(null);
   const timeoutRef = useRef<number | null>(null);
 
+  useEffect(() => {
+    if (hasStarted && activeTab === null) {
+      setActiveTab(1);
+    }
+  }, [hasStarted, activeTab]);
+
   const { width } = useWindowSize();
   const isMobile = width < 1024;
 
-  // Стежимо, коли секція потрапляє у viewport
+  //images preloader
+  useEffect(() => {
+    tabs.forEach((tab) => {
+      const img = new Image();
+      img.src = tab.image;
+    });
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -69,7 +83,7 @@ export const ServicesSection = () => {
           setHasStarted(true);
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.1 }
     );
 
     const section = sectionRef.current;
@@ -89,7 +103,6 @@ export const ServicesSection = () => {
     });
   }, [activeTab]);
 
-  // Автоматичне перемикання табів
   useEffect(() => {
     if (!hasStarted) return;
 
@@ -98,7 +111,7 @@ export const ServicesSection = () => {
     }
 
     timeoutRef.current = setTimeout(() => {
-      setActiveTab((prevTab) => (prevTab % tabs.length) + 1);
+      setActiveTab((prevTab) => ((prevTab ?? 0) % tabs.length) + 1);
     }, 10000); // 10 секунд
 
     return () => {
@@ -118,7 +131,7 @@ export const ServicesSection = () => {
     }
 
     timeoutRef.current = setTimeout(() => {
-      setActiveTab((prevTab) => (prevTab % tabs.length) + 1);
+      setActiveTab((prevTab) => ((prevTab ?? 0) % tabs.length) + 1);
     }, 10000);
   };
 
@@ -128,7 +141,8 @@ export const ServicesSection = () => {
       className={s.section}
       style={{
         backgroundImage: `url(${
-          tabs.find((tab) => tab.id === activeTab)?.image
+          tabs.find((tab) => tab.id === activeTab)?.image ||
+          "/images/services-images/helicopter.avif"
         })`,
         transition: "background-image 0.5s ease-in-out",
       }}
@@ -163,7 +177,7 @@ export const ServicesSection = () => {
             ))}
           </ul>
 
-          {!isMobile && (
+          {!isMobile && activeTab !== null && (
             <button
               onClick={() => handleTabClick((activeTab % tabs.length) + 1)}
             >
@@ -185,19 +199,23 @@ export const ServicesSection = () => {
           <div className={s.titleContainer}>
             <p>Дополнительные бонусы к вашему путешествию</p>
 
-            <h2
-              dangerouslySetInnerHTML={{
-                __html: tabs[activeTab - 1]?.title.replace(
-                  /<br\s*\/?>/g,
-                  "<br /> "
-                ),
-              }}
-            ></h2>
+            {activeTab !== null && (
+              <h2
+                dangerouslySetInnerHTML={{
+                  __html: tabs[activeTab - 1]?.title.replace(
+                    /<br\s*\/?>/g,
+                    "<br /> "
+                  ),
+                }}
+              ></h2>
+            )}
           </div>
 
-          <div className={s.tabDesc}>
-            <p>{tabs[activeTab - 1].description}</p>
-          </div>
+          {activeTab !== null && (
+            <div className={s.tabDesc}>
+              <p>{tabs[activeTab - 1].description}</p>
+            </div>
+          )}
         </div>
       </Layout>
     </section>

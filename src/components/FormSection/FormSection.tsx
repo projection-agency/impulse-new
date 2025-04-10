@@ -1,12 +1,12 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 import CustomSelect from "../CustomSelect/CustomSelect";
 import CustomCheckbox from "./CustomCheckbox";
 import { PhoneNumberInput } from "./PhoneNumberInput";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import s from "./FormSection.module.css";
+import { TextAnimation } from "../TextAnimation/TextAnimation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,7 +78,7 @@ export const FormSection = () => {
             <div className={s.title}>
               <span data-aos="fade-up">Ну что</span>
               <h2>
-                <AnimatedHeading text="Готовы начать путешествие?" />
+                <TextAnimation texts={["Готовы начать", "путешествие?"]} />
               </h2>
             </div>
           </div>
@@ -164,9 +164,12 @@ export const FormSection = () => {
                   alt="mountains road"
                 />
                 <div className={s.title}>
-                  <span data-aos="fade-up">Ну что</span>
+                  <span className={s.span} data-aos="fade-up">
+                    Ну что
+                  </span>
                   <h2>
-                    <AnimatedHeading text="Готовы начать путешествие?" />
+                    {/* <AnimatedHeading text="Готовы начать путешествие?" /> */}
+                    <TextAnimation texts={["Готовы начать", "путешествие?"]} />
                   </h2>
                 </div>
               </div>

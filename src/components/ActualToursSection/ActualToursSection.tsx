@@ -7,7 +7,7 @@ import { API_URL } from "../../App";
 import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 import Lenis from "lenis";
-import { AnimatedHeading } from "../AnimatedText/AnimatedText";
+import { TextAnimation } from "../TextAnimation/TextAnimation";
 
 export interface Day {
   hl_input_title: string;
@@ -128,7 +128,7 @@ export const ActualToursSection = ({
           viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
-          <AnimatedHeading text="Актуальные event-туры" />
+          <TextAnimation texts={["Актуальные", "event-туры"]} />
         </motion.h2>
 
         <div className={s.list}>

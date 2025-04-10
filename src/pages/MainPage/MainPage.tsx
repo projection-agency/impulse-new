@@ -15,12 +15,21 @@ import { FC } from "react";
 interface MainPageProps {
   openOrder: () => void;
   openConsult: () => void;
+  loading: boolean;
 }
 
-export const MainPage: FC<MainPageProps> = ({ openOrder, openConsult }) => {
+export const MainPage: FC<MainPageProps> = ({
+  openOrder,
+  openConsult,
+  loading,
+}) => {
   return (
     <main>
-      <HomeHero openOrder={openOrder} openConsult={openConsult} />
+      <HomeHero
+        loading={loading}
+        openOrder={openOrder}
+        openConsult={openConsult}
+      />
 
       <DescSection />
 

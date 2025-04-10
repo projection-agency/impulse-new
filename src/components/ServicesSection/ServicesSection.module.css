@@ -5,6 +5,7 @@
   background-position: center;
   background-attachment: fixed;
   padding-top: 3.2vw;
+  background-color: black;
 
   .tabsController {
     position: relative;

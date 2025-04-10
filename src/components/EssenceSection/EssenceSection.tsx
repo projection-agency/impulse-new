@@ -1,4 +1,5 @@
 import { Layout } from "../Layout/Layout";
+import { TextAnimation } from "../TextAnimation/TextAnimation";
 import s from "./EssenceSection.module.css";
 import { motion } from "framer-motion";
 
@@ -104,11 +105,19 @@ export const EssenceSection = () => {
           </p>
 
           <h3>
-            «Наши автопробеги — шанс ощутить за рулем спорткара тот самый
-            Impulse»
+            {/* «Наши автопробеги — шанс ощутить за рулем спорткара тот самый
+            Impulse» */}
+            <TextAnimation
+              texts={[
+                "«Наши автопробеги —",
+                "шанс ощутить за рулем",
+                "спорткара тот самый",
+                "Impulse»",
+              ]}
+            />
           </h3>
 
-          <span>© Марк Буткин</span>
+          <span className={s.span}>© Марк Буткин</span>
 
           <p className={s.bottomDesc}>
             Мы позаботились о том, чтобы у нас были машины на любой вкус: от

@@ -90,6 +90,10 @@
           transition: background 0.5s ease;
         }
 
+        /* address a:hover {
+          background-color: transparent;
+        } */
+
         address a::after {
           position: absolute;
           content: "";
@@ -233,6 +237,11 @@
 
     a {
       text-decoration: underline;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #ff5e00;
     }
 
     p {

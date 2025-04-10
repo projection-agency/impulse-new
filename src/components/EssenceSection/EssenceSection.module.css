@@ -133,7 +133,7 @@
       margin-bottom: 0;
     }
 
-    span {
+    .span {
       font-family: Druk Cyr;
       font-weight: 700;
       font-size: 2.1vw;
@@ -179,7 +179,7 @@
         font-size: 12.5vw;
       }
 
-      span {
+      .span {
         font-size: 7.4vw;
         margin-bottom: 4.2vw;
       }

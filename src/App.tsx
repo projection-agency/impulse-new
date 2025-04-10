@@ -30,8 +30,8 @@ export const App = () => {
     document.fonts.ready.then(() => {
       setTimeout(() => {
         setFadeOutLoader(true);
-        setTimeout(() => setLoading(false), 1000);
-      }, 2500);
+        setLoading(false);
+      }, 3500);
     });
 
     if (window.innerWidth >= 1024) {
@@ -80,6 +80,7 @@ export const App = () => {
             path="/"
             element={
               <MainPage
+                loading={loading}
                 openOrder={handleToggleOrder}
                 openConsult={handleToggleConsult}
               />

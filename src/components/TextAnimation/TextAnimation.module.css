@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.textRow {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.animate {
+  animation: slideUp 0.4s ease forwards;
+}
+
+@keyframes slideUp {
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}

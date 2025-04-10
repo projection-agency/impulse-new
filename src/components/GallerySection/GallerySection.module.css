@@ -30,7 +30,6 @@
   }
 
   .galleryBlock {
-    /* position: relative; */
     min-height: 90vw;
 
     .galleryImage {
@@ -38,23 +37,11 @@
       top: 25vw;
       left: 50%;
       transform: translateX(-50%);
-
       width: 5.8vw;
       height: 5.8vw;
-      transition: all 1s;
       border-radius: 50%;
-    }
-
-    .scrolled {
-      width: 100% !important;
-      height: 100% !important;
-      transform: translateX(-50%) translateY(-30vw);
-      border-radius: 0;
-    }
-
-    .visible {
-      opacity: 1;
-      transform: translateY(0);
+      object-fit: cover;
+      transition: none; /* віддаємо контроль GSAP */
     }
   }
 }
@@ -62,8 +49,8 @@
 .galleryList {
   position: absolute;
   top: 20vw;
-  transform: translateY(5vw);
-  opacity: 0;
+  /* transform: translateY(5vw); */
+  opacity: 1;
   transition: 1s;
 
   li {

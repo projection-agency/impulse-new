@@ -4,7 +4,8 @@ import { PhoneNumberInput } from "../FormSection/PhoneNumberInput";
 import CustomSelect from "../CustomSelect/CustomSelect";
 import CustomCheckbox from "../FormSection/CustomCheckbox";
 import { TourType } from "../ActualToursSection/ActualToursSection";
-import { AnimatedHeading } from "../AnimatedText/AnimatedText";
+
+import { TextAnimation } from "../TextAnimation/TextAnimation";
 
 export const PopupOrder = ({
   onClose,
@@ -41,10 +42,12 @@ export const PopupOrder = ({
             <img src="/images/form-mountains-road.avif" alt="three cars" />
 
             <div className={s.title}>
-              <span data-aos="fade-up">Ну что</span>
+              <span className="block lg:mb-[0.7vw]" data-aos="fade-up">
+                Ну что
+              </span>
 
               <h2>
-                <AnimatedHeading text="Готовы начать путешествие?" />
+                <TextAnimation texts={["Готовы начать", " путешествие?"]} />
               </h2>
             </div>
           </div>

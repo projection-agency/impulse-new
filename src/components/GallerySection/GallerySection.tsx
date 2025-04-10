@@ -1,6 +1,8 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import s from "./GallerySection.module.css";
 import "aos/dist/aos.css";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 const gallery = [
   { image: "/images/gallery/1.avif" },
@@ -14,85 +16,42 @@ const gallery = [
   { image: "/images/gallery/9.avif" },
   { image: "/images/gallery/10.avif" },
 ];
+gsap.registerPlugin(ScrollTrigger);
 
 export const GallerySection = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isImagesVisible, setIsImagesVisible] = useState(false);
   const gallerySectionRef = useRef<HTMLElement | null>(null);
-  const galleryRef = useRef<HTMLUListElement | null>(null);
-  const imagesRef = useRef<(HTMLLIElement | null)[]>([]);
-
-  const handleScroll = () => {
-    if (gallerySectionRef.current) {
-      const rect = gallerySectionRef.current.getBoundingClientRect();
-      setIsScrolled(rect.top <= 100);
-    }
-  };
-
-  const handleImages = () => {
-    if (galleryRef.current) {
-      const rect = galleryRef.current.getBoundingClientRect();
-      setIsImagesVisible(rect.top <= 190);
-    }
-  };
+  const galleryImageRef = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("scroll", handleImages);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("scroll", handleImages);
-    };
+    if (!gallerySectionRef.current || !galleryImageRef.current) return;
+
+    gsap.fromTo(
+      galleryImageRef.current,
+      {
+        width: "5.8vw",
+        height: "5.8vw",
+        borderRadius: "50%",
+        top: "25vw",
+        left: "50%",
+        transform: "translateX(-50%)",
+      },
+      {
+        width: "100%",
+        height: "100%",
+        borderRadius: "0",
+        top: "0",
+        left: "0",
+        transform: "none",
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: gallerySectionRef.current,
+          start: "top top+=100",
+          end: "+=300",
+          scrub: 1,
+        },
+      }
+    );
   }, []);
-
-  useEffect(() => {
-    imagesRef.current.forEach((img) => {
-      if (img) {
-        img.style.transform = `translate(${Math.random() * 100 - 50}px, ${
-          Math.random() * 100 - 50
-        }px) `;
-      }
-    });
-  }, []);
-
-  const handleMouseDown = (
-    e: React.MouseEvent<HTMLLIElement>,
-    index: number
-  ) => {
-    const img = imagesRef.current[index];
-    if (!img) return;
-
-    const startX = e.clientX;
-    const startY = e.clientY;
-
-    img.style.transition = "none"; // Вимикаємо плавні переходи під час руху
-    img.style.animation = "none"; // Вимикаємо анімацію
-    img.style.zIndex = "9";
-
-    const handleMouseMove = (event: MouseEvent) => {
-      const dx = event.clientX - startX;
-      const dy = event.clientY - startY;
-      if (img) {
-        img.style.transform = `translate(${dx}px, ${dy}px)`;
-      }
-    };
-
-    const handleMouseUp = () => {
-      if (img) {
-        img.style.transition = "transform 0.5s ease"; // Повертаємо плавний ефект
-        img.style.transform = "translate(0, 0)";
-        img.style.zIndex = "";
-        setTimeout(() => {
-          img.style.animation = ""; // Повертаємо анімацію після завершення
-        }, 500);
-      }
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
-  };
 
   return (
     <section ref={gallerySectionRef} className={s.section}>
@@ -106,28 +65,24 @@ export const GallerySection = () => {
 
       <div className={s.galleryBlock}>
         <img
+          ref={galleryImageRef}
           src="/images/gallery-bg.avif"
           alt="The forest"
-          className={`${s.galleryImage} ${isScrolled ? s.scrolled : ""}`}
+          className={s.galleryImage}
         />
-
-        <ul
-          className={`${s.galleryList} ${isImagesVisible && s.visible}`}
-          ref={galleryRef}
-        >
+        <ul className={`${s.galleryList} ${s.visible}`}>
           {gallery.map((image, index) => (
             <li
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-offset="500"
               key={index}
-              ref={(el) => {
-                imagesRef.current[index] = el;
-              }}
-              onMouseDown={(e) => handleMouseDown(e, index)}
-              style={{ transition: "transform 0.5s ease", cursor: "grab" }}
             >
-              <img src={image.image} alt="image" draggable={false} />
+              <img src={image.image} alt="image" />
             </li>
           ))}
         </ul>
+        ;
       </div>
     </section>
   );

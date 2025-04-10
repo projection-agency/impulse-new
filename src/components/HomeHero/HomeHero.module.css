@@ -163,12 +163,12 @@
     display: flex;
     align-items: center;
     gap: 0.8vw;
-
+    background: #cccccc00;
     width: fit-content;
     padding: 1.2vw 1.6vw;
     border-radius: 1.2vw;
     opacity: 0.4;
-    transition: opacity 0.3s;
+    transition: 0.5s;
     cursor: pointer;
 
     .tabImageBorder {

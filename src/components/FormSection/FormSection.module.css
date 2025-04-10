@@ -29,6 +29,7 @@
     position: sticky;
     top: 0;
     overflow: hidden;
+    z-index: 999;
 
     img {
       height: 100%;
@@ -45,7 +46,7 @@
       text-transform: uppercase;
       max-width: 24vw;
 
-      span {
+      .span {
         display: block;
         font-family: Manrope;
         font-weight: 700;
@@ -213,7 +214,7 @@
         width: 90vw;
         max-width: none;
 
-        span {
+        .span {
           font-size: 4.2vw;
           margin-bottom: 5vw;
         }

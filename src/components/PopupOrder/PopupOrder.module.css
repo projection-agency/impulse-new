@@ -33,17 +33,15 @@
       width: 40vw;
 
       span {
-        display: block;
+        /* display: block; */
         font-family: Manrope;
         font-weight: 700;
         font-size: 0.9vw;
         line-height: 100%;
-        margin-bottom: 0.7vw;
       }
 
       h2 {
         justify-content: center;
-        max-width: 24vw;
         margin: 0 auto;
 
         span {

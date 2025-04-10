@@ -11,7 +11,9 @@ import { useQuery } from "@tanstack/react-query";
 import { API_URL } from "../../App";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { motion } from "framer-motion";
-import { AnimatedHeading } from "../AnimatedText/AnimatedText";
+import type { Swiper as SwiperType } from "swiper";
+
+import { TextAnimation } from "../TextAnimation/TextAnimation";
 
 interface ImageItem {
   cars: string;
@@ -34,6 +36,7 @@ export const ChroniclesSection = () => {
   const [selectedCar, setSelectedCar] = useState<string | null>(null);
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   const uniqueCars: string[] = Array.from(
     new Set(data.flatMap((item: ImageItem) => item.cars))
@@ -54,6 +57,16 @@ export const ChroniclesSection = () => {
     visible: { opacity: 1 },
   };
 
+  useEffect(() => {
+    if (swiperRef.current) {
+      swiperRef.current.slideTo(0);
+
+      const count = filteredData.length;
+      const progress = count > 0 ? (1 / count) * 100 : 0;
+      setProgress(progress);
+    }
+  }, [selectedCar]);
+
   if (isLoading) return <p>Loading...</p>;
 
   return (
@@ -68,7 +81,8 @@ export const ChroniclesSection = () => {
           className={s.titleContainer}
         >
           <h2>
-            <AnimatedHeading text="Хроники путешествий" />
+            {/* <AnimatedHeading text="Хроники путешествий" /> */}
+            <TextAnimation texts={["Хроники путешествий"]} />
           </h2>
           {!isMobile && <SiteButton />}
         </motion.div>
@@ -144,12 +158,22 @@ export const ChroniclesSection = () => {
         </div>
 
         <Swiper
+          key={filteredData.length > 2 ? "loop" : "no-loop"}
           spaceBetween={20}
           slidesPerView={0.95}
           initialSlide={1}
           loop={filteredData.length > 2}
           navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
           modules={[Navigation]}
+          onSwiper={(swiperInstance) => {
+            swiperRef.current = swiperInstance;
+
+            // одразу виставити правильний прогрес
+            const count = filteredData.length;
+            const progress =
+              count > 0 ? ((swiperInstance.realIndex + 1) / count) * 100 : 0;
+            setProgress(progress);
+          }}
           onInit={(swiper) => {
             if (
               swiper.params.navigation &&
@@ -165,9 +189,9 @@ export const ChroniclesSection = () => {
             setProgress(realCount > 0 ? (1 / realCount) * 100 : 0);
           }}
           onSlideChange={(swiper) => {
-            const realCount = filteredData.length;
+            const count = filteredData.length;
             const progress =
-              realCount > 0 ? ((swiper.realIndex + 1) / realCount) * 100 : 0;
+              count > 0 ? ((swiper.realIndex + 1) / count) * 100 : 0;
             setProgress(progress);
           }}
           className={s.swiperContainer}
