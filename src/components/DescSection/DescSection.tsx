@@ -34,8 +34,9 @@ export const DescSection = () => {
     });
 
     tl.to([topImagesRef.current, infoRef.current], {
-      top: isMobile ? "-65vw" : "-100vw", // або "0" → залежить від стилів
+      top: isMobile ? "-65vw" : "-80vw", // або "0" → залежить від стилів
       position: "relative", // якщо ще немає
+      height: "60vh",
       ease: "power2.out",
       duration: 0.3,
     });

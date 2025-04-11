@@ -101,7 +101,6 @@
   display: flex;
   justify-content: flex-end;
   gap: 18vw;
-  /* margin-top: 20vw; */
 
   .separate {
     width: 20.8vw;
