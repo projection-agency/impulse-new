@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { useWindowSize } from "../../hooks/useWindowSize";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const MenuPopup = ({ onClose }: { onClose: () => void }) => {
+export const MenuPopup = () => {
   const { width } = useWindowSize();
   const isMobile = width < 1024;
 

@@ -106,7 +106,7 @@ export const App = () => {
               onClose={handleToggleOrder}
             />
           )}
-          {menuPopupIsOpen && <MenuPopup onClose={handleToggleMenuPopup} />}
+          {menuPopupIsOpen && <MenuPopup />}
         </AnimatePresence>
       </div>
     </QueryClientProvider>
