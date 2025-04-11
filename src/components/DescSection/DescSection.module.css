@@ -2,6 +2,7 @@
   padding-top: 8.3vw;
   padding-bottom: 13vw;
   position: relative;
+  max-height: 200vh;
 
   .container {
     display: flex;
@@ -11,8 +12,7 @@
 
   .infoBlock {
     margin: 0 auto;
-    /* position: absolute; */
-    /* transform: translateX(-50%); */
+    margin-bottom: 10vw;
 
     svg {
       margin: 0 auto;

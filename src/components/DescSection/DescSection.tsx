@@ -14,6 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
 export const DescSection = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const topImagesRef = useRef<HTMLDivElement | null>(null);
+  const bottomImagesRef = useRef<HTMLDivElement | null>(null);
   const infoRef = useRef<HTMLDivElement | null>(null);
 
   const { width } = useWindowSize();
@@ -24,19 +25,20 @@ export const DescSection = () => {
     if (!sectionRef.current || !topImagesRef.current || !infoRef.current)
       return;
 
+    const vw = (value: number) => (window.innerWidth / 100) * value;
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: isMobile ? "top -400px" : "top -400px", // коли секція доходить до верху в'юпорта
-        end: isMobile ? "+=800" : "+=1200", // анімація йде наступні 300px
+        start: "top -400px",
+        end: isMobile ? `+=${vw(80)}` : `+=${vw(100)}`,
         scrub: true,
       },
     });
 
-    tl.to([topImagesRef.current, infoRef.current], {
-      top: isMobile ? "-65vw" : "-80vw", // або "0" → залежить від стилів
-      position: "relative", // якщо ще немає
-      height: "60vh",
+    tl.to([topImagesRef.current, infoRef.current, bottomImagesRef.current], {
+      top: `${-vw(isMobile ? 65 : 80)}px`,
+      position: "relative",
       ease: "power2.out",
       duration: 0.3,
     });
@@ -44,7 +46,7 @@ export const DescSection = () => {
     return () => {
       tl.kill();
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <section id="descSection" className={s.section} ref={sectionRef}>
@@ -95,9 +97,9 @@ export const DescSection = () => {
             </div>
           </div>
 
-          <div className={s.bottomImagesContainer}>
+          <div ref={bottomImagesRef} className={s.bottomImagesContainer}>
             <div className={s.couple}>
-              <div data-aos="fade-up" data-aos-offset="300">
+              <div data-aos-offset="-200" data-aos="fade-up">
                 <img
                   src={`${
                     isMobile
@@ -107,15 +109,15 @@ export const DescSection = () => {
                   alt="Home"
                 />
               </div>
-              <div data-aos="fade-up" data-aos-offset="200">
+              <div data-aos-offset="-100" data-aos="fade-up">
                 <img src="/images/actual-tours/bed.avif" alt="Bed" />
               </div>
             </div>
 
             {!isMobile && (
               <div
+                data-aos-offset="-200"
                 data-aos="fade-up"
-                data-aos-offset="300"
                 className={s.separate}
               >
                 <img src="/images/actual-tours/mountain.avif" alt="Mountain" />
