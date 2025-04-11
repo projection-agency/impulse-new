@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import s from "./Loader.module.css";
+import { SiteLogo } from "../SiteLogo/SiteLogo";
 
 const Loader = () => {
   const [progress, setProgress] = useState(0);
@@ -12,16 +14,32 @@ const Loader = () => {
         }
         return prev + 1;
       });
-    }, 35);
+    }, 60);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-50">
-      <div className="absolute w-64 h-64 bg-gray-500 rounded-full animate-ping"></div>
-
-      <p className="text-black-700 text-9xl font-medium z-10">{progress}%</p>
+    <div className={s.loaderLayout}>
+      <div className={s.pulse}>
+        <img src="/images/preload-pulse/1.png" alt="" />
+        <img src="/images/preload-pulse/2.png" alt="" />
+        <img src="/images/preload-pulse/3.png" alt="" />
+        <img src="/images/preload-pulse/4.png" alt="" />
+        <img src="/images/preload-pulse/5.png" alt="" />
+      </div>
+      <div className={`${s.headerLogoContainer}  ${progress >= 80 && s.scale}`}>
+        <SiteLogo fill="white" />
+        <div className={`${s.logoTitle} ${progress > 20 && s.narrowed}`}>
+          <h4>IMPULSE</h4>
+          <p>
+            <span></span>
+            Sports car tours
+            <span></span>
+          </p>
+        </div>
+      </div>
+      <p className={s.progress}>{progress}%</p>
     </div>
   );
 };

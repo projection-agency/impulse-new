@@ -33,7 +33,7 @@ export const App = () => {
     setTimeout(() => {
       setFadeOutLoader(true);
       setLoading(false);
-    }, 3500);
+    }, 6000);
 
     if (window.innerWidth >= 1024) {
       const lenis = new Lenis({

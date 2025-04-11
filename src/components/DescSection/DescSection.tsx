@@ -27,14 +27,14 @@ export const DescSection = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: isMobile ? "top -400px" : "top -800px", // коли секція доходить до верху в'юпорта
-        end: isMobile ? "+=800" : "+=1000", // анімація йде наступні 300px
+        start: isMobile ? "top -400px" : "top -400px", // коли секція доходить до верху в'юпорта
+        end: isMobile ? "+=800" : "+=1200", // анімація йде наступні 300px
         scrub: true,
       },
     });
 
     tl.to([topImagesRef.current, infoRef.current], {
-      top: isMobile ? "-65vw" : "-50vw", // або "0" → залежить від стилів
+      top: isMobile ? "-65vw" : "-100vw", // або "0" → залежить від стилів
       position: "relative", // якщо ще немає
       ease: "power2.out",
       duration: 0.3,
