@@ -1,7 +1,7 @@
 .header {
   position: absolute;
   z-index: 9;
-  left: 50%;
+  left: 50vw;
   transform: translateX(-50%);
   padding: 1.2vw 0;
 
@@ -15,6 +15,7 @@
   .headerNavList {
     display: flex;
     align-items: center;
+    transition: opacity 0.3s;
 
     a {
       color: var(--white);
@@ -32,6 +33,10 @@
       background-color: var(--white);
       color: var(--black);
     }
+  }
+
+  .opacity {
+    opacity: 0;
   }
 
   .headerLogoContainer {
@@ -177,12 +182,29 @@
         gap: 0.25vw;
         padding: 0 1.2vw;
         border-radius: 2.6vw;
+        cursor: pointer;
+        transition: 0.3s;
 
         span {
           display: block;
           width: 1.3vw;
           height: 1px;
           background-color: var(--white);
+          transition: transform 0.3s;
+        }
+      }
+
+      .menuBtn:not(.active):hover {
+        span {
+        }
+      }
+
+      .active {
+        span:nth-child(1) {
+          transform: rotate(45deg) translate(0.1vw, 0.1vw) !important;
+        }
+        span:nth-child(2) {
+          transform: rotate(-45deg) translate(0.1vw, -0.1vw) !important;
         }
       }
     }
@@ -231,6 +253,15 @@
             width: 6.3vw;
             height: 1px;
             background-color: var(--white);
+          }
+        }
+
+        .active {
+          span:nth-child(1) {
+            transform: rotate(45deg) translate(0.1vw, 1.3vw) !important;
+          }
+          span:nth-child(2) {
+            transform: rotate(-45deg) translate(0.1vw, -1.3vw) !important;
           }
         }
       }

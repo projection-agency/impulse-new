@@ -6,9 +6,15 @@ import { FC } from "react";
 
 interface HeaderProps {
   openConsult: () => void;
+  toggleMenuPopup: () => void;
+  menuIsOpen: boolean;
 }
 
-export const Header: FC<HeaderProps> = ({ openConsult }) => {
+export const Header: FC<HeaderProps> = ({
+  openConsult,
+  toggleMenuPopup,
+  menuIsOpen,
+}) => {
   const { width } = useWindowSize();
 
   const isMobile = width < 1024;
@@ -18,7 +24,7 @@ export const Header: FC<HeaderProps> = ({ openConsult }) => {
         <div className={s.headerContainer}>
           {!isMobile && (
             <nav>
-              <ul className={s.headerNavList}>
+              <ul className={`${s.headerNavList} ${menuIsOpen && s.opacity}`}>
                 <li>
                   <a href="#gallery">Галерея</a>
                 </li>
@@ -76,7 +82,10 @@ export const Header: FC<HeaderProps> = ({ openConsult }) => {
                 </div>
               )}
 
-              <div className={s.menuBtn}>
+              <div
+                onClick={toggleMenuPopup}
+                className={`${s.menuBtn} ${menuIsOpen && s.active}`}
+              >
                 <span></span>
                 <span></span>
               </div>

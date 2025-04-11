@@ -1,121 +1,127 @@
-import { useWindowSize } from "../../hooks/useWindowSize";
+import { useEffect, useRef } from "react";
 import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 import { Layout } from "../Layout/Layout";
 import { SiteButton } from "../SiteButton/SiteButton";
 import { SiteLogo } from "../SiteLogo/SiteLogo";
 import s from "./DescSection.module.css";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0 },
-};
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import { useWindowSize } from "../../hooks/useWindowSize";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const DescSection = () => {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const topImagesRef = useRef<HTMLDivElement | null>(null);
+  const infoRef = useRef<HTMLDivElement | null>(null);
+
   const { width } = useWindowSize();
+
   const isMobile = width < 1024;
 
-  const imageBlockRef = useRef(null);
-  const bottomBlockRef = useRef(null);
+  useEffect(() => {
+    if (!sectionRef.current || !topImagesRef.current || !infoRef.current)
+      return;
 
-  const imageInView = useInView(imageBlockRef, { once: false, amount: 0.3 });
-  const bottomInView = useInView(bottomBlockRef, { once: false, amount: 0.3 });
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: isMobile ? "top -400px" : "top -800px", // коли секція доходить до верху в'юпорта
+        end: isMobile ? "+=800" : "+=1000", // анімація йде наступні 300px
+        scrub: true,
+      },
+    });
 
-  const infoBlockRef = useRef(null);
+    tl.to([topImagesRef.current, infoRef.current], {
+      top: isMobile ? "-65vw" : "-50vw", // або "0" → залежить від стилів
+      position: "relative", // якщо ще немає
+      ease: "power2.out",
+      duration: 0.3,
+    });
 
-  const { scrollYProgress } = useScroll({
-    target: infoBlockRef,
-    offset: ["start end", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [0, isMobile ? -300 : -1000]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8, 1], [1, 1, 0]);
+    return () => {
+      tl.kill();
+    };
+  }, []);
 
   return (
-    <section id="descSection" className={s.section}>
-      <Layout>
-        <motion.div
-          ref={imageBlockRef}
-          variants={fadeUp}
-          initial="hidden"
-          animate={imageInView ? "visible" : "hidden"}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <div className="flex flex-row justify-between gap-[5.6vw]">
-            <div className="lg:w-[30.4vw]">
+    <section id="descSection" className={s.section} ref={sectionRef}>
+      <Layout className={s.container}>
+        <div>
+          <div className={s.topImagesContainer} ref={topImagesRef}>
+            <div className={s.separate}>
               <img src="/images/actual-tours/lambos.avif" alt="Lamborghini" />
             </div>
 
-            <div className="flex gap-[1.2vw]">
-              <div className="lg:w-[20.3vw]">
+            <div className={s.couple}>
+              <div>
                 <img src="/images/actual-tours/drone.avif" alt="Drone" />
               </div>
 
               {!isMobile && (
-                <div className="lg:w-[14.1vw]">
+                <div>
                   <img src="/images/actual-tours/plate.avif" alt="Plate" />
                 </div>
               )}
             </div>
           </div>
-        </motion.div>
 
-        <motion.div
-          ref={infoBlockRef}
-          style={{ y, opacity }}
-          className={s.infoBlock}
-        >
-          <div data-aos="fade-up">
-            <SiteLogo fill="black" />
-          </div>
-
-          <h2 data-aos="fade-up">
-            Погрузитесь в путешествие <br />
-            <span className={s.span}>
-              <AnimatedHeading text="с самыми близкими" />
-            </span>
-            , где всё создано по вашему личному сценарию
-          </h2>
-
-          <div className={s.aside}>
-            <p data-aos="fade-up">
-              Наши приватные туры дают возможность сменить обстановку, оставить
-              позади рутину и насладиться каждым километром лучших европейских
-              дорог за рулём роскошного спорткара — с вашей второй половинкой
-              или в компании друзей.
-            </p>
-
+          <div className={s.infoBlock} ref={infoRef}>
             <div data-aos="fade-up">
-              <SiteButton />
+              <SiteLogo fill="black" />
+            </div>
+
+            <h2 data-aos="fade-up">
+              Погрузитесь в путешествие <br />
+              <span className={s.span}>
+                <AnimatedHeading text="с самыми близкими" />
+              </span>
+              , где всё создано по вашему личному сценарию
+            </h2>
+
+            <div className={s.aside}>
+              <p data-aos="fade-up">
+                Наши приватные туры дают возможность сменить обстановку,
+                оставить позади рутину и насладиться каждым километром лучших
+                европейских дорог за рулём роскошного спорткара — с вашей второй
+                половинкой или в компании друзей.
+              </p>
+
+              <div data-aos="fade-up" data-aos-offset="-1000">
+                <SiteButton />
+              </div>
             </div>
           </div>
-        </motion.div>
 
-        <motion.div
-          ref={bottomBlockRef}
-          variants={fadeUp}
-          initial="hidden"
-          animate={bottomInView ? "visible" : "hidden"}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
-        >
-          <div className="flex gap-[18vw] lg:ml-[14.5vw] ">
-            <div className="flex flex-row-reverse lg:flex-row lg:gap-[1.2vw] gap-[5.8vw] lg:justify-start justify-between">
-              <div className="lg:block flex justify-end">
-                <img src="/images/actual-tours/home.avif" alt="Home" />
+          <div className={s.bottomImagesContainer}>
+            <div className={s.couple}>
+              <div data-aos="fade-up" data-aos-offset="300">
+                <img
+                  src={`${
+                    isMobile
+                      ? "/images/actual-tours/mobile-home.avif"
+                      : "/images/actual-tours/home.avif"
+                  }`}
+                  alt="Home"
+                />
               </div>
-              <div>
+              <div data-aos="fade-up" data-aos-offset="200">
                 <img src="/images/actual-tours/bed.avif" alt="Bed" />
               </div>
             </div>
 
             {!isMobile && (
-              <div>
+              <div
+                data-aos="fade-up"
+                data-aos-offset="300"
+                className={s.separate}
+              >
                 <img src="/images/actual-tours/mountain.avif" alt="Mountain" />
               </div>
             )}
           </div>
-        </motion.div>
+        </div>
       </Layout>
     </section>
   );

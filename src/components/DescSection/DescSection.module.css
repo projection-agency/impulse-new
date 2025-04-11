@@ -1,25 +1,30 @@
 .section {
   padding-top: 8.3vw;
   padding-bottom: 13vw;
+  position: relative;
 
-  .topImages {
+  .container {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
   }
 
   .infoBlock {
     margin: 0 auto;
-    transform: translateY(-3.5vw);
-    margin-bottom: 0.8vw;
+    /* position: absolute; */
+    /* transform: translateX(-50%); */
 
     svg {
       margin: 0 auto;
       width: 6.4vw;
       height: 6.4vw;
       margin-bottom: 2vw;
+      position: relative;
+      z-index: 9;
     }
 
     h2 {
+      position: relative;
       font-family: Druk Cyr;
       font-weight: 700;
       font-size: 5vw;
@@ -30,7 +35,8 @@
       width: 70vw;
       margin: 0 auto;
       margin-bottom: 2vw;
-      color: #1d1d1d;
+      color: #ffffff;
+      mix-blend-mode: exclusion;
 
       .span {
         position: relative;
@@ -42,25 +48,74 @@
         content: "";
         width: 100%;
         height: 0.5vw;
-        background-color: black;
+        background-color: rgb(255, 255, 255);
         bottom: 0;
       }
     }
 
     p {
+      position: relative;
       margin: 0 auto;
       margin-bottom: 2.9vw;
       font-family: Manrope;
       font-weight: 500;
       font-size: 1vw;
       line-height: 130%;
-      color: #1d1d1d;
+      color: #ffffff;
+      mix-blend-mode: exclusion !important;
     }
 
     .aside {
       margin: 0 auto;
       width: 22vw;
-      transform: translateX(50%);
+      position: absolute;
+      left: 50%;
+    }
+  }
+}
+
+.topImagesContainer {
+  display: flex;
+  justify-content: space-between;
+  position: sticky !important;
+  top: 3vw;
+
+  .separate {
+    width: 30.4vw;
+  }
+
+  .couple {
+    display: flex;
+    gap: 1.2vw;
+
+    div:nth-child(1) {
+      width: 20.3vw;
+    }
+    div:nth-child(2) {
+      width: 14.1vw;
+    }
+  }
+}
+
+.bottomImagesContainer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 18vw;
+  margin-top: 10vw;
+
+  .separate {
+    width: 20.8vw;
+  }
+
+  .couple {
+    display: flex;
+    gap: 1.2vw;
+
+    div:nth-child(1) {
+      width: 19vw;
+    }
+    div:nth-child(2) {
+      width: 21vw;
     }
   }
 }
@@ -70,8 +125,7 @@
     padding: 21.3vw 0;
 
     .infoBlock {
-      transform: translateY(-13vw);
-      margin-bottom: 5vw;
+      /* transform: translateY(-13vw); */
 
       svg {
         width: 21.8vw;
@@ -86,7 +140,9 @@
       }
 
       .aside {
-        transform: none;
+        display: block;
+        position: static;
+
         width: 82vw;
       }
 
@@ -99,8 +155,54 @@
       .span::before {
         height: 1vw !important;
       }
+    }
 
-      .btn {
+    .topImagesContainer {
+      top: 3vw;
+
+      .separate {
+        width: 45vw;
+      }
+
+      .couple {
+        display: flex;
+        gap: 1.2vw;
+
+        div:nth-child(1) {
+          width: 40vw;
+          height: 44vw;
+          overflow: hidden;
+
+          img {
+            object-position: 0.5vw;
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .bottomImagesContainer {
+      display: block;
+
+      .couple {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        align-items: end;
+        gap: 1.2vw;
+
+        div {
+          height: fit-content;
+        }
+
+        div:nth-child(1) {
+          width: 45vw;
+        }
+        div:nth-child(2) {
+          width: 40vw;
+        }
       }
     }
   }

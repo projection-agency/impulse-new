@@ -12,6 +12,7 @@ import "aos/dist/aos.css";
 import { TourType } from "./components/ActualToursSection/ActualToursSection";
 import Lenis from "lenis";
 import { AnimatePresence } from "framer-motion";
+import { MenuPopup } from "./components/MenuPopup/MenuPopup";
 
 export const API_URL = "https://www.impulse.projection-learn.website/";
 
@@ -24,15 +25,15 @@ export const App = () => {
   const [fadeOutLoader, setFadeOutLoader] = useState(false); // для анімації
   const [selectedTour, setSelectedTour] = useState<TourType | null>(null);
 
+  const [menuPopupIsOpen, setMenuPopupIsopen] = useState(false);
+
   useEffect(() => {
     Aos.init();
 
-    document.fonts.ready.then(() => {
-      setTimeout(() => {
-        setFadeOutLoader(true);
-        setLoading(false);
-      }, 3500);
-    });
+    setTimeout(() => {
+      setFadeOutLoader(true);
+      setLoading(false);
+    }, 3500);
 
     if (window.innerWidth >= 1024) {
       const lenis = new Lenis({
@@ -57,9 +58,13 @@ export const App = () => {
     document.body.style.overflow = !orderPopup ? "hidden" : "";
   };
 
+  const handleToggleMenuPopup = () => {
+    setMenuPopupIsopen(!menuPopupIsOpen);
+    document.body.style.overflow = !menuPopupIsOpen ? "hidden" : "";
+  };
   return (
     <QueryClientProvider client={queryClient}>
-      {/* {loading && (
+      {loading && (
         <div
           className={`fixed inset-0 z-50 transition-opacity duration-1000 bg-white ${
             fadeOutLoader ? "opacity-0 pointer-events-none" : "opacity-100"
@@ -67,14 +72,18 @@ export const App = () => {
         >
           <Loader />
         </div>
-      )} */}
+      )}
 
       <div
-      // className={`transition-opacity duration-1000 ${
-      //   fadeOutLoader ? "opacity-100" : "opacity-0"
-      // }`}
+        className={`transition-opacity duration-1000 ${
+          fadeOutLoader ? "opacity-100" : "opacity-0"
+        }`}
       >
-        <Header openConsult={handleToggleConsult} />
+        <Header
+          toggleMenuPopup={handleToggleMenuPopup}
+          openConsult={handleToggleConsult}
+          menuIsOpen={menuPopupIsOpen}
+        />
         <Routes>
           <Route
             path="/"
@@ -97,6 +106,7 @@ export const App = () => {
               onClose={handleToggleOrder}
             />
           )}
+          {menuPopupIsOpen && <MenuPopup onClose={handleToggleMenuPopup} />}
         </AnimatePresence>
       </div>
     </QueryClientProvider>
