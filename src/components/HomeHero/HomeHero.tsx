@@ -52,10 +52,12 @@ export const HomeHero = ({
   openOrder,
   openConsult,
   loading,
+  openVideo,
 }: {
   openOrder: () => void;
   openConsult: () => void;
   loading: boolean;
+  openVideo: () => void;
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const { width } = useWindowSize();
@@ -123,7 +125,11 @@ export const HomeHero = ({
             </a>
 
             {!isMobile && (
-              <div data-aos="fade-up" className={s.showReelContainer}>
+              <div
+                onClick={openVideo}
+                data-aos="fade-up"
+                className={s.showReelContainer}
+              >
                 <img src="/images/show-reel-circle.svg" alt="" />
 
                 <div className={s.showReel}>
@@ -224,7 +230,7 @@ export const HomeHero = ({
       {isMobile && (
         <Layout className={s.shoeReelMobileWrapper}>
           <div className={s.showReelContainer}>
-            <div className={s.showReel}>
+            <div onClick={openVideo} className={s.showReel}>
               <svg
                 width="22"
                 height="22"

@@ -1,6 +1,5 @@
 .section {
   padding-top: 8.3vw;
-  padding-bottom: 13vw;
   position: relative;
 
   .container {
@@ -14,7 +13,7 @@
     position: sticky;
     top: 2vw;
     z-index: 1;
-    /* mix-blend-mode: exclusion; */
+    margin-bottom: 15vw;
 
     svg {
       margin: 0 auto;

@@ -13,6 +13,7 @@ import { TourType } from "./components/ActualToursSection/ActualToursSection";
 import Lenis from "lenis";
 import { AnimatePresence } from "framer-motion";
 import { MenuPopup } from "./components/MenuPopup/MenuPopup";
+import { VideoPopup } from "./components/VideoPopup/VideoPopup";
 
 export const API_URL = "https://www.impulse.projection-learn.website/";
 
@@ -22,8 +23,9 @@ export const App = () => {
   const [consultPopup, setConsultPopup] = useState(false);
   const [orderPopup, setOrderPopup] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [fadeOutLoader, setFadeOutLoader] = useState(false); // для анімації
+  const [fadeOutLoader, setFadeOutLoader] = useState(false);
   const [selectedTour, setSelectedTour] = useState<TourType | null>(null);
+  const [videoOpen, setVideoOpen] = useState(false);
 
   const [menuPopupIsOpen, setMenuPopupIsopen] = useState(false);
 
@@ -84,6 +86,7 @@ export const App = () => {
           openConsult={handleToggleConsult}
           menuIsOpen={menuPopupIsOpen}
         />
+
         <Routes>
           <Route
             path="/"
@@ -92,6 +95,7 @@ export const App = () => {
                 loading={loading}
                 openOrder={handleToggleOrder}
                 openConsult={handleToggleConsult}
+                openVideo={() => setVideoOpen(true)}
               />
             }
           />
@@ -108,6 +112,14 @@ export const App = () => {
           )}
           {menuPopupIsOpen && <MenuPopup />}
         </AnimatePresence>
+        <VideoPopup
+          isOpen={videoOpen}
+          onClose={() => {
+            setVideoOpen(false);
+            document.body.style.overflow = "";
+          }}
+          videoSrc="/temp/hero-video.mp4"
+        />
       </div>
     </QueryClientProvider>
   );

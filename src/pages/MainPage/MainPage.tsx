@@ -16,16 +16,19 @@ interface MainPageProps {
   openOrder: () => void;
   openConsult: () => void;
   loading: boolean;
+  openVideo: () => void;
 }
 
 export const MainPage: FC<MainPageProps> = ({
   openOrder,
   openConsult,
   loading,
+  openVideo,
 }) => {
   return (
     <main>
       <HomeHero
+        openVideo={openVideo}
         loading={loading}
         openOrder={openOrder}
         openConsult={openConsult}
