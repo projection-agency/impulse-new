@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 import { Layout } from "../Layout/Layout";
 import { SiteButton } from "../SiteButton/SiteButton";
@@ -12,70 +11,20 @@ import { useWindowSize } from "../../hooks/useWindowSize";
 gsap.registerPlugin(ScrollTrigger);
 
 export const DescSection = () => {
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  const topImagesRef = useRef<HTMLDivElement | null>(null);
-  const bottomImagesRef = useRef<HTMLDivElement | null>(null);
-  const infoRef = useRef<HTMLDivElement | null>(null);
-
   const { width } = useWindowSize();
 
   const isMobile = width < 1024;
 
-  useEffect(() => {
-    if (!sectionRef.current || !topImagesRef.current || !infoRef.current)
-      return;
-
-    const vw = (value: number) => (window.innerWidth / 100) * value;
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top -400px",
-        end: isMobile ? `+=${vw(80)}` : `+=${vw(100)}`,
-        scrub: true,
-      },
-    });
-
-    tl.to([topImagesRef.current, infoRef.current, bottomImagesRef.current], {
-      top: `${-vw(isMobile ? 65 : 80)}px`,
-      position: "relative",
-      ease: "power2.out",
-      duration: 0.3,
-    });
-
-    return () => {
-      tl.kill();
-    };
-  }, [isMobile]);
-
   return (
-    <section id="descSection" className={s.section} ref={sectionRef}>
+    <section id="descSection" className={s.section}>
       <Layout className={s.container}>
         <div>
-          <div className={s.topImagesContainer} ref={topImagesRef}>
-            <div className={s.separate}>
-              <img src="/images/actual-tours/lambos.avif" alt="Lamborghini" />
-            </div>
-
-            <div className={s.couple}>
-              <div>
-                <img src="/images/actual-tours/drone.avif" alt="Drone" />
-              </div>
-
-              {!isMobile && (
-                <div>
-                  <img src="/images/actual-tours/plate.avif" alt="Plate" />
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className={s.infoBlock} ref={infoRef}>
-            <div data-aos="fade-up">
+          <div className={s.infoBlock}>
+            <div>
               <SiteLogo fill="black" />
             </div>
 
-            <h2 data-aos="fade-up">
+            <h2>
               Погрузитесь в путешествие <br />
               <span className={s.span}>
                 <AnimatedHeading text="с самыми близкими" />
@@ -84,22 +33,44 @@ export const DescSection = () => {
             </h2>
 
             <div className={s.aside}>
-              <p data-aos="fade-up">
+              <p>
                 Наши приватные туры дают возможность сменить обстановку,
                 оставить позади рутину и насладиться каждым километром лучших
                 европейских дорог за рулём роскошного спорткара — с вашей второй
                 половинкой или в компании друзей.
               </p>
 
-              <div data-aos="fade-up" data-aos-offset="-1000">
+              <div>
                 <SiteButton />
               </div>
             </div>
           </div>
 
-          <div ref={bottomImagesRef} className={s.bottomImagesContainer}>
+          <div className={s.topImagesContainer}>
+            <div
+              data-aos="fade-up"
+              data-aos-offset="100"
+              className={s.separate}
+            >
+              <img src="/images/actual-tours/lambos.avif" alt="Lamborghini" />
+            </div>
+
             <div className={s.couple}>
-              <div data-aos-offset="-200" data-aos="fade-up">
+              <div data-aos="fade-up" data-aos-offset="200">
+                <img src="/images/actual-tours/drone.avif" alt="Drone" />
+              </div>
+
+              {!isMobile && (
+                <div data-aos="fade-up" data-aos-offset="300">
+                  <img src="/images/actual-tours/plate.avif" alt="Plate" />
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className={s.bottomImagesContainer}>
+            <div className={s.couple}>
+              <div data-aos="fade-up" data-aos-offset="100">
                 <img
                   src={`${
                     isMobile
@@ -109,15 +80,15 @@ export const DescSection = () => {
                   alt="Home"
                 />
               </div>
-              <div data-aos-offset="-100" data-aos="fade-up">
+              <div data-aos="fade-up" data-aos-offset="200">
                 <img src="/images/actual-tours/bed.avif" alt="Bed" />
               </div>
             </div>
 
             {!isMobile && (
               <div
-                data-aos-offset="-200"
                 data-aos="fade-up"
+                data-aos-offset="300"
                 className={s.separate}
               >
                 <img src="/images/actual-tours/mountain.avif" alt="Mountain" />

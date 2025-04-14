@@ -2,7 +2,6 @@
   padding-top: 8.3vw;
   padding-bottom: 13vw;
   position: relative;
-  max-height: 200vh;
 
   .container {
     display: flex;
@@ -12,13 +11,16 @@
 
   .infoBlock {
     margin: 0 auto;
-    margin-bottom: 10vw;
+    position: sticky;
+    top: 2vw;
+    z-index: 1;
+    /* mix-blend-mode: exclusion; */
 
     svg {
       margin: 0 auto;
       width: 6.4vw;
       height: 6.4vw;
-      margin-bottom: 2vw;
+      margin-bottom: 1.5vw;
       position: relative;
       z-index: 9;
     }
@@ -28,15 +30,15 @@
       font-family: Druk Cyr;
       font-weight: 700;
       font-size: 5vw;
-      line-height: 110.00000000000001%;
+      line-height: 105%;
       letter-spacing: 0.01vw;
       text-align: center;
       text-transform: uppercase;
       width: 70vw;
       margin: 0 auto;
-      margin-bottom: 2vw;
-      color: #ffffff;
-      mix-blend-mode: exclusion;
+      margin-bottom: 1.5vw;
+      /* color: var(--white);
+      mix-blend-mode: exclusion; */
 
       .span {
         position: relative;
@@ -48,7 +50,7 @@
         content: "";
         width: 100%;
         height: 0.5vw;
-        background-color: rgb(255, 255, 255);
+        background-color: var(--black);
         bottom: 0;
       }
     }
@@ -56,13 +58,12 @@
     p {
       position: relative;
       margin: 0 auto;
-      margin-bottom: 2.9vw;
+      margin-bottom: 2.3vw;
       font-family: Manrope;
       font-weight: 500;
       font-size: 1vw;
       line-height: 130%;
-      color: #ffffff;
-      mix-blend-mode: exclusion !important;
+      /* color: var(--white); */
     }
 
     .aside {
@@ -77,8 +78,9 @@
 .topImagesContainer {
   display: flex;
   justify-content: space-between;
-  position: sticky !important;
-  top: 3vw;
+  margin-bottom: 15vw;
+  position: relative;
+  z-index: 1;
 
   .separate {
     width: 30.4vw;
@@ -101,6 +103,9 @@
   display: flex;
   justify-content: flex-end;
   gap: 18vw;
+  height: 160vh;
+  position: relative;
+  z-index: 1;
 
   .separate {
     width: 20.8vw;
@@ -158,6 +163,7 @@
 
     .topImagesContainer {
       top: 3vw;
+      margin-bottom: 100vw;
 
       .separate {
         width: 45vw;

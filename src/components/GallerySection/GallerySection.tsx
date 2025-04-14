@@ -32,7 +32,6 @@ export const GallerySection = () => {
   useEffect(() => {
     if (!gallerySectionRef.current || !galleryImageRef.current) return;
 
-    // Примусово скидаємо стилі перед анімацією
     galleryImageRef.current.style.webkitMaskSize = isMobile
       ? "10vw 10vw"
       : "7%";
@@ -40,7 +39,6 @@ export const GallerySection = () => {
     galleryImageRef.current.style.webkitMaskPosition = "center 24vw";
     galleryImageRef.current.style.maskPosition = "center 24vw";
 
-    // Потім запускаємо GSAP
     const animation = gsap.fromTo(
       galleryImageRef.current,
       {
@@ -56,7 +54,7 @@ export const GallerySection = () => {
         scrollTrigger: {
           trigger: gallerySectionRef.current,
           start: isMobile ? "top 40%" : "top 1%",
-          end: "+=300",
+          end: "+=100",
           scrub: 1,
         },
       }

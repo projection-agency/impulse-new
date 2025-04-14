@@ -43,6 +43,7 @@ export const FormSection = () => {
           start: "top top",
           end: "+=800",
           scrub: true,
+          pinSpacing: false,
           anticipatePin: 1,
         },
       });
