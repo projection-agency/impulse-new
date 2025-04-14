@@ -30,7 +30,7 @@
   }
 
   .galleryBlock {
-    min-height: 90vw;
+    min-height: 115vw;
 
     .galleryImage {
       position: absolute;
@@ -53,7 +53,7 @@
 
 .galleryList {
   position: absolute;
-  top: 20vw;
+  top: 45vw;
   /* transform: translateY(5vw); */
   opacity: 1;
   transition: 1s;
@@ -137,24 +137,6 @@
   }
   to {
     transform: translateX(-100%);
-  }
-}
-
-@keyframes shake {
-  0% {
-    transform: translateY(0);
-  }
-  25% {
-    transform: translateY(-10px);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  75% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
   }
 }
 

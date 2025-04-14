@@ -40,7 +40,7 @@ export const FormSection = () => {
         scrollTrigger: {
           trigger: sectionRef.current,
           pin: pinWrapperRef.current,
-          start: "top 0",
+          start: "top top",
           end: "+=800",
           scrub: true,
           anticipatePin: 1,
@@ -62,8 +62,9 @@ export const FormSection = () => {
       );
 
       setTimeout(() => {
+        console.log("refresh");
         ScrollTrigger.refresh();
-      }, 5000);
+      }, 10000);
     }, sectionRef);
 
     return () => ctx.revert();

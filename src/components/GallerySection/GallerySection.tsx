@@ -27,7 +27,7 @@ export const GallerySection = () => {
 
   const isMobile = width < 1024;
 
-  const offset = isMobile ? "400" : "600";
+  const offset = isMobile ? "400" : "300";
 
   useEffect(() => {
     if (!gallerySectionRef.current || !galleryImageRef.current) return;
@@ -35,20 +35,20 @@ export const GallerySection = () => {
     gsap.fromTo(
       galleryImageRef.current,
       {
-        WebkitMaskSize: isMobile ? "10vw 10vw" : "5.8vw 5.8vw",
-        maskSize: isMobile ? "10vw 10vw" : "5.8vw 5.8vw",
-        WebkitMaskPosition: "center 25vw ",
+        WebkitMaskSize: isMobile ? "50% 50%" : "7%",
+        maskSize: isMobile ? "50% 50%" : "7%",
+        WebkitMaskPosition: "center 24vw ",
       },
       {
-        WebkitMaskSize: "300% 300%",
-        maskSize: "300% 300%",
+        WebkitMaskSize: isMobile ? "1000%" : "300%",
+        maskSize: isMobile ? "1000%" : "300%",
         WebkitMaskPosition: "center -40vw ",
 
         ease: "power3.out",
         scrollTrigger: {
           trigger: gallerySectionRef.current,
-          start: isMobile ? "top 70%" : "top top+=10",
-          end: "+=10",
+          start: isMobile ? "top 90%" : "top top+=10",
+          end: "+=300",
           scrub: 1,
         },
       }
