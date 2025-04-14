@@ -32,27 +32,40 @@ export const GallerySection = () => {
   useEffect(() => {
     if (!gallerySectionRef.current || !galleryImageRef.current) return;
 
-    gsap.fromTo(
+    // Примусово скидаємо стилі перед анімацією
+    galleryImageRef.current.style.webkitMaskSize = isMobile
+      ? "10vw 10vw"
+      : "7%";
+    galleryImageRef.current.style.maskSize = isMobile ? "10vw 10vw" : "7%";
+    galleryImageRef.current.style.webkitMaskPosition = "center 24vw";
+    galleryImageRef.current.style.maskPosition = "center 24vw";
+
+    // Потім запускаємо GSAP
+    const animation = gsap.fromTo(
       galleryImageRef.current,
       {
-        WebkitMaskSize: isMobile ? "50% 50%" : "7%",
-        maskSize: isMobile ? "50% 50%" : "7%",
-        WebkitMaskPosition: "center 24vw ",
+        WebkitMaskSize: isMobile ? "10vw 10vw" : "7%",
+        maskSize: isMobile ? "10vw 10vw" : "7%",
+        WebkitMaskPosition: "center 24vw",
       },
       {
         WebkitMaskSize: isMobile ? "1000%" : "300%",
         maskSize: isMobile ? "1000%" : "300%",
-        WebkitMaskPosition: "center -40vw ",
-
+        WebkitMaskPosition: "center -40vw",
         ease: "power3.out",
         scrollTrigger: {
           trigger: gallerySectionRef.current,
-          start: isMobile ? "top 90%" : "top top+=10",
+          start: isMobile ? "top 40%" : "top 1%",
           end: "+=300",
           scrub: 1,
         },
       }
     );
+
+    return () => {
+      animation.scrollTrigger?.kill();
+      animation.kill();
+    };
   }, [isMobile]);
 
   return (
