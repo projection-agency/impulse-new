@@ -10,10 +10,11 @@ import Loader from "./components/Loader/Loader";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { TourType } from "./components/ActualToursSection/ActualToursSection";
-import Lenis from "lenis";
+// import Lenis from "lenis";
 import { AnimatePresence } from "framer-motion";
 import { MenuPopup } from "./components/MenuPopup/MenuPopup";
 import { VideoPopup } from "./components/VideoPopup/VideoPopup";
+// import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
 export const API_URL = "https://www.impulse.projection-learn.website/";
 
@@ -37,16 +38,17 @@ export const App = () => {
       setLoading(false);
     }, 6000);
 
-    if (window.innerWidth >= 1024) {
-      const lenis = new Lenis({
-        lerp: 0.05,
-      });
-      function raf(time: number) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-    }
+    // if (window.innerWidth >= 1024) {
+    //   const lenis = new Lenis({
+    //     lerp: 0.05,
+    //   });
+    //   function raf(time: number) {
+    //     lenis.raf(time);
+    //     requestAnimationFrame(raf);
+    //   }
+    //   requestAnimationFrame(raf);
+    //   lenis.on("scroll", ScrollTrigger.update); // якщо ти використовуєш GSAP
+    // }
   }, []);
 
   const handleToggleConsult = () => {

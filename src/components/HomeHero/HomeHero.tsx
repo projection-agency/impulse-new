@@ -125,14 +125,10 @@ export const HomeHero = ({
             </a>
 
             {!isMobile && (
-              <div
-                onClick={openVideo}
-                data-aos="fade-up"
-                className={s.showReelContainer}
-              >
+              <div data-aos="fade-up" className={s.showReelContainer}>
                 <img src="/images/show-reel-circle.svg" alt="" />
 
-                <div className={s.showReel}>
+                <div onClick={openVideo} className={s.showReel}>
                   <svg
                     width="22"
                     height="22"
