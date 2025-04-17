@@ -125,6 +125,13 @@
   }
 }
 
+.mobile {
+  svg {
+    width: 50vw;
+    height: 50vw;
+  }
+}
+
 @keyframes bounceY {
   0%,
   100% {
@@ -132,5 +139,15 @@
   }
   50% {
     transform: translateY(-10px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .loaderLayout {
+    padding: 10vw;
+  }
+
+  .progress {
+    font-size: 20vw;
   }
 }

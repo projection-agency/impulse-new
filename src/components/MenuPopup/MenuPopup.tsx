@@ -50,20 +50,22 @@ export const MenuPopup = () => {
         {/* <button onClick={onClose}></button> */}
 
         <div className={s.navBlock}>
-          <div className={s.langController}>
-            <div
-              onClick={() => changeLanguage("ru")}
-              className={i18n.language === "ru" ? s.active : ""}
-            >
-              РУ
+          {isMobile && (
+            <div className={s.langController}>
+              <div
+                onClick={() => changeLanguage("ru")}
+                className={i18n.language === "ru" ? s.active : ""}
+              >
+                РУ
+              </div>
+              <div
+                onClick={() => changeLanguage("en")}
+                className={i18n.language === "en" ? s.active : ""}
+              >
+                EN
+              </div>
             </div>
-            <div
-              onClick={() => changeLanguage("en")}
-              className={i18n.language === "en" ? s.active : ""}
-            >
-              EN
-            </div>
-          </div>
+          )}
 
           <h3>Меню</h3>
 

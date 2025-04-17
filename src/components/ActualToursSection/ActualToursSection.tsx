@@ -201,7 +201,7 @@ export const ActualToursSection = ({
 
               <div className={s.btnContainer}>
                 <div onClick={() => openOrder(item)}>Забронировать</div>
-                <div onClick={() => handleTourPopup(item.id)}>Детальнее</div>
+                <div onClick={() => handleTourPopup(item.id)}>Подробнее</div>
               </div>
 
               <AnimatePresence>

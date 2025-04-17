@@ -149,11 +149,11 @@
 
 @media (max-width: 1024px) {
   .section {
-    padding-bottom: 35vw;
+    padding-bottom: 30vw;
     padding-top: 20vw;
 
     .titleContainer {
-      margin-bottom: 0;
+      margin-bottom: -5vw;
 
       h2 {
         font-size: 12.8vw;

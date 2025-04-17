@@ -183,6 +183,7 @@
 @media (max-width: 1024px) {
   .section {
     padding: 21vw 0;
+
     .reviewContainer {
       display: flex;
       flex-direction: column-reverse;

@@ -78,7 +78,9 @@ export const FormSection = () => {
           <div className={s.imageBlock}>
             <img src="/images/form-mountains-road.avif" alt="mountains road" />
             <div className={s.title}>
-              <span data-aos="fade-up">Ну что</span>
+              <span className="mb-[4vw] block" data-aos="fade-up">
+                Ну что
+              </span>
               <h2>
                 <TextAnimation texts={["Готовы начать", "путешествие?"]} />
               </h2>
