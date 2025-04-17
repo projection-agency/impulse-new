@@ -83,6 +83,7 @@
 
   .separate {
     width: 30.4vw;
+    overflow: hidden;
   }
 
   .couple {
@@ -91,9 +92,11 @@
 
     div:nth-child(1) {
       width: 20.3vw;
+      overflow: hidden;
     }
     div:nth-child(2) {
       width: 14.1vw;
+      overflow: hidden;
     }
   }
 }
@@ -108,6 +111,7 @@
 
   .separate {
     width: 20.8vw;
+    overflow: hidden;
   }
 
   .couple {
@@ -116,9 +120,11 @@
 
     div:nth-child(1) {
       width: 19vw;
+      overflow: hidden;
     }
     div:nth-child(2) {
       width: 21vw;
+      overflow: hidden;
     }
   }
 }

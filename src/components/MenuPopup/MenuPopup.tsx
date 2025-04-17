@@ -2,11 +2,18 @@ import { motion } from "framer-motion";
 import s from "./MenuPopup.module.css";
 import { Link } from "react-router";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { useTranslation } from "react-i18next";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const MenuPopup = () => {
   const { width } = useWindowSize();
   const isMobile = width < 1024;
+
+  const { i18n } = useTranslation();
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
 
   return (
     <motion.div
@@ -43,6 +50,21 @@ export const MenuPopup = () => {
         {/* <button onClick={onClose}></button> */}
 
         <div className={s.navBlock}>
+          <div className={s.langController}>
+            <div
+              onClick={() => changeLanguage("ru")}
+              className={i18n.language === "ru" ? s.active : ""}
+            >
+              РУ
+            </div>
+            <div
+              onClick={() => changeLanguage("en")}
+              className={i18n.language === "en" ? s.active : ""}
+            >
+              EN
+            </div>
+          </div>
+
           <h3>Меню</h3>
 
           <ul>

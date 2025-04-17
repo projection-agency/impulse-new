@@ -312,6 +312,7 @@
         background-image: url(images/gradient-bg.avif);
         background-size: cover;
         color: var(--white);
+        background-color: black;
       }
       div:nth-child(1)::before {
         opacity: 1;

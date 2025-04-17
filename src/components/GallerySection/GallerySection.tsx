@@ -4,6 +4,7 @@ import "aos/dist/aos.css";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { Layout } from "../Layout/Layout";
 
 const gallery = [
   { image: "/images/gallery/1.avif" },
@@ -77,6 +78,15 @@ export const GallerySection = () => {
       </div>
 
       <div className={s.galleryBlock}>
+        <Layout>
+          <h3
+            data-aos="fade-up"
+            data-aos-offset="500"
+            className={s.galleryTitle}
+          >
+            memories
+          </h3>
+        </Layout>
         <img
           ref={galleryImageRef}
           src="/images/gallery-bg.avif"

@@ -377,6 +377,10 @@
       align-items: center;
       font-size: 3.7vw;
       gap: 4.2vw;
+
+      a {
+        margin-left: 1vw;
+      }
     }
   }
 }

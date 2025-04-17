@@ -32,7 +32,6 @@ export const MissionSection = () => {
   const videoWrapperRef = useRef(null);
   const listRef = useRef(null);
 
-  const titleInView = useInView(titleRef, { once: false, amount: 0.3 });
   const controlsInView = useInView(videoControlsRef, {
     once: false,
     amount: 0.3,
@@ -46,14 +45,7 @@ export const MissionSection = () => {
   return (
     <section className={s.section}>
       <Layout>
-        <motion.div
-          ref={titleRef}
-          variants={fadeUp}
-          initial="hidden"
-          animate={titleInView ? "visible" : "hidden"}
-          transition={{ duration: 0.6 }}
-          className={s.titleContainer}
-        >
+        <div data-aos="fade-up" ref={titleRef} className={s.titleContainer}>
           <motion.h2
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -92,6 +84,7 @@ export const MissionSection = () => {
             <p>
               Комфорт и забота о каждом клиенте —
               <span>
+                {" "}
                 наша главная цель. Налаженные связи позволяют нам создавать
                 лучший опыт и обеспечивать максимальный комфорт для вашего
                 отдыха.
@@ -115,7 +108,7 @@ export const MissionSection = () => {
               </svg>
             </span>
           </div>
-        </motion.div>
+        </div>
       </Layout>
 
       <Layout>

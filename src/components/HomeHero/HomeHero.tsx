@@ -4,6 +4,7 @@ import { Layout } from "../Layout/Layout";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { FixedBar } from "../FixedBar/FixedBar";
 import { AnimatedHeading } from "../AnimatedText/AnimatedText";
+import { useTranslation } from "react-i18next";
 
 const videos = [
   { src: "/temp/hero-video.mp4", poster: "/images/stub-hero-image.avif" },
@@ -63,6 +64,8 @@ export const HomeHero = ({
   const { width } = useWindowSize();
   const isMobile = width < 1024;
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setActiveIndex((prevIndex) => (prevIndex + 1) % videos.length);
@@ -96,7 +99,7 @@ export const HomeHero = ({
           <div className={s.heroTitleContainer}>
             <span data-aos="fade-up">Формат:</span>
             <h1>
-              <AnimatedHeading text="Приватные туры" />
+              <AnimatedHeading text={t("heroTitle")} />
             </h1>
 
             <p data-aos="fade-up">

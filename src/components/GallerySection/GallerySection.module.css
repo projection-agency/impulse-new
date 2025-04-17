@@ -48,6 +48,19 @@
       transition: 0.5s;
       pointer-events: none;
     }
+
+    .galleryTitle {
+      position: absolute;
+      top: -30vw;
+      z-index: 9;
+      color: #1d1d1d;
+      font-family: "Druk Cyr";
+      font-size: 5vw;
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: 0.01vw;
+      text-transform: uppercase;
+    }
   }
 }
 
@@ -150,6 +163,13 @@
       min-height: 450vw;
 
       .galleryImage {
+      }
+
+      .galleryTitle {
+        font-size: 12.8vw;
+        text-align: center;
+        width: 100%;
+        top: -35vw;
       }
 
       .galleryList {

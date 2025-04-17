@@ -193,13 +193,17 @@
 
   .sliderWrapper {
     .swiperController {
-      gap: 60vw;
+      gap: 55vw;
     }
 
     .btn {
       width: 13.8vw;
       height: 13.8vw;
       flex-shrink: 0;
+    }
+
+    img {
+      width: 100%;
     }
 
     svg {

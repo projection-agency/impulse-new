@@ -160,7 +160,7 @@ export const ChroniclesSection = () => {
         <Swiper
           key={filteredData.length > 2 ? "loop" : "no-loop"}
           spaceBetween={20}
-          slidesPerView={0.95}
+          slidesPerView={1}
           initialSlide={1}
           loop={filteredData.length > 2}
           navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
@@ -168,7 +168,6 @@ export const ChroniclesSection = () => {
           onSwiper={(swiperInstance) => {
             swiperRef.current = swiperInstance;
 
-            // одразу виставити правильний прогрес
             const count = filteredData.length;
             const progress =
               count > 0 ? ((swiperInstance.realIndex + 1) / count) * 100 : 0;

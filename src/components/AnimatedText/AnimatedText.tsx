@@ -36,6 +36,7 @@ export const AnimatedHeading = ({ text }: AnimatedHeadingProps) => {
 
   return (
     <motion.div
+      key={text} // ⬅️ Додай це!
       className="animated-heading"
       variants={container}
       initial="hidden"

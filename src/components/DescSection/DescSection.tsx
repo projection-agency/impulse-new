@@ -7,13 +7,61 @@ import s from "./DescSection.module.css";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { useEffect, useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const DescSection = () => {
   const { width } = useWindowSize();
 
+  const topImagesContainerRef = useRef<HTMLDivElement>(null);
+  const bottomImagesContainerRef = useRef<HTMLDivElement>(null);
+
   const isMobile = width < 1024;
+
+  useEffect(() => {
+    const topImages = topImagesContainerRef.current?.querySelectorAll("img");
+    const bottomImages =
+      bottomImagesContainerRef.current?.querySelectorAll("img");
+
+    if (topImages) {
+      topImages.forEach((img) => {
+        gsap.fromTo(
+          img,
+          { scale: 2 }, // початковий масштаб
+          {
+            scale: 1, // кінцевий масштаб
+            scrollTrigger: {
+              trigger: img,
+              start: "top bottom", // коли верх фото торкається низу екрану
+              end: "bottom top", // коли низ фото торкається верху екрану
+              scrub: true, // скрол-контрольована анімація
+            },
+            ease: "none",
+          }
+        );
+      });
+    }
+
+    if (bottomImages) {
+      bottomImages.forEach((img) => {
+        gsap.fromTo(
+          img,
+          { scale: 2 },
+          {
+            scale: 1,
+            scrollTrigger: {
+              trigger: img,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+            ease: "none",
+          }
+        );
+      });
+    }
+  }, []);
 
   return (
     <section id="descSection" className={s.section}>
@@ -46,7 +94,7 @@ export const DescSection = () => {
             </div>
           </div>
 
-          <div className={s.topImagesContainer}>
+          <div ref={topImagesContainerRef} className={s.topImagesContainer}>
             <div
               data-aos="fade-up"
               data-aos-offset="100"
@@ -68,7 +116,10 @@ export const DescSection = () => {
             </div>
           </div>
 
-          <div className={s.bottomImagesContainer}>
+          <div
+            ref={bottomImagesContainerRef}
+            className={s.bottomImagesContainer}
+          >
             <div className={s.couple}>
               <div data-aos="fade-up" data-aos-offset="100">
                 <img

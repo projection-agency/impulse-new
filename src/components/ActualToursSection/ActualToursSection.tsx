@@ -64,11 +64,6 @@ export const yearEditor = (start: string, end: string) => {
   return `${formattedStartDate} – ${formattedEndDate}`;
 };
 
-const getYear = (date: string) => {
-  const dateObj = new Date(date);
-  return dateObj.getFullYear();
-};
-
 export const ActualToursSection = ({
   lenis,
   openOrder,
@@ -121,15 +116,9 @@ export const ActualToursSection = ({
   return (
     <section id="tours" className={s.section}>
       <Layout>
-        <motion.h2
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-        >
+        <h2 data-aos="fade-up">
           <TextAnimation texts={["Актуальные", "event-туры"]} />
-        </motion.h2>
+        </h2>
 
         <div className={s.list}>
           {data.map((item: TourType, index: number) => (
@@ -182,31 +171,6 @@ export const ActualToursSection = ({
                     <h4>{item.title.rendered}</h4>
                     <div className={s.location}>
                       <span>{item.input_location}</span>
-                      <svg
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <g opacity="0.6" clipPath="url(#clip0_1340_1948)">
-                          <path
-                            d="M6.66667 10H5C4.08083 10 3.33333 10.7475 3.33333 11.6667V13.3333C3.33333 14.2525 4.08083 15 5 15H6.66667C7.58583 15 8.33333 14.2525 8.33333 13.3333V11.6667C8.33333 10.7475 7.58583 10 6.66667 10ZM5 13.3333V11.6667H6.66667V13.3333H5ZM15.8333 1.66667H15V0.833333C15 0.373333 14.6275 0 14.1667 0C13.7058 0 13.3333 0.373333 13.3333 0.833333V1.66667H6.66667V0.833333C6.66667 0.373333 6.29417 0 5.83333 0C5.3725 0 5 0.373333 5 0.833333V1.66667H4.16667C1.86917 1.66667 0 3.53583 0 5.83333V15.8333C0 18.1308 1.86917 20 4.16667 20H15.8333C18.1308 20 20 18.1308 20 15.8333V5.83333C20 3.53583 18.1308 1.66667 15.8333 1.66667ZM4.16667 3.33333H15.8333C17.2117 3.33333 18.3333 4.455 18.3333 5.83333V6.66667H1.66667V5.83333C1.66667 4.455 2.78833 3.33333 4.16667 3.33333ZM15.8333 18.3333H4.16667C2.78833 18.3333 1.66667 17.2117 1.66667 15.8333V8.33333H18.3333V15.8333C18.3333 17.2117 17.2117 18.3333 15.8333 18.3333Z"
-                            fill="white"
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_1340_1948">
-                            <rect width="20" height="20" fill="white" />
-                          </clipPath>
-                        </defs>
-                      </svg>
-
-                      <span>
-                        {getYear(item.input_date_start) || ""}.
-                        {yearEditor(
-                          item.input_date_start,
-                          item.input_date_end
-                        ) || ""}
-                      </span>
                     </div>
                   </div>
 

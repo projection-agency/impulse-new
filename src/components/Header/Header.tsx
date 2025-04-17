@@ -3,6 +3,7 @@ import { SiteLogo } from "../SiteLogo/SiteLogo";
 import { Layout } from "../Layout/Layout";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 interface HeaderProps {
   openConsult: () => void;
@@ -16,8 +17,13 @@ export const Header: FC<HeaderProps> = ({
   menuIsOpen,
 }) => {
   const { width } = useWindowSize();
-
   const isMobile = width < 1024;
+
+  const { i18n } = useTranslation();
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
   return (
     <header className={s.header}>
       <Layout>
@@ -56,8 +62,18 @@ export const Header: FC<HeaderProps> = ({
           <div className={s.headerRightContainer}>
             {!isMobile && (
               <div className={s.langController}>
-                <div>РУ</div>
-                <div>EN</div>
+                <div
+                  onClick={() => changeLanguage("ru")}
+                  className={i18n.language === "ru" ? s.active : ""}
+                >
+                  РУ
+                </div>
+                <div
+                  onClick={() => changeLanguage("en")}
+                  className={i18n.language === "en" ? s.active : ""}
+                >
+                  EN
+                </div>
               </div>
             )}
 
