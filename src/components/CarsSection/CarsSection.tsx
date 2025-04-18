@@ -46,8 +46,6 @@ export const CarsSection = () => {
     queryFn: fetchCars,
   });
 
-  console.log(data);
-
   if (isLoading) {
     return <p>Loading</p>;
   }

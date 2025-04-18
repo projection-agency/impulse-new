@@ -19,6 +19,8 @@ export const Header: FC<HeaderProps> = ({
   const { width } = useWindowSize();
   const isMobile = width < 1024;
 
+  const [showHeader, setShowHeader] = useState(true);
+
   const { i18n } = useTranslation();
 
   const changeLanguage = (lng: string) => {
@@ -28,18 +30,30 @@ export const Header: FC<HeaderProps> = ({
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
       if (menuIsOpen) {
-        setScrolled(false); // якщо меню відкрите, завжди прибираємо скрол
-      } else {
-        setScrolled(window.scrollY > 200); // інакше слухаємо скрол
+        setShowHeader(true);
+        setScrolled(false);
+        return;
       }
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Скрол вниз
+        setShowHeader(false);
+      } else {
+        // Скрол вгору
+        setShowHeader(true);
+      }
+
+      setScrolled(currentScrollY > 200);
+      lastScrollY = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    // Викликаємо відразу один раз, щоб при оновленні menuIsOpen актуалізувати стан
-    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -47,7 +61,11 @@ export const Header: FC<HeaderProps> = ({
   }, [menuIsOpen]);
 
   return (
-    <header className={`${s.header} ${scrolled ? s.scrolled : ""}`}>
+    <header
+      className={`${s.header} ${showHeader ? s.show : s.hide} ${
+        scrolled ? s.scrolled : ""
+      }`}
+    >
       <Layout>
         <div className={s.headerContainer}>
           {!isMobile && (
