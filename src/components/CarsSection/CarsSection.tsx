@@ -1,74 +1,4 @@
 import s from "./CarsSection.module.css";
-
-const cars = [
-  {
-    mark: "Lamborghini",
-    image: "/images/cars-images/Lamborghini.webp",
-    models: ["Aventador", "Huracan STO", "Huracan", "revuelto", "Urus"],
-  },
-  {
-    mark: "Ferrari",
-    image: "/images/cars-images/ferrari.webp",
-    models: [
-      "PORTOFINO",
-      "F8 TRIBUTO",
-      "296 GTB",
-      "SF90 STRADALE",
-      "PUROSANGUE",
-      "488 SPIDER",
-      "812 SUPERFAST",
-      " 812 GTS",
-      "F8 SPIDER",
-      "ROMA",
-      "ROMA SPIDER",
-    ],
-  },
-  {
-    mark: "mcLaren",
-    image: "/images/cars-images/McLaren.webp",
-    models: ["650S", "720S", "750S", "765LT", "ARTURA"],
-  },
-  {
-    mark: "Porsche",
-    image: "/images/cars-images/porshe.webp",
-    models: ["911 CARRERA", "911 CARRERA S", "911 TURBO", "911 GT3"],
-  },
-  {
-    mark: "bentley",
-    image: "/images/cars-images/bentley.webp",
-    models: ["CONTINENTAL GT", "BENTAYGA"],
-  },
-  {
-    mark: "rolls royce",
-    image: "/images/cars-images/rolls-royce.webp",
-    models: ["CULLINAN", "GHOST", "SPECTRE", "PHANTOM"],
-  },
-  {
-    mark: "Aston martin",
-    image: "/images/cars-images/aston-martin.webp",
-    models: ["DB12", "DBS", "DBX"],
-  },
-  {
-    mark: "BMW",
-    image: "/images/cars-images/BMW.webp",
-    models: [
-      "M2",
-      "M3",
-      "M4",
-      "M5",
-      "7 SERIES LONG",
-      "X5M",
-      "X7 M60I XDRIVE",
-      "XM",
-    ],
-  },
-  {
-    mark: "Bugatti",
-    image: "/images/cars-images/Bugatti.webp",
-    models: ["CHIRON"],
-  },
-];
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -76,9 +6,27 @@ import "./CarsSection.css";
 import { useRef, useState } from "react";
 import { Navigation } from "swiper/modules";
 import { AnimatedHeading } from "../AnimatedText/AnimatedText";
+import { API_URL } from "../../App";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+
+interface CarModel {
+  hl_input_model_name: string;
+}
+interface Car {
+  id: number;
+  title: { rendered: string };
+  load_image_text_more: string;
+  save_data_text: CarModel[];
+}
+
+const fetchCars = async (): Promise<Car[]> => {
+  const { data } = await axios.get(`${API_URL}wp-json/wp/v2/cars`);
+  return data;
+};
 
 export const CarsSection = () => {
-  const [activeSlide, setActiveSlide] = useState(0);
+  const [activeSlide, setActiveSlide] = useState(1);
   const [isAnimating, setIsAnimating] = useState(false);
 
   const handleSlideChange = (index: number) => {
@@ -92,6 +40,17 @@ export const CarsSection = () => {
 
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
+
+  const { data = [], isLoading } = useQuery({
+    queryKey: ["cars"],
+    queryFn: fetchCars,
+  });
+
+  console.log(data);
+
+  if (isLoading) {
+    return <p>Loading</p>;
+  }
 
   return (
     <section id="cars" className={`${s.section} carSection`}>
@@ -187,19 +146,19 @@ export const CarsSection = () => {
             }
           }}
         >
-          {cars.map((car, index) => (
+          {data.map((car, index) => (
             <SwiperSlide key={index} className={s.carItem}>
-              <img src={car.image} alt={car.mark} />
+              <img src={car.load_image_text_more} alt={car.title.rendered} />
             </SwiperSlide>
           ))}
         </Swiper>
 
         <div className={`${s.carInfo} ${isAnimating ? s.hidden : ""}`}>
-          <h3>{cars[activeSlide].mark}</h3>
+          <h3>{data[activeSlide]?.title.rendered}</h3>
 
           <ul className={s.modelsList}>
-            {cars[activeSlide].models.map((model, index) => (
-              <li key={index}>{model}</li>
+            {data[activeSlide]?.save_data_text?.map((model, index) => (
+              <li key={index}>{model.hl_input_model_name}</li>
             ))}
           </ul>
         </div>
