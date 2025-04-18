@@ -16,7 +16,7 @@
   font-size: 1vw !important;
   font-style: normal !important;
   font-weight: 500 !important;
-  line-height: 100% !important; /* 20px */
+  line-height: 100% !important;
   opacity: 0.6 !important;
   display: flex !important;
   height: 3vw !important;
@@ -25,7 +25,11 @@
   align-self: stretch !important;
   border-bottom: 1px solid rgba(29, 29, 29, 0.2) !important;
   background: rgba(29, 29, 29, 0.05) !important;
-  padding-left: 5vw !important; /* Щоб був відступ після коду */
+  padding-left: 5vw !important;
+}
+
+.form-control.open .arrow {
+  transform: rotate(180deg) !important;
 }
 
 .react-tel-input .flag-dropdown {
@@ -47,6 +51,7 @@
   .arrow {
     background-image: url(/images/form-arrow.svg);
     background-size: cover;
+
     width: 1.2vw;
     height: 1.2vw;
     border: none !important;
@@ -58,16 +63,22 @@
 .react-tel-input .country-list {
   border-radius: 0 !important;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1) !important;
-  max-width: 7vw;
+  max-width: 10vw;
+  left: 0;
 
   .country {
-    .flag {
-      display: none;
-    }
     .country-name {
       display: none;
     }
   }
+}
+
+.react-tel-input .selected-flag .arrow.up {
+  transform: rotate(0) !important;
+}
+
+.react-tel-input .country-list::-webkit-scrollbar {
+  display: none;
 }
 
 @media (max-width: 1024px) {
@@ -82,14 +93,13 @@
   }
 
   .react-tel-input .country-list {
-    min-width: 20vw !important;
+    min-width: 40vw !important;
   }
 
   .react-tel-input .selected-flag {
     .arrow {
       width: 2.2vw;
       height: 1.6vw;
-
       top: 0 !important;
     }
   }

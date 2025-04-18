@@ -33,6 +33,8 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
 
   const [currentDay, setCurrentDay] = useState(0);
 
+  console.log(info);
+
   const totalDays = info.save_data_text.length;
   const currentSlide = info.save_data_text[currentDay];
 

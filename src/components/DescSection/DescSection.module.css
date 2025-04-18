@@ -12,7 +12,7 @@
     margin: 0 auto;
     position: sticky;
     top: 2vw;
-    z-index: 1;
+    z-index: 1; /* Менший ніж у фото */
     margin-bottom: 15vw;
 
     svg {
@@ -74,12 +74,23 @@
   }
 }
 
+/* .topImagesContainer,
+.bottomImagesContainer {
+  position: relative;
+  z-index: 10; 
+} */
+
+.topImagesContainer img,
+.bottomImagesContainer img {
+  position: relative;
+  z-index: 99999;
+  transition: 1;
+}
+
 .topImagesContainer {
   display: flex;
   justify-content: space-between;
   margin-bottom: 15vw;
-  position: relative;
-  z-index: 1;
 
   .separate {
     width: 30.4vw;
@@ -106,8 +117,6 @@
   justify-content: flex-end;
   gap: 18vw;
   height: 160vh;
-  position: relative;
-  z-index: 1;
 
   .separate {
     width: 20.8vw;
@@ -127,6 +136,11 @@
       overflow: hidden;
     }
   }
+}
+
+.z {
+  position: relative;
+  z-index: 999999999999999999999999999999999999;
 }
 
 @media (max-width: 1024px) {

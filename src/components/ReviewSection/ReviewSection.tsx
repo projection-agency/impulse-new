@@ -40,6 +40,7 @@ export const ReviewSection = () => {
   return (
     <section id="reviews" className={s.section}>
       <Layout className={s.container}>
+        <h2>отзывы участников</h2>
         <div className={s.reviewContainer}>
           <div className={s.reviewerInfoContainer}>
             <div>

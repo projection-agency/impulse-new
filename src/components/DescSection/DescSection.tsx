@@ -88,28 +88,24 @@ export const DescSection = () => {
                 половинкой или в компании друзей.
               </p>
 
-              <div>
+              <div className={s.z}>
                 <SiteButton />
               </div>
             </div>
           </div>
 
           <div ref={topImagesContainerRef} className={s.topImagesContainer}>
-            <div
-              data-aos="fade-up"
-              data-aos-offset="100"
-              className={s.separate}
-            >
+            <div ref={topImagesContainerRef} className={s.separate}>
               <img src="/images/actual-tours/lambos.avif" alt="Lamborghini" />
             </div>
 
-            <div className={s.couple}>
-              <div data-aos="fade-up" data-aos-offset="200">
+            <div ref={topImagesContainerRef} className={s.couple}>
+              <div ref={topImagesContainerRef}>
                 <img src="/images/actual-tours/drone.avif" alt="Drone" />
               </div>
 
               {!isMobile && (
-                <div data-aos="fade-up" data-aos-offset="300">
+                <div ref={topImagesContainerRef}>
                   <img src="/images/actual-tours/plate.avif" alt="Plate" />
                 </div>
               )}
@@ -120,8 +116,8 @@ export const DescSection = () => {
             ref={bottomImagesContainerRef}
             className={s.bottomImagesContainer}
           >
-            <div className={s.couple}>
-              <div data-aos="fade-up" data-aos-offset="100">
+            <div ref={bottomImagesContainerRef} className={s.couple}>
+              <div ref={bottomImagesContainerRef}>
                 <img
                   src={`${
                     isMobile
@@ -131,17 +127,13 @@ export const DescSection = () => {
                   alt="Home"
                 />
               </div>
-              <div data-aos="fade-up" data-aos-offset="200">
+              <div ref={bottomImagesContainerRef}>
                 <img src="/images/actual-tours/bed.avif" alt="Bed" />
               </div>
             </div>
 
             {!isMobile && (
-              <div
-                data-aos="fade-up"
-                data-aos-offset="300"
-                className={s.separate}
-              >
+              <div ref={bottomImagesContainerRef} className={s.separate}>
                 <img src="/images/actual-tours/mountain.avif" alt="Mountain" />
               </div>
             )}

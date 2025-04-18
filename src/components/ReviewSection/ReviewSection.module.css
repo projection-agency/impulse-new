@@ -5,6 +5,15 @@
     /* display: flex; */
   }
 
+  h2 {
+    font-family: Druk Cyr;
+    font-weight: 700;
+    font-size: 5vw;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 3vw;
+  }
+
   .reviewContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -187,6 +196,11 @@
     .reviewContainer {
       display: flex;
       flex-direction: column-reverse;
+    }
+
+    h2 {
+      font-size: 12.8vw;
+      margin-bottom: 6.4vw;
     }
 
     .container {

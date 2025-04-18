@@ -63,7 +63,6 @@ export const FormSection = () => {
       );
 
       setTimeout(() => {
-        console.log("refresh");
         ScrollTrigger.refresh();
       }, 10000);
     }, sectionRef);

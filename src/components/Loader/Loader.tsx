@@ -10,8 +10,6 @@ const Loader = () => {
 
   const isMobile = width < 1024;
 
-  console.log(isMobile);
-
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
