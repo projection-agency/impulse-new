@@ -4,6 +4,7 @@
   left: 50vw;
   transform: translateX(-50%);
   padding: 1.2vw 0;
+  z-index: 99999999999999999999999;
 
   .headerContainer {
     position: relative;
@@ -223,6 +224,23 @@
       }
     }
   }
+}
+
+.header::before {
+  position: absolute;
+  top: 0;
+  left: -4vw;
+  content: "";
+  width: 110vw;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.158);
+  backdrop-filter: blur(1vw);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.scrolled::before {
+  opacity: 1;
 }
 
 @media (max-width: 1024px) {

@@ -2,7 +2,7 @@ import s from "./Header.module.css";
 import { SiteLogo } from "../SiteLogo/SiteLogo";
 import { Layout } from "../Layout/Layout";
 import { useWindowSize } from "../../hooks/useWindowSize";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface HeaderProps {
@@ -24,8 +24,30 @@ export const Header: FC<HeaderProps> = ({
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
   };
+
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (menuIsOpen) {
+        setScrolled(false); // якщо меню відкрите, завжди прибираємо скрол
+      } else {
+        setScrolled(window.scrollY > 200); // інакше слухаємо скрол
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Викликаємо відразу один раз, щоб при оновленні menuIsOpen актуалізувати стан
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [menuIsOpen]);
+
   return (
-    <header className={s.header}>
+    <header className={`${s.header} ${scrolled ? s.scrolled : ""}`}>
       <Layout>
         <div className={s.headerContainer}>
           {!isMobile && (

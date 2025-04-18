@@ -149,6 +149,7 @@
 
     .infoBlock {
       /* transform: translateY(-13vw); */
+      top: 10vw;
 
       svg {
         width: 21.8vw;
