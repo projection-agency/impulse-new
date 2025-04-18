@@ -210,6 +210,8 @@
 
       .inst {
         gap: 3.2vw;
+        bottom: 4vw;
+        right: 4vw;
 
         .icon {
           width: 17vw;

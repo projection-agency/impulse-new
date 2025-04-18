@@ -124,8 +124,10 @@ export const Header: FC<HeaderProps> = ({
                 onClick={toggleMenuPopup}
                 className={`${s.menuBtn} ${menuIsOpen && s.active}`}
               >
-                <span></span>
-                <span></span>
+                <div>
+                  <span></span>
+                  <span></span>
+                </div>
               </div>
             </div>
           </div>
