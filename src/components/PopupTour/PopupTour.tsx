@@ -259,6 +259,16 @@ export const PopupTour: FC<PopupTourProps> = ({ info, onClose }) => {
             </button>
           )}
 
+          <div style={{ display: "none" }}>
+            {info.save_data_text.map((day, index) => (
+              <img
+                key={index}
+                src={day.hl_image_image}
+                alt={`Preload day ${index}`}
+              />
+            ))}
+          </div>
+
           <div className={s.daysSlider}>
             <div>
               <div className={s.counter}>
