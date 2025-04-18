@@ -232,6 +232,9 @@
 
     .formBlock {
       padding: 25.8vw 0;
+      position: static;
+      width: auto !important;
+      transform: none;
 
       .formContainer {
         width: 91.4vw;
