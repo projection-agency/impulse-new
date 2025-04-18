@@ -54,7 +54,7 @@ export const GallerySection = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: gallerySectionRef.current,
-          start: isMobile ? "top -90%" : "top 1%",
+          start: isMobile ? "top -20%" : "top 1%",
           end: "+=100",
           scrub: 1,
         },
