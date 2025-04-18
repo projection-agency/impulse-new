@@ -29,23 +29,21 @@ export const Header: FC<HeaderProps> = ({
 
   const [scrolled, setScrolled] = useState(false);
 
+  // Основний useEffect для скролу
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
       if (menuIsOpen) {
         setShowHeader(true);
-        setScrolled(false);
         return;
       }
 
+      const currentScrollY = window.scrollY;
+
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Скрол вниз
         setShowHeader(false);
       } else {
-        // Скрол вгору
         setShowHeader(true);
       }
 
@@ -58,6 +56,27 @@ export const Header: FC<HeaderProps> = ({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+  }, [menuIsOpen]);
+
+  // Окремий useEffect для обнулення scrolled при відкритті меню
+  useEffect(() => {
+    if (menuIsOpen) {
+      setScrolled(false);
+    }
+  }, [menuIsOpen]);
+
+  useEffect(() => {
+    if (menuIsOpen) {
+      // Коли меню відкрито — фон забираємо
+      setScrolled(false);
+    } else {
+      // Коли меню закрито — перевіряємо скрол і оновлюємо фон
+      if (window.scrollY > 200) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    }
   }, [menuIsOpen]);
 
   return (
