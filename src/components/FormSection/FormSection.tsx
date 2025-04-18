@@ -14,6 +14,7 @@ export const FormSection = () => {
   const imageRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
   const pinWrapperRef = useRef<HTMLDivElement>(null);
 
   const { width } = useWindowSize();
@@ -41,30 +42,35 @@ export const FormSection = () => {
           trigger: sectionRef.current,
           pin: pinWrapperRef.current,
           start: "top top",
-          end: "+=800",
+          end: "+=1000",
           scrub: true,
           pinSpacing: false,
           anticipatePin: 1,
         },
       });
 
+      tl.to(titleRef.current, {
+        transform: "translateX(-160%) translateY(-50%)",
+      });
+
       tl.to(imageRef.current, {
-        width: "50%",
-        ease: "power2.inOut",
+        clipPath: "inset(0% 50% 0% 0%)",
+        ease: "power2.out",
+        immediateRender: false, // 👈
       }).to(
         formRef.current,
         {
-          width: "50%",
           opacity: 1,
           pointerEvents: "auto",
-          ease: "power2.inOut",
+          ease: "power2.out",
+          immediateRender: false, // 👈
         },
         "<"
       );
 
       setTimeout(() => {
         ScrollTrigger.refresh();
-      }, 10000);
+      }, 7000);
     }, sectionRef);
 
     return () => ctx.revert();
@@ -166,7 +172,7 @@ export const FormSection = () => {
                   src="/images/form-mountains-road.avif"
                   alt="mountains road"
                 />
-                <div className={s.title}>
+                <div ref={titleRef} className={s.title}>
                   <span className={s.span} data-aos="fade-up">
                     Ну что
                   </span>

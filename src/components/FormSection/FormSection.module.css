@@ -5,7 +5,7 @@
 
 .section {
   position: relative;
-  height: 190vh;
+  height: 220vh;
   overflow: hidden;
 
   .pinWrapper {
@@ -13,6 +13,7 @@
     top: 0;
     height: 100vh;
     display: flex;
+    background-color: rgba(255, 255, 250, 1);
   }
 
   .imageBlock,
@@ -68,12 +69,14 @@
   }
 
   .formBlock {
+    position: absolute;
+    right: 25%;
+    transform: translateX(50%);
     display: flex;
     justify-content: center;
     align-items: center;
     background: #fffffa;
-    width: 0%;
-    opacity: 0;
+    width: 50% !important;
 
     .formContainer {
       min-width: 29.7vw;
