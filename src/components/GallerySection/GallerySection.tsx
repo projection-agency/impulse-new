@@ -1,32 +1,74 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import s from "./GallerySection.module.css";
 import "aos/dist/aos.css";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { Layout } from "../Layout/Layout";
+import { useLocation } from "react-router";
 
-const gallery = [
-  { image: "/images/gallery/1.avif" },
-  { image: "/images/gallery/2.avif" },
-  { image: "/images/gallery/3.avif" },
-  { image: "/images/gallery/4.avif" },
-  { image: "/images/gallery/5.avif" },
-  { image: "/images/gallery/6.avif" },
-  { image: "/images/gallery/7.avif" },
-  { image: "/images/gallery/8.avif" },
-  { image: "/images/gallery/9.avif" },
-  { image: "/images/gallery/10.avif" },
-];
 gsap.registerPlugin(ScrollTrigger);
 
 export const GallerySection = () => {
   const gallerySectionRef = useRef<HTMLElement | null>(null);
   const galleryImageRef = useRef<HTMLImageElement | null>(null);
-
+  const { pathname } = useLocation();
   const { width } = useWindowSize();
-
+  const [business, setBusiness] = useState(false);
   const isMobile = width < 1024;
+
+  const gallery = [
+    {
+      image: business
+        ? "/images/business-gallery/1.avif"
+        : "/images/gallery/1.avif",
+    },
+    {
+      image: business
+        ? "/images/business-gallery/2.avif"
+        : "/images/gallery/2.avif",
+    },
+    {
+      image: business
+        ? "/images/business-gallery/3.avif"
+        : "/images/gallery/3.avif",
+    },
+    {
+      image: business
+        ? "/images/business-gallery/4.avif"
+        : "/images/gallery/4.avif",
+    },
+    {
+      image: business
+        ? "/images/business-gallery/5.avif"
+        : "/images/gallery/5.avif",
+    },
+    {
+      image: business
+        ? "/images/business-gallery/6.avif"
+        : "/images/gallery/6.avif",
+    },
+    {
+      image: business
+        ? "/images/business-gallery/7.avif"
+        : "/images/gallery/7.avif",
+    },
+    {
+      image: business
+        ? "/images/business-gallery/8.avif"
+        : "/images/gallery/8.avif",
+    },
+    {
+      image: business
+        ? "/images/business-gallery/9.avif"
+        : "/images/gallery/9.avif",
+    },
+    {
+      image: business
+        ? "/images/business-gallery/10.avif"
+        : "/images/gallery/10.avif",
+    },
+  ];
 
   const offset = isMobile ? "400" : "300";
 
@@ -67,8 +109,24 @@ export const GallerySection = () => {
     };
   }, [isMobile]);
 
+  useEffect(() => {
+    switch (pathname) {
+      case "/business-tours":
+        setBusiness(true);
+        break;
+      case "/private-tours":
+        setBusiness(false);
+
+        break;
+      default:
+        setBusiness(false);
+
+        break;
+    }
+  }, [pathname]);
+
   return (
-    <section ref={gallerySectionRef} className={s.section}>
+    <section id="tour-memories" ref={gallerySectionRef} className={s.section}>
       <div className={s.marquee}>
         <div className={s.marqueeInner}>
           <h2>Сотни клиентов, которые доверились нам</h2>
@@ -89,7 +147,11 @@ export const GallerySection = () => {
         </Layout>
         <img
           ref={galleryImageRef}
-          src="/images/gallery-bg.avif"
+          src={
+            business
+              ? "/images/business-galley-bg.avif"
+              : "/images/gallery-bg.avif"
+          }
           alt="The forest"
           className={s.galleryImage}
         />

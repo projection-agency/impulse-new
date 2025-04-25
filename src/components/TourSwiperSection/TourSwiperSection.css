@@ -1,0 +1,25 @@
+.swiperTour {
+  max-width: 38vw;
+  overflow: visible;
+
+  .swiper-slide {
+    transition: opacity 0.3s;
+  }
+
+  .swiper-slide-active {
+    div > div {
+      transform: translateY(0);
+    }
+  }
+
+  .swiper-slide-prev {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1024px) {
+  .swiperTour {
+    max-width: none;
+    margin-bottom: 65vw;
+  }
+}

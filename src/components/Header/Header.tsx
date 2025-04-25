@@ -4,6 +4,9 @@ import { Layout } from "../Layout/Layout";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link, useLocation } from "react-router";
+import { anchorsByPage } from "../../utils/anchorsByPage";
+import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   openConsult: () => void;
@@ -21,6 +24,8 @@ export const Header: FC<HeaderProps> = ({
 
   const [showHeader, setShowHeader] = useState(true);
 
+  const { pathname } = useLocation();
+
   const { i18n } = useTranslation();
 
   const changeLanguage = (lng: string) => {
@@ -29,7 +34,6 @@ export const Header: FC<HeaderProps> = ({
 
   const [scrolled, setScrolled] = useState(false);
 
-  // Основний useEffect для скролу
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
@@ -58,7 +62,6 @@ export const Header: FC<HeaderProps> = ({
     };
   }, [menuIsOpen]);
 
-  // Окремий useEffect для обнулення scrolled при відкритті меню
   useEffect(() => {
     if (menuIsOpen) {
       setScrolled(false);
@@ -67,10 +70,8 @@ export const Header: FC<HeaderProps> = ({
 
   useEffect(() => {
     if (menuIsOpen) {
-      // Коли меню відкрито — фон забираємо
       setScrolled(false);
     } else {
-      // Коли меню закрито — перевіряємо скрол і оновлюємо фон
       if (window.scrollY > 200) {
         setScrolled(true);
       } else {
@@ -79,34 +80,72 @@ export const Header: FC<HeaderProps> = ({
     }
   }, [menuIsOpen]);
 
+  const basePath = pathname.startsWith("/tour/") ? "/tour" : pathname;
+
+  const navLinks = anchorsByPage[basePath] || [];
+
+  const navigate = useNavigate();
+
+  const handleAnchorRedirect = (href: string) => {
+    const isHome = pathname === "/";
+    const id = href.replace("/#", "").replace("#", "");
+
+    if (isHome) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      navigate("/"); // ⬅️ Переходимо на головну
+
+      // ⏱ Додаємо затримку перед скролом
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 500); // 500мс — достатньо для оновлення DOM
+    }
+  };
+
   return (
     <header
       className={`${s.header} ${showHeader ? s.show : s.hide} ${
         scrolled ? s.scrolled : ""
-      }`}
+      } ${pathname === "/contact" ? s.static : ""}`}
     >
       <Layout>
         <div className={s.headerContainer}>
-          {!isMobile && (
+          {!isMobile && navLinks.length > 0 && (
             <nav>
               <ul className={`${s.headerNavList} ${menuIsOpen && s.opacity}`}>
-                <li>
-                  <a href="#gallery">Галерея</a>
-                </li>
-                <li>
-                  <a href="#cars">Автопарк</a>
-                </li>
-                <li>
-                  <a href="#tours">Туры</a>
-                </li>
-                <li>
-                  <a href="#reviews">Отзывы</a>
-                </li>
+                {navLinks.map(({ label, href }, index) => (
+                  <li key={index}>
+                    {label === "Оставить заявку" ? (
+                      <button type="button" onClick={openConsult}>
+                        {label}
+                      </button>
+                    ) : (
+                      <a
+                        href={href}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleAnchorRedirect(href);
+                        }}
+                      >
+                        {label}
+                      </a>
+                    )}
+                  </li>
+                ))}
               </ul>
             </nav>
           )}
 
-          <div className={`${s.headerLogoContainer} ${isMobile && s.mobile}`}>
+          <Link
+            to="/"
+            className={`${s.headerLogoContainer} ${isMobile && s.mobile}`}
+          >
             <SiteLogo fill="white" />
             <div className={s.logoTitle}>
               <h4>IMPULSE</h4>
@@ -116,7 +155,7 @@ export const Header: FC<HeaderProps> = ({
                 <span></span>
               </p>
             </div>
-          </div>
+          </Link>
 
           <div className={s.headerRightContainer}>
             {!isMobile && (

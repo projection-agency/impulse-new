@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import { Layout } from "../Layout/Layout";
 import s from "./ActualToursSection.module.css";
 import { PopupTour } from "../PopupTour/PopupTour";
-import { useQuery } from "@tanstack/react-query";
-import { API_URL } from "../../App";
-import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 import Lenis from "lenis";
 import { TextAnimation } from "../TextAnimation/TextAnimation";
+import { Link, useLocation } from "react-router";
+import { useGlobalProps } from "../../GlobalPropContext";
 
 export interface Day {
   hl_input_title: string;
@@ -39,12 +38,8 @@ export interface TourType {
   price_include: string[];
   price_uninclude: string[];
   load_image_text_image: string;
+  slug: string;
 }
-
-const fetchGallery = async () => {
-  const { data } = await axios.get(`${API_URL}wp-json/wp/v2/tour`);
-  return data;
-};
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const yearEditor = (start: string, end: string) => {
@@ -72,6 +67,8 @@ export const ActualToursSection = ({
   openOrder: (tour: TourType) => void;
 }) => {
   const [activeTourId, setActiveTourId] = useState<number | null>(null);
+  const { pathname } = useLocation();
+  const { tours: data } = useGlobalProps();
 
   useEffect(() => {
     if (activeTourId !== null) {
@@ -80,11 +77,6 @@ export const ActualToursSection = ({
       document.body.style.overflow = "";
     }
   }, [activeTourId, lenis]);
-
-  const { data = [], isLoading } = useQuery({
-    queryKey: ["tours"],
-    queryFn: fetchGallery,
-  });
 
   const dateEditor = (start: string, end: string) => {
     const startDate = new Date(start);
@@ -102,16 +94,10 @@ export const ActualToursSection = ({
     return `${formattedStartDay} – ${formattedEndDate}`;
   };
 
-  const handleTourPopup = (tourId: number) => {
-    setActiveTourId(activeTourId === tourId ? null : tourId);
-  };
-
   const fadeUp = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
   };
-
-  if (isLoading) return <p>Loading...</p>;
 
   return (
     <section id="tours" className={s.section}>
@@ -120,7 +106,11 @@ export const ActualToursSection = ({
           <TextAnimation texts={["Актуальные", "event-туры"]} />
         </h2>
 
-        <div className={s.list}>
+        <div
+          className={`${s.list} ${
+            pathname === "/actual-tours" ? s.eventPage : ""
+          }`}
+        >
           {data.map((item: TourType, index: number) => (
             <motion.div
               key={item.id}
@@ -164,7 +154,6 @@ export const ActualToursSection = ({
 
                 <div className={s.verticalText}>{item.input_route}</div>
               </div>
-
               <div>
                 <div className={s.bottomHeading}>
                   <div>
@@ -198,12 +187,10 @@ export const ActualToursSection = ({
                   </div>
                 </div>
               </div>
-
               <div className={s.btnContainer}>
                 <div onClick={() => openOrder(item)}>Забронировать</div>
-                <div onClick={() => handleTourPopup(item.id)}>Подробнее</div>
+                <Link to={`/tour/${item.slug}`}>Подробнее</Link>
               </div>
-
               <AnimatePresence>
                 {activeTourId === item.id && (
                   <PopupTour

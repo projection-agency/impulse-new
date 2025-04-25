@@ -1,10 +1,12 @@
 .header {
   position: fixed;
+  overflow: hidden;
   z-index: 9;
-  left: 50vw;
+  left: 49.5vw;
   padding: 1.2vw 0;
   z-index: 99999999999999999999999;
   transition: 0.3s;
+  width: 102vw;
 
   .headerContainer {
     position: relative;
@@ -18,7 +20,8 @@
     align-items: center;
     transition: opacity 0.3s;
 
-    a {
+    a,
+    button {
       color: var(--white);
       padding: 0.8vw 1.3vw;
       font-family: Manrope;
@@ -28,9 +31,11 @@
       border: 0.1vw solid var(--white);
       border-radius: 8.6vw;
       transition: color 0.3s, background-color 0.3s;
+      cursor: pointer;
     }
 
-    a:hover {
+    a:hover,
+    button:hover {
       background-color: var(--white);
       color: var(--black);
     }
@@ -227,6 +232,15 @@
   }
 }
 
+body:has(.static) {
+  background-color: rgba(18, 18, 18, 1);
+}
+
+.static {
+  position: relative;
+  background-color: rgba(18, 18, 18, 1);
+}
+
 .header::before {
   position: absolute;
   /* display: none; */
@@ -317,5 +331,9 @@
         }
       }
     }
+  }
+
+  .header::before {
+    backdrop-filter: blur(1vw);
   }
 }

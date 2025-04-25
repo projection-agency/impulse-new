@@ -1,0 +1,312 @@
+.section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+.sliderContainer {
+  position: relative;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 1s;
+
+  .daysSlider {
+    background-color: var(--white);
+    padding: 2vw;
+    border-radius: 1.2vw;
+    max-width: 35vw;
+    min-height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .counter {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6vw;
+      margin-bottom: 2vw;
+
+      span {
+        color: #000;
+        font-family: Manrope;
+        font-size: 0.8vw;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 140%; /* 22.4px */
+        letter-spacing: -0.01vw;
+        opacity: 0.2;
+      }
+
+      .current {
+        opacity: 1;
+      }
+
+      div {
+        height: 1px;
+        width: 1.2vw;
+        opacity: 0.2;
+        background: #000;
+      }
+    }
+
+    .image {
+      position: relative;
+      width: 100%;
+      height: 16vw;
+      overflow: hidden;
+      margin-bottom: 2vw;
+
+      img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        object-position: bottom;
+      }
+
+      .location {
+        font-family: manrope;
+        position: absolute;
+        left: 50%;
+        bottom: 1.2vw;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 0.4vw;
+        padding: 0.6vw 0.8vw;
+        border-radius: 1.2vw;
+        background: rgba(255, 255, 255, 0.16);
+        backdrop-filter: blur(12px);
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        color: var(--white);
+
+        svg {
+          width: 0.4vw;
+          height: 0.8vw;
+        }
+      }
+    }
+
+    .distance {
+      color: #000;
+      text-align: center;
+      font-family: Manrope;
+      font-size: 0.9vw;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 140%; /* 25.2px */
+      letter-spacing: -0.01vw;
+      text-align: center;
+      margin-bottom: 0.8vw;
+    }
+
+    .dayDescription {
+      color: #000;
+      text-align: center;
+      font-family: Manrope;
+      font-size: 0.9vw;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 140%; /* 25.2px */
+      letter-spacing: -0.01vw;
+      padding: 0 3.4vw;
+    }
+
+    .controller {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.8vw;
+
+      button {
+        position: relative;
+        overflow: hidden;
+        width: 3.3vw;
+        height: 3.3vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 57vw;
+        background: #1d1d1d;
+        flex-shrink: 0;
+        cursor: pointer;
+
+        svg {
+          position: relative;
+          width: 1.6vw;
+          height: 1.6vw;
+          fill: white;
+          z-index: 1;
+        }
+      }
+
+      button::before {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-image: url(/images/circle-gradient-bg.svg);
+        background-size: cover;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      button:hover::before {
+        opacity: 1;
+      }
+
+      .progressBarWrapper {
+        border-radius: 0.5vw;
+        background: #f4f4f4;
+        height: 2px;
+        width: 100%;
+
+        .progressBar {
+          border-radius: 0.5vw;
+          background: linear-gradient(93deg, #ab0600 0%, #ff5e00 100%);
+          height: 2px;
+          transition: width 0.3s;
+        }
+      }
+    }
+  }
+
+  .date {
+    color: #1d1d1d;
+    font-family: "Druk Cyr";
+    font-size: 3.7vw;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 99%; /* 71.28px */
+    letter-spacing: 0.01vw;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6vw;
+    margin-bottom: 2.6vw;
+  }
+}
+
+.routeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #121212;
+  padding: 0 4.1vw;
+
+  h3 {
+    color: #fff;
+    text-align: center;
+    font-family: "Druk Cyr";
+    font-size: 3.7vw;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 99%;
+    letter-spacing: 1.44px;
+    text-transform: uppercase;
+    margin-bottom: 2vw;
+  }
+
+  .routeImage {
+  }
+}
+
+@media (max-width: 1024px) {
+  .section {
+    display: flex;
+    flex-direction: column-reverse;
+    min-height: auto;
+  }
+  .sliderContainer {
+    padding: 8.5vw 0;
+
+    .daysSlider {
+      padding: 6.4vw 4.2vw 4.2vw 4.2vw;
+      max-width: 91.4vw;
+      min-height: 161vw;
+      border-radius: 6.4vw;
+
+      .counter {
+        gap: 2.1vw;
+        margin-bottom: 4.2vw;
+
+        div {
+          width: 4.2vw;
+        }
+
+        span {
+          font-size: 3.7vw;
+        }
+      }
+
+      .image {
+        height: 50vw;
+        margin-bottom: 4.2vw;
+
+        .location {
+          bottom: 3.2vw;
+          gap: 1.6vw;
+          padding: 2.6vw 3.2vw;
+          border-radius: 6.4vw;
+
+          svg {
+            width: 2vw;
+            height: 3.7vw;
+          }
+        }
+      }
+
+      .distance {
+        font-size: 3.7vw;
+        margin-bottom: 2.1vw;
+      }
+
+      .dayDescription {
+        font-size: 3.7vw;
+      }
+
+      .controller {
+        gap: 3.2vw;
+
+        button {
+          width: 13.8vw;
+          height: 13.8vw;
+
+          svg {
+            width: 4.6vw;
+            height: 4.6vw;
+          }
+        }
+
+        .progressBarWrapper {
+          height: 1vw;
+          .progressBar {
+            height: 1vw;
+          }
+        }
+      }
+    }
+
+    .date {
+      font-size: 10.6vw;
+      margin-bottom: 6.4vw;
+    }
+  }
+
+  .routeContainer {
+    padding: 21vw 4.2vw 8.5vw 4.2vw;
+
+    h3 {
+      font-size: 12.8vw;
+      margin-bottom: 6.4vw;
+    }
+  }
+}

@@ -6,6 +6,7 @@ import CustomCheckbox from "../FormSection/CustomCheckbox";
 import { TourType } from "../ActualToursSection/ActualToursSection";
 
 import { TextAnimation } from "../TextAnimation/TextAnimation";
+import { useGlobalProps } from "../../GlobalPropContext";
 
 export const PopupOrder = ({
   onClose,
@@ -20,6 +21,15 @@ export const PopupOrder = ({
   const handleCheckboxChange = (checked: boolean) => {
     console.log("Чекбокс:", checked);
   };
+
+  const { tours } = useGlobalProps();
+
+  const options = tours
+    .map((item: TourType) => item.title.rendered)
+    .map((item: string) => ({
+      value: item,
+      label: item,
+    }));
 
   return (
     <motion.div
@@ -97,10 +107,7 @@ export const PopupOrder = ({
                   <label>
                     Тема консультации
                     <CustomSelect
-                      options={[
-                        { value: "ua", label: "Lamborghini 2.0" },
-                        { value: "us", label: "Multibrand Tour" },
-                      ]}
+                      options={options}
                       placeholder={
                         initialTour?.title?.rendered ||
                         "Выберите актуальный тур"

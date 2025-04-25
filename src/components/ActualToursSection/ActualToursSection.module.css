@@ -78,6 +78,18 @@
       }
     }
   }
+
+  .eventPage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    .item:nth-child(1) {
+      width: auto;
+    }
+    .item:nth-child(2) {
+      flex-grow: 0;
+      align-self: flex-start;
+    }
+  }
 }
 
 .bottomHeading {
@@ -159,7 +171,8 @@
   width: 30.7vw;
   height: 2.8vw;
 
-  div {
+  div,
+  a {
     font-family: Manrope;
     font-weight: 700;
     font-size: 0.8vw;
@@ -206,11 +219,11 @@
     opacity: 1;
   }
 
-  div:nth-child(2) {
+  a {
     border: 2px solid var(--white);
   }
 
-  div:nth-child(2):hover {
+  a:hover {
     background-color: var(--white);
     color: var(--black);
   }
@@ -304,7 +317,8 @@
       height: 13.8vw;
       gap: 3.2vw;
 
-      div {
+      div,
+      a {
         font-size: 3.7vw;
       }
 
@@ -318,5 +332,9 @@
         opacity: 1;
       }
     }
+  }
+
+  .section:has(.eventPage) {
+    padding-top: 30vw;
   }
 }

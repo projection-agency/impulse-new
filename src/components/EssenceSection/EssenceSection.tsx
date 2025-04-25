@@ -103,8 +103,6 @@ export const EssenceSection = () => {
           <p className={s.essence}>Суть проекта Impulse Глазами основателя</p>
 
           <h3>
-            {/* «Наши автопробеги — шанс ощутить за рулем спорткара тот самый
-            Impulse» */}
             <TextAnimation
               texts={[
                 "«Наши автопробеги —",

@@ -14,7 +14,7 @@
 
 body {
   background-color: rgba(249, 247, 240, 1);
-  width: 100vw;
+  /* width: 100vw; */
   overflow-x: hidden;
 }
 

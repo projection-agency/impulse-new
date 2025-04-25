@@ -7,7 +7,9 @@ import s from "./DescSection.module.css";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useWindowSize } from "../../hooks/useWindowSize";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router";
+import { useTranslation } from "react-i18next";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,8 +18,14 @@ export const DescSection = () => {
 
   const topImagesContainerRef = useRef<HTMLDivElement>(null);
   const bottomImagesContainerRef = useRef<HTMLDivElement>(null);
-
+  const { pathname } = useLocation();
   const isMobile = width < 1024;
+  const [topTitle, setTopTitle] = useState("");
+  const [animatedTitle, setAnimatedTitle] = useState("");
+  const [bottomTitle, setBottomTitle] = useState("");
+  const [business, setBusiness] = useState(false);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const topImages = topImagesContainerRef.current?.querySelectorAll("img");
@@ -28,14 +36,14 @@ export const DescSection = () => {
       topImages.forEach((img) => {
         gsap.fromTo(
           img,
-          { scale: 2 }, // початковий масштаб
+          { scale: 2 },
           {
-            scale: 1, // кінцевий масштаб
+            scale: 1,
             scrollTrigger: {
               trigger: img,
-              start: "top bottom", // коли верх фото торкається низу екрану
-              end: "bottom top", // коли низ фото торкається верху екрану
-              scrub: true, // скрол-контрольована анімація
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
             },
             ease: "none",
           }
@@ -63,6 +71,29 @@ export const DescSection = () => {
     }
   }, []);
 
+  useEffect(() => {
+    switch (pathname) {
+      case "/business-tours":
+        setTopTitle(t("descBusinessTopTitle"));
+        setAnimatedTitle(t("descBusinessAnimatedTitle"));
+        setBottomTitle(t("descBusinessBottomTitle"));
+        setBusiness(true);
+        break;
+      case "/private-tours":
+        setTopTitle(t("descPrivateTopTitle"));
+        setAnimatedTitle(t("descPrivateAnimatedTitle"));
+        setBottomTitle(t("descPrivateBottomTitle"));
+        setBusiness(false);
+
+        break;
+      default:
+        setTopTitle(t("descMainTopTitle"));
+        setBusiness(false);
+
+        break;
+    }
+  }, [pathname, t]);
+
   return (
     <section id="descSection" className={s.section}>
       <Layout className={s.container}>
@@ -72,12 +103,12 @@ export const DescSection = () => {
               <SiteLogo fill="black" />
             </div>
 
-            <h2>
-              Погрузитесь в путешествие <br />
+            <h2 className={business ? s.longer : ""}>
+              {topTitle} <br />
               <span className={s.span}>
-                <AnimatedHeading text="с самыми близкими" />
+                <AnimatedHeading text={animatedTitle} />
               </span>
-              , где всё создано по вашему личному сценарию
+              {bottomTitle}
             </h2>
 
             <div className={s.aside}>
@@ -96,17 +127,38 @@ export const DescSection = () => {
 
           <div ref={topImagesContainerRef} className={s.topImagesContainer}>
             <div ref={topImagesContainerRef} className={s.separate}>
-              <img src="/images/actual-tours/lambos.avif" alt="Lamborghini" />
+              <img
+                src={
+                  business
+                    ? "/images/business-desc/1.avif"
+                    : "/images/actual-tours/lambos.avif"
+                }
+                alt="Lamborghini"
+              />
             </div>
 
             <div ref={topImagesContainerRef} className={s.couple}>
               <div ref={topImagesContainerRef}>
-                <img src="/images/actual-tours/drone.avif" alt="Drone" />
+                <img
+                  src={
+                    business
+                      ? "/images/business-desc/2.avif"
+                      : "/images/actual-tours/drone.avif"
+                  }
+                  alt="Drone"
+                />
               </div>
 
               {!isMobile && (
                 <div ref={topImagesContainerRef}>
-                  <img src="/images/actual-tours/plate.avif" alt="Plate" />
+                  <img
+                    src={
+                      business
+                        ? "/images/business-desc/3.avif"
+                        : "/images/actual-tours/plate.avif"
+                    }
+                    alt="Plate"
+                  />
                 </div>
               )}
             </div>

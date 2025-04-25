@@ -7,6 +7,8 @@ import { PhoneNumberInput } from "./PhoneNumberInput";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import s from "./FormSection.module.css";
 import { TextAnimation } from "../TextAnimation/TextAnimation";
+import { useGlobalProps } from "../../GlobalPropContext";
+import { TourType } from "../ActualToursSection/ActualToursSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,6 +18,15 @@ export const FormSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const pinWrapperRef = useRef<HTMLDivElement>(null);
+
+  const { tours } = useGlobalProps();
+
+  const options = tours
+    .map((item: TourType) => item.title.rendered)
+    .map((item: string) => ({
+      value: item,
+      label: item,
+    }));
 
   const { width } = useWindowSize();
   const isMobile = width < 1024;
@@ -213,10 +224,7 @@ export const FormSection = () => {
                       <label>
                         Интересующий тур <span>*</span>
                         <CustomSelect
-                          options={[
-                            { value: "ua", label: "Lamborghini 2.0" },
-                            { value: "us", label: "Multibrand Tour" },
-                          ]}
+                          options={options}
                           placeholder="Выберите актуальный тур"
                           onChange={handleSelectChange}
                         />

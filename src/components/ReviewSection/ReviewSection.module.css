@@ -132,7 +132,7 @@
       font-size: 1.2vw;
       line-height: 130%;
       letter-spacing: 0.4vw;
-      min-width: 4vw;
+      width: 5vw;
       text-align: center;
     }
 
@@ -265,6 +265,7 @@
 
     .controller {
       gap: 2vw;
+
       .pagination {
         gap: 2.1vw;
 

@@ -1,4 +1,14 @@
 {
-  "heroTitle": "Приватные туры",
-  "language": "Мова"
+  "mainHeroTitle": "Путешествия на спорткарах",
+  "privateHeroTitle": "Приватные туры",
+  "businessHeroTitle": "туры для бизнеса",
+  "mainHeroDesc": "Уникальные автопутешествия для предпринимателей и экспертов из разных сфер",
+  "privateHeroDesc": "Индивидуальные путешествия на спортивных автомобилях с маршрутом, созданным специально для вас.",
+  "businessHeroDesc": "Индивидуальные путешествия на спортивных автомобилях с маршрутом, созданным специально для вас.",
+  "descBusinessTopTitle": "Представьте, вы с бизнес-партнёрами или командой",
+  "descPrivateTopTitle": "Погрузитесь в путешествие",
+  "descBusinessAnimatedTitle": "за рулём Lamborghini или Ferrari",
+  "descPrivateAnimatedTitle": "с самыми близкими",
+  "descBusinessBottomTitle": " огибаете живописные повороты лучших дорог Европы.",
+  "descPrivateBottomTitle": ", где всё создано по вашему личному сценарию"
 }

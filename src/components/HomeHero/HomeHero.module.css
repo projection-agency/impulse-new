@@ -1,6 +1,6 @@
 .section {
   position: relative;
-  width: 100%;
+  width: 100.1%;
   /* height: 100vh; */
   padding-top: 8vw;
   padding-bottom: 3vw;
@@ -60,7 +60,8 @@
     margin-bottom: 2.5vw;
   }
 
-  a {
+  a,
+  .a {
     padding: 1.6vw 0;
     width: 17vw;
     font-family: Mona Sans, sans-serif;
@@ -79,6 +80,7 @@
     background: var(--gradient);
     transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     margin-bottom: 3.8vw;
+    cursor: pointer;
 
     svg {
       width: 0.6vw;
@@ -88,7 +90,8 @@
     }
   }
 
-  a:hover {
+  a:hover,
+  .a:hover {
     box-shadow: 0px 20px 33px 4px rgba(209, 47, 1, 0.33);
     background: var(--hoverGradient);
 
@@ -373,13 +376,13 @@
     }
 
     h1 {
-      max-width: 80vw;
-      margin: 0 auto;
+      font-family: Druk Cyr;
+      font-weight: 700;
+      font-size: 21.3vw;
+      line-height: 99%;
+      text-align: center;
+      text-transform: uppercase;
       margin-bottom: 8.5vw;
-
-      span {
-        font-size: 21.3vw;
-      }
     }
 
     p {
@@ -388,7 +391,8 @@
       margin-bottom: 8.5vw;
     }
 
-    a {
+    a,
+    .a {
       font-size: 4.2vw;
       width: 66.6vw;
       border-radius: 6.4vw;

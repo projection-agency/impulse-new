@@ -5,6 +5,8 @@ import { useWindowSize } from "../../hooks/useWindowSize";
 import { FixedBar } from "../FixedBar/FixedBar";
 import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router";
+import { TourType } from "../ActualToursSection/ActualToursSection";
 
 const videos = [
   { src: "/temp/hero-video.mp4", poster: "/images/stub-hero-image.avif" },
@@ -54,16 +56,19 @@ export const HomeHero = ({
   openConsult,
   loading,
   openVideo,
+  actualTour,
 }: {
-  openOrder: () => void;
+  openOrder: (tour?: TourType) => void;
   openConsult: () => void;
   loading: boolean;
   openVideo: () => void;
+  actualTour?: TourType;
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const { width } = useWindowSize();
   const isMobile = width < 1024;
-
+  const [heroTitle, setHeroTitle] = useState("");
+  const [desc, setDesc] = useState("");
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -73,6 +78,36 @@ export const HomeHero = ({
 
     return () => clearTimeout(timeout);
   }, [activeIndex]);
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname.startsWith("/tour")) {
+      if (actualTour?.title?.rendered) {
+        setHeroTitle(actualTour.title.rendered);
+      } else {
+        setHeroTitle(t("mainHeroTitle")); // або залиш без змін
+      }
+      return;
+    }
+
+    switch (pathname) {
+      case "/business-tours":
+        setHeroTitle(t("businessHeroTitle"));
+        setDesc(t("businessHeroDesc"));
+        break;
+
+      case "/private-tours":
+        setHeroTitle(t("privateHeroTitle"));
+        setDesc(t("privateHeroDesc"));
+        break;
+
+      default:
+        setHeroTitle(t("mainHeroTitle"));
+        setDesc(t("mainHeroDesc"));
+        break;
+    }
+  }, [pathname, t, actualTour]);
 
   return (
     <>
@@ -99,33 +134,58 @@ export const HomeHero = ({
           <div className={s.heroTitleContainer}>
             <span data-aos="fade-up">Формат:</span>
             <h1>
-              <AnimatedHeading text={t("heroTitle")} />
+              {isMobile ? heroTitle : <AnimatedHeading text={heroTitle} />}
             </h1>
 
-            <p data-aos="fade-up">
-              Индивидуальные путешествия на спортивных автомобилях с маршрутом,
-              созданным специально для вас.
-            </p>
-            <a data-aos="fade-up" href="#tours">
-              Актуальные туры
-              <svg
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+            <p data-aos="fade-up">{desc}</p>
+
+            {actualTour ? (
+              <div
+                className={s.a}
+                onClick={() => openOrder(actualTour)}
+                data-aos="fade-up"
               >
-                <g clipPath="url(#clip0_1398_14919)">
-                  <path
-                    d="M2.39999 0V2.39999H7.79999L0 10.2L1.79999 12L9.60001 4.19997V9.59998H12V0H2.39999Z"
-                    fill="white"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="clip0_1398_14919">
-                    <rect width="12" height="12" fill="white" />
-                  </clipPath>
-                </defs>
-              </svg>
-            </a>
+                Забронировать тур
+                <svg
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clipPath="url(#clip0_1398_14919)">
+                    <path
+                      d="M2.39999 0V2.39999H7.79999L0 10.2L1.79999 12L9.60001 4.19997V9.59998H12V0H2.39999Z"
+                      fill="white"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_1398_14919">
+                      <rect width="12" height="12" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+            ) : (
+              <a data-aos="fade-up" href="#tours">
+                Актуальные туры
+                <svg
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clipPath="url(#clip0_1398_14919)">
+                    <path
+                      d="M2.39999 0V2.39999H7.79999L0 10.2L1.79999 12L9.60001 4.19997V9.59998H12V0H2.39999Z"
+                      fill="white"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_1398_14919">
+                      <rect width="12" height="12" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </a>
+            )}
 
             {!isMobile && (
               <div data-aos="fade-up" className={s.showReelContainer}>
@@ -215,7 +275,7 @@ export const HomeHero = ({
                   />
                 </svg>
 
-                <a href="#descSection">
+                <a>
                   <p>Прокрутите вниз</p>
                   <span>чтобы узнать больше</span>
                 </a>

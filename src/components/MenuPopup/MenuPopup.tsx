@@ -1,13 +1,16 @@
 import { motion } from "framer-motion";
 import s from "./MenuPopup.module.css";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { useTranslation } from "react-i18next";
+import { useGlobalProps } from "../../GlobalPropContext";
+import { useEffect, useState } from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const MenuPopup = () => {
   const { width } = useWindowSize();
   const isMobile = width < 1024;
+  const [hasMounted, setHasMounted] = useState(false);
 
   const { i18n } = useTranslation();
 
@@ -15,13 +18,25 @@ export const MenuPopup = () => {
     i18n.changeLanguage(lng);
   };
 
+  const { pathname } = useLocation();
+
+  const { menuToggle } = useGlobalProps();
+
+  useEffect(() => {
+    if (hasMounted) {
+      menuToggle();
+    } else {
+      setHasMounted(true);
+    }
+  }, [pathname]);
+
   return (
     <motion.div
       data-lenis-prevent
       className={s.popupOverlay}
       initial={{ x: "" }}
       animate={{ x: "0" }}
-      exit={{ x: "-100%" }} // Не прибирай одразу
+      exit={{ x: "-100%" }}
       transition={{
         duration: 0.3,
         ease: "easeOut",
@@ -44,7 +59,7 @@ export const MenuPopup = () => {
         className={s.popupContent}
         initial={{ x: "100%" }}
         animate={{ x: 0 }}
-        exit={{ x: "100%" }} // Ось це тепер буде працювати
+        exit={{ x: "100%" }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
         {/* <button onClick={onClose}></button> */}
@@ -71,22 +86,22 @@ export const MenuPopup = () => {
 
           <ul>
             <li>
-              <Link data-text="Приватные туры" to="">
+              <Link data-text="Приватные туры" to="/private-tours">
                 Приватные туры
               </Link>
             </li>
             <li>
-              <Link data-text="туры для бизнеса" to="">
+              <Link data-text="туры для бизнеса" to="/business-tours">
                 туры для бизнеса
               </Link>
             </li>
             <li>
-              <Link data-text="Актуальные Event-туры" to="">
+              <Link data-text="Актуальные Event-туры" to="/actual-tours">
                 Актуальные Event-туры
               </Link>
             </li>
             <li>
-              <Link data-text="контакты" to="">
+              <Link data-text="контакты" to="/contact">
                 контакты
               </Link>
             </li>
