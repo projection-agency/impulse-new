@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 import s from "./TourDaysSection.module.css";
 import { Day } from "../ActualToursSection/ActualToursSection";
+import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 
 interface TourDaysProps {
   info: {
@@ -128,7 +129,9 @@ export const TourDaysSection: FC<TourDaysProps> = ({ info }) => {
         </div>
       </div>
       <div className={s.routeContainer}>
-        <h3>маршрут</h3>
+        <h3>
+          <AnimatedHeading text="маршрут" />
+        </h3>
 
         <div className={s.routeImage}>
           <img src={info.load_image_text_image} alt="" />

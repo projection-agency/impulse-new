@@ -5,6 +5,7 @@ import { Layout } from "../Layout/Layout";
 import s from "./ReviewSection.module.css";
 import { useState } from "react";
 import axios from "axios";
+import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 
 const fetchReviews = async () => {
   const { data } = await axios.get(`${API_URL}wp-json/wp/v2/review`);
@@ -40,7 +41,9 @@ export const ReviewSection = () => {
   return (
     <section id="reviews" className={s.section}>
       <Layout className={s.container}>
-        <h2>отзывы участников</h2>
+        <h2>
+          <AnimatedHeading text="отзывы участников" />
+        </h2>
         <div className={s.reviewContainer}>
           <div className={s.reviewerInfoContainer}>
             <div>

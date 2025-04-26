@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { Layout } from "../Layout/Layout";
 import s from "./TariffSection.module.css";
+import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 
 const svg = (
   <svg
@@ -55,16 +56,18 @@ export const TariffSection = () => {
     <section id="tariffs" className={s.section}>
       <Layout className={s.layout}>
         <div className={s.titleContainer}>
-          <h2>Тарифы</h2>
+          <h2>
+            <AnimatedHeading text="Тарифы" />
+          </h2>
 
-          <p>
+          <p data-aos="fade-up">
             Индивидуальные туры лучшее решение, где вы сами выбираете даты
             путешествий на спорткарах для своих важных событий
           </p>
         </div>
 
         <ul className={s.list}>
-          <li>
+          <li data-aos="fade-up">
             <div className={s.infoBlock}>
               <div>
                 <div className={s.memberQty}>{svg} Любое кол-во участников</div>
@@ -81,7 +84,7 @@ export const TariffSection = () => {
               </div>
             </div>
           </li>
-          <li>
+          <li data-aos="fade-up">
             <div className={s.infoBlock}>
               <div>
                 <div className={s.memberQty}>{svg} Любое кол-во участников</div>

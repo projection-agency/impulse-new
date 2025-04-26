@@ -61,7 +61,7 @@
   position: sticky;
   top: 2vw;
   z-index: 1; /* Менший ніж у фото */
-  margin-bottom: 15vw;
+  margin-bottom: 5vw;
   color: #fff;
 
   svg {
@@ -132,6 +132,7 @@
 .topImagesContainer {
   display: flex;
   justify-content: space-between;
+  min-height: 150vh;
 
   .separate {
     width: 21.8vw;

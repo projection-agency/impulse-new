@@ -87,24 +87,24 @@ export const Header: FC<HeaderProps> = ({
   const navigate = useNavigate();
 
   const handleAnchorRedirect = (href: string) => {
-    const isHome = pathname === "/";
     const id = href.replace("/#", "").replace("#", "");
+    const isHome = pathname !== "/actual-tours";
+    const isActualTours = pathname === "/actual-tours";
 
     if (isHome) {
       const el = document.getElementById(id);
       if (el) {
         el.scrollIntoView({ behavior: "smooth" });
       }
-    } else {
-      navigate("/"); // ⬅️ Переходимо на головну
+    } else if (isActualTours) {
+      navigate("/");
 
-      // ⏱ Додаємо затримку перед скролом
       setTimeout(() => {
         const el = document.getElementById(id);
         if (el) {
           el.scrollIntoView({ behavior: "smooth" });
         }
-      }, 500); // 500мс — достатньо для оновлення DOM
+      }, 500);
     }
   };
 

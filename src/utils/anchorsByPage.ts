@@ -5,6 +5,7 @@ export const anchorsByPage: Record<string, { label: string; href: string }[]> =
       { label: "Туры", href: "#tours" },
       { label: "Отзывы", href: "#reviews" },
       { label: "Тарифы", href: "#tariffs" },
+      { label: "Галерея", href: "#tour-memories" },
     ],
     "/private-tours": [
       { label: "Автопарк", href: "#cars" },
