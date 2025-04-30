@@ -188,7 +188,7 @@ export const MissionSection = () => {
             <div>
               <p>Подходящий маршрут</p>
               <img
-                className="lg:h-[5vw] h-[16.5vw]"
+                className="lg:h-[5vw] h-[16.5vw] -translate-y-2"
                 src="/images/mission-list/компас.webp"
                 alt=""
               />
@@ -196,7 +196,7 @@ export const MissionSection = () => {
             <div>
               <p>Желанный спорткар</p>
               <img
-                className="lg:h-[3.85vw] h-[11.7vw]"
+                className="lg:h-[3.85vw] h-[11.7vw] translate-y-1"
                 src="/images/mission-list/спорткар.webp"
                 alt=""
               />
@@ -204,7 +204,7 @@ export const MissionSection = () => {
             <div>
               <p>Лучшие отели и рестораны</p>
               <img
-                className="lg:h-[5vw] h-[16.5vw]"
+                className="lg:h-[5vw] h-[16.5vw] -translate-y-2"
                 src="/images/mission-list/ресторани.webp"
                 alt=""
               />

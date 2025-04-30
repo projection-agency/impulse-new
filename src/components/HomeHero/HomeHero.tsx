@@ -81,6 +81,8 @@ export const HomeHero = ({
 
   const { pathname } = useLocation();
 
+  const isTourPage = pathname.startsWith("/tour");
+
   useEffect(() => {
     if (pathname.startsWith("/tour")) {
       if (actualTour?.title?.rendered) {
@@ -113,21 +115,34 @@ export const HomeHero = ({
     <>
       <section className={s.section}>
         <div className={s.videoContainer}>
-          {videos.map((video, index) => (
+          {isTourPage ? (
             <video
-              key={index}
-              className={`${s.video} ${
-                index === activeIndex ? s.active : s.hidden
-              }`}
-              poster={video.poster}
+              className={`${s.video} ${s.active}`}
+              poster={videos[0].poster}
               autoPlay
               loop
               muted
               playsInline
             >
-              <source src={video.src} type="video/mp4" />
+              <source src={videos[0].src} type="video/mp4" />
             </video>
-          ))}
+          ) : (
+            videos.map((video, index) => (
+              <video
+                key={index}
+                className={`${s.video} ${
+                  index === activeIndex ? s.active : s.hidden
+                }`}
+                poster={video.poster}
+                autoPlay
+                loop
+                muted
+                playsInline
+              >
+                <source src={video.src} type="video/mp4" />
+              </video>
+            ))
+          )}
         </div>
 
         {(!loading && (
@@ -211,57 +226,64 @@ export const HomeHero = ({
 
         <Layout>
           <div className={s.heroBottomContainer}>
-            <div className={s.swiperController}>
-              {tabs.map((car, index) => {
-                const isActive = activeIndex === index;
+            {!isTourPage && (
+              <div className={s.swiperController}>
+                {tabs.map((car, index) => {
+                  const isActive = activeIndex === index;
 
-                return (
-                  <div
-                    key={index}
-                    className={`${s.tab} ${isActive ? s.active : ""}`}
-                    onClick={() => setActiveIndex(index)}
-                  >
-                    <div className={s.tabImageWrapper}>
-                      <svg
-                        key={isActive ? `active-${index}` : `inactive-${index}`}
-                        className={s.progressCircle}
-                        viewBox="0 0 36 36"
-                      >
-                        <path
-                          className={s.progressBackground}
-                          d="M18 2.0845
+                  return (
+                    <div
+                      key={index}
+                      className={`${s.tab} ${isActive ? s.active : ""}`}
+                      onClick={() => setActiveIndex(index)}
+                    >
+                      <div className={s.tabImageWrapper}>
+                        <svg
+                          key={
+                            isActive ? `active-${index}` : `inactive-${index}`
+                          }
+                          className={s.progressCircle}
+                          viewBox="0 0 36 36"
+                        >
+                          <path
+                            className={s.progressBackground}
+                            d="M18 2.0845
        a 15.9155 15.9155 0 0 1 0 31.831
        a 15.9155 15.9155 0 0 1 0 -31.831"
-                        />
-                        <path
-                          data-index={index}
-                          className={`${s.progressBar} ${
-                            isActive ? s.animating : ""
-                          }`}
-                          d="M18 2.0845
+                          />
+                          <path
+                            data-index={index}
+                            className={`${s.progressBar} ${
+                              isActive ? s.animating : ""
+                            }`}
+                            d="M18 2.0845
        a 15.9155 15.9155 0 0 1 0 31.831
        a 15.9155 15.9155 0 0 1 0 -31.831"
-                        />
-                      </svg>
+                          />
+                        </svg>
 
-                      <img src={car.image} alt="" />
-                    </div>
+                        <img src={car.image} alt="" />
+                      </div>
 
-                    <div className={s.tabInfo}>
-                      <h4>{car.car}</h4>
-                      <p>{car.route}</p>
-                      <p>
-                        {calendarIcon}
-                        {car.date}
-                      </p>
+                      <div className={s.tabInfo}>
+                        <h4>{car.car}</h4>
+                        <p>{car.route}</p>
+                        <p>
+                          {calendarIcon}
+                          {car.date}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+            )}
 
             {!isMobile && (
-              <div className={s.scrollDown}>
+              <div
+                style={isTourPage ? { marginLeft: "auto" } : undefined}
+                className={s.scrollDown}
+              >
                 <svg
                   width="32"
                   height="32"

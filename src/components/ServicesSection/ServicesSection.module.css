@@ -138,7 +138,7 @@
       font-family: Manrope;
       font-weight: 600;
       font-size: 1vw;
-      line-height: 120%;
+      line-height: 130%;
       letter-spacing: -0.02vw;
       background: rgba(255, 255, 255, 0.16);
       backdrop-filter: blur(24px);
@@ -260,7 +260,7 @@
 
     .tabDesc {
       max-width: none;
-      width: 90%;
+      width: 100%;
       right: unset;
       bottom: unset;
       left: 50%;

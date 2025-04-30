@@ -23,6 +23,8 @@ export const DescSection = () => {
   const [topTitle, setTopTitle] = useState("");
   const [animatedTitle, setAnimatedTitle] = useState("");
   const [bottomTitle, setBottomTitle] = useState("");
+  const [asideDesc, setAsideDesc] = useState("");
+
   const [business, setBusiness] = useState(false);
 
   const { t } = useTranslation();
@@ -77,6 +79,7 @@ export const DescSection = () => {
         setTopTitle(t("descBusinessTopTitle"));
         setAnimatedTitle(t("descBusinessAnimatedTitle"));
         setBottomTitle(t("descBusinessBottomTitle"));
+        setAsideDesc(t("descBusinessAsideDesc"));
         setBusiness(true);
         break;
       case "/private-tours":
@@ -84,6 +87,7 @@ export const DescSection = () => {
         setAnimatedTitle(t("descPrivateAnimatedTitle"));
         setBottomTitle(t("descPrivateBottomTitle"));
         setBusiness(false);
+        setAsideDesc(t("descPrivateAsideDesc"));
 
         break;
       default:
@@ -112,12 +116,7 @@ export const DescSection = () => {
             </h2>
 
             <div className={s.aside}>
-              <p>
-                Наши приватные туры дают возможность сменить обстановку,
-                оставить позади рутину и насладиться каждым километром лучших
-                европейских дорог за рулём роскошного спорткара — с вашей второй
-                половинкой или в компании друзей.
-              </p>
+              <p>{asideDesc}</p>
 
               <div className={s.z}>
                 <SiteButton />

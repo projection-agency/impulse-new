@@ -128,6 +128,7 @@
 
 .slide {
   position: relative;
+  aspect-ratio: 16 / 12;
 
   img {
     height: 100%;

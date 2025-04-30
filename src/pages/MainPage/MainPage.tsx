@@ -34,9 +34,9 @@ export const MainPage: FC<MainPageProps> = ({
 
       <CarsSection />
 
-      <TariffSection />
-
       <GallerySection />
+
+      <TariffSection />
 
       <ActualToursSection openOrder={openOrder} />
 

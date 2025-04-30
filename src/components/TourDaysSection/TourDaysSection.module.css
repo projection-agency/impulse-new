@@ -1,7 +1,7 @@
 .section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
 .sliderContainer {
@@ -12,13 +12,14 @@
   justify-content: center;
   align-items: center;
   transition: 1s;
+  padding: 4vw 0;
 
   .daysSlider {
     background-color: var(--white);
     padding: 2vw;
     border-radius: 1.2vw;
     max-width: 35vw;
-    min-height: 90%;
+    min-height: 48.5vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -62,9 +63,8 @@
 
       img {
         object-fit: cover;
-        height: 100%;
+        object-position: 0 -12vw;
         width: 100%;
-        object-position: bottom;
       }
 
       .location {
@@ -250,6 +250,10 @@
       .image {
         height: 50vw;
         margin-bottom: 4.2vw;
+
+        img {
+          object-position: 0 -35vw;
+        }
 
         .location {
           bottom: 3.2vw;

@@ -38,6 +38,8 @@ export const ChroniclesSection = () => {
   const nextRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<SwiperType | null>(null);
 
+  const [activeIndex, setActiveIndex] = useState(0);
+
   const uniqueCars: string[] = Array.from(
     new Set(data.flatMap((item: ImageItem) => item.cars))
   );
@@ -189,6 +191,7 @@ export const ChroniclesSection = () => {
           }}
           onSlideChange={(swiper) => {
             const count = filteredData.length;
+            setActiveIndex(swiper.activeIndex);
             const progress =
               count > 0 ? ((swiper.realIndex + 1) / count) * 100 : 0;
             setProgress(progress);
@@ -196,26 +199,31 @@ export const ChroniclesSection = () => {
           className={s.swiperContainer}
         >
           {filteredData.map(
-            (image: {
-              id: number;
-              load_image_text_photo: string;
-              input_way_start: string;
-              input_way_end: string;
-              input_date: string;
-            }) =>
+            (
+              image: {
+                id: number;
+                load_image_text_photo: string;
+                input_way_start: string;
+                input_way_end: string;
+                input_date: string;
+              },
+              index: number
+            ) =>
               image.load_image_text_photo ? (
                 <SwiperSlide className={s.slide} key={image.id}>
                   <div>
                     <img src={image.load_image_text_photo} alt="" />
 
-                    <div className={s.slideBottomInfo}>
-                      <p className={s.route}>
-                        {image.input_way_start}
-                        <span></span>
-                        {image.input_way_end}
-                      </p>
-                      <p>{image.input_date}</p>
-                    </div>
+                    {index === activeIndex && (
+                      <div className={s.slideBottomInfo}>
+                        <p className={s.route}>
+                          {image.input_way_start}
+                          <span></span>
+                          {image.input_way_end}
+                        </p>
+                        <p>{image.input_date}</p>
+                      </div>
+                    )}
                   </div>
                 </SwiperSlide>
               ) : null

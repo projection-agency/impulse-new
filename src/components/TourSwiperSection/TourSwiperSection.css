@@ -4,6 +4,7 @@
 
   .swiper-slide {
     transition: opacity 0.3s;
+    aspect-ratio: 16 / 12;
   }
 
   .swiper-slide-active {
