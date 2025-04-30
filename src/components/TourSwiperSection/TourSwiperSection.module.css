@@ -137,7 +137,7 @@
   }
 
   .slideContent {
-    position: absolute;
+    position: relative;
     background: #1d1d1d;
     color: var(--white);
     padding: 2.7vw;
