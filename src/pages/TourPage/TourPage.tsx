@@ -46,7 +46,7 @@ export const TourPage: FC<MainPageProps> = ({
 
       <TourAccordionSection openOrder={openOrder} item={actualTour!} />
 
-      <CarsSection tourCars={actualTour?.cars} />
+      <CarsSection tourCars={actualTour} />
 
       <FormSection />
 

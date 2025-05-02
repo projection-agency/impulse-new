@@ -9,6 +9,7 @@ import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 import { API_URL } from "../../App";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { TourType } from "../ActualToursSection/ActualToursSection";
 
 interface CarModel {
   hl_input_model_name: string;
@@ -25,7 +26,7 @@ const fetchCars = async (): Promise<Car[]> => {
   return data;
 };
 
-export const CarsSection = ({ tourCars }: { tourCars?: Car[] }) => {
+export const CarsSection = ({ tourCars }: { tourCars?: TourType }) => {
   const [activeSlide, setActiveSlide] = useState(1);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -49,6 +50,8 @@ export const CarsSection = ({ tourCars }: { tourCars?: Car[] }) => {
   if (isLoading) {
     return <p>Loading</p>;
   }
+
+  console.log(tourCars);
 
   return (
     <section id="cars" className={`${s.section} carSection`}>

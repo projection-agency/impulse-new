@@ -87,8 +87,6 @@ export const HomeHero = ({
   //   setDesc(actualTour.input_sec_desc);
   // }
 
-  console.log(actualTour);
-
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, "0");
@@ -101,7 +99,6 @@ export const HomeHero = ({
       if (actualTour?.title?.rendered) {
         setHeroTitle(actualTour.title.rendered);
         setDesc(actualTour.input_sec_desk);
-        console.log(desc);
       } else {
         setHeroTitle(t("mainHeroTitle")); // або залиш без змін
       }
