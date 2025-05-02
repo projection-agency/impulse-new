@@ -50,6 +50,7 @@
 .swiperContainer {
   width: 77vw;
   overflow: visible;
+  margin-bottom: 10vw;
 }
 
 .sliderWrapper {

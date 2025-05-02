@@ -223,7 +223,7 @@
       .title {
         width: auto;
         font-size: 5vw;
-        top: 55vw;
+        top: 50vw;
 
         h2 {
           font-family: Druk Cyr;
@@ -235,7 +235,7 @@
           text-transform: uppercase;
 
           span {
-            font-size: 20vw;
+            font-size: 40vw;
           }
         }
       }
@@ -243,7 +243,7 @@
 
     .formBlock {
       padding: 0;
-      height: 100vh;
+      padding: 20vw 0;
 
       .formContainer {
         width: 91.4vw;

@@ -13,7 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 interface CarModel {
   hl_input_model_name: string;
 }
-interface Car {
+export interface Car {
   id: number;
   title: { rendered: string };
   load_image_text_more: string;
@@ -25,7 +25,7 @@ const fetchCars = async (): Promise<Car[]> => {
   return data;
 };
 
-export const CarsSection = () => {
+export const CarsSection = ({ tourCars }: { tourCars?: Car[] }) => {
   const [activeSlide, setActiveSlide] = useState(1);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -54,13 +54,26 @@ export const CarsSection = () => {
     <section id="cars" className={`${s.section} carSection`}>
       <div className={s.titleContainer}>
         <h2>
-          <AnimatedHeading text="50+ Автомобилей в автопарке Impulse" />
+          <AnimatedHeading
+            text={
+              tourCars
+                ? "Рекомендуемые машины для тура"
+                : "50+ Автомобилей в автопарке Impulse"
+            }
+          />
         </h2>
 
-        <p>
-          Мы позаботились о том, чтобы у нас были машины на любой вкус: от
-          стремительных суперкаров до элегантных премиум-седанов
-        </p>
+        {tourCars ? (
+          <p>
+            Хотите другую машину? При оформлении заявки скажите нам про свои
+            предпочтения и мы подберём автомобиль специально для вас
+          </p>
+        ) : (
+          <p>
+            Мы позаботились о том, чтобы у нас были машины на любой вкус: от
+            стремительных суперкаров до элегантных премиум-седанов
+          </p>
+        )}
       </div>
 
       <div className={s.sliderWrapper}>

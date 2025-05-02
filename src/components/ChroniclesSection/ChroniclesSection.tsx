@@ -38,7 +38,7 @@ export const ChroniclesSection = () => {
   const nextRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<SwiperType | null>(null);
 
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [, setActiveIndex] = useState(0);
 
   const uniqueCars: string[] = Array.from(
     new Set(data.flatMap((item: ImageItem) => item.cars))
@@ -214,7 +214,7 @@ export const ChroniclesSection = () => {
                   <div>
                     <img src={image.load_image_text_photo} alt="" />
 
-                    {index === activeIndex && (
+                    {index === swiperRef.current?.realIndex && (
                       <div className={s.slideBottomInfo}>
                         <p className={s.route}>
                           {image.input_way_start}
@@ -229,6 +229,8 @@ export const ChroniclesSection = () => {
               ) : null
           )}
         </Swiper>
+
+        {isMobile && <SiteButton />}
       </div>
     </section>
   );

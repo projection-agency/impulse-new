@@ -28,9 +28,9 @@
 .disabled:hover {
   border-bottom: 1px solid rgba(255, 255, 255, 1);
 
-  svg {
+  /* svg {
     transform: rotate(180deg) !important;
-  }
+  } */
 }
 
 .disabled:active {

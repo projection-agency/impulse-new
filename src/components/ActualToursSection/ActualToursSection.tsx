@@ -7,6 +7,7 @@ import Lenis from "lenis";
 import { TextAnimation } from "../TextAnimation/TextAnimation";
 import { Link, useLocation } from "react-router";
 import { useGlobalProps } from "../../GlobalPropContext";
+import { Car } from "../CarsSection/CarsSection";
 
 export interface Day {
   hl_input_title: string;
@@ -32,6 +33,7 @@ export interface TourType {
   coast_content_22: string;
   coast_title_1: string;
   coast_title_2: string;
+  input_sec_desk: string;
   input_desc: string;
   input_route: string;
   save_data_text: Day[];
@@ -39,6 +41,7 @@ export interface TourType {
   price_uninclude: string[];
   load_image_text_image: string;
   slug: string;
+  cars: Car[];
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -188,7 +191,7 @@ export const ActualToursSection = ({
                 </div>
               </div>
               <div className={s.btnContainer}>
-                <div onClick={() => openOrder(item)}>Забронировать</div>
+                <div onClick={() => openOrder(item)}>Забронировать </div>
                 <Link to={`/tour/${item.slug}`}>Подробнее</Link>
               </div>
               <AnimatePresence>

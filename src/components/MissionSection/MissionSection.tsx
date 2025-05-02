@@ -188,7 +188,7 @@ export const MissionSection = () => {
             <div>
               <p>Подходящий маршрут</p>
               <img
-                className="lg:h-[5vw] h-[16.5vw] -translate-y-2"
+                className="lg:h-[5vw] h-[16.5vw] lg:-translate-y-2 -translate-y-1"
                 src="/images/mission-list/компас.webp"
                 alt=""
               />
@@ -196,7 +196,7 @@ export const MissionSection = () => {
             <div>
               <p>Желанный спорткар</p>
               <img
-                className="lg:h-[3.85vw] h-[11.7vw] translate-y-1"
+                className="lg:h-[3.85vw] h-[11.7vw] lg:translate-y-1 translate-y-2"
                 src="/images/mission-list/спорткар.webp"
                 alt=""
               />

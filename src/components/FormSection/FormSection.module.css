@@ -213,6 +213,7 @@
       height: 220vw;
 
       .title {
+        top: 30%;
         width: 90vw;
         max-width: none;
 

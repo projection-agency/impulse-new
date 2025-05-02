@@ -1,12 +1,16 @@
+import { useLocation } from "react-router";
 import { Layout } from "../Layout/Layout";
 import { TextAnimation } from "../TextAnimation/TextAnimation";
 import s from "./EssenceSection.module.css";
 import { motion } from "framer-motion";
 
 export const EssenceSection = () => {
+  const { pathname } = useLocation();
+
   return (
     <motion.section
       className={s.section}
+      style={pathname == "/" ? { paddingTop: "20vw" } : {}}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false, amount: 0.2 }}

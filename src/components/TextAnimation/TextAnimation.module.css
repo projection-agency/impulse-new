@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.2vw;
   overflow: hidden;
 }
 
@@ -25,5 +25,11 @@
   to {
     transform: translateY(0%);
     opacity: 1;
+  }
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    gap: 0;
   }
 }

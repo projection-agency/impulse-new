@@ -1,4 +1,16 @@
 {
-  "privateHeroTitle": "PRIVATE TOURS",
-  "language": "Language"
+  "mainHeroTitle": "Путешествия на спорткарах",
+  "privateHeroTitle": "Private tours",
+  "businessHeroTitle": "business tours",
+  "mainHeroDesc": "Уникальные автопутешествия для предпринимателей и экспертов из разных сфер",
+  "privateHeroDesc": "Индивидуальные путешествия на спортивных автомобилях с маршрутом, созданным специально для вас.",
+  "businessHeroDesc": "Индивидуальные путешествия на спортивных автомобилях с маршрутом, созданным специально для вас.",
+  "descBusinessTopTitle": "Представьте, вы с бизнес-партнёрами или командой",
+  "descPrivateTopTitle": "Immerse yourself in a journey with",
+  "descBusinessAnimatedTitle": "за рулём Lamborghini или Ferrari",
+  "descPrivateAnimatedTitle": "your closest ones, ",
+  "descBusinessBottomTitle": " огибаете живописные повороты лучших дорог Европы.",
+  "descPrivateBottomTitle": "where everything is created according to your personal scenario",
+  "descPrivateAsideDesc": "Our private tours offer a chance to escape the routine, enjoy a change of scenery, and experience every kilometre of Europe's finest roads behind the wheel of a luxury sports car – whether with your significant other or a group of close friends.",
+  "descBusinessAsideDesc": "Вокруг пейзажи, которые захватывают дух, а впереди насыщенные дни, наполненные эмоциями, яркими активностями и качественным нетворкингом. Представили? А мы воплотим это в реальность, избавив вас от всех организационных забот:"
 }

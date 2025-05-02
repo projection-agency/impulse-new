@@ -10,7 +10,7 @@
 
   @media (max-width: 1024px) {
     .swiper-slide {
-      transform: scale(1.5) translateY(40vw);
+      transform: scale(1.9) translateY(40vw);
 
       img {
         width: 200vw;

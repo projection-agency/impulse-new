@@ -83,10 +83,25 @@ export const HomeHero = ({
 
   const isTourPage = pathname.startsWith("/tour");
 
+  // if (actualTour) {
+  //   setDesc(actualTour.input_sec_desc);
+  // }
+
+  console.log(actualTour);
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    return `${day}.${month}`;
+  };
+
   useEffect(() => {
-    if (pathname.startsWith("/tour")) {
+    if (isTourPage) {
       if (actualTour?.title?.rendered) {
         setHeroTitle(actualTour.title.rendered);
+        setDesc(actualTour.input_sec_desk);
+        console.log(desc);
       } else {
         setHeroTitle(t("mainHeroTitle")); // або залиш без змін
       }
@@ -147,7 +162,14 @@ export const HomeHero = ({
 
         {(!loading && (
           <div className={s.heroTitleContainer}>
-            <span data-aos="fade-up">Формат:</span>
+            <span data-aos="fade-up">
+              {isTourPage && actualTour
+                ? `ДАТЫ: ${formatDate(
+                    actualTour.input_date_start
+                  )} - ${formatDate(actualTour.input_date_end)}`
+                : "Формат:"}
+            </span>
+
             <h1>
               {isMobile ? heroTitle : <AnimatedHeading text={heroTitle} />}
             </h1>
@@ -308,7 +330,7 @@ export const HomeHero = ({
       </section>
       <FixedBar openOrder={openOrder} openConsult={openConsult} />
 
-      {isMobile && (
+      {isMobile && pathname !== "/" && !pathname.startsWith("/tour") && (
         <Layout className={s.shoeReelMobileWrapper}>
           <div className={s.showReelContainer}>
             <div onClick={openVideo} className={s.showReel}>
