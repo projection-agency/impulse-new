@@ -51,8 +51,6 @@ export const CarsSection = ({ tourCars }: { tourCars?: TourType }) => {
     return <p>Loading</p>;
   }
 
-  console.log(tourCars);
-
   return (
     <section id="cars" className={`${s.section} carSection`}>
       <div className={s.titleContainer}>
