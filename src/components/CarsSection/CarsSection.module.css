@@ -162,6 +162,11 @@
         margin-bottom: 6.4vw;
       }
 
+      .tourCars {
+        font-size: 12.7vw;
+        max-width: 77vw;
+      }
+
       p {
         font-size: 3.7vw;
         width: 76vw;

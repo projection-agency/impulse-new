@@ -54,7 +54,7 @@ export const CarsSection = ({ tourCars }: { tourCars?: TourType }) => {
   return (
     <section id="cars" className={`${s.section} carSection`}>
       <div className={s.titleContainer}>
-        <h2>
+        <h2 className={tourCars ? s.tourCars : ""}>
           <AnimatedHeading
             text={
               tourCars
