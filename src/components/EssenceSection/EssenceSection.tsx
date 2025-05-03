@@ -3,14 +3,17 @@ import { Layout } from "../Layout/Layout";
 import { TextAnimation } from "../TextAnimation/TextAnimation";
 import s from "./EssenceSection.module.css";
 import { motion } from "framer-motion";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 export const EssenceSection = () => {
   const { pathname } = useLocation();
+  const { width } = useWindowSize();
+  const isMobile = width < 1024;
 
   return (
     <motion.section
       className={s.section}
-      style={pathname == "/" ? { paddingTop: "20vw" } : {}}
+      style={pathname == "/" && isMobile ? { paddingTop: "20vw" } : {}}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false, amount: 0.2 }}
