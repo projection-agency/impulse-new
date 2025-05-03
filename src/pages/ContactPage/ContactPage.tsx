@@ -81,7 +81,7 @@ export const ContactPage = () => {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <g clip-path="url(#clip0_1735_358)">
+                  <g clipPath="url(#clip0_1735_358)">
                     <path d="M2.89999 0V2.39999H8.29999L0.5 10.2L2.29999 12L10.1 4.19997V9.59998H12.5V0H2.89999Z" />
                   </g>
                   <defs>

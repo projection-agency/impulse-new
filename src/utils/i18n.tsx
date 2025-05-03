@@ -3,17 +3,17 @@ import { initReactI18next } from "react-i18next";
 import HttpBackend from "i18next-http-backend";
 
 i18n
-  .use(HttpBackend) // для підвантаження перекладів
-  .use(initReactI18next) // інтеграція з React
+  .use(HttpBackend)
+  .use(initReactI18next)
   .init({
-    fallbackLng: "ru", // мова за замовченням
+    fallbackLng: "ru",
     supportedLngs: ["ru", "en"],
-    debug: false, // true → якщо хочеш бачити в консолі помилки перекладу
+    debug: false,
     interpolation: {
-      escapeValue: false, // React і так екранує
+      escapeValue: false,
     },
     backend: {
-      loadPath: "/locales/{{lng}}/translation.json", // де лежать файли
+      loadPath: "/locales/{{lng}}/translation.json",
     },
   });
 

@@ -301,7 +301,7 @@
       .tourDesc {
         font-size: 3.2vw;
         gap: 1vw;
-
+        flex-wrap: wrap;
         margin-bottom: 10.6vw;
 
         div {
