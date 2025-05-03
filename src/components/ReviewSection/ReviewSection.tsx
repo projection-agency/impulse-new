@@ -43,28 +43,27 @@ export const ReviewSection = () => {
   };
 
   useEffect(() => {
-    setIsPlaying(false); // Зупиняємо стан при зміні слайда
+    setIsPlaying(false);
     pauseVideo();
   }, [currentIndex]);
 
   useEffect(() => {
-    setIsPlaying(false); // кнопка завжди показана при старті нового слайда
-
     const video = videoRef.current;
-    if (!video) return;
+    if (video) {
+      video.pause(); // 🛑 СТОП відео
+    }
 
     const handlePlay = () => setIsPlaying(true);
     const handlePause = () => setIsPlaying(false);
 
-    video.addEventListener("play", handlePlay);
-    video.addEventListener("pause", handlePause);
+    video?.addEventListener("play", handlePlay);
+    video?.addEventListener("pause", handlePause);
 
-    // важливо! видаляти слухачів попереднього елемента
     return () => {
-      video.removeEventListener("play", handlePlay);
-      video.removeEventListener("pause", handlePause);
+      video?.removeEventListener("play", handlePlay);
+      video?.removeEventListener("pause", handlePause);
     };
-  }, [currentIndex]); // ← залежить тільки від currentIndex
+  }, [currentIndex]);
 
   const handlePlayClick = () => {
     if (videoRef.current) {
@@ -188,6 +187,8 @@ export const ReviewSection = () => {
                 poster={currentItem.load_image_text_image || null}
                 loop
                 playsInline
+                muted={false}
+                autoPlay={false}
               >
                 <source src={currentItem?.load_video_text} type="video/mp4" />
               </video>
