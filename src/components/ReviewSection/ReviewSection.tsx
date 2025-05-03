@@ -172,6 +172,11 @@ export const ReviewSection = () => {
           </div>
 
           <div className={s.videoContainer}>
+            <img
+              src={currentItem.load_image_text_image || ""}
+              alt=""
+              className={`${s.poster} ${isPlaying ? s.posterHidden : ""}`}
+            />
             {hasVideo ? (
               <video
                 key={`video-${currentIndex}`}
