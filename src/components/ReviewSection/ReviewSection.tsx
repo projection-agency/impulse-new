@@ -179,7 +179,6 @@ export const ReviewSection = () => {
                 ref={videoRef}
                 className={`${s.video} ${s.active}`}
                 poster={currentItem.load_image_text_image || null}
-                autoPlay
                 loop
                 playsInline
               >
