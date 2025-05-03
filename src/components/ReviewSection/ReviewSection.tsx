@@ -147,7 +147,7 @@ export const ReviewSection = () => {
               </div>
 
               {isMobile && (
-                <button onClick={nextSlide}>
+                <button onClick={prevSlide}>
                   <svg
                     viewBox="0 0 42 20"
                     fill="none"
@@ -173,8 +173,7 @@ export const ReviewSection = () => {
           <div className={s.videoContainer}>
             <img
               src={
-                currentItem.load_image_text_image ||
-                currentItem?.load_video_text
+                currentItem.load_image_text_image || "/images/review-bg.avif"
               }
               alt=""
               className={`${s.poster} ${isPlaying ? s.posterHidden : ""}`}
