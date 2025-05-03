@@ -30,7 +30,6 @@ export const ReviewSection = () => {
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % totalSlides);
-    console.log(currentIndex);
   };
 
   const prevSlide = () => {

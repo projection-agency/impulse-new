@@ -11,7 +11,7 @@ const svg = (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g clip-path="url(#clip0_1905_3648)">
+    <g clipPath="url(#clip0_1905_3648)">
       <path
         d="M10 10C12.7614 10 15 7.76142 15 5C15 2.23858 12.7614 0 10 0C7.23858 0 5 2.23858 5 5C5 7.76142 7.23858 10 10 10Z"
         fill="white"
@@ -37,7 +37,7 @@ const arrow = (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g clip-path="url(#clip0_2505_289)">
+    <g clipPath="url(#clip0_2505_289)">
       <path
         d="M2.89999 0V2.39999H8.29999L0.5 10.2L2.29999 12L10.1 4.19997V9.59998H12.5V0H2.89999Z"
         fill="white"

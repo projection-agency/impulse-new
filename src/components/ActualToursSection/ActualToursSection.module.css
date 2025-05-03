@@ -99,7 +99,7 @@
   align-items: flex-start;
 
   h4 {
-    font-family: Mona Sans;
+    font-family: "Mona Sans", "Arial", "Helvetica", "Segoe UI", sans-serif;
     font-weight: 700;
     font-size: 1.4vw;
     line-height: 100%;
