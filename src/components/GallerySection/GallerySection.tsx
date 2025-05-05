@@ -97,8 +97,8 @@ export const GallerySection = () => {
           ease: "power3.out",
           scrollTrigger: {
             trigger: gallerySectionRef.current,
-            start: isMobile ? "top 10%" : "top 10%",
-            end: "+=100",
+            start: isMobile ? "top 80%" : "top 10%",
+            end: isMobile ? "+=1000" : "+=100",
             scrub: 1,
             refreshPriority: 1,
             invalidateOnRefresh: true,
@@ -180,7 +180,7 @@ export const GallerySection = () => {
         <Layout>
           <h3
             data-aos="fade-up"
-            data-aos-offset="800"
+            data-aos-offset={isMobile ? "500" : "800"}
             className={s.galleryTitle}
           >
             memories
