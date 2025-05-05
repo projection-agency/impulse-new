@@ -70,44 +70,64 @@ export const GallerySection = () => {
     },
   ];
 
-  const offset = isMobile ? "400" : "300";
+  const offset = isMobile ? "400" : "450";
 
   useEffect(() => {
-    if (!gallerySectionRef.current || !galleryImageRef.current) return;
+    const timeout = setTimeout(() => {
+      if (!gallerySectionRef.current || !galleryImageRef.current) return;
 
-    galleryImageRef.current.style.webkitMaskSize = isMobile
-      ? "10vw 10vw"
-      : "7%";
-    galleryImageRef.current.style.maskSize = isMobile ? "10vw 10vw" : "7%";
-    galleryImageRef.current.style.webkitMaskPosition = "center 24vw";
-    galleryImageRef.current.style.maskPosition = "center 24vw";
+      galleryImageRef.current.style.webkitMaskSize = isMobile
+        ? "10vw 10vw"
+        : "7%";
+      galleryImageRef.current.style.maskSize = isMobile ? "10vw 10vw" : "7%";
+      galleryImageRef.current.style.webkitMaskPosition = "center 24vw";
+      galleryImageRef.current.style.maskPosition = "center 24vw";
 
-    const animation = gsap.fromTo(
-      galleryImageRef.current,
-      {
-        WebkitMaskSize: isMobile ? "10vw 10vw" : "7%",
-        maskSize: isMobile ? "10vw 10vw" : "7%",
-        WebkitMaskPosition: "center 24vw",
-      },
-      {
-        WebkitMaskSize: isMobile ? "1000%" : "300%",
-        maskSize: isMobile ? "1000%" : "300%",
-        WebkitMaskPosition: "center -40vw",
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: gallerySectionRef.current,
-          start: isMobile ? "top -20%" : "top 1%",
-          end: "+=100",
-          scrub: 1,
+      const animation = gsap.fromTo(
+        galleryImageRef.current,
+        {
+          WebkitMaskSize: isMobile ? "10vw 10vw" : "7%",
+          maskSize: isMobile ? "10vw 10vw" : "7%",
+          WebkitMaskPosition: "center 24vw",
         },
-      }
-    );
+        {
+          WebkitMaskSize: isMobile ? "1000%" : "300%",
+          maskSize: isMobile ? "1000%" : "300%",
+          WebkitMaskPosition: "center -40vw",
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: gallerySectionRef.current,
+            start: isMobile ? "top 10%" : "top 10%",
+            end: "+=100",
+            scrub: 1,
+            refreshPriority: 1,
+            invalidateOnRefresh: true,
+          },
+        }
+      );
+
+      ScrollTrigger.refresh();
+
+      return () => {
+        animation.scrollTrigger?.kill();
+        animation.kill();
+      };
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, [isMobile]);
+
+  useEffect(() => {
+    const handleLoad = () => {
+      ScrollTrigger.refresh();
+    };
+
+    window.addEventListener("load", handleLoad);
 
     return () => {
-      animation.scrollTrigger?.kill();
-      animation.kill();
+      window.removeEventListener("load", handleLoad);
     };
-  }, [isMobile]);
+  }, [pathname]);
 
   useEffect(() => {
     switch (pathname) {
@@ -125,6 +145,27 @@ export const GallerySection = () => {
     }
   }, [pathname]);
 
+  useEffect(() => {
+    const img = galleryImageRef.current;
+    if (!img) return;
+
+    const handleImageLoad = () => {
+      console.log("Image loaded, refreshing ScrollTrigger");
+      ScrollTrigger.refresh();
+    };
+
+    if (img.complete) {
+      // якщо картинка кешована
+      handleImageLoad();
+    } else {
+      img.addEventListener("load", handleImageLoad);
+    }
+
+    return () => {
+      img.removeEventListener("load", handleImageLoad);
+    };
+  }, [business]);
+
   return (
     <section id="tour-memories" ref={gallerySectionRef} className={s.section}>
       <div className={s.marquee}>
@@ -139,7 +180,7 @@ export const GallerySection = () => {
         <Layout>
           <h3
             data-aos="fade-up"
-            data-aos-offset="500"
+            data-aos-offset="800"
             className={s.galleryTitle}
           >
             memories
