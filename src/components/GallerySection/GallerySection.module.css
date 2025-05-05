@@ -26,6 +26,7 @@
   .marqueeInner {
     display: flex;
     min-width: 100%;
+    gap: 2vw;
     animation: marquee 25s linear infinite;
   }
 

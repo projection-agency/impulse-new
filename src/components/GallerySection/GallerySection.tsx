@@ -70,7 +70,7 @@ export const GallerySection = () => {
     },
   ];
 
-  const offset = isMobile ? "400" : "450";
+  const offset = isMobile ? "600" : "450";
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -97,8 +97,8 @@ export const GallerySection = () => {
           ease: "power3.out",
           scrollTrigger: {
             trigger: gallerySectionRef.current,
-            start: isMobile ? "top 80%" : "top 10%",
-            end: isMobile ? "+=1000" : "+=100",
+            start: isMobile ? "top 50%" : "top 10%",
+            end: isMobile ? "+=500" : "+=100",
             scrub: 1,
             refreshPriority: 1,
             invalidateOnRefresh: true,
@@ -170,9 +170,13 @@ export const GallerySection = () => {
     <section id="tour-memories" ref={gallerySectionRef} className={s.section}>
       <div className={s.marquee}>
         <div className={s.marqueeInner}>
-          <h2>Сотни клиентов, которые доверились нам</h2>
-          <h2>Сотни клиентов, которые доверились нам</h2>
-          <h2>Сотни клиентов, которые доверились нам</h2>
+          <h2>Сотни клиентов, которые доверились нам </h2>
+          <span> </span>
+          <h2>Сотни клиентов, которые доверились нам </h2>
+          <span> </span>
+
+          <h2>Сотни клиентов, которые доверились нам </h2>
+          <span> </span>
         </div>
       </div>
 
@@ -180,7 +184,7 @@ export const GallerySection = () => {
         <Layout>
           <h3
             data-aos="fade-up"
-            data-aos-offset={isMobile ? "500" : "800"}
+            data-aos-offset={isMobile ? "700" : "800"}
             className={s.galleryTitle}
           >
             memories
