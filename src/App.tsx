@@ -78,7 +78,9 @@ export const App = () => {
 
   useEffect(() => {
     if (isMobile) {
-      window.scrollTo(0, 0);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 100);
     } else if (lenisRef.current) {
       lenisRef.current.scrollTo(0, { immediate: true });
     }

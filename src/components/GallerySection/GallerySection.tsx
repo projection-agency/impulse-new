@@ -112,7 +112,7 @@ export const GallerySection = () => {
         animation.scrollTrigger?.kill();
         animation.kill();
       };
-    }, 3000);
+    }, 5000);
 
     return () => clearTimeout(timeout);
   }, [isMobile]);
