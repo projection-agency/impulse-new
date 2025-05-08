@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import s from "./FixedBar.module.css";
+import { useTranslation } from "react-i18next";
 
 export const FixedBar = ({
   openConsult,
@@ -9,6 +10,7 @@ export const FixedBar = ({
   openOrder: () => void;
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,10 +31,10 @@ export const FixedBar = ({
   return (
     <div className={`${s.bar} ${isVisible ? s.visible : ""}`}>
       <button onClick={openOrder}>
-        <span>Заказать сейчас</span>
+        <span>{t("order_now")}</span>
       </button>
       <button onClick={openConsult}>
-        <span>задать вопрос</span>
+        <span>{t("ask_question")}</span>
       </button>
     </div>
   );

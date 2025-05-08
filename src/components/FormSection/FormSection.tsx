@@ -9,6 +9,7 @@ import s from "./FormSection.module.css";
 import { TextAnimation } from "../TextAnimation/TextAnimation";
 import { useGlobalProps } from "../../GlobalPropContext";
 import { TourType } from "../ActualToursSection/ActualToursSection";
+import { useTranslation } from "react-i18next";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,6 +19,7 @@ export const FormSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const pinWrapperRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   const { tours } = useGlobalProps();
 
@@ -94,62 +96,58 @@ export const FormSection = () => {
           <div className={s.imageBlock}>
             <img src="/images/form-mountains-road.avif" alt="mountains road" />
             <div className={s.title}>
-              <span className="mb-[4vw] block" data-aos="fade-up">
-                Ну что
-              </span>
+              <span>{t("form_pre_title")}</span>
               <h2>
-                <TextAnimation texts={["Готовы начать", "путешествие?"]} />
+                <TextAnimation texts={[t("form_title_1"), t("form_title_2")]} />
               </h2>
             </div>
           </div>
 
           <div className={`${s.formBlock} ${s.mobile}`}>
             <div className={s.formContainer}>
-              <h3>
-                Заполните контактную форму и наш менеджер свяжется с вами в
-                ближайшее время
-              </h3>
+              <h3>{t("form_subtitle")}</h3>
 
               <form>
                 <div className={s.inputsBlock}>
                   <label>
-                    Имя <span>*</span>
-                    <input type="text" placeholder="Введите свое имя" />
-                  </label>
-
-                  <label>
-                    Instagram <span>*</span>
+                    {t("form_name_label")} <span>*</span>
                     <input
                       type="text"
-                      placeholder="Введите свой ник Instagram"
+                      placeholder={t("form_name_placeholder")}
                     />
                   </label>
 
                   <label>
-                    Номер телефона<span>*</span>
+                    {t("form_instagram_label")} <span>*</span>
+                    <input
+                      type="text"
+                      placeholder={t("form_instagram_placeholder")}
+                    />
+                  </label>
+
+                  <label>
+                    {t("form_phone_label")} <span>*</span>
                     <PhoneNumberInput />
                   </label>
 
                   <label>
-                    Интересующий тур <span>*</span>
+                    {t("form_tour_label")} <span>*</span>
                     <CustomSelect
-                      options={[
-                        { value: "ua", label: "Lamborghini 2.0" },
-                        { value: "us", label: "Multibrand Tour" },
-                      ]}
-                      placeholder="Выберите актуальный тур"
+                      options={options}
+                      placeholder={t("form_tour_placeholder")}
                       onChange={handleSelectChange}
                     />
                   </label>
                 </div>
 
                 <CustomCheckbox
-                  label="Я соглашаюсь с Политикой конфиденциальности"
+                  label={t("form_checkbox")}
                   onChange={handleCheckboxChange}
                 />
 
                 <button className={s.submitBtn} type="submit">
-                  <span>оставить заявку</span>
+                  <span>{t("form_submit")}</span>
+
                   <svg
                     viewBox="0 0 13 12"
                     fill="none"
@@ -184,60 +182,59 @@ export const FormSection = () => {
                   alt="mountains road"
                 />
                 <div ref={titleRef} className={s.title}>
-                  <span className={s.span} data-aos="fade-up">
-                    Ну что
-                  </span>
+                  <span>{t("form_pre_title")}</span>
                   <h2>
-                    {/* <AnimatedHeading text="Готовы начать путешествие?" /> */}
-                    <TextAnimation texts={["Готовы начать", "путешествие?"]} />
+                    <TextAnimation
+                      texts={[t("form_title_1"), t("form_title_2")]}
+                    />
                   </h2>
                 </div>
               </div>
 
               <div className={s.formBlock} ref={formRef}>
                 <div className={s.formContainer}>
-                  <h3>
-                    Заполните контактную форму и наш менеджер свяжется с вами в
-                    ближайшее время
-                  </h3>
+                  <h3>{t("form_subtitle")}</h3>
 
                   <form>
                     <div className={s.inputsBlock}>
                       <label>
-                        Имя <span>*</span>
-                        <input type="text" placeholder="Введите свое имя" />
-                      </label>
-
-                      <label>
-                        Instagram <span>*</span>
+                        {t("form_name_label")} <span>*</span>
                         <input
                           type="text"
-                          placeholder="Введите свой ник Instagram"
+                          placeholder={t("form_name_placeholder")}
                         />
                       </label>
 
                       <label>
-                        Номер телефона<span>*</span>
+                        {t("form_instagram_label")} <span>*</span>
+                        <input
+                          type="text"
+                          placeholder={t("form_instagram_placeholder")}
+                        />
+                      </label>
+
+                      <label>
+                        {t("form_phone_label")} <span>*</span>
                         <PhoneNumberInput />
                       </label>
 
                       <label>
-                        Интересующий тур <span>*</span>
+                        {t("form_tour_label")} <span>*</span>
                         <CustomSelect
                           options={options}
-                          placeholder="Выберите актуальный тур"
+                          placeholder={t("form_tour_placeholder")}
                           onChange={handleSelectChange}
                         />
                       </label>
                     </div>
 
                     <CustomCheckbox
-                      label="Я соглашаюсь с Политикой конфиденциальности"
+                      label={t("form_checkbox")}
                       onChange={handleCheckboxChange}
                     />
 
                     <button className={s.submitBtn} type="submit">
-                      <span>оставить заявку</span>
+                      <span>{t("form_submit")}</span>
                       <svg
                         viewBox="0 0 13 12"
                         fill="none"

@@ -10,6 +10,7 @@ import { API_URL } from "../../App";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { TourType } from "../ActualToursSection/ActualToursSection";
+import { useTranslation } from "react-i18next";
 
 interface CarModel {
   hl_input_model_name: string;
@@ -47,6 +48,8 @@ export const CarsSection = ({ tourCars }: { tourCars?: TourType }) => {
     queryFn: fetchCars,
   });
 
+  const { t } = useTranslation();
+
   if (isLoading) {
     return <p>Loading</p>;
   }
@@ -58,21 +61,23 @@ export const CarsSection = ({ tourCars }: { tourCars?: TourType }) => {
           <AnimatedHeading
             text={
               tourCars
-                ? "Рекомендуемые машины для тура"
-                : "50+ Автомобилей в автопарке Impulse"
+                ? t("Рекомендуемые машины для тура")
+                : t("50+ Автомобилей в автопарке Impulse")
             }
           />
         </h2>
 
         {tourCars ? (
           <p>
-            Хотите другую машину? При оформлении заявки скажите нам про свои
-            предпочтения и мы подберём автомобиль специально для вас
+            {t(
+              "Хотите другую машину? При оформлении заявки скажите нам про свои предпочтения и мы подберём автомобиль специально для вас"
+            )}
           </p>
         ) : (
           <p>
-            Мы позаботились о том, чтобы у нас были машины на любой вкус: от
-            стремительных суперкаров до элегантных премиум-седанов
+            {t(
+              "Мы позаботились о том, чтобы у нас были машины на любой вкус: от стремительных суперкаров до элегантных премиум-седанов"
+            )}
           </p>
         )}
       </div>

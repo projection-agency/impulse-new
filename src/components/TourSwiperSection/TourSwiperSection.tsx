@@ -6,29 +6,34 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./TourSwiperSection.css";
 import { Swiper as SwiperType } from "swiper";
-
+import { useMemo } from "react";
 import { Layout } from "../Layout/Layout";
 import { TextAnimation } from "../TextAnimation/TextAnimation";
 import s from "./TourSwiperSection.module.css";
 import { useWindowSize } from "../../hooks/useWindowSize";
-
-const slides = [
-  {
-    image: "/images/tour-swiper-images/1.avif",
-    title: "Скорость и драйв",
-    desc: "Наслаждайтесь захватывающими маршрутами, покоряйте легендарные перевалы и испытывайте мощь спорткаров на безлимитных автобанах",
-  },
-  {
-    image: "/images/tour-swiper-images/2.avif",
-    title: "Итальянский шик",
-    desc: "Посетите музеи Lamborghini и Ferrari, ощутите атмосферу Болоньи и насладитесь гастрономией в замке",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 export const TourSwiperSection = () => {
   const { width } = useWindowSize();
   const isMobile = width < 1024;
   const swiperRef = useRef<SwiperType | null>(null);
+  const { t } = useTranslation();
+
+  const slides = useMemo(
+    () => [
+      {
+        image: "/images/tour-swiper-images/1.avif",
+        title: t("tour_slide_1_title"),
+        desc: t("tour_slide_1_desc"),
+      },
+      {
+        image: "/images/tour-swiper-images/2.avif",
+        title: t("tour_slide_2_title"),
+        desc: t("tour_slide_2_desc"),
+      },
+    ],
+    [t]
+  );
 
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -39,26 +44,18 @@ export const TourSwiperSection = () => {
           <h2>
             <TextAnimation
               texts={[
-                "Каждый день — это",
-                "уникальное сочетание",
-                "скорости, эмоций и",
-                "атмосферы премиальных",
-                "курортов",
+                t("tour_swiper_title_1"),
+                t("tour_swiper_title_2"),
+                t("tour_swiper_title_3"),
+                t("tour_swiper_title_4"),
+                t("tour_swiper_title_5"),
               ]}
             />
           </h2>
 
           <div className={s.descContainer}>
-            <p data-aos="fade-up">
-              Пятидневное приключение, которое начинается в Мюнхене и проходит
-              через скоростные автобаны, величественные Доломитовые Альпы и
-              легендарные итальянские города
-            </p>
-            <p data-aos="fade-up">
-              Тур завершится в Болонье, где вы посетите музей Lamborghini и
-              отпразднуете финал тура в роскошном замке с живой музыкой и
-              изысканной кухней
-            </p>
+            <p data-aos="fade-up">{t("tour_swiper_desc_1")}</p>
+            <p data-aos="fade-up">{t("tour_swiper_desc_2")}</p>
           </div>
         </div>
 

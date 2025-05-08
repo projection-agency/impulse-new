@@ -161,7 +161,7 @@ export const HomeHero = ({
           <div className={s.heroTitleContainer}>
             <span data-aos="fade-up">
               {isTourPage && actualTour
-                ? `ДАТЫ: ${formatDate(
+                ? `${t("date")}: ${formatDate(
                     actualTour.input_date_start
                   )} - ${formatDate(actualTour.input_date_end)}`
                 : "Формат:"}
@@ -179,7 +179,7 @@ export const HomeHero = ({
                 onClick={() => openOrder(actualTour)}
                 data-aos="fade-up"
               >
-                Забронировать тур
+                {t("bookTour")}
                 <svg
                   viewBox="0 0 12 12"
                   fill="none"
@@ -200,7 +200,7 @@ export const HomeHero = ({
               </div>
             ) : (
               <a data-aos="fade-up" href="#tours">
-                Актуальные туры
+                {t("actualTours")}
                 <svg
                   viewBox="0 0 12 12"
                   fill="none"
@@ -317,8 +317,8 @@ export const HomeHero = ({
                 </svg>
 
                 <a>
-                  <p>Прокрутите вниз</p>
-                  <span>чтобы узнать больше</span>
+                  <p>{t("scroll_title")}</p>
+                  <span>{t("scroll_subtitle")}</span>
                 </a>
               </div>
             )}

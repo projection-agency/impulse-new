@@ -4,10 +4,11 @@ import { SiteLogo } from "../SiteLogo/SiteLogo";
 import s from "./DescMainSection.module.css";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import gsap from "gsap";
+import { useTranslation } from "react-i18next";
 
 export const DescMainSection = () => {
   const topImagesContainerRef = useRef<HTMLDivElement>(null);
-
+  const { t } = useTranslation();
   const { width } = useWindowSize();
   const isMobile = width < 1024;
 
@@ -50,19 +51,10 @@ export const DescMainSection = () => {
               <SiteLogo fill="white" />
             </div>
 
-            <h2>
-              Это слово идеально отражает суть наших путешествий — энергию,
-              драйв и вдохновение
-            </h2>
+            <h2>{t("mainDesc")}</h2>
 
             <div className={s.aside}>
-              <p>
-                Мы не просто организовываем автопробеги, а создаём моменты,
-                которые становятся импульсом к переменам, новым эмоциям и
-                открытиям. Каждый заезд — это не просто поездка, а часть
-                большого пути, полного незабываемых впечатлений и новых
-                горизонтов
-              </p>
+              <p>{t("mainDescBottom")}</p>
             </div>
           </div>
 

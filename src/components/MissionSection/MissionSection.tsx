@@ -3,6 +3,7 @@ import { Layout } from "../Layout/Layout";
 import s from "./MissionSection.module.css";
 import { motion, useInView } from "framer-motion";
 import { TextAnimation } from "../TextAnimation/TextAnimation";
+import { useTranslation } from "react-i18next";
 
 const videos = ["/temp/video.mp4", "/temp/hero-video.mp4", "/temp/video.mp4"];
 
@@ -42,6 +43,8 @@ export const MissionSection = () => {
   });
   const listInView = useInView(listRef, { once: false, amount: 0.3 });
 
+  const { t } = useTranslation();
+
   return (
     <section className={s.section}>
       <Layout>
@@ -51,7 +54,7 @@ export const MissionSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <TextAnimation texts={["Чтобы каждая деталь"]}></TextAnimation>
+            <TextAnimation texts={[t("mission_title_1")]} />
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -61,7 +64,7 @@ export const MissionSection = () => {
                 fontWeight: 500,
               }}
             >
-              <TextAnimation texts={["соответствовала вашим"]} />
+              <TextAnimation texts={[t("mission_title_2")]} />
             </motion.div>
             <br />
             <motion.span
@@ -75,21 +78,17 @@ export const MissionSection = () => {
             >
               <TextAnimation
                 color="rgba(95, 95, 95, 1)"
-                texts={["ожиданиям и потребностям"]}
+                texts={[t("mission_title_3")]}
               />
             </motion.span>
           </motion.h2>
 
           <div className={s.jcsb}>
             <p>
-              Комфорт и забота о каждом клиенте —
-              <span>
-                {" "}
-                наша главная цель. Налаженные связи позволяют нам создавать
-                лучший опыт и обеспечивать максимальный комфорт для вашего
-                отдыха.
-              </span>
+              {t("mission_desc_1")}
+              <span>{t("mission_desc_2")}</span>
             </p>
+
             <span className={s.impulse}>
               IMpulSE
               <svg
@@ -186,7 +185,7 @@ export const MissionSection = () => {
             className={s.list}
           >
             <div>
-              <p>Подходящий маршрут</p>
+              <p>{t("mission_list_1")}</p>
               <img
                 className="lg:h-[5vw] h-[16.5vw] lg:-translate-y-2 -translate-y-1"
                 src="/images/mission-list/компас.webp"
@@ -194,7 +193,7 @@ export const MissionSection = () => {
               />
             </div>
             <div>
-              <p>Желанный спорткар</p>
+              <p>{t("mission_list_2")}</p>
               <img
                 className="lg:h-[3.85vw] h-[11.7vw] lg:translate-y-1 translate-y-2"
                 src="/images/mission-list/спорткар.webp"
@@ -202,7 +201,7 @@ export const MissionSection = () => {
               />
             </div>
             <div>
-              <p>Лучшие отели и рестораны</p>
+              <p>{t("mission_list_3")}</p>
               <img
                 className="lg:h-[5vw] h-[16.5vw] -translate-y-2"
                 src="/images/mission-list/ресторани.webp"

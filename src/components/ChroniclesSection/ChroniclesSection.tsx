@@ -14,6 +14,7 @@ import { motion } from "framer-motion";
 import type { Swiper as SwiperType } from "swiper";
 
 import { TextAnimation } from "../TextAnimation/TextAnimation";
+import { useTranslation } from "react-i18next";
 
 interface ImageItem {
   cars: string;
@@ -69,6 +70,8 @@ export const ChroniclesSection = () => {
     }
   }, [selectedCar]);
 
+  const { t } = useTranslation();
+
   if (isLoading) return <p>Loading...</p>;
 
   return (
@@ -84,7 +87,7 @@ export const ChroniclesSection = () => {
         >
           <h2>
             {/* <AnimatedHeading text="Хроники путешествий" /> */}
-            <TextAnimation texts={["Хроники путешествий"]} />
+            <TextAnimation texts={[t("chronicles")]} />
           </h2>
           {!isMobile && <SiteButton />}
         </motion.div>

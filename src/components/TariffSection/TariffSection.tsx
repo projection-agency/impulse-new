@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { Layout } from "../Layout/Layout";
 import s from "./TariffSection.module.css";
 import { AnimatedHeading } from "../AnimatedText/AnimatedText";
+import { useTranslation } from "react-i18next";
 
 const svg = (
   <svg
@@ -52,34 +53,33 @@ const arrow = (
 );
 
 export const TariffSection = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="tariffs" className={s.section}>
       <Layout className={s.layout}>
         <div className={s.titleContainer}>
           <h2>
-            <AnimatedHeading text="Тарифы" />
+            <AnimatedHeading text={t("tariffs")} />
           </h2>
 
-          <p data-aos="fade-up">
-            Индивидуальные туры лучшее решение, где вы сами выбираете даты
-            путешествий на спорткарах для своих важных событий
-          </p>
+          <p data-aos="fade-up">{t("tariffs_desc")}</p>
         </div>
 
         <ul className={s.list}>
           <li data-aos="fade-up">
             <div className={s.infoBlock}>
               <div>
-                <div className={s.memberQty}>{svg} Любое кол-во участников</div>
-
-                <h4>Туры для бизнеса</h4>
+                <div className={s.memberQty}>
+                  {svg} {t("any_qty")}
+                </div>
+                <h4>{t("business_tours")}</h4>
               </div>
 
               <div className={s.bottomFlex}>
-                <p>Для тимбилдингов и бизнес встреч с партнерами</p>
-
+                <p>{t("business_desc")}</p>
                 <Link to="/business-tours">
-                  <span>подробнее</span> {arrow}
+                  <span>{t("more")}</span> {arrow}
                 </Link>
               </div>
             </div>
@@ -87,16 +87,16 @@ export const TariffSection = () => {
           <li data-aos="fade-up">
             <div className={s.infoBlock}>
               <div>
-                <div className={s.memberQty}>{svg} Любое кол-во участников</div>
-
-                <h4>приватные туры</h4>
+                <div className={s.memberQty}>
+                  {svg} {t("any_qty")}
+                </div>
+                <h4>{t("private_tours")}</h4>
               </div>
 
               <div className={s.bottomFlex}>
-                <p>Для пар, друзей и важных событий</p>
-
+                <p>{t("private_desc")}</p>
                 <Link to="/private-tours">
-                  <span>подробнее</span> {arrow}
+                  <span>{t("more")}</span> {arrow}
                 </Link>
               </div>
             </div>

@@ -4,11 +4,14 @@ import { TextAnimation } from "../TextAnimation/TextAnimation";
 import s from "./EssenceSection.module.css";
 import { motion } from "framer-motion";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { useTranslation } from "react-i18next";
 
 export const EssenceSection = () => {
   const { pathname } = useLocation();
   const { width } = useWindowSize();
   const isMobile = width < 1024;
+
+  const { t } = useTranslation();
 
   return (
     <motion.section
@@ -107,25 +110,22 @@ export const EssenceSection = () => {
         </motion.div>
 
         <motion.div className={s.descBlock} variants={fadeUp}>
-          <p className={s.essence}>Суть проекта Impulse Глазами основателя</p>
+          <p className={s.essence}>{t("essence_title")}</p>
 
           <h3>
             <TextAnimation
               texts={[
-                "«Наши автопробеги —",
-                "шанс ощутить за рулем",
-                "спорткара тот самый",
-                "Impulse»",
+                t("essence_text_1"),
+                t("essence_text_2"),
+                t("essence_text_3"),
+                t("essence_text_4"),
               ]}
             />
           </h3>
 
-          <span className={s.span}>© Марк Буткин</span>
+          <span className={s.span}>{t("essence_author")}</span>
 
-          <p className={s.bottomDesc}>
-            Мы позаботились о том, чтобы у нас были машины на любой вкус: от
-            стремительных суперкаров до элегантных премиум-седанов
-          </p>
+          <p className={s.bottomDesc}>{t("essence_desc")}</p>
         </motion.div>
       </Layout>
     </motion.section>

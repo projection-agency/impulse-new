@@ -3,10 +3,11 @@ import { Layout } from "../Layout/Layout";
 import { SiteLogo } from "../SiteLogo/SiteLogo";
 import s from "./Footer.module.css";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { useTranslation } from "react-i18next";
 
 export const Footer = () => {
   const { width } = useWindowSize();
-
+  const { t } = useTranslation();
   const isMobile = width < 1024;
 
   return (
@@ -33,25 +34,15 @@ export const Footer = () => {
 
             {!isMobile && (
               <div className={s.desc}>
-                <p>
-                  Импульс. Это слово идеально отражает суть наших путешествий —
-                  энергию, драйв и вдохновение.
-                </p>
-                <p>
-                  Мы не просто организовываем автопробеги, а создаём моменты,
-                  которые становятся импульсом к переменам, новым эмоциям и
-                  открытиям.
-                </p>
+                <p>{t("footer_desc_1")}</p>
+                <p>{t("footer_desc_2")}</p>
               </div>
             )}
 
             {isMobile && (
               <div className={s.desc}>
                 <p>
-                  Импульс. Это слово идеально отражает суть наших путешествий —
-                  энергию, драйв и вдохновение. Мы не просто организовываем
-                  автопробеги, а создаём моменты, которые становятся импульсом к
-                  переменам, новым эмоциям и открытиям.
+                  {t("footer_desc_1")} {t("footer_desc_2")}
                 </p>
               </div>
             )}
@@ -65,7 +56,7 @@ export const Footer = () => {
 
           <div className={s.contactBlock}>
             <div className={s.address}>
-              <p>Связаться с нами</p>
+              <p>{t("footer_contact")}</p>
 
               <address>
                 <a
@@ -153,9 +144,9 @@ export const Footer = () => {
 
         <div className={s.footerBottomLinks}>
           <p>©2025 Impulse. All rights Reserved</p>
-          <Link to="">Политика конфиденциальности</Link>
+          <Link to="">{t("footer_privacy")}</Link>
           <p>
-            Разработка сайта <a href=""> Before/After</a>
+            {t("footer_dev")} <a href="">{t("footer_dev_name")}</a>
           </p>
         </div>
       </Layout>

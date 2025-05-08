@@ -5,8 +5,8 @@ import { useWindowSize } from "../../hooks/useWindowSize";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router";
-import { anchorsByPage } from "../../utils/anchorsByPage";
 import { useNavigate } from "react-router-dom";
+import { useAnchorsByPage } from "../../utils/anchorsByPage";
 
 interface HeaderProps {
   openConsult: () => void;
@@ -21,11 +21,10 @@ export const Header: FC<HeaderProps> = ({
 }) => {
   const { width } = useWindowSize();
   const isMobile = width < 1024;
-
+  const { t } = useTranslation();
   const [showHeader, setShowHeader] = useState(true);
 
   const { pathname } = useLocation();
-
   const { i18n } = useTranslation();
 
   const changeLanguage = (lng: string) => {
@@ -82,6 +81,7 @@ export const Header: FC<HeaderProps> = ({
 
   const basePath = pathname.startsWith("/tour/") ? "/tour" : pathname;
 
+  const anchorsByPage = useAnchorsByPage();
   const navLinks = anchorsByPage[basePath] || [];
 
   const navigate = useNavigate();
@@ -164,7 +164,7 @@ export const Header: FC<HeaderProps> = ({
                   onClick={() => changeLanguage("ru")}
                   className={i18n.language === "ru" ? s.active : ""}
                 >
-                  РУ
+                  RU
                 </div>
                 <div
                   onClick={() => changeLanguage("en")}
@@ -178,7 +178,7 @@ export const Header: FC<HeaderProps> = ({
             <div className={s.contactContainer}>
               {!isMobile && (
                 <div onClick={openConsult} className={s.contactWithUs}>
-                  <span>Связаться с нами</span>
+                  <span>{t("Оставить заявку")}</span>
                   <svg
                     viewBox="0 0 18 18"
                     fill="none"

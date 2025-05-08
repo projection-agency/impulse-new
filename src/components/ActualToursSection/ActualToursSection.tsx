@@ -8,6 +8,7 @@ import { TextAnimation } from "../TextAnimation/TextAnimation";
 import { Link, useLocation } from "react-router";
 import { useGlobalProps } from "../../GlobalPropContext";
 import { Car } from "../CarsSection/CarsSection";
+import { useTranslation } from "react-i18next";
 
 export interface Day {
   hl_input_title: string;
@@ -102,11 +103,13 @@ export const ActualToursSection = ({
     visible: { opacity: 1, y: 0 },
   };
 
+  const { t } = useTranslation();
+
   return (
     <section id="tours" className={s.section}>
       <Layout>
         <h2 data-aos="fade-up">
-          <TextAnimation texts={["Актуальные", "event-туры"]} />
+          <TextAnimation texts={[t("actual"), t("Event Tours")]} />
         </h2>
 
         <div
@@ -190,10 +193,12 @@ export const ActualToursSection = ({
                   </div>
                 </div>
               </div>
+
               <div className={s.btnContainer}>
-                <div onClick={() => openOrder(item)}>Забронировать </div>
-                <Link to={`/tour/${item.slug}`}>Подробнее</Link>
+                <div onClick={() => openOrder(item)}>{t("Забронировать")}</div>
+                <Link to={`/tour/${item.slug}`}>{t("Подробнее")}</Link>
               </div>
+
               <AnimatePresence>
                 {activeTourId === item.id && (
                   <PopupTour

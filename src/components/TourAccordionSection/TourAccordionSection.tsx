@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import AccordionGroup from "../Accordion/Accordion";
 import { TourType } from "../ActualToursSection/ActualToursSection";
 import { Layout } from "../Layout/Layout";
@@ -34,12 +35,15 @@ export const TourAccordionSection = ({
   };
 
   const shortTourInfo = {
-    title: item.title.rendered, // "LAMBORGHINI, FERRARI..." → "LAMBORGHINI"
-    location: "Германия, Италия", // можеш витягувати з input_route якщо треба динамічно
+    title: item.title.rendered,
+    location: "Германия, Италия",
     date: `${formatDate(item.input_date_start)} – ${formatDate(
       item.input_date_end
     ).slice(5)}`,
   };
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { t } = useTranslation();
 
   const arrow = (
     <svg
@@ -137,7 +141,7 @@ export const TourAccordionSection = ({
               onClick={() => openOrder(item)}
               data-aos="fade-up"
             >
-              Забронировать
+              {t("Забронировать")}
               <svg
                 viewBox="0 0 12 12"
                 fill="none"
@@ -162,7 +166,7 @@ export const TourAccordionSection = ({
             <AccordionGroup
               items={[
                 {
-                  title: "Включено в стоимость",
+                  title: t("acc_included"),
                   content: (
                     <ul>
                       {item.price_include.map((item: string, index: number) => (
@@ -173,7 +177,7 @@ export const TourAccordionSection = ({
                 },
 
                 {
-                  title: "Не включено в стоимость",
+                  title: t("acc_not_included"),
                   content: (
                     <ul>
                       {item.price_uninclude.map(
@@ -186,15 +190,15 @@ export const TourAccordionSection = ({
                 },
 
                 {
-                  title: "стоимость тура",
+                  title: t("acc_price_title"),
                   content: (
                     <div className={s.accordion}>
                       <div className={s.priceAcardon}>
                         <div>
                           <h4>1. {item.coast_title_1}</h4>
                           <ul>
-                            <p>- Шеринг спорткара между двумя участниками</p>
-                            <p>- Проживание в отеле в двухместном номере</p>
+                            <p>{t("acc_car_share")}</p>
+                            <p>{t("acc_hotel")}</p>
                           </ul>
 
                           {item.coast_content_11 && (
@@ -205,8 +209,7 @@ export const TourAccordionSection = ({
                           )}
 
                           <p className="lg:mb-[0.8vw]  mb-[2.1vw]">
-                            Специальная цена при бронировании двух мест сразу
-                            (для друзей или пар):
+                            {t("acc_special_price")}
                           </p>
 
                           {item.coast_content_12 && (
@@ -220,8 +223,8 @@ export const TourAccordionSection = ({
                         <div>
                           <h4>2. {item.coast_title_2}</h4>
                           <ul>
-                            <p>- Шеринг спорткара между двумя участниками</p>
-                            <p>- Проживание в отеле в двухместном номере</p>
+                            <p>{t("acc_car_share")}</p>
+                            <p>{t("acc_hotel")}</p>
                           </ul>
 
                           {item.coast_content_21 && (
@@ -234,8 +237,7 @@ export const TourAccordionSection = ({
                           {item.coast_content_22 && (
                             <>
                               <p className="lg:mb-[0.8vw] mb-[2.1vw]">
-                                Специальная цена при бронировании двух мест
-                                сразу (для друзей или пар):
+                                {t("acc_special_price")}
                               </p>
 
                               <div className={s.priceBlock}>

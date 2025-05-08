@@ -6,6 +6,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { Layout } from "../Layout/Layout";
 import { useLocation } from "react-router";
+import { useTranslation } from "react-i18next";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -166,16 +167,18 @@ export const GallerySection = () => {
     };
   }, [business]);
 
+  const { t } = useTranslation();
+
   return (
     <section id="tour-memories" ref={gallerySectionRef} className={s.section}>
       <div className={s.marquee}>
         <div className={s.marqueeInner}>
-          <h2>Сотни клиентов, которые доверились нам </h2>
+          <h2>{t("galleryTitle")} </h2>
           <span> </span>
-          <h2>Сотни клиентов, которые доверились нам </h2>
+          <h2>{t("galleryTitle")} </h2>
           <span> </span>
 
-          <h2>Сотни клиентов, которые доверились нам </h2>
+          <h2>{t("galleryTitle")} </h2>
           <span> </span>
         </div>
       </div>
@@ -184,7 +187,7 @@ export const GallerySection = () => {
         <Layout>
           <h3
             data-aos="fade-up"
-            data-aos-offset={isMobile ? "700" : "800"}
+            data-aos-offset={isMobile ? "701" : "800"}
             className={s.galleryTitle}
           >
             memories

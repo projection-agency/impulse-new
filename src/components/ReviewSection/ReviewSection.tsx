@@ -6,6 +6,7 @@ import s from "./ReviewSection.module.css";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { AnimatedHeading } from "../AnimatedText/AnimatedText";
+import { useTranslation } from "react-i18next";
 
 const fetchReviews = async () => {
   const { data } = await axios.get(`${API_URL}wp-json/wp/v2/review`);
@@ -78,6 +79,8 @@ export const ReviewSection = () => {
   const currentItem = data[currentIndex];
   const hasVideo = Boolean(currentItem?.load_video_text);
 
+  const { t } = useTranslation();
+
   if (isLoading) {
     return <p>Loading</p>;
   }
@@ -90,7 +93,7 @@ export const ReviewSection = () => {
     <section id="reviews" className={s.section}>
       <Layout className={s.container}>
         <h2>
-          <AnimatedHeading text="отзывы участников" />
+          <AnimatedHeading text={t("reviews_heading")} />
         </h2>
         <div className={s.reviewContainer}>
           <div className={s.reviewerInfoContainer}>

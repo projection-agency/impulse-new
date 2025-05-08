@@ -2,53 +2,32 @@ import { useState, useEffect, useRef } from "react";
 import s from "./ServicesSection.module.css";
 import { Layout } from "../Layout/Layout";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { useTranslation } from "react-i18next";
 
 const tabs = [
   {
     id: 1,
-    tab: "Полет на вертолете",
-    title: "Полет на <br/> вертолете",
     image: "/images/services-images/helicopter.avif",
-    description:
-      "Захватывающий вид с высоты, яркие эмоции и уникальная возможность увидеть самые красивые места маршрута с недоступной на земле перспективы",
   },
   {
     id: 2,
-    tab: "Проживание в  роскошных отелях",
-    title: "Проживание в <br/> роскошных отелях",
     image: "/images/services-images/hotels.avif",
-    description:
-      "Изысканные номера в отелях, соответствующих высочайшим стандартам премиального отдыха",
   },
   {
     id: 3,
-    tab: "Гастрономические приключения",
-    title: "Гастрономические <br/> приключения",
     image: "/images/services-images/hastro.avif",
-    description:
-      "Погружение в мир уникальных вкусов с изысканными блюдами и авторской кухней",
   },
   {
     id: 4,
-    tab: "Профессиональная  фото и видеосъёмка",
-    title: "Профессиональная <br/> фото и видеосъёмка",
     image: "/images/services-images/photos.avif",
-    description:
-      "Лучшие моменты вашего отдыха в кадрах, выполненных с непревзойдённым мастерством и уникальным стилем",
   },
   {
     id: 5,
-    tab: "Брендирование авто, и вертолётов ",
-    title: "Брендирование авто, <br/> и вертолётов",
     image: "/images/services-images/hastro.avif",
-    description: "Уникальная деталь для полного погружения в эксклюзивность",
   },
   {
     id: 6,
-    tab: "Индивидуальные номерные знаки",
-    title: "Индивидуальные <br/> номерные знаки",
     image: "/images/services-images/numbers.avif",
-    description: "Частичка вас, дополняющая атмосферу путешествия",
   },
 ];
 
@@ -135,6 +114,8 @@ export const ServicesSection = () => {
     }, 10000);
   };
 
+  const { t } = useTranslation();
+
   return (
     <section
       ref={sectionRef}
@@ -158,7 +139,7 @@ export const ServicesSection = () => {
               >
                 <p className={`${tab.id === activeTab ? s.active : ""}`}>
                   <span>0{tab.id}</span>
-                  <span>{tab.tab}</span>
+                  <span>{t(`services_tab_${tab.id}`)}</span>
                 </p>
 
                 <div className={s.progressLayout}>
@@ -197,15 +178,12 @@ export const ServicesSection = () => {
 
         <div className={s.tabContent}>
           <div className={s.titleContainer}>
-            <p>Дополнительные бонусы к вашему путешествию</p>
+            <p>{t("services_top")}</p>
 
             {activeTab !== null && (
               <h2
                 dangerouslySetInnerHTML={{
-                  __html: tabs[activeTab - 1]?.title.replace(
-                    /<br\s*\/?>/g,
-                    "<br /> "
-                  ),
+                  __html: t(`services_title_${activeTab}`),
                 }}
               ></h2>
             )}
@@ -213,7 +191,7 @@ export const ServicesSection = () => {
 
           {activeTab !== null && (
             <div className={s.tabDesc}>
-              <p>{tabs[activeTab - 1].description}</p>
+              <p>{t(`services_desc_${activeTab}`)}</p>
             </div>
           )}
         </div>

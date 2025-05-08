@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import s from "./TourDaysSection.module.css";
 import { Day } from "../ActualToursSection/ActualToursSection";
 import { AnimatedHeading } from "../AnimatedText/AnimatedText";
+import { useTranslation } from "react-i18next";
 
 interface TourDaysProps {
   info: {
@@ -25,7 +26,7 @@ interface TourDaysProps {
 
 export const TourDaysSection: FC<TourDaysProps> = ({ info }) => {
   const [currentDay, setCurrentDay] = useState(0);
-
+  const { t } = useTranslation();
   const totalDays = info.save_data_text.length;
   const currentSlide = info.save_data_text[currentDay];
 
@@ -130,7 +131,7 @@ export const TourDaysSection: FC<TourDaysProps> = ({ info }) => {
       </div>
       <div className={s.routeContainer}>
         <h3>
-          <AnimatedHeading text="маршрут" />
+          <AnimatedHeading text={t("route")} />
         </h3>
 
         <div className={s.routeImage}>

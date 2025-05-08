@@ -3,11 +3,14 @@ import s from "./PopupConsultation.module.css";
 import { PhoneNumberInput } from "../FormSection/PhoneNumberInput";
 import CustomCheckbox from "../FormSection/CustomCheckbox";
 import { TextAnimation } from "../TextAnimation/TextAnimation";
+import { useTranslation } from "react-i18next";
 
 export const PopupConsultation = ({ onClose }: { onClose: () => void }) => {
   const handleCheckboxChange = (checked: boolean) => {
     console.log("Чекбокс:", checked);
   };
+
+  const { t } = useTranslation();
 
   return (
     <motion.div
@@ -31,12 +34,12 @@ export const PopupConsultation = ({ onClose }: { onClose: () => void }) => {
 
             <div className={s.title}>
               <span className="block lg:mb-[0.7vw]" data-aos="fade-up">
-                остались вопросы?
+                {t("contact_questions")}
               </span>
 
               <h2>
                 <TextAnimation
-                  texts={["мы Поможем подобрать", "идеальный маршрут"]}
+                  texts={[t("contact_title_1"), t("contact_title_2")]}
                 />
               </h2>
             </div>
@@ -59,44 +62,47 @@ export const PopupConsultation = ({ onClose }: { onClose: () => void }) => {
             </button>
 
             <div className={s.formContainer}>
-              <h3>
-                Заполните контактную форму и наш менеджер свяжется с вами в
-                ближайшее время
-              </h3>
+              <h3>{t("form_subtitle")}</h3>
 
               <form>
                 <div className={s.inputsBlock}>
                   <label>
-                    Имя <span>*</span>
-                    <input type="text" placeholder="Введите свое имя" />
-                  </label>
-
-                  <label>
-                    Instagram <span>*</span>
+                    {t("form_name_label")} <span>*</span>
                     <input
                       type="text"
-                      placeholder="Введите свой ник Instagram"
+                      placeholder={t("form_name_placeholder")}
                     />
                   </label>
 
                   <label>
-                    Номер телефона<span>*</span>
+                    {t("form_instagram_label")} <span>*</span>
+                    <input
+                      type="text"
+                      placeholder={t("form_instagram_placeholder")}
+                    />
+                  </label>
+
+                  <label>
+                    {t("form_phone_label")} <span>*</span>
                     <PhoneNumberInput />
                   </label>
 
                   <label>
-                    Интересующий тур <span>*</span>
-                    <textarea placeholder="Опишите интересующий вопрос"></textarea>
+                    {t("textarea_label")} <span>*</span>
+                    <textarea
+                      placeholder={t("textarea_placeholder")}
+                    ></textarea>
                   </label>
                 </div>
 
                 <CustomCheckbox
-                  label="Я соглашаюсь с Политикой конфиденциальности"
+                  label={t("form_checkbox")}
                   onChange={handleCheckboxChange}
                 />
 
                 <button className={s.submitBtn} type="submit">
-                  оставить заявку
+                  <span>{t("form_submit")}</span>
+
                   <svg
                     viewBox="0 0 13 12"
                     fill="none"
