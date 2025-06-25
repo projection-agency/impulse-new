@@ -57,7 +57,7 @@ export const FormSection = () => {
           start: "top top",
           end: "+=1000",
           scrub: true,
-          pinSpacing: false,
+          pinSpacing: true,
           anticipatePin: 1,
         },
       });

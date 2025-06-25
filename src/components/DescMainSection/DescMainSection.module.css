@@ -125,14 +125,14 @@
 
 .topImagesContainer img {
   position: relative;
-  z-index: 999;
+  z-index: 0;
   transition: 1;
 }
 
 .topImagesContainer {
   display: flex;
   justify-content: space-between;
-  min-height: 150vh;
+  min-height: 100vh;
 
   .separate {
     width: 21.8vw;

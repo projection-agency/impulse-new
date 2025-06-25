@@ -17,6 +17,7 @@ export const GallerySection = () => {
   const { width } = useWindowSize();
   const [business, setBusiness] = useState(false);
   const isMobile = width < 1024;
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const gallery = [
     {
@@ -74,49 +75,59 @@ export const GallerySection = () => {
   const offset = isMobile ? "600" : "450";
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (!gallerySectionRef.current || !galleryImageRef.current) return;
+    const img = galleryImageRef.current;
+    if (!img) return;
 
-      galleryImageRef.current.style.webkitMaskSize = isMobile
-        ? "10vw 10vw"
-        : "7%";
-      galleryImageRef.current.style.maskSize = isMobile ? "10vw 10vw" : "7%";
-      galleryImageRef.current.style.webkitMaskPosition = "center 24vw";
-      galleryImageRef.current.style.maskPosition = "center 24vw";
+    const handleLoad = () => setImageLoaded(true);
 
-      const animation = gsap.fromTo(
-        galleryImageRef.current,
-        {
-          WebkitMaskSize: isMobile ? "10vw 10vw" : "7%",
-          maskSize: isMobile ? "10vw 10vw" : "7%",
-          WebkitMaskPosition: "center 24vw",
+    if (img.complete) {
+      handleLoad();
+    } else {
+      img.addEventListener('load', handleLoad);
+      return () => img.removeEventListener('load', handleLoad);
+    }
+  }, [business]);
+
+  useEffect(() => {
+    if (!gallerySectionRef.current || !galleryImageRef.current || !imageLoaded) return;
+
+    galleryImageRef.current.style.webkitMaskSize = isMobile
+      ? "10vw 10vw"
+      : "0%";
+    galleryImageRef.current.style.maskSize = isMobile ? "10vw 10vw" : "0%";
+    galleryImageRef.current.style.webkitMaskPosition = "center 40vw";
+    galleryImageRef.current.style.maskPosition = "center 40vw";
+
+    const animation = gsap.fromTo(
+      galleryImageRef.current,
+      {
+        WebkitMaskSize: isMobile ? "10vw 10vw" : "0%",
+        maskSize: isMobile ? "10vw 10vw" : "0%",
+        WebkitMaskPosition: "center 40vw",
+      },
+      {
+        WebkitMaskSize: isMobile ? "1000%" : "300%",
+        maskSize: isMobile ? "1000%" : "300%",
+        WebkitMaskPosition: "center -40vw",
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: gallerySectionRef.current,
+          start: isMobile ? "top 50%" : "top top",
+          end: isMobile ? "+=500" : "+=100",
+          scrub: 1.5,
+          refreshPriority: 1,
+          invalidateOnRefresh: true,
         },
-        {
-          WebkitMaskSize: isMobile ? "1000%" : "300%",
-          maskSize: isMobile ? "1000%" : "300%",
-          WebkitMaskPosition: "center -40vw",
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: gallerySectionRef.current,
-            start: isMobile ? "top 50%" : "top 10%",
-            end: isMobile ? "+=500" : "+=100",
-            scrub: 1,
-            refreshPriority: 1,
-            invalidateOnRefresh: true,
-          },
-        }
-      );
+      }
+    );
 
-      ScrollTrigger.refresh();
+    ScrollTrigger.refresh();
 
-      return () => {
-        animation.scrollTrigger?.kill();
-        animation.kill();
-      };
-    }, 3000);
-
-    return () => clearTimeout(timeout);
-  }, [isMobile]);
+    return () => {
+      animation.scrollTrigger?.kill();
+      animation.kill();
+    };
+  }, [isMobile, imageLoaded]);
 
   useEffect(() => {
     const handleLoad = () => {
@@ -146,27 +157,6 @@ export const GallerySection = () => {
     }
   }, [pathname]);
 
-  useEffect(() => {
-    const img = galleryImageRef.current;
-    if (!img) return;
-
-    const handleImageLoad = () => {
-      console.log("Image loaded, refreshing ScrollTrigger");
-      ScrollTrigger.refresh();
-    };
-
-    if (img.complete) {
-      // якщо картинка кешована
-      handleImageLoad();
-    } else {
-      img.addEventListener("load", handleImageLoad);
-    }
-
-    return () => {
-      img.removeEventListener("load", handleImageLoad);
-    };
-  }, [business]);
-
   const { t } = useTranslation();
 
   return (
@@ -174,25 +164,11 @@ export const GallerySection = () => {
       <div className={s.marquee}>
         <div className={s.marqueeInner}>
           <h2>{t("galleryTitle")} </h2>
-          <span> </span>
-          <h2>{t("galleryTitle")} </h2>
-          <span> </span>
-
-          <h2>{t("galleryTitle")} </h2>
-          <span> </span>
         </div>
       </div>
 
       <div className={s.galleryBlock}>
-        <Layout>
-          <h3
-            data-aos="fade-up"
-            data-aos-offset={isMobile ? "701" : "800"}
-            className={s.galleryTitle}
-          >
-            memories
-          </h3>
-        </Layout>
+        
         <img
           ref={galleryImageRef}
           src={

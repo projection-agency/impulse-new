@@ -40,11 +40,11 @@ export const DescMainSection = () => {
       <Layout>
         <div className={s.videoTitleContainer}>
           <span className={s.bigTitle}>ИМПУЛЬС</span>
-          <div className={s.video}>
+          {/* <div className={s.video}>
             <video autoPlay loop muted playsInline>
               <source src="/images/main-page-video.mp4" />
             </video>
-          </div>
+          </div> */}
 
           <div className={s.infoBlock}>
             <div>
