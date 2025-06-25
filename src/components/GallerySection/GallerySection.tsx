@@ -4,7 +4,6 @@ import "aos/dist/aos.css";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useWindowSize } from "../../hooks/useWindowSize";
-import { Layout } from "../Layout/Layout";
 import { useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 
