@@ -65,7 +65,7 @@
 
 .galleryList {
   position: absolute;
-  top: 35vw;
+  top: 25vw;
   /* transform: translateY(5vw); */
   opacity: 1;
   transition: 1s;
