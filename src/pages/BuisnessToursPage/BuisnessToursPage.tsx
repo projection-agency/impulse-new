@@ -16,14 +16,12 @@ import { PageProps } from "../PrivateToursPage/PrivateToursPage";
 export const BuisnessToursPage: FC<PageProps> = ({
   openOrder,
   openConsult,
-  loading,
   openVideo,
 }) => {
   return (
     <main>
       <HomeHero
         openVideo={openVideo}
-        loading={loading}
         openOrder={openOrder}
         openConsult={openConsult}
       />

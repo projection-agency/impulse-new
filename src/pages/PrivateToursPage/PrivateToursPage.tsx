@@ -22,14 +22,12 @@ export interface PageProps {
 export const PrivateToursPage: FC<PageProps> = ({
   openOrder,
   openConsult,
-  loading,
   openVideo,
 }) => {
   return (
     <main>
       <HomeHero
         openVideo={openVideo}
-        loading={!!loading}
         openOrder={openOrder}
         openConsult={openConsult}
       />

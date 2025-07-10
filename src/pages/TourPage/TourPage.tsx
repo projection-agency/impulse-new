@@ -16,7 +16,6 @@ import { TourAccordionSection } from "../../components/TourAccordionSection/Tour
 export const TourPage: FC<MainPageProps> = ({
   openOrder,
   openConsult,
-  loading,
   openVideo,
 }) => {
   const { tours } = useGlobalProps();
@@ -30,7 +29,6 @@ export const TourPage: FC<MainPageProps> = ({
     <main>
       <HomeHero
         openVideo={openVideo}
-        loading={!!loading}
         openOrder={openOrder}
         openConsult={openConsult}
         actualTour={actualTour}

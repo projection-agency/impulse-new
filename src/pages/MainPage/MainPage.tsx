@@ -18,14 +18,12 @@ export interface MainPageProps {
 export const MainPage: FC<MainPageProps> = ({
   openOrder,
   openConsult,
-  loading,
   openVideo,
 }) => {
   return (
     <main>
       <HomeHero
         openVideo={openVideo}
-        loading={!!loading}
         openOrder={openOrder}
         openConsult={openConsult}
       />

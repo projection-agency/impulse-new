@@ -54,13 +54,11 @@ const calendarIcon = (
 export const HomeHero = ({
   openOrder,
   openConsult,
-  loading,
   openVideo,
   actualTour,
 }: {
   openOrder: (tour?: TourType) => void;
   openConsult: () => void;
-  loading: boolean;
   openVideo: () => void;
   actualTour?: TourType;
 }) => {
@@ -157,7 +155,6 @@ export const HomeHero = ({
           )}
         </div>
 
-        {(!loading && (
           <div className={s.heroTitleContainer}>
             <span data-aos="fade-up">
               {isTourPage && actualTour
@@ -241,7 +238,6 @@ export const HomeHero = ({
               </div>
             )}
           </div>
-        )) || <div style={{ minHeight: "100vh" }}></div>}
 
         <Layout>
           <div className={s.heroBottomContainer}>
