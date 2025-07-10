@@ -30,7 +30,7 @@ export const TourPage: FC<MainPageProps> = ({
     <main>
       <HomeHero
         openVideo={openVideo}
-        loading={loading}
+        loading={!!loading}
         openOrder={openOrder}
         openConsult={openConsult}
         actualTour={actualTour}

@@ -11,7 +11,7 @@ import { TariffSection } from "../../components/TariffSection/TariffSection";
 export interface MainPageProps {
   openOrder: () => void;
   openConsult: () => void;
-  loading: boolean;
+  loading?: boolean;
   openVideo: () => void;
 }
 
@@ -25,7 +25,7 @@ export const MainPage: FC<MainPageProps> = ({
     <main>
       <HomeHero
         openVideo={openVideo}
-        loading={loading}
+        loading={!!loading}
         openOrder={openOrder}
         openConsult={openConsult}
       />

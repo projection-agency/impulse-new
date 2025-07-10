@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from "react";
 import { PopupConsultation } from "./components/PopupConsultation/PopupConsultation";
 import { PopupOrder } from "./components/PopupOrder/PopupOrder";
 import { useQuery } from "@tanstack/react-query";
-import Loader from "./components/Loader/Loader";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { TourType } from "./components/ActualToursSection/ActualToursSection";
@@ -23,7 +22,7 @@ import { EventToursPage } from "./pages/EventToursPage/EventToursPage";
 import { ContactPage } from "./pages/ContactPage/ContactPage";
 import { useWindowSize } from "./hooks/useWindowSize";
 
-export const API_URL = "https://www.impulse.projection-learn.website/";
+export const API_URL = "https://api.impulse-sportcars.com/";
 
 const fetchGallery = async () => {
   const { data } = await axios.get(`${API_URL}wp-json/wp/v2/tour`);
@@ -33,8 +32,6 @@ const fetchGallery = async () => {
 export const App = () => {
   const [consultPopup, setConsultPopup] = useState(false);
   const [orderPopup, setOrderPopup] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [fadeOutLoader, setFadeOutLoader] = useState(false);
   const [selectedTour, setSelectedTour] = useState<TourType | null>(null);
   const [videoOpen, setVideoOpen] = useState(false);
   const [menuPopupIsOpen, setMenuPopupIsopen] = useState(false);
@@ -52,11 +49,6 @@ export const App = () => {
   useEffect(() => {
     Aos.init();
 
-    const timeout = setTimeout(() => {
-      setFadeOutLoader(true);
-      setLoading(false);
-    }, 6000);
-
     if (window.innerWidth >= 1024) {
       const lenis = new Lenis({ lerp: 0.1 });
       lenisRef.current = lenis;
@@ -71,7 +63,6 @@ export const App = () => {
     }
 
     return () => {
-      clearTimeout(timeout);
       lenisRef.current?.destroy();
     };
   }, []);
@@ -109,21 +100,7 @@ export const App = () => {
 
   return (
     <GlobalPropsContext.Provider value={globalProps}>
-      {loading && (
-        <div
-          className={`fixed inset-0 z-50 transition-opacity duration-1000 bg-white ${
-            fadeOutLoader ? "opacity-0 pointer-events-none" : "opacity-100"
-          }`}
-        >
-          <Loader />
-        </div>
-      )}
-
-      <div
-        className={`transition-opacity duration-1000 ${
-          fadeOutLoader ? "opacity-100" : "opacity-0"
-        }`}
-      >
+      <div>
         <Header
           toggleMenuPopup={handleToggleMenuPopup}
           openConsult={handleToggleConsult}
@@ -135,7 +112,6 @@ export const App = () => {
             path="/private-tours"
             element={
               <PrivateToursPage
-                loading={loading}
                 openOrder={handleToggleOrder}
                 openConsult={handleToggleConsult}
                 openVideo={() => setVideoOpen(true)}
@@ -146,7 +122,6 @@ export const App = () => {
             path="/business-tours"
             element={
               <PrivateToursPage
-                loading={loading}
                 openOrder={handleToggleOrder}
                 openConsult={handleToggleConsult}
                 openVideo={() => setVideoOpen(true)}
@@ -157,7 +132,6 @@ export const App = () => {
             path="/tour/:slug"
             element={
               <TourPage
-                loading={loading}
                 openOrder={handleToggleOrder}
                 openConsult={handleToggleConsult}
                 openVideo={() => setVideoOpen(true)}
@@ -176,7 +150,6 @@ export const App = () => {
             path="/"
             element={
               <MainPage
-                loading={loading}
                 openOrder={handleToggleOrder}
                 openConsult={handleToggleConsult}
                 openVideo={() => setVideoOpen(true)}

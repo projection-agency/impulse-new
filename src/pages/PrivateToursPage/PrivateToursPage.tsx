@@ -15,7 +15,7 @@ import { FC } from "react";
 export interface PageProps {
   openOrder: () => void;
   openConsult: () => void;
-  loading: boolean;
+  loading?: boolean;
   openVideo: () => void;
 }
 
@@ -29,7 +29,7 @@ export const PrivateToursPage: FC<PageProps> = ({
     <main>
       <HomeHero
         openVideo={openVideo}
-        loading={loading}
+        loading={!!loading}
         openOrder={openOrder}
         openConsult={openConsult}
       />

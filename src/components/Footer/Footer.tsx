@@ -146,7 +146,7 @@ export const Footer = () => {
           <p>©2025 Impulse. All rights Reserved</p>
           <Link to="">{t("footer_privacy")}</Link>
           <p>
-            {t("footer_dev")} <a href="">{t("footer_dev_name")}</a>
+            {t("footer_dev")} <a href="https://www.instagram.com/before_after.agency?igsh=MTVyMTIxaTE4ZmRobA==" target="_blank">{t("footer_dev_name")}</a>
           </p>
         </div>
       </Layout>

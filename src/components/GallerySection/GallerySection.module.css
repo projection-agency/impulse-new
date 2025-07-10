@@ -1,7 +1,7 @@
 .section {
   position: relative;
   overflow: hidden;
-  padding-top: 20.6vw;
+  padding-top: 10.6vw;
 
   h2 {
     font-family: "Druk Cyr", sans-serif;
@@ -147,7 +147,8 @@
 @media (max-width: 1024px) {
   .section {
     h2 {
-      font-size: 16.5vw;
+      font-size: 10.8vw;
+      width: 90%;
     }
 
     .galleryBlock {
