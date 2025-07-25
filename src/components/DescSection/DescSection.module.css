@@ -12,7 +12,7 @@
     margin: 0 auto;
     position: sticky;
     top: 2vw;
-    z-index: 1; /* Менший ніж у фото */
+    z-index: 1000; /* Менший ніж у фото */
     margin-bottom: 15vw;
 
     svg {

@@ -10,6 +10,13 @@ import { useGlobalProps } from "../../GlobalPropContext";
 import { Car } from "../CarsSection/CarsSection";
 import { useTranslation } from "react-i18next";
 
+interface ServiceTab {
+  id: number;
+  image: string;
+  title: string;
+  description: string;
+}
+
 export interface Day {
   hl_input_title: string;
   hl_image_image: string;
@@ -41,8 +48,27 @@ export interface TourType {
   price_include: string[];
   price_uninclude: string[];
   load_image_text_image: string;
+  load_video_text_main_image: string;
+  load_video_text_main_video: string;
+  load_video_text_main_showreel: string;
+  tour_swiper_title_1: string;
+  tour_swiper_title_2: string;
+  tour_swiper_title_3: string;
+  tour_swiper_title_4: string;
+  tour_swiper_title_5: string;
+  tour_swiper_desc_1: string;
+  tour_swiper_desc_2: string;
+  tour_swiper_slides_data: SlideData[];
   slug: string;
   cars: Car[];
+  services_tabs_data?: ServiceTab[];
+}
+
+interface SlideData {
+  id: number;
+  image: string;
+  title: string;
+  desc: string;
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -114,7 +140,7 @@ export const ActualToursSection = ({
 
         <div
           className={`${s.list} ${
-            pathname === "/actual-tours" ? s.eventPage : ""
+            pathname === "/actual-tours" || data.length > 2 ? s.eventPage : ""
           }`}
         >
           {data.map((item: TourType, index: number) => (

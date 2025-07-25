@@ -128,9 +128,9 @@ export const VideoPopup = ({
         <div className={`${s.controls} ${showControls ? s.visible : s.hidden}`}>
           <button onClick={togglePlay} className={s.playBtn}>
             {isPlaying ? (
-              <img src="images/pause.png" />
+              <img src="/images/pause.png" />
             ) : (
-              <img src="images/play.png" />
+              <img src="/images/play.png" />
             )}
           </button>
 

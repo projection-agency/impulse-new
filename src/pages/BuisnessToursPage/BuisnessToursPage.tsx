@@ -16,15 +16,10 @@ import { PageProps } from "../PrivateToursPage/PrivateToursPage";
 export const BuisnessToursPage: FC<PageProps> = ({
   openOrder,
   openConsult,
-  openVideo,
 }) => {
   return (
     <main>
-      <HomeHero
-        openVideo={openVideo}
-        openOrder={openOrder}
-        openConsult={openConsult}
-      />
+      <HomeHero openOrder={openOrder} openConsult={openConsult} />
 
       <DescSection />
 

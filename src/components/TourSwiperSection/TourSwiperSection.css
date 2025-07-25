@@ -5,6 +5,7 @@
   .swiper-slide {
     transition: opacity 0.3s;
     aspect-ratio: 16 / 12;
+    opacity: 0;
   }
 
   .swiper-slide-active {
@@ -13,8 +14,11 @@
     }
   }
 
-  .swiper-slide-prev {
-    opacity: 0;
+  .swiper-slide-active {
+    opacity: 1;
+  }
+  .swiper-slide-next {
+    opacity: 1;
   }
 }
 

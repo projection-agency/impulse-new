@@ -7,33 +7,8 @@ import { AnimatedHeading } from "../AnimatedText/AnimatedText";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 import { TourType } from "../ActualToursSection/ActualToursSection";
-
-const videos = [
-  { src: "/temp/hero-video.mp4", poster: "/images/stub-hero-image.avif" },
-  { src: "/temp/video.mp4", poster: "/images/stub-hero-image.avif" },
-  { src: "/temp/hero-video.mp4", poster: "/images/stub-hero-image.avif" },
-];
-
-const tabs = [
-  {
-    image: "/temp/lamb.jpg",
-    car: "Lamborghini 2.0",
-    route: "Munich, Dolomites, Bologna",
-    date: "01.06 - 05.06",
-  },
-  {
-    image: "/temp/bmw.jpg",
-    car: "BMW",
-    route: "Munich, Dolomites",
-    date: "01.06 - 05.06",
-  },
-  {
-    image: "/temp/porsche.jpg",
-    car: "Porsche 911",
-    route: "Switzerland",
-    date: "01.06 - 05.06",
-  },
-];
+import { useGlobalProps } from "../../GlobalPropContext";
+import { VideoPopup } from "../VideoPopup/VideoPopup";
 
 const calendarIcon = (
   <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,12 +29,10 @@ const calendarIcon = (
 export const HomeHero = ({
   openOrder,
   openConsult,
-  openVideo,
   actualTour,
 }: {
   openOrder: (tour?: TourType) => void;
   openConsult: () => void;
-  openVideo: () => void;
   actualTour?: TourType;
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -68,14 +41,16 @@ export const HomeHero = ({
   const [heroTitle, setHeroTitle] = useState("");
   const [desc, setDesc] = useState("");
   const { t } = useTranslation();
+  const { tours } = useGlobalProps();
+  const [videoOpen, setVideoOpen] = useState(false);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % videos.length);
+      setActiveIndex((prevIndex) => (prevIndex + 1) % tours.length);
     }, 20000);
 
     return () => clearTimeout(timeout);
-  }, [activeIndex]);
+  }, [activeIndex, tours.length]);
 
   const { pathname } = useLocation();
 
@@ -121,6 +96,21 @@ export const HomeHero = ({
     }
   }, [pathname, t, actualTour]);
 
+  console.log(actualTour);
+
+  // Визначаємо яке відео показувати
+  const getCurrentVideoSrc = () => {
+    if (isTourPage && actualTour) {
+      return actualTour.load_video_text_main_showreel || "/temp/hero-video.mp4";
+    } else {
+      // Для головної сторінки використовуємо активний тур з swiperController
+      const activeTour = tours[activeIndex];
+      return (
+        activeTour?.load_video_text_main_showreel || "/temp/hero-video.mp4"
+      );
+    }
+  };
+
   return (
     <>
       <section className={s.section}>
@@ -128,122 +118,126 @@ export const HomeHero = ({
           {isTourPage ? (
             <video
               className={`${s.video} ${s.active}`}
-              poster={videos[0].poster}
+              poster={actualTour?.load_image_text_main_image}
               autoPlay
               loop
               muted
               playsInline
             >
-              <source src={videos[0].src} type="video/mp4" />
+              <source
+                src={actualTour?.load_video_text_main_video}
+                type="video/mp4"
+              />
             </video>
           ) : (
-            videos.map((video, index) => (
+            tours.map((video, index) => (
               <video
                 key={index}
                 className={`${s.video} ${
                   index === activeIndex ? s.active : s.hidden
                 }`}
-                poster={video.poster}
+                poster={video.load_image_text_main_image}
                 autoPlay
                 loop
                 muted
                 playsInline
               >
-                <source src={video.src} type="video/mp4" />
+                <source
+                  src={video.load_video_text_main_video}
+                  type="video/mp4"
+                />
               </video>
             ))
           )}
         </div>
 
-          <div className={s.heroTitleContainer}>
-            <span data-aos="fade-up">
-              {isTourPage && actualTour
-                ? `${t("date")}: ${formatDate(
-                    actualTour.input_date_start
-                  )} - ${formatDate(actualTour.input_date_end)}`
-                : "Формат:"}
-            </span>
+        <div className={s.heroTitleContainer}>
+          <span data-aos="fade-up">
+            {isTourPage && actualTour
+              ? `${t("date")}: ${formatDate(
+                  actualTour.input_date_start
+                )} - ${formatDate(actualTour.input_date_end)}`
+              : "Формат:"}
+          </span>
 
-            <h1>
-              {isMobile ? heroTitle : <AnimatedHeading text={heroTitle} />}
-            </h1>
+          <h1>{isMobile ? heroTitle : <AnimatedHeading text={heroTitle} />}</h1>
 
-            <p data-aos="fade-up">{desc}</p>
+          <p data-aos="fade-up">{desc}</p>
 
-            {actualTour ? (
-              <div
-                className={s.a}
-                onClick={() => openOrder(actualTour)}
-                data-aos="fade-up"
+          {actualTour ? (
+            <div
+              className={s.a}
+              onClick={() => openOrder(actualTour)}
+              data-aos="fade-up"
+            >
+              {t("bookTour")}
+              <svg
+                viewBox="0 0 12 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                {t("bookTour")}
+                <g clipPath="url(#clip0_1398_14919)">
+                  <path
+                    d="M2.39999 0V2.39999H7.79999L0 10.2L1.79999 12L9.60001 4.19997V9.59998H12V0H2.39999Z"
+                    fill="white"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_1398_14919">
+                    <rect width="12" height="12" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </div>
+          ) : (
+            <a data-aos="fade-up" href="#tours">
+              {t("actualTours")}
+              <svg
+                viewBox="0 0 12 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clipPath="url(#clip0_1398_14919)">
+                  <path
+                    d="M2.39999 0V2.39999H7.79999L0 10.2L1.79999 12L9.60001 4.19997V9.59998H12V0H2.39999Z"
+                    fill="white"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_1398_14919">
+                    <rect width="12" height="12" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </a>
+          )}
+
+          {!isMobile && (
+            <div data-aos="fade-up" className={s.showReelContainer}>
+              <img src="/images/show-reel-circle.svg" alt="" />
+
+              <div onClick={() => setVideoOpen(true)} className={s.showReel}>
                 <svg
-                  viewBox="0 0 12 12"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 22 22"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <g clipPath="url(#clip0_1398_14919)">
-                    <path
-                      d="M2.39999 0V2.39999H7.79999L0 10.2L1.79999 12L9.60001 4.19997V9.59998H12V0H2.39999Z"
-                      fill="white"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_1398_14919">
-                      <rect width="12" height="12" fill="white" />
-                    </clipPath>
-                  </defs>
+                  <path d="M18.7862 7.30398L10.0412 0.887312C9.35815 0.387165 8.54995 0.0859563 7.7062 0.0170862C6.86245 -0.0517839 6.01611 0.114375 5.26102 0.497139C4.50594 0.879903 3.87161 1.46431 3.42839 2.18557C2.98516 2.90683 2.75035 3.73675 2.75 4.58331V17.4166C2.75015 18.2636 2.98497 19.0939 3.4284 19.8155C3.87183 20.5371 4.50653 21.1217 5.26205 21.5044C6.01758 21.8872 6.86438 22.0531 7.70848 21.9838C8.55258 21.9145 9.36096 21.6126 10.0439 21.1117L18.7889 14.6951C19.3694 14.2694 19.8415 13.7129 20.1669 13.0708C20.4922 12.4287 20.6618 11.7189 20.6618 10.9991C20.6618 10.2792 20.4922 9.56946 20.1669 8.92734C19.8415 8.28522 19.3694 7.72877 18.7889 7.30306L18.7862 7.30398ZM17.7008 13.2165L8.95583 19.6331C8.5461 19.9326 8.0615 20.1127 7.55569 20.1538C7.04988 20.1948 6.54258 20.0951 6.08994 19.8656C5.6373 19.6362 5.25698 19.286 4.99107 18.8537C4.72516 18.4215 4.58405 17.9241 4.58333 17.4166V4.58331C4.57825 4.07488 4.7167 3.57533 4.9828 3.14206C5.24889 2.70879 5.63182 2.35938 6.08758 2.13398C6.47523 1.9368 6.90391 1.83379 7.33883 1.83331C7.92173 1.83554 8.48853 2.02479 8.95583 2.37323L17.7008 8.7899C18.0487 9.04537 18.3316 9.37913 18.5265 9.76419C18.7215 10.1493 18.8231 10.5748 18.8231 11.0064C18.8231 11.438 18.7215 11.8635 18.5265 12.2486C18.3316 12.6337 18.0487 12.9674 17.7008 13.2229V13.2165Z" />
                 </svg>
+
+                <span>Showreel</span>
               </div>
-            ) : (
-              <a data-aos="fade-up" href="#tours">
-                {t("actualTours")}
-                <svg
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g clipPath="url(#clip0_1398_14919)">
-                    <path
-                      d="M2.39999 0V2.39999H7.79999L0 10.2L1.79999 12L9.60001 4.19997V9.59998H12V0H2.39999Z"
-                      fill="white"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_1398_14919">
-                      <rect width="12" height="12" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-              </a>
-            )}
-
-            {!isMobile && (
-              <div data-aos="fade-up" className={s.showReelContainer}>
-                <img src="/images/show-reel-circle.svg" alt="" />
-
-                <div onClick={openVideo} className={s.showReel}>
-                  <svg
-                    width="22"
-                    height="22"
-                    viewBox="0 0 22 22"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M18.7862 7.30398L10.0412 0.887312C9.35815 0.387165 8.54995 0.0859563 7.7062 0.0170862C6.86245 -0.0517839 6.01611 0.114375 5.26102 0.497139C4.50594 0.879903 3.87161 1.46431 3.42839 2.18557C2.98516 2.90683 2.75035 3.73675 2.75 4.58331V17.4166C2.75015 18.2636 2.98497 19.0939 3.4284 19.8155C3.87183 20.5371 4.50653 21.1217 5.26205 21.5044C6.01758 21.8872 6.86438 22.0531 7.70848 21.9838C8.55258 21.9145 9.36096 21.6126 10.0439 21.1117L18.7889 14.6951C19.3694 14.2694 19.8415 13.7129 20.1669 13.0708C20.4922 12.4287 20.6618 11.7189 20.6618 10.9991C20.6618 10.2792 20.4922 9.56946 20.1669 8.92734C19.8415 8.28522 19.3694 7.72877 18.7889 7.30306L18.7862 7.30398ZM17.7008 13.2165L8.95583 19.6331C8.5461 19.9326 8.0615 20.1127 7.55569 20.1538C7.04988 20.1948 6.54258 20.0951 6.08994 19.8656C5.6373 19.6362 5.25698 19.286 4.99107 18.8537C4.72516 18.4215 4.58405 17.9241 4.58333 17.4166V4.58331C4.57825 4.07488 4.7167 3.57533 4.9828 3.14206C5.24889 2.70879 5.63182 2.35938 6.08758 2.13398C6.47523 1.9368 6.90391 1.83379 7.33883 1.83331C7.92173 1.83554 8.48853 2.02479 8.95583 2.37323L17.7008 8.7899C18.0487 9.04537 18.3316 9.37913 18.5265 9.76419C18.7215 10.1493 18.8231 10.5748 18.8231 11.0064C18.8231 11.438 18.7215 11.8635 18.5265 12.2486C18.3316 12.6337 18.0487 12.9674 17.7008 13.2229V13.2165Z" />
-                  </svg>
-
-                  <span>Showreel</span>
-                </div>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
+        </div>
 
         <Layout>
           <div className={s.heroBottomContainer}>
             {!isTourPage && (
               <div className={s.swiperController}>
-                {tabs.map((car, index) => {
+                {tours.map((tour, index) => {
                   const isActive = activeIndex === index;
 
                   return (
@@ -277,15 +271,16 @@ export const HomeHero = ({
                           />
                         </svg>
 
-                        <img src={car.image} alt="" />
+                        <img src={tour.load_image_text_main_image} alt="" />
                       </div>
 
                       <div className={s.tabInfo}>
-                        <h4>{car.car}</h4>
-                        <p>{car.route}</p>
+                        <h4>{tour.title.rendered}</h4>
+                        <p>{tour.input_route}</p>
                         <p>
                           {calendarIcon}
-                          {car.date}
+                          {formatDate(tour.input_date_start)} -{" "}
+                          {formatDate(tour.input_date_end)}
                         </p>
                       </div>
                     </div>
@@ -326,7 +321,7 @@ export const HomeHero = ({
       {isMobile && pathname !== "/" && !pathname.startsWith("/tour") && (
         <Layout className={s.shoeReelMobileWrapper}>
           <div className={s.showReelContainer}>
-            <div onClick={openVideo} className={s.showReel}>
+            <div onClick={() => setVideoOpen(true)} className={s.showReel}>
               <svg
                 width="22"
                 height="22"
@@ -342,6 +337,15 @@ export const HomeHero = ({
           </div>
         </Layout>
       )}
+
+      <VideoPopup
+        isOpen={videoOpen}
+        onClose={() => {
+          setVideoOpen(false);
+          document.body.style.overflow = "";
+        }}
+        videoSrc={getCurrentVideoSrc()}
+      />
     </>
   );
 };

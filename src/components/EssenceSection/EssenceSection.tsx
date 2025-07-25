@@ -61,7 +61,8 @@ export const EssenceSection = () => {
           </svg>
 
           <motion.a
-            href=""
+            href="https://www.instagram.com/mark_butkin/"
+            target="_blank"
             className={s.inst}
             variants={fadeUp}
             transition={{ delay: 0.3, duration: 0.8 }}

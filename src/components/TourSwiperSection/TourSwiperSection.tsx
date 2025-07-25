@@ -12,28 +12,30 @@ import { TextAnimation } from "../TextAnimation/TextAnimation";
 import s from "./TourSwiperSection.module.css";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { useTranslation } from "react-i18next";
+import { TourType } from "../ActualToursSection/ActualToursSection";
 
-export const TourSwiperSection = () => {
+export const TourSwiperSection = ({
+  actualTour,
+}: {
+  actualTour: TourType | undefined;
+}) => {
   const { width } = useWindowSize();
   const isMobile = width < 1024;
   const swiperRef = useRef<SwiperType | null>(null);
   const { t } = useTranslation();
 
-  const slides = useMemo(
-    () => [
-      {
-        image: "/images/tour-swiper-images/1.avif",
-        title: t("tour_slide_1_title"),
-        desc: t("tour_slide_1_desc"),
-      },
-      {
-        image: "/images/tour-swiper-images/2.avif",
-        title: t("tour_slide_2_title"),
-        desc: t("tour_slide_2_desc"),
-      },
-    ],
-    [t]
-  );
+  const slides = useMemo(() => {
+    // Використовуємо дані з actualTour.tour_swiper_slides_data
+    if (
+      actualTour?.tour_swiper_slides_data &&
+      actualTour.tour_swiper_slides_data.length > 0
+    ) {
+      return actualTour.tour_swiper_slides_data;
+    }
+
+    // Повертаємо порожній масив якщо немає даних
+    return [];
+  }, [actualTour]);
 
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -44,18 +46,22 @@ export const TourSwiperSection = () => {
           <h2>
             <TextAnimation
               texts={[
-                t("tour_swiper_title_1"),
-                t("tour_swiper_title_2"),
-                t("tour_swiper_title_3"),
-                t("tour_swiper_title_4"),
-                t("tour_swiper_title_5"),
+                actualTour?.tour_swiper_title_1 || t("tour_swiper_title_1"),
+                actualTour?.tour_swiper_title_2 || t("tour_swiper_title_2"),
+                actualTour?.tour_swiper_title_3 || t("tour_swiper_title_3"),
+                actualTour?.tour_swiper_title_4 || t("tour_swiper_title_4"),
+                actualTour?.tour_swiper_title_5 || t("tour_swiper_title_5"),
               ]}
             />
           </h2>
 
           <div className={s.descContainer}>
-            <p data-aos="fade-up">{t("tour_swiper_desc_1")}</p>
-            <p data-aos="fade-up">{t("tour_swiper_desc_2")}</p>
+            <p data-aos="fade-up">
+              {actualTour?.tour_swiper_desc_1 || t("tour_swiper_desc_1")}
+            </p>
+            <p data-aos="fade-up">
+              {actualTour?.tour_swiper_desc_2 || t("tour_swiper_desc_2")}
+            </p>
           </div>
         </div>
 

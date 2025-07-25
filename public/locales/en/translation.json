@@ -169,5 +169,6 @@
   "acc_special_price": "Special price when booking two spots at once (for friends or couples):",
   "acc_booking_note": "* Booking conditions apply",
   "acc_car_share": "- Car sharing between two participants",
-  "acc_hotel": "- Hotel accommodation in a double room"
+  "acc_hotel": "- Hotel accommodation in a double room",
+  "impulse": "IMPULSE"
 }

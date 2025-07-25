@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Layout } from "../Layout/Layout";
 import { SiteLogo } from "../SiteLogo/SiteLogo";
 import s from "./Footer.module.css";
@@ -75,7 +74,7 @@ export const Footer = () => {
             <div className={s.socialBlock}>
               <ul>
                 <li>
-                  <a href="">
+                  <a href="https://t.me/impulse_sportcars" target="_blank">
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
@@ -87,7 +86,7 @@ export const Footer = () => {
                 </li>
 
                 <li>
-                  <a href="">
+                  <a href="https://wa.me/+380953440973" target="_blank">
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
@@ -105,7 +104,10 @@ export const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="">
+                  <a
+                    href="https://www.instagram.com/impulse_sportcars/"
+                    target="_blank"
+                  >
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
@@ -144,9 +146,14 @@ export const Footer = () => {
 
         <div className={s.footerBottomLinks}>
           <p>©2025 Impulse. All rights Reserved</p>
-          <Link to="">{t("footer_privacy")}</Link>
           <p>
-            {t("footer_dev")} <a href="https://www.instagram.com/before_after.agency?igsh=MTVyMTIxaTE4ZmRobA==" target="_blank">{t("footer_dev_name")}</a>
+            {t("footer_dev")}{" "}
+            <a
+              href="https://www.instagram.com/before_after.agency?igsh=MTVyMTIxaTE4ZmRobA=="
+              target="_blank"
+            >
+              {t("footer_dev_name")}
+            </a>
           </p>
         </div>
       </Layout>

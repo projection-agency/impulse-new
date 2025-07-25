@@ -119,6 +119,7 @@
       line-height: 99%;
       letter-spacing: 0.01vw;
       text-transform: uppercase;
+      width: 50vw;
     }
   }
 
@@ -255,6 +256,7 @@
 
       h2 {
         font-size: 12.8vw;
+        width: 100%;
       }
     }
 

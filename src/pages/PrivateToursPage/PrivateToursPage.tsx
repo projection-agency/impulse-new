@@ -16,21 +16,12 @@ export interface PageProps {
   openOrder: () => void;
   openConsult: () => void;
   loading?: boolean;
-  openVideo: () => void;
 }
 
-export const PrivateToursPage: FC<PageProps> = ({
-  openOrder,
-  openConsult,
-  openVideo,
-}) => {
+export const PrivateToursPage: FC<PageProps> = ({ openOrder, openConsult }) => {
   return (
     <main>
-      <HomeHero
-        openVideo={openVideo}
-        openOrder={openOrder}
-        openConsult={openConsult}
-      />
+      <HomeHero openOrder={openOrder} openConsult={openConsult} />
 
       <DescSection />
 

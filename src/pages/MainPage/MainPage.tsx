@@ -12,21 +12,12 @@ export interface MainPageProps {
   openOrder: () => void;
   openConsult: () => void;
   loading?: boolean;
-  openVideo: () => void;
 }
 
-export const MainPage: FC<MainPageProps> = ({
-  openOrder,
-  openConsult,
-  openVideo,
-}) => {
+export const MainPage: FC<MainPageProps> = ({ openOrder, openConsult }) => {
   return (
     <main>
-      <HomeHero
-        openVideo={openVideo}
-        openOrder={openOrder}
-        openConsult={openConsult}
-      />
+      <HomeHero openOrder={openOrder} openConsult={openConsult} />
 
       <DescMainSection />
 

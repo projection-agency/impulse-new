@@ -3,40 +3,67 @@ import s from "./ServicesSection.module.css";
 import { Layout } from "../Layout/Layout";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { API_URL } from "../../App";
+import { TourType } from "../ActualToursSection/ActualToursSection";
 
-const tabs = [
-  {
-    id: 1,
-    image: "/images/services-images/helicopter.avif",
-  },
-  {
-    id: 2,
-    image: "/images/services-images/hotels.avif",
-  },
-  {
-    id: 3,
-    image: "/images/services-images/hastro.avif",
-  },
-  {
-    id: 4,
-    image: "/images/services-images/photos.avif",
-  },
-  {
-    id: 5,
-    image: "/images/services-images/hastro.avif",
-  },
-  {
-    id: 6,
-    image: "/images/services-images/numbers.avif",
-  },
-];
+interface ServiceTab {
+  id: number;
+  image: string;
+  title: string;
+  description: string;
+}
 
-export const ServicesSection = () => {
+interface ServicesData {
+  services_tabs_data: ServiceTab[];
+}
+
+interface ServicesSectionProps {
+  type?: string;
+  data?: ServicesData | TourType;
+}
+
+const fetchServices = async (slug: string): Promise<ServicesData> => {
+  const response = await axios.get(
+    `${API_URL}wp-json/wp/v2/services?slug=${slug}`
+  );
+  return response.data[0] || { services_tabs_data: [] };
+};
+
+export const ServicesSection = ({ type, data }: ServicesSectionProps) => {
   const [activeTab, setActiveTab] = useState<number | null>(null);
-
   const [hasStarted, setHasStarted] = useState(false);
   const sectionRef = useRef(null);
   const timeoutRef = useRef<number | null>(null);
+  const { pathname } = useLocation();
+
+  // Визначаємо slug на основі pathname
+  const getSlugFromPathname = () => {
+    if (pathname === "/") return "main";
+    if (pathname === "/private-tours") return "private-tours";
+    if (pathname === "/business-tours") return "business-tours";
+    if (pathname.startsWith("/tour")) return "tour";
+    return "main";
+  };
+
+  const slug = getSlugFromPathname();
+
+  // Якщо передаються type та data, використовуємо їх замість запиту
+  const shouldUseProps = type && data;
+
+  const { data: servicesData } = useQuery({
+    queryKey: ["services", slug],
+    queryFn: () => fetchServices(slug),
+    enabled: !!slug && !shouldUseProps,
+  });
+
+  const tabs = shouldUseProps
+    ? (data as ServicesData)?.services_tabs_data ||
+      (data as TourType)?.services_tabs_data ||
+      []
+    : servicesData?.services_tabs_data || [];
 
   useEffect(() => {
     if (hasStarted && activeTab === null) {
@@ -53,7 +80,7 @@ export const ServicesSection = () => {
       const img = new Image();
       img.src = tab.image;
     });
-  }, []);
+  }, [tabs]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -116,6 +143,8 @@ export const ServicesSection = () => {
 
   const { t } = useTranslation();
 
+  console.log(tabs);
+
   return (
     <section
       ref={sectionRef}
@@ -139,7 +168,7 @@ export const ServicesSection = () => {
               >
                 <p className={`${tab.id === activeTab ? s.active : ""}`}>
                   <span>0{tab.id}</span>
-                  <span>{t(`services_tab_${tab.id}`)}</span>
+                  <span>{tab.title}</span>
                 </p>
 
                 <div className={s.progressLayout}>
@@ -181,17 +210,15 @@ export const ServicesSection = () => {
             <p>{t("services_top")}</p>
 
             {activeTab !== null && (
-              <h2
-                dangerouslySetInnerHTML={{
-                  __html: t(`services_title_${activeTab}`),
-                }}
-              ></h2>
+              <h2>{tabs.find((tab) => tab.id === activeTab)?.title || ""}</h2>
             )}
           </div>
 
           {activeTab !== null && (
             <div className={s.tabDesc}>
-              <p>{t(`services_desc_${activeTab}`)}</p>
+              <p>
+                {tabs.find((tab) => tab.id === activeTab)?.description || ""}
+              </p>
             </div>
           )}
         </div>

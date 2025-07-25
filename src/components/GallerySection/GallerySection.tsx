@@ -82,13 +82,14 @@ export const GallerySection = () => {
     if (img.complete) {
       handleLoad();
     } else {
-      img.addEventListener('load', handleLoad);
-      return () => img.removeEventListener('load', handleLoad);
+      img.addEventListener("load", handleLoad);
+      return () => img.removeEventListener("load", handleLoad);
     }
   }, [business]);
 
   useEffect(() => {
-    if (!gallerySectionRef.current || !galleryImageRef.current || !imageLoaded) return;
+    if (!gallerySectionRef.current || !galleryImageRef.current || !imageLoaded)
+      return;
 
     galleryImageRef.current.style.webkitMaskSize = isMobile
       ? "10vw 10vw"
@@ -167,7 +168,6 @@ export const GallerySection = () => {
       </div>
 
       <div className={s.galleryBlock}>
-        
         <img
           ref={galleryImageRef}
           src={

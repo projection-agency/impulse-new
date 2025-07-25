@@ -12,7 +12,6 @@ import { TourType } from "./components/ActualToursSection/ActualToursSection";
 import Lenis from "lenis";
 import { AnimatePresence } from "framer-motion";
 import { MenuPopup } from "./components/MenuPopup/MenuPopup";
-import { VideoPopup } from "./components/VideoPopup/VideoPopup";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import { MainPage } from "./pages/MainPage/MainPage";
 import { GlobalPropsContext } from "./GlobalPropContext";
@@ -20,6 +19,7 @@ import { TourPage } from "./pages/TourPage/TourPage";
 import axios from "axios";
 import { EventToursPage } from "./pages/EventToursPage/EventToursPage";
 import { ContactPage } from "./pages/ContactPage/ContactPage";
+import { BuisnessToursPage } from "./pages/BuisnessToursPage/BuisnessToursPage";
 import { useWindowSize } from "./hooks/useWindowSize";
 
 export const API_URL = "https://api.impulse-sportcars.com/";
@@ -33,7 +33,7 @@ export const App = () => {
   const [consultPopup, setConsultPopup] = useState(false);
   const [orderPopup, setOrderPopup] = useState(false);
   const [selectedTour, setSelectedTour] = useState<TourType | null>(null);
-  const [videoOpen, setVideoOpen] = useState(false);
+
   const [menuPopupIsOpen, setMenuPopupIsopen] = useState(false);
   const { width } = useWindowSize();
   const isMobile = width < 1024;
@@ -114,17 +114,15 @@ export const App = () => {
               <PrivateToursPage
                 openOrder={handleToggleOrder}
                 openConsult={handleToggleConsult}
-                openVideo={() => setVideoOpen(true)}
               />
             }
           />
           <Route
             path="/business-tours"
             element={
-              <PrivateToursPage
+              <BuisnessToursPage
                 openOrder={handleToggleOrder}
                 openConsult={handleToggleConsult}
-                openVideo={() => setVideoOpen(true)}
               />
             }
           />
@@ -134,7 +132,6 @@ export const App = () => {
               <TourPage
                 openOrder={handleToggleOrder}
                 openConsult={handleToggleConsult}
-                openVideo={() => setVideoOpen(true)}
               />
             }
           />
@@ -152,7 +149,6 @@ export const App = () => {
               <MainPage
                 openOrder={handleToggleOrder}
                 openConsult={handleToggleConsult}
-                openVideo={() => setVideoOpen(true)}
               />
             }
           />
@@ -169,15 +165,6 @@ export const App = () => {
           )}
           {menuPopupIsOpen && <MenuPopup />}
         </AnimatePresence>
-
-        <VideoPopup
-          isOpen={videoOpen}
-          onClose={() => {
-            setVideoOpen(false);
-            document.body.style.overflow = "";
-          }}
-          videoSrc="/temp/hero-video.mp4"
-        />
       </div>
     </GlobalPropsContext.Provider>
   );

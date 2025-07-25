@@ -13,11 +13,7 @@ import { FormSection } from "../../components/FormSection/FormSection";
 import { FaqSection } from "../../components/FaqSection/FaqSection";
 import { TourAccordionSection } from "../../components/TourAccordionSection/TourAccordionSection";
 
-export const TourPage: FC<MainPageProps> = ({
-  openOrder,
-  openConsult,
-  openVideo,
-}) => {
+export const TourPage: FC<MainPageProps> = ({ openOrder, openConsult }) => {
   const { tours } = useGlobalProps();
   const { pathname } = useLocation();
   const match = matchPath("/tour/:slug", pathname);
@@ -28,19 +24,18 @@ export const TourPage: FC<MainPageProps> = ({
   return (
     <main>
       <HomeHero
-        openVideo={openVideo}
         openOrder={openOrder}
         openConsult={openConsult}
         actualTour={actualTour}
       />
 
-      <TourSwiperSection />
+      {actualTour && <TourSwiperSection actualTour={actualTour} />}
 
       {actualTour && <TourDaysSection info={actualTour} />}
 
       <GallerySection />
 
-      <ServicesSection />
+      <ServicesSection type="custom" data={actualTour} />
 
       <TourAccordionSection openOrder={openOrder} item={actualTour!} />
 
